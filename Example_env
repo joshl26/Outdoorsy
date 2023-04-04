@@ -1,0 +1,9 @@
+<!-- Delete this line and Rename this file to .env. Then add your info below -->
+
+CLOUDINARY_CLOUD_NAME=YOUR_CLOUD_NAME
+CLOUDINARY_KEY=YOUR_KEY
+CLOUDINARY_SECRET=YOUR_SECRET
+
+MAPBOX_TOKEN=YOUR_TOKEN
+
+DB_URL=YOUR_MONGO_URL
