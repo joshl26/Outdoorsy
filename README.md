@@ -19,6 +19,7 @@
 ### 🏠 [Homepage](https://github.com/joshl26/Outdoorsy#readme)
 
 ### ✨ [Demo](https://outdors.ca)
+<p>Allow up to 1 minute for Render.com to start the app, depending on how recent the last load was.</p>
 
 ## Prerequisites
 
