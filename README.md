@@ -18,7 +18,7 @@
 
 ### 🏠 [Homepage](https://github.com/joshl26/Outdoorsy#readme)
 
-### ✨ [Demo](https://outdoorsy-xxfy.onrender.com)
+### ✨ [Demo](https://outdors.ca)
 
 ## Prerequisites
 
