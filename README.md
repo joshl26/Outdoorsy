@@ -61,16 +61,16 @@ This project is being created created using Node.js, Express, MongoDB, and Boots
 
 ## Screenshots
 >HomePage
-![home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/outdoorsy_1.png)
+![home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
 
 >All Campgrounds
-![All campgrounds](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/outdoorsy_2.png)
+![All campgrounds](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png)
 
 ->Single Campground ShowPage
-![showPage](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/outdoorsy_3.png)
+![showPage](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
 
 ->Login & Register page
-![login,register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/outdoorsy_4.png)
+![login,register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png)
 
 ## Demo
 
