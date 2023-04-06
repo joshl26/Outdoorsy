@@ -110,11 +110,11 @@ npm run test
 
 ## Github
 
-- [@joshl26](https://github.com/joshl26)
+- [joshl26](https://github.com/joshl26)
 
 ## LinkedIn
 
-- [@jlehmaneng](https://linkedin.com/in/jlehmaneng)
+- [jlehmaneng](https://linkedin.com/in/jlehmaneng)
 
 ## 🤝 Contributing
 
