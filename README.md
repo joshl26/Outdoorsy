@@ -106,7 +106,7 @@ npm run test
 
 ## Portfolio
 
-- https://joshlehman.ca
+- [joshlehman.ca](https://joshlehman.ca)
 
 ## Github
 
