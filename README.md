@@ -114,7 +114,7 @@ npm run test
 
 ## LinkedIn
 
-- [jlehmaneng](https://linkedin.com/in/jlehmaneng)
+- [joshrlehman](https://www.linkedin.com/in/joshrlehman/)
 
 ## 🤝 Contributing
 
