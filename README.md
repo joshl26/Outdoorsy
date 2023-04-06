@@ -72,10 +72,7 @@ This project is being created created using Node.js, Express, MongoDB, and Boots
 ->Login & Register page
 ![login,register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/outdoorsy_4.png)
 
-
-### 🏠 [Homepage](https://github.com/joshl26/Outdoorsy#readme)
-
-### ✨ [Demo](https://outdors.ca)
+### ✨ [Live Site Demo](https://outdors.ca)
 <p>Allow up to 1 minute for Render.com to start the app, depending on how recent the last load was.</p>
 
 ## Prerequisites
