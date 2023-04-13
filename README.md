@@ -29,7 +29,7 @@ This project is being created created using Node.js, Express, MongoDB, and Boots
 
 >The user can only edit/delete the campgrounds and comments that they have added.
 
->All the data will pe persistent and is stored in the awazon cloud.
+>All the data will pe persistent and is stored in the amazon cloud.
 
 ## Technologies Used:
 
