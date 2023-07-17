@@ -42,6 +42,19 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+var userProfile;
+
+app.get("/success", (req, res) => res.send(userProfile));
+app.get("/error", (req, res) => res.send("error logging in"));
+
+passport.serializeUser(function (user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function (obj, cb) {
+  cb(null, obj);
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -124,6 +137,26 @@ app.use(
   })
 );
 
+/*  Google AUTH  */
+
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const GOOGLE_CLIENT_ID =
+  "210077088022-tq1gkrurei2n98p8g9uogei0t97e7tc9.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/auth/google/callback",
+    },
+    function (accessToken, refreshToken, profile, done) {
+      userProfile = profile;
+      return done(null, userProfile);
+    }
+  )
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -141,6 +174,20 @@ app.use((req, res, next) => {
 app.use("/", userRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/reviews", reviewRoutes);
+
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/error" }),
+  function (req, res) {
+    // Successful authentication, redirect success.
+    res.redirect("/success");
+  }
+);
 
 app.get("/", (req, res) => {
   res.render("home");
