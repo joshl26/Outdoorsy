@@ -47,6 +47,8 @@ This project is being created created using Node.js, Express, MongoDB, and Boots
 
 >Express.js - for building web applications and APIs and connecting middleware
 
+>Joi - Used for schema description and data validation.
+
 >REST - REST (REpresentational State Transfer) is an architectural style for developing web services
 
 >MongoDB - open-source cross-platform document-oriented NoSQL database program to store details like users info, campgrounds info and comments
