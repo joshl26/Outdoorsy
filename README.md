@@ -65,7 +65,7 @@ This project has been created utilizing the technologies listed below.
 >AWS - Mongodb is hosted on Amazon ec2 instance.
 
 ## API DOCUMENTATION
->LIVE API DEMO/DOCUMENTATION ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png) 
+>LIVE API DEMO/DOCUMENTATION ![API](https://outdors.ca/api-docs/) 
 
 ## Screenshots
 >HomePage ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
@@ -73,10 +73,10 @@ This project has been created utilizing the technologies listed below.
 >All campsites
 ![All campsites](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png)
 
--> Campsite Details Page
+>Campsite Details Page
 ![Campsite Details](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png)
 
-->Login & Register page
+>Login & Register page
 ![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
 
 ## Demo
