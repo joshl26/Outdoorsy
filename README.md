@@ -15,62 +15,69 @@
 </p>
 
 
-Outdoorsy is a full-stack website project where users can create and review campgrounds.
-In order to review or create a campground, you must have an account. This project was coded from scratch by myself and completed as part of Colt Steele's web dev bootcamp course on udemy.
+Outdoorsy is a full-stack website project where users can create and review campsites. To review or create a campsite, you must have an account.
 
-This project is being created created using Node.js, Express, MongoDB, and Bootstrap. Passport.js is used to handle authentication.
+This project has been created utilizing the technologies listed below.
 
 
 ## Functionalities
 
 >Everyone can view the camps and reviews without signing up or logging in.
 
->The user will have to login to edit the campground details or any comments.
+>The user will have to log in to edit the campsite details or any comments.
 
->The user can only edit/delete the campgrounds and comments that they have added.
+>The user can only edit/delete the campsites and comments that they have added.
 
->All the data will pe persistent and is stored in the amazon cloud.
+>All the data will be persistent and stored in the Amazon cloud.
 
 ## Technologies Used:
 
->HTML5 - markup language for creating web pages and web applications
+>HTML5 - A markup language for creating web pages and web applications.
 
->CSS3 - used for describing the presentation of a document written in a markup language
+>CSS3 - used for describing the presentation of a document written in a markup language.
 
->Bootstrap - free and open-source front-end web framework for designing websites and web applications quickly
+>Bootstrap - A free and open-source front-end web framework for designing websites and web applications quickly.
 
->jQuery - cross-platform JavaScript library designed to simplify the client-side scripting of HTML
+>jQuery - Cross-platform JavaScript library designed to simplify the client-side scripting of HTML.
 
->DOM Manipulation - is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document
+>DOM Manipulation - is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document.
 
->Node.js - pen-source, cross-platform JavaScript run-time environment for executing JavaScript code server-side
+>Node.js - Open-source, cross-platform JavaScript run-time environment for executing JavaScript code server-side.
 
->Express.js - for building web applications and APIs and connecting middleware
+>Express.js - For building web applications and APIs and connecting middleware.
 
->REST - REST (REpresentational State Transfer) is an architectural style for developing web services
+>Joi - Used for schema description and data validation.
 
->MongoDB - open-source cross-platform document-oriented NoSQL database program to store details like users info, campgrounds info and comments
+>Swagger-UI/JSDOC - Powerful UI interface for documenting, testing and displaying API endpoints.
 
->PassportJS - authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application
+>Helmet - Helps secure Express apps by setting HTTP response headers.
 
->Data Associations - associating user data with the respective campgrounds and comments using reference method
+>REST - REST (REpresentational State Transfer) is an architectural style for developing web services.
 
->Render.com - cloud platform as a service used as a web application deployment model
+>MongoDB - Open-source cross-platform document-oriented NoSQL database program to store details like user info, campsites info and comments.
 
->AWS - mongodb is hosted on amazon ec2 instance
+>PassportJS - Authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped into any Express-based web application.
+
+>Data Associations - Associating user data with the respective campsites and comments using the reference method.
+
+>Render.com - Cloud platform as a service used as a web application deployment model.
+
+>AWS - Mongodb is hosted on Amazon ec2 instance.
+
+## API DOCUMENTATION
+>LIVE API DEMO/DOCUMENTATION ![API]([https://www.outdors.ca/api-docs/) 
 
 ## Screenshots
->HomePage
-![home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
+>HomePage ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
 
->All Campgrounds
-![All campgrounds](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png)
+>All campsites
+![All campsites](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png)
 
-->Single Campground ShowPage
-![showPage](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png)
+>Campsite Details Page
+![Campsite Details](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png)
 
-->Login & Register page
-![login,register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
+>Login & Register page
+![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
 
 ## Demo
 
