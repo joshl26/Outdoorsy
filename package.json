@@ -30,6 +30,7 @@
     "cloudinary": "^1.23.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
+    "date-fns": "^2.30.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "ejs-mate": "^3.0.0",
@@ -46,6 +47,9 @@
     "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
-    "sanitize-html": "^1.27.4"
+    "sanitize-html": "^1.27.4",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^9.0.0"
   }
 }

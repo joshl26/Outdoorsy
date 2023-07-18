@@ -18,7 +18,44 @@ const mongoSanitize = require("express-mongo-sanitize");
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
+const { logger, logEvents } = require("./middleware/logger");
+const errorHandler = require("./middleware/errorHandler");
+const app = express();
 
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Outdoorsy",
+      version: "0.1.0",
+      description:
+        "This is a Campsite review application made with Express and documented with Swagger",
+      license: {
+        name: "MIT",
+        url: "https://spdx.org/licenses/MIT.html",
+      },
+      contact: {
+        name: "Joshua Lehman",
+        url: "https://joshlehman.ca",
+        email: "joshlehman.dev@gmail.com",
+      },
+    },
+    servers: [
+      {
+        url: "http://localhost:3001/",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+// Initialize swagger-jsdoc -> returns validated swagger spec in json format
+const swaggerSpec = swaggerJSDoc(options);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const MongoDBStore = require("connect-mongo")(session);
 
 const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1/Campground";
@@ -31,29 +68,30 @@ mongoose.connect(dbUrl, {
 });
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Database connected");
-});
-
-const app = express();
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(logger);
+app.use(errorHandler);
+
+db.once("open", () => {
+  console.log("Database connected");
+});
+
+db.on("error", (err) => {
+  // console.error.bind(console, "connection error:");
+  console.log(err);
+  logEvents(
+    `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
+    "mongoErrLog.log"
+  );
+});
 
 var userProfile;
 
 app.get("/success", (req, res) => res.send(userProfile));
 app.get("/error", (req, res) => res.send("error logging in"));
-
-passport.serializeUser(function (user, cb) {
-  cb(null, user);
-});
-
-passport.deserializeUser(function (obj, cb) {
-  cb(null, obj);
-});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -164,21 +202,20 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// passport.serializeUser(function (user, cb) {
+//   cb(null, user);
+// });
+
+// passport.deserializeUser(function (obj, cb) {
+//   cb(null, obj);
+// });
+
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
-
-app.use("/", userRoutes);
-app.use("/campgrounds", campgroundRoutes);
-app.use("/campgrounds/:id/reviews", reviewRoutes);
-
-app.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
 
 app.get(
   "/auth/google/callback",
@@ -189,9 +226,18 @@ app.get(
   }
 );
 
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
 app.get("/", (req, res) => {
   res.render("home");
 });
+
+app.use("/", userRoutes);
+app.use("/campgrounds", campgroundRoutes);
+app.use("/campgrounds/:id/reviews", reviewRoutes);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
