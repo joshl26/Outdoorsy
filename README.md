@@ -80,6 +80,9 @@ This project has been created utilizing the technologies listed below.
 >Login & Register page
 ![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
 
+>API Demo page
+![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+
 ## Demo
 
 ### ✨ [Live Site Demo](https://outdors.ca)
