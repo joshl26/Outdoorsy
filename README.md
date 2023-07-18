@@ -65,7 +65,7 @@ This project has been created utilizing the technologies listed below.
 >AWS - Mongodb is hosted on Amazon ec2 instance.
 
 ## API DOCUMENTATION
->LIVE API DEMO/DOCUMENTATION ![API]([https://www.outdors.ca/api-docs/) 
+>LIVE API DEMO/DOCUMENTATION ![API](https://www.outdors.ca/api-docs/) 
 
 ## Screenshots
 >HomePage ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
