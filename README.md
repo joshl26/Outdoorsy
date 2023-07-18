@@ -86,7 +86,7 @@ This project has been created utilizing the technologies listed below.
 ## Demo
 
 ### ✨ [Live Site Demo](https://outdors.ca)
-><p>Allow up to 1 minute for Render.com to start the app, depending on how recent the last load was.</p>
+><p>Hosted with free tier on Render.com</p>
 
 ## Prerequisites
 
