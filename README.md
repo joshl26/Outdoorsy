@@ -15,7 +15,7 @@
 </p>
 
 
-Outdoorsy is a full-stack website project where users can create and review campsites. In order to review or create a campsite, you must have an account.
+Outdoorsy is a full-stack website project where users can create and review campsites. To review or create a campsite, you must have an account.
 
 This project has been created utilizing the technologies listed below.
 
