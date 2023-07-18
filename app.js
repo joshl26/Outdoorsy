@@ -49,6 +49,9 @@ const options = {
       {
         url: "http://localhost:3001/",
       },
+      {
+        url: "http://outdors.ca/",
+      },
     ],
   },
   apis: ["./routes/*.js"],
