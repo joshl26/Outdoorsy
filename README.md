@@ -64,7 +64,7 @@ This project has been created utilizing the technologies listed below.
 
 >AWS - Mongodb is hosted on Amazon ec2 instance.
 
-## API DOCUMENTATION
+## API Documentation
 ### ✨ [Live API Documentation](https://outdors.ca/api-docs/)
 ><p>Created using Swagger UI</p>
 
