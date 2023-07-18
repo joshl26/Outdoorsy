@@ -1,6 +1,8 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+// if (process.env.NODE_ENV !== "production") {
+//   require("dotenv").config();
+// }
+require("dotenv").config();
+// console.log(process.env);
 
 const express = require("express");
 const path = require("path");
@@ -101,7 +103,7 @@ app.use(
     replaceWith: "_",
   })
 );
-const secret = process.env.SECRET || "thisshouldbeabettersecret!";
+const secret = process.env.JWT_SECRET;
 
 const store = new MongoDBStore({
   url: dbUrl,
