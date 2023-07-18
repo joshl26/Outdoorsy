@@ -80,10 +80,13 @@ This project has been created utilizing the technologies listed below.
 >Login & Register page
 ![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
 
+>API Demo page
+![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+
 ## Demo
 
-### ✨ [Live Site Demo](https://outdors.ca)
-><p>Allow up to 1 minute for Render.com to start the app, depending on how recent the last load was.</p>
+### ✨ [Live Demo Site](https://outdors.ca)
+><p>Hosted with free tier on Render.com</p>
 
 ## Prerequisites
 
