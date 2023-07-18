@@ -49,6 +49,8 @@ This project is being created created using Node.js, Express, MongoDB, and Boots
 
 >Joi - Used for schema description and data validation.
 
+>Swagger-UI/JSDOC - Powerful UI interface for documenting, testing and displaying API endpoints.
+
 >REST - REST (REpresentational State Transfer) is an architectural style for developing web services
 
 >MongoDB - open-source cross-platform document-oriented NoSQL database program to store details like users info, campgrounds info and comments
