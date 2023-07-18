@@ -15,19 +15,18 @@
 </p>
 
 
-Outdoorsy is a full-stack website project where users can create and review campgrounds.
-In order to review or create a campground, you must have an account. This project was coded from scratch by myself and completed as part of Colt Steele's web dev bootcamp course on udemy.
+Outdoorsy is a full-stack website project where users can create and review campsites. In order to review or create a campsite, you must have an account.
 
-This project is being created created using Node.js, Express, MongoDB, and Bootstrap. Passport.js is used to handle authentication.
+This project is being created using the technologies listed below.
 
 
 ## Functionalities
 
 >Everyone can view the camps and reviews without signing up or logging in.
 
->The user will have to login to edit the campground details or any comments.
+>The user will have to login to edit the campsite details or any comments.
 
->The user can only edit/delete the campgrounds and comments that they have added.
+>The user can only edit/delete the campsites and comments that they have added.
 
 >All the data will pe persistent and is stored in the amazon cloud.
 
@@ -55,24 +54,26 @@ This project is being created created using Node.js, Express, MongoDB, and Boots
 
 >REST - REST (REpresentational State Transfer) is an architectural style for developing web services.
 
->MongoDB - open-source cross-platform document-oriented NoSQL database program to store details like users info, campgrounds info and comments.
+>MongoDB - open-source cross-platform document-oriented NoSQL database program to store details like users info, campsites info and comments.
 
 >PassportJS - authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application.
 
->Data Associations - associating user data with the respective campgrounds and comments using reference method.
+>Data Associations - associating user data with the respective campsites and comments using reference method.
 
 >Render.com - cloud platform as a service used as a web application deployment model.
 
 >AWS - mongodb is hosted on amazon ec2 instance.
 
+## API DOCUMENTATION
+>LIVE API DEMO/DOCUMENTATION ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png) 
+
 ## Screenshots
->HomePage
-![home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
+>HomePage ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
 
->All Campgrounds
-![All campgrounds](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png)
+>All campsites
+![All campsites](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png)
 
-->Single Campground ShowPage
+->campsite Details Page
 ![showPage](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png)
 
 ->Login & Register page
