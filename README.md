@@ -85,7 +85,7 @@ This project has been created utilizing the technologies listed below.
 
 ## Demo
 
-### ✨ [Live Site Demo](https://outdors.ca)
+### ✨ [Live Demo Site](https://outdors.ca)
 ><p>Hosted with free tier on Render.com</p>
 
 ## Prerequisites
