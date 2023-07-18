@@ -64,8 +64,9 @@ This project has been created utilizing the technologies listed below.
 
 >AWS - Mongodb is hosted on Amazon ec2 instance.
 
-## API DOCUMENTATION
->LIVE API DEMO/DOCUMENTATION ![API]([https://www.outdors.ca/api-docs/) 
+## API Documentation
+### ✨ [Live API Documentation](https://outdors.ca/api-docs/)
+><p>Created using Swagger UI</p>
 
 ## Screenshots
 >HomePage ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
@@ -82,7 +83,7 @@ This project has been created utilizing the technologies listed below.
 ## Demo
 
 ### ✨ [Live Site Demo](https://outdors.ca)
-<p>Allow up to 1 minute for Render.com to start the app, depending on how recent the last load was.</p>
+><p>Allow up to 1 minute for Render.com to start the app, depending on how recent the last load was.</p>
 
 ## Prerequisites
 
