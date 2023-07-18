@@ -22,6 +22,7 @@ const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const { logger, logEvents } = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler");
+const cors = require("cors");
 const app = express();
 
 const swaggerJSDoc = require("swagger-jsdoc");
@@ -50,7 +51,7 @@ const options = {
         url: "http://localhost:3001/",
       },
       {
-        url: "http://outdors.ca/",
+        url: "https://www.outdors.ca/",
       },
     ],
   },
@@ -62,6 +63,17 @@ const swaggerSpec = swaggerJSDoc(options);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const MongoDBStore = require("connect-mongo")(session);
+
+// Cors Origin for Client Access
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1/Campground";
 
@@ -106,7 +118,7 @@ app.use(
     replaceWith: "_",
   })
 );
-const secret = process.env.JWT_SECRET;
+const secret = process.env.MONGOOSE_SECRET;
 
 const store = new MongoDBStore({
   url: dbUrl,
@@ -134,7 +146,7 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
-app.use(helmet());
+app.use(helmet({ crossOriginEmbedderPolicy: false }));
 
 const scriptSrcUrls = [
   "https://stackpath.bootstrapcdn.com/",
