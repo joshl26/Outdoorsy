@@ -48,10 +48,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3001/",
-      },
-      {
-        url: "https://www.outdors.ca/",
+        url: process.env.SERVER_URL,
       },
     ],
   },
@@ -59,6 +56,7 @@ const options = {
   swaggerOptions: {
     validatorUrl: false,
   },
+  explorer: true,
 };
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
