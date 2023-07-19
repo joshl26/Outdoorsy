@@ -54,17 +54,16 @@ const options = {
   },
   apis: ["./routes/*.js"],
   swaggerOptions: {
-    validatorUrl: false,
+    requestInterceptor: function (request) {
+      request.headers.Origin = process.env.SERVER_URL;
+      return request;
+    },
+    url: `${process.env.SERVER_URL}/api-doc`,
   },
-  explorer: true,
 };
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
 const swaggerSpec = swaggerJSDoc(options);
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-const MongoDBStore = require("connect-mongo")(session);
-
 // Cors Origin for Client Access
 const corsOptions = {
   origin: process.env.CLIENT_URL,
@@ -75,8 +74,10 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+const MongoDBStore = require("connect-mongo")(session);
 
-const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1/Campground";
+const dbUrl = process.env.DB_URL;
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
@@ -166,6 +167,10 @@ const styleSrcUrls = [
   "https://use.fontawesome.com/",
 ];
 const connectSrcUrls = [
+  "https://3.134.238.10/",
+  "https://3.129.111.220/",
+  "https://52.15.118.168/",
+  "https://outdors.ca/",
   "https://api.mapbox.com/",
   "https://a.tiles.mapbox.com/",
   "https://b.tiles.mapbox.com/",
@@ -204,7 +209,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/callback",
+      callbackURL: `${process.env.CLIENT_URL}/auth/google/callback`,
     },
     function (accessToken, refreshToken, profile, done) {
       userProfile = profile;
