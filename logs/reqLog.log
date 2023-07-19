@@ -810,3 +810,9 @@
 20230719	00:31:43	cbb2afa8-f80b-42f4-b386-d9899bccaaa2	GET	/campgrounds/	undefined
 20230719	00:37:40	4a15eb95-1bfe-4d05-9d50-2e63be47bc56	GET	/campgrounds/	undefined
 20230719	00:45:18	40f7ac60-283c-4a07-82d0-e930c4955662	GET	/campgrounds/646d919387d1d5003b83728c	undefined
+20230719	00:54:02	14a7d993-da49-477a-a0c7-17f477b5993f	GET	/users/register	undefined
+20230719	00:54:06	5739dc14-0eb1-404e-a380-e2ce36ea95b6	GET	/users/register	undefined
+20230719	00:54:08	7eb5647e-d643-484c-b15e-24046cd26a3a	GET	/users/register	undefined
+20230719	00:54:57	3bb5e33e-c5a7-4cfb-b0bf-b505a29acd2c	GET	/register	undefined
+20230719	00:55:45	066502ef-7ea2-4597-ad72-f26dbfc736da	GET	/register/	undefined
+20230719	00:59:06	86223350-a4c7-413b-a6c1-bb9928c87a85	GET	/login/	undefined

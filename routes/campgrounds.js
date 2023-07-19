@@ -236,6 +236,34 @@ router.get("/new", isLoggedIn, campgrounds.renderNewForm);
  *         description: update campground listing contents
  */
 
+/**
+ * @swagger
+ * /campgrounds/{id}:
+ *   delete:
+ *     tags:
+ *     - Campgrounds
+ *
+ */
+
+/**
+ * @swagger
+ * /campgrounds/{id}:
+ *   delete:
+ *     summary: Delete campground details
+ *     description: Delete campground details
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the Campground record to delete
+ *         example: 646d919387d1d5003b83728c
+ *         schema:
+ *            type: string
+ *     responses:
+ *       200:
+ *         description: Delete campground listing contents
+ */
+
 router
   .route("/:id")
   .get(catchAsync(campgrounds.showCampground))
