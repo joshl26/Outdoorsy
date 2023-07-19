@@ -208,6 +208,34 @@ router.get("/new", isLoggedIn, campgrounds.renderNewForm);
  *         description: Edit campground listing contents
  */
 
+/**
+ * @swagger
+ * /campgrounds/{id}:
+ *   put:
+ *     tags:
+ *     - Campgrounds
+ *
+ */
+
+/**
+ * @swagger
+ * /campgrounds/{id}:
+ *   put:
+ *     summary: Update campground details
+ *     description: Update campground details
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the Campground record to update
+ *         example: 646d919387d1d5003b83728c
+ *         schema:
+ *            type: string
+ *     responses:
+ *       200:
+ *         description: update campground listing contents
+ */
+
 router
   .route("/:id")
   .get(catchAsync(campgrounds.showCampground))
