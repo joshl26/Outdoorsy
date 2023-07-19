@@ -14,10 +14,8 @@ const catchAsync = require("../utils/catchAsync");
  *    Reviews:
  *      type: object
  *      required:
- *      - title
- *      - location
- *      - price
- *      - description
+ *      - rating
+ *      - body
  *      properties:
  *          _id:
  *              type: string
@@ -64,6 +62,33 @@ const catchAsync = require("../utils/catchAsync");
  *
  */
 
+/**
+ * @swagger
+ * /reviews/:
+ *   post:
+ *     tags:
+ *     - Reviews
+ *     summary: Create a JSONPlaceholder user.
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       description: The user ID.
+ *                       example: 0
+ *                     name:
+ *                       type: string
+ *                       description: The user's name.
+ *                       example: Leanne Graham
+ */
 router.post("/", isLoggedIn, validateReview, catchAsync(reviews.createReview));
 
 router.delete(

@@ -90,17 +90,6 @@ const Campground = require("../models/campground");
  *
  */
 
-/**
- * @swagger
- * /:
- *   get:
- *     url: https://outdors.ca
- *     description: Welcome to Outdoorsy!
- *     responses:
- *       200:
- *         description: Returns the homepage.
- */
-
 router
   .route("/")
   .get(catchAsync(campgrounds.index))
@@ -111,6 +100,18 @@ router
     catchAsync(campgrounds.createCampground)
   );
 
+/**
+ * @swagger
+ * /campgrounds/new:
+ *   get:
+ *     tags:
+ *     - Campgrounds
+ *     summary: Display new campground page.
+ *     description: Return the HTML code for Outdoorsy' Homepage.
+ *     responses:
+ *       200:
+ *         description: New campground page contents
+ */
 router.get("/new", isLoggedIn, campgrounds.renderNewForm);
 
 router
@@ -125,6 +126,26 @@ router
   )
   .delete(isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground));
 
+/**
+ * @swagger
+ * /campgrounds/{id}/edit:
+ *   get:
+ *     tags:
+ *     - Campgrounds
+ *     summary: Display edit campground page.
+ *     description: Return the HTML code for Outdoorsy' Edit campground page.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the Campground record to edit.
+ *         example: 646d919387d1d5003b83728c
+ *         schema:
+ *            type: string
+ *     responses:
+ *       200:
+ *         description: Edit campground page contents
+ */
 router.get(
   "/:id/edit",
   isLoggedIn,

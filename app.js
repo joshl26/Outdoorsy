@@ -53,13 +53,6 @@ const options = {
     ],
   },
   apis: ["./routes/*.js"],
-  swaggerOptions: {
-    requestInterceptor: function (request) {
-      request.headers.Origin = process.env.SERVER_URL;
-      return request;
-    },
-    url: `${process.env.SERVER_URL}/api-doc`,
-  },
 };
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
@@ -73,7 +66,6 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const MongoDBStore = require("connect-mongo")(session);
 
