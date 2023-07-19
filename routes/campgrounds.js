@@ -106,11 +106,13 @@ router
  *   get:
  *     tags:
  *     - Campgrounds
- *     summary: Display new campground page.
- *     description: Return the HTML code for Outdoorsy' Homepage.
+ *     summary: Display new campground page
+ *     description: Return the HTML code for Outdoorsy' Homepage
  *     responses:
  *       200:
  *         description: New campground page contents
+ *         schema:
+ *            $ref: '#/components/schemas/Campgrounds'
  */
 router.get("/new", isLoggedIn, campgrounds.renderNewForm);
 
