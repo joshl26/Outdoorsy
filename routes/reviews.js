@@ -64,32 +64,50 @@ const catchAsync = require("../utils/catchAsync");
 
 /**
  * @swagger
- * /reviews/:
+ * /campgrounds/{id}/reviews/:
  *   post:
  *     tags:
  *     - Reviews
- *     summary: Create a JSONPlaceholder user.
+ *     summary: Create a new review
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the Campground record to edit
+ *         example: 646d919387d1d5003b83728c
+ *         schema:
+ *            type: string
  *     responses:
  *       201:
- *         description: Created
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 data:
- *                   type: object
- *                   properties:
- *                     id:
- *                       type: integer
- *                       description: The user ID.
- *                       example: 0
- *                     name:
- *                       type: string
- *                       description: The user's name.
- *                       example: Leanne Graham
+ *         description: Create a new review
  */
 router.post("/", isLoggedIn, validateReview, catchAsync(reviews.createReview));
+
+/**
+ * @swagger
+ * /campgrounds/{id}/reviews/{reviewId}/:
+ *   delete:
+ *     tags:
+ *     - Reviews
+ *     summary: Delete a review
+ *     description: Delete a review
+ *     parameters:
+ *        - in: path
+ *          schema:
+ *              type: object
+ *          required:
+ *              -id
+ *              -reviewId
+ *          properties:
+ *              id:
+ *                  type: string
+ *              reviewId:
+ *                  type: string
+ *          description: string id of review to delete
+ *     responses:
+ *       200:
+ *         description: Delete a review
+ */
 
 router.delete(
   "/:reviewId",

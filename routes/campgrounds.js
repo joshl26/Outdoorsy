@@ -90,6 +90,58 @@ const Campground = require("../models/campground");
  *
  */
 
+/**
+ * @swagger
+ * /campgrounds/:
+ *   post:
+ *     tags:
+ *     - Campgrounds
+ *
+ */
+
+/**
+ * @swagger
+ * /campgrounds/:
+ *   post:
+ *     summary: Create new campground
+ *     description: Create new campground
+ *     parameters:
+ *       - in: body
+ *         name: campground
+ *         description: The campground to create
+ *         schema:
+ *           $ref: '#/components/schemas/Campgrounds'
+ *     responses:
+ *         201:
+ *           description: campground created
+ */
+
+/**
+ * @swagger
+ * /campgrounds/:
+ *   get:
+ *     tags:
+ *     - Campgrounds
+ *
+ */
+
+/**
+ * @swagger
+ * /campgrounds/:
+ *   get:
+ *     summary: Get list of campgrounds
+ *     description: Get list of campgrounds
+ *     responses:
+ *         201:
+ *           description: campground created
+ *     parameters:
+ *       - in: body
+ *         name: campground
+ *         description: List of sites
+ *         schema:
+ *           $ref: '#/components/schemas/Campgrounds'
+ */
+
 router
   .route("/")
   .get(catchAsync(campgrounds.index))
@@ -106,15 +158,55 @@ router
  *   get:
  *     tags:
  *     - Campgrounds
- *     summary: Display new campground page
- *     description: Return the HTML code for Outdoorsy' Homepage
- *     responses:
- *       200:
- *         description: New campground page contents
- *         schema:
+ *
+ */
+
+/**
+ * @swagger
+ * /campgrounds/new:
+ *  get:
+ *      description: Create new campground
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - in: body
+ *          name: campground
+ *          description: The campground to create
+ *          schema:
  *            $ref: '#/components/schemas/Campgrounds'
+ *      responses:
+ *          201:
+ *              description: campground created
  */
 router.get("/new", isLoggedIn, campgrounds.renderNewForm);
+
+/**
+ * @swagger
+ * /campgrounds/{id}:
+ *   get:
+ *     tags:
+ *     - Campgrounds
+ *
+ */
+
+/**
+ * @swagger
+ * /campgrounds/{id}:
+ *   get:
+ *     summary: Get campground details
+ *     description: Get campground details
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the Campground record to edit
+ *         example: 646d919387d1d5003b83728c
+ *         schema:
+ *            type: string
+ *     responses:
+ *       200:
+ *         description: Edit campground listing contents
+ */
 
 router
   .route("/:id")
@@ -134,19 +226,19 @@ router
  *   get:
  *     tags:
  *     - Campgrounds
- *     summary: Display edit campground page.
- *     description: Return the HTML code for Outdoorsy' Edit campground page.
+ *     summary: Edit a campground listing
+ *     description: Return the form to edit a campground listing
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: Numeric ID of the Campground record to edit.
+ *         description: Numeric ID of the Campground record to edit
  *         example: 646d919387d1d5003b83728c
  *         schema:
  *            type: string
  *     responses:
  *       200:
- *         description: Edit campground page contents
+ *         description: Edit campground listing contents
  */
 router.get(
   "/:id/edit",
