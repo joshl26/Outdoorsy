@@ -56,6 +56,9 @@ const options = {
     ],
   },
   apis: ["./routes/*.js"],
+  swaggerOptions: {
+    validatorUrl: false,
+  },
 };
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format

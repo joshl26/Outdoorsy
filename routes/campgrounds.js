@@ -94,6 +94,7 @@ const Campground = require("../models/campground");
  * @swagger
  * /:
  *   get:
+ *     url: https://outdors.ca
  *     description: Welcome to Outdoorsy!
  *     responses:
  *       200:
