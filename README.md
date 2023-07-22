@@ -50,7 +50,7 @@ This project has been created utilizing the technologies listed below.
 
 >Swagger-UI/JSDOC - Powerful UI interface for documenting, testing and displaying API endpoints.
 
-Unified Modeling Language (UML) diagrams which illustrate the sequence of events between objects within this app.  
+>Unified Modeling Language (UML) diagrams which illustrate the sequence of events between objects within this app.  
 
 >Helmet - Helps secure Express apps by setting HTTP response headers.
 
