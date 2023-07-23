@@ -9,8 +9,8 @@
   <a href="https://github.com/joshl26/Outdoorsy/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/joshl26/Outdoorsy/blob/master/LICENSE" target="_blank">
-    <img alt="License: ISC" src="https://img.shields.io/github/license/joshl26/outdoorsy" />
+  <a href="https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge" target="_blank">
+    <img alt="License: ISC" src="https://img.shields.io/github/license/Ileriayo/markdown-badges" />
   </a>
 </p>
 
@@ -20,25 +20,32 @@ This project has been created utilizing the technologies listed below.
 
 ## Functionalities
 
-> Everyone can view the camps and reviews without signing up or logging in.
+> Anyone can view the campsites and reviews without needing to sign up or log in.
 
-> The user will have to log in to edit the campsite details or any comments.
+> Users must log in to edit campsite details or comments.
 
-> The user can only edit/delete the campsites and comments that they have added.
+> Only the user who added a campsite or comment can edit/delete it.
 
-> All the data will be persistent and stored in the Amazon cloud.
+> All data will be securely stored on Amazon cloud servers.
 
-## Technologies Used:
+## Technologies Utilized
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
 > HTML5 - A markup language for creating web pages and web applications.
 
 > CSS3 - used for describing the presentation of a document written in a markup language.
 
 > Bootstrap - A free and open-source front-end web framework for designing websites and web applications quickly.
-
-> jQuery - Cross-platform JavaScript library designed to simplify the client-side scripting of HTML.
-
-> DOM Manipulation - is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document.
 
 > Node.js - Open-source, cross-platform JavaScript run-time environment for executing JavaScript code server-side.
 

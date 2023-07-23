@@ -23,7 +23,7 @@
     "start": "node app.js"
   },
   "keywords": [],
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.11.0",
     "@react-oauth/google": "^0.11.0",
