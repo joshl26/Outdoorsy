@@ -88,7 +88,7 @@ This project has been created utilizing the technologies listed below.
 
 > UML Sequence Diagrams
 
-![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-sequence-diagram.png)
+> ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-sequence-diagram.png)
 
 ## Demo
 
