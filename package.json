@@ -54,6 +54,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^8.0.0"
+    "jsdoc-to-markdown": "^8.0.0",
+    "swagger-inline": "^7.0.0"
   }
 }

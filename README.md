@@ -14,79 +14,87 @@
   </a>
 </p>
 
-
 Outdoorsy is a full-stack website project where users can create and review campsites. To review or create a campsite, you must have an account.
 
 This project has been created utilizing the technologies listed below.
 
-
 ## Functionalities
 
->Everyone can view the camps and reviews without signing up or logging in.
+> Everyone can view the camps and reviews without signing up or logging in.
 
->The user will have to log in to edit the campsite details or any comments.
+> The user will have to log in to edit the campsite details or any comments.
 
->The user can only edit/delete the campsites and comments that they have added.
+> The user can only edit/delete the campsites and comments that they have added.
 
->All the data will be persistent and stored in the Amazon cloud.
+> All the data will be persistent and stored in the Amazon cloud.
 
 ## Technologies Used:
 
->HTML5 - A markup language for creating web pages and web applications.
+> HTML5 - A markup language for creating web pages and web applications.
 
->CSS3 - used for describing the presentation of a document written in a markup language.
+> CSS3 - used for describing the presentation of a document written in a markup language.
 
->Bootstrap - A free and open-source front-end web framework for designing websites and web applications quickly.
+> Bootstrap - A free and open-source front-end web framework for designing websites and web applications quickly.
 
->jQuery - Cross-platform JavaScript library designed to simplify the client-side scripting of HTML.
+> jQuery - Cross-platform JavaScript library designed to simplify the client-side scripting of HTML.
 
->DOM Manipulation - is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document.
+> DOM Manipulation - is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document.
 
->Node.js - Open-source, cross-platform JavaScript run-time environment for executing JavaScript code server-side.
+> Node.js - Open-source, cross-platform JavaScript run-time environment for executing JavaScript code server-side.
 
->Express.js - For building web applications and APIs and connecting middleware.
+> Express.js - For building web applications and APIs and connecting middleware.
 
->Joi - Used for schema description and data validation.
+> Joi - Used for schema description and data validation.
 
->Swagger-UI/JSDOC - Powerful UI interface for documenting, testing and displaying API endpoints.
+> Swagger-UI/JSDOC - Powerful UI interface for documenting, testing and displaying API endpoints.
 
->Helmet - Helps secure Express apps by setting HTTP response headers.
+> UML - Unified Modeling Language diagrams which illustrate the sequence of events between objects within this app.
 
->REST - REST (REpresentational State Transfer) is an architectural style for developing web services.
+> Helmet - Helps secure Express apps by setting HTTP response headers.
 
->MongoDB - Open-source cross-platform document-oriented NoSQL database program to store details like user info, campsites info and comments.
+> REST - REST (REpresentational State Transfer) is an architectural style for developing web services.
 
->PassportJS - Authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped into any Express-based web application.
+> MongoDB - Open-source cross-platform document-oriented NoSQL database program to store details like user info, campsites info and comments.
 
->Data Associations - Associating user data with the respective campsites and comments using the reference method.
+> PassportJS - Authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped into any Express-based web application.
 
->Render.com - Cloud platform as a service used as a web application deployment model.
+> Data Associations - Associating user data with the respective campsites and comments using the reference method.
 
->AWS - Mongodb is hosted on Amazon ec2 instance.
+> Render.com - Cloud platform as a service used as a web application deployment model.
+
+> AWS - Mongodb is hosted on Amazon ec2 instance.
 
 ## API Documentation
+
 ### ✨ [Live API Documentation](https://outdors.ca/api-docs/)
-><p>Created using Swagger UI</p>
+
+> <p>Created using Swagger UI</p>
 
 ## Screenshots
->HomePage ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
 
->All campsites
-![All campsites](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png)
+> HomePage ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
 
->Campsite Details Page
-![Campsite Details](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png)
+> All campsites
+> ![All campsites](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png)
 
->Login & Register page
-![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
+> Campsite Details Page
+> ![Campsite Details](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png)
 
->API Demo page
-![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+> Login & Register page
+> ![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
+
+> API Demo page
+> ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+
+> UML Sequence Diagrams
+
+![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-sequence-diagram.png)
 
 ## Demo
 
 ### ✨ [Live Demo Site](https://outdors.ca)
-><p>Hosted with free tier on Render.com</p>
+
+> <p>Hosted with free tier on Render.com</p>
 
 ## Prerequisites
 
