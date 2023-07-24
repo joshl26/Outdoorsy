@@ -38,7 +38,7 @@ const options = {
         "This is a Campsite review application made with Express and documented with Swagger",
       license: {
         name: "MIT",
-        url: "https://spdx.org/licenses/MIT.html",
+        url: "https://https://github.com/joshl26/Outdoorsy/blob/master/LICENSE",
       },
       contact: {
         name: "Joshua Lehman",
