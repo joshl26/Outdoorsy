@@ -1,0 +1,17 @@
+github: # Replace with up to 4 GitHub Sponsors-enabled usernames e.g., [user1, user2]
+patreon: https://www.patreon.com/join/TheModernDeveloper/checkout?ru=undefined
+open_collective: # Replace with a single Open Collective username
+ko_fi: # Replace with a single Ko-fi username
+tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
+community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with a single Liberapay username
+issuehunt: # Replace with a single IssueHunt username
+otechie: # Replace with a single Otechie username
+lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
+custom:
+  [
+    "https://www.paypal.com/donate/?hosted_button_id=PKXQX549ASWG8",
+    "https://blockchair.com/bitcoin/address/1KWszwDxsjviQvTBHDQjAWkvqJHGCPcanb",
+    "https://blockchair.com/ethereum/address/0x20823db64fe5623d7d2d84626ce2706aa6d56d69",
+    "https://blockchair.com/litecoin/address/LYpp81xAYsf9i1tUrsfVK8bbfnVDWSYcAE",
+  ]
