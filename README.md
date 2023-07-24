@@ -90,8 +90,10 @@ This project has been created utilizing the technologies listed below.
 > Login & Register page
 > ![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
 
-> API Demo page
-> ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+> Swagger API Demo pages
+> ![API Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+> ![API Schemas](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI-1.png)
+
 
 > UML Sequence Diagrams
 > ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-sequence-diagram.png)
