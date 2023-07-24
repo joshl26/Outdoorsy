@@ -816,3 +816,13 @@
 20230719	00:54:57	3bb5e33e-c5a7-4cfb-b0bf-b505a29acd2c	GET	/register	undefined
 20230719	00:55:45	066502ef-7ea2-4597-ad72-f26dbfc736da	GET	/register/	undefined
 20230719	00:59:06	86223350-a4c7-413b-a6c1-bb9928c87a85	GET	/login/	undefined
+20230724	11:31:30	c9265948-25b7-411e-a9fc-50b64ede2877	GET	/	undefined
+20230724	11:31:31	78da024a-f8a3-486d-a483-e662967de966	GET	/stylesheets/home.css	undefined
+20230724	11:31:31	569a8091-fa01-4fa2-ac2d-e835c0134d35	GET	/	undefined
+20230724	11:31:31	e4e99975-7f8f-44e0-8009-912266bc45a8	GET	/favicon.ico	undefined
+20230724	11:31:33	9fed737d-c727-48d0-a886-91931a7464a7	GET	/campgrounds	undefined
+20230724	11:31:34	6faa1f6f-8fed-48da-89d1-ffdb39fbcf68	GET	/stylesheets/app.css	undefined
+20230724	11:31:34	658d5ffd-05a0-402c-9fef-d5e3a43b3be9	GET	/javascripts/clusterMap.js	undefined
+20230724	11:31:35	e3333ad2-cad4-42b1-a62c-dfa90c8af0d2	GET	/campgrounds	undefined
+20230724	11:33:26	5d5768f8-d638-42b8-9419-29985082f9be	POST	/campgrounds/	http://localhost:3001
+20230724	11:33:46	e6763b80-d607-42fe-b436-cd2f95c26e6e	GET	/campgrounds/	undefined

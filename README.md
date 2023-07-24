@@ -90,10 +90,12 @@ This project has been created utilizing the technologies listed below.
 > Login & Register page
 > ![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
 
-> API Demo page
-> ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+> Swagger API Demo pages
+> ![API Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+> ![API Schemas](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI-1.png)
 
 > UML Sequence Diagrams
+
 > ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-sequence-diagram.png)
 
 ## Demo
@@ -152,6 +154,7 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2023 [Joshua Lehman](https://github.com/joshl26).<br />
-This project is [ISC](https://github.com/joshl26/Outdoorsy/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/joshl26/Outdoorsy/blob/master/LICENSE) licensed.
 
 ---
+
