@@ -94,8 +94,8 @@ This project has been created utilizing the technologies listed below.
 > ![API Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
 > ![API Schemas](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI-1.png)
 
-
 > UML Sequence Diagrams
+
 > ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-sequence-diagram.png)
 
 ## Demo
