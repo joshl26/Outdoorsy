@@ -89,7 +89,7 @@ Outdoorsy is a full-stack website project where users can create and review camp
 > ![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
 
 > Swagger API Demo pages
-> ![API Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png) 
+> ![API Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
 > ![API Schemas](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI-1.png)
 
 > UML Sequence Diagrams
@@ -100,7 +100,7 @@ Outdoorsy is a full-stack website project where users can create and review camp
 
 ### ✨ [Live Demo Site](https://outdors.ca)
 
-> <p>Hosted with GoDaddy</p>
+> <p>Hosted with free tier on Render.com</p>
 
 ## Prerequisites
 
