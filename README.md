@@ -16,8 +16,6 @@
 
 Outdoorsy is a full-stack website project where users can create and review campsites. To review or create a campsite, you must have an account.
 
-This project has been created utilizing the technologies listed below.
-
 ## Functionalities
 
 > Anyone can view the campsites and reviews without needing to sign up or log in.
@@ -91,7 +89,7 @@ This project has been created utilizing the technologies listed below.
 > ![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
 
 > Swagger API Demo pages
-> ![API Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+> ![API Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png) 
 > ![API Schemas](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI-1.png)
 
 > UML Sequence Diagrams
@@ -102,7 +100,7 @@ This project has been created utilizing the technologies listed below.
 
 ### ✨ [Live Demo Site](https://outdors.ca)
 
-> <p>Hosted with free tier on Render.com</p>
+> <p>Hosted with GoDaddy</p>
 
 ## Prerequisites
 
@@ -157,4 +155,3 @@ Copyright © 2023 [Joshua Lehman](https://github.com/joshl26).<br />
 This project is [MIT](https://github.com/joshl26/Outdoorsy/blob/master/LICENSE) licensed.
 
 ---
-
