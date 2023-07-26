@@ -24,6 +24,12 @@ const users = require("../controllers/users");
  *          username:
  *              type: string
  *              description: The username of the user
+ *          salt:
+ *              type: string
+ *              description: The salt for the users password
+ *          hash:
+ *              type: string
+ *              description: The hash for the users password
  */
 
 /**
