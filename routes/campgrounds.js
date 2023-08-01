@@ -133,7 +133,7 @@ const Campground = require("../models/campground");
  *     description: Get list of campgrounds
  *     responses:
  *         201:
- *           description: campground created
+ *           description: all campgrounds in database returned
  *     parameters:
  *       - in: body
  *         name: campground
