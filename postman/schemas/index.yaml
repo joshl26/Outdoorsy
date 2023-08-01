@@ -4,7 +4,7 @@ info:
   title: "Outdoorsy"
   description: Campground review site
 paths:
-  /campgrounds/:
+  /campgrounds:
     get:
       summary: Return all campground records in database
       responses:
