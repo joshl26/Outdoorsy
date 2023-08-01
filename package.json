@@ -51,7 +51,8 @@
     "sanitize-html": "^1.27.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "yaml": "^2.3.1"
   },
   "devDependencies": {
     "jsdoc-to-markdown": "^8.0.0",

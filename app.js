@@ -24,6 +24,11 @@ const { logger, logEvents } = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler");
 const cors = require("cors");
 const app = express();
+const fs = require("fs");
+const YAML = require("yaml");
+
+const file = fs.readFileSync("./postman/schemas/index.yaml", "utf8");
+const swaggerDocument = YAML.parse(file);
 
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
@@ -66,7 +71,9 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 const MongoDBStore = require("connect-mongo")(session);
 
 const dbUrl = process.env.DB_URL;
