@@ -4,12 +4,34 @@ info:
   title: "Outdoorsy"
   description: Campground review site
 paths:
-  /campgrounds:
+  /campground/s:
     get:
-      summary: Return all campground records in database
+      summary: Return the HTML for the campground list page
       responses:
         "200":
-          description: The list of all campgrounds in the database has been returned
+          description: A list of all campgrounds in the database in HTML format
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Campgrounds"
+        404:
+          description: No campgrounds found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /campgrounds:
+    post:
+      summary: Return the HTML for the campground list page
+      responses:
+        "200":
+          description: A list of all campgrounds in the database in HTML format
           content:
             application/json:
               schema:
