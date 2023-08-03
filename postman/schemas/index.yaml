@@ -4,6 +4,8 @@ info:
   title: "Outdoorsy"
   description: Campground review site
 tags:
+  - name: auth
+    description: Everything about your auth
   - name: campgrounds
     description: Everything about your campgrounds
   - name: reviews
