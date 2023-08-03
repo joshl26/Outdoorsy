@@ -2,44 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const catchAsync = require("../utils/catchAsync");
-const User = require("../models/user");
 const users = require("../controllers/users");
-
-/**
- * @swagger
- *  components:
- *   schemas:
- *    Users:
- *      type: object
- *      required:
- *      - username
- *      - email
- *      properties:
- *          id:
- *              type: string
- *              description: The auto generated id of the user
- *          email:
- *              type: string
- *              description: The email adress of the user
- *          username:
- *              type: string
- *              description: The username of the user
- *          salt:
- *              type: string
- *              description: The salt for the users password
- *          hash:
- *              type: string
- *              description: The hash for the users password
- */
-
-/**
- * @swagger
- * /register/:
- *   get:
- *     tags:
- *     - Users
- *
- */
 
 /**
  * @swagger
@@ -52,14 +15,6 @@ const users = require("../controllers/users");
  *         description: update campground listing contents
  */
 
-/**
- * @swagger
- * /register/:
- *   post:
- *     tags:
- *     - Users
- *
- */
 
 /**
  * @swagger
@@ -76,14 +31,6 @@ router
   .get(users.renderRegister)
   .post(catchAsync(users.register));
 
-/**
- * @swagger
- * /login/:
- *   get:
- *     tags:
- *     - Users
- *
- */
 
 /**
  * @swagger
@@ -96,14 +43,6 @@ router
  *         description: update campground listing contents
  */
 
-/**
- * @swagger
- * /login/:
- *   post:
- *     tags:
- *     - Users
- *
- */
 
 /**
  * @swagger
@@ -126,14 +65,6 @@ router
     users.login
   );
 
-/**
- * @swagger
- * /logout/:
- *   get:
- *     tags:
- *     - Users
- *
- */
 
 /**
  * @swagger
