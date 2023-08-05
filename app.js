@@ -1,8 +1,4 @@
-// if (process.env.NODE_ENV !== "production") {
-//   require("dotenv").config();
-// }
 require("dotenv").config();
-// console.log(process.env);
 
 const express = require("express");
 const path = require("path");
@@ -25,19 +21,28 @@ const errorHandler = require("./middleware/errorHandler");
 const app = express();
 const fs = require("fs");
 const YAML = require("yaml");
-
 const file = fs.readFileSync("./postman/schemas/index.yaml", "utf8");
 const swaggerDocument = YAML.parse(file);
-
 const swaggerUi = require("swagger-ui-express");
 
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+//  configures the Express.js application to use the Swagger UI middleware for displaying a Swagger
+//  document. The '/api-docs' route is used as an endpoint for accessing the Swagger UI.
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// creates a session store using MongoDB as the backend storage. This allows users to save their
+// sessions in MongoDB, providing a secure and persistent way for them to access their data even
+// after they have closed the browser window. The MongoDBStore also provides an easy way to manage
+// user sessions across multiple applications or servers.
 const MongoDBStore = require("connect-mongo")(session);
 
 const dbUrl = process.env.DB_URL;
 
+//  used to connect a Mongoose application to a MongoDB database. It takes the URL of the database
+//  (dbUrl) as an argument and sets several options that are needed for proper connection and operation.
+//  The useNewUrlParser option ensures that the parser uses current Node.js driver behavior, while
+//  useCreateIndex creates any indexes defined in your model schemas when connecting to the database.
+//  The useUnifiedTopology option allows Mongoose to take advantage of new features in MongoDB drivers,
+//  while useFindAndModify prevents findOneAndUpdate() from returning deprecated values.
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -47,9 +52,20 @@ mongoose.connect(dbUrl, {
 
 const db = mongoose.connection;
 
+//  sets up the Express web application to use EJS as its view engine. This means that when a route
+//  is requested, the server will look for an associated EJS file in the views folder and render it.
+//  The ejsMate variable contains configuration options for how EJS should be rendered.
 app.engine("ejs", ejsMate);
+
+//  sets the view engine for the Express app to EJS. This allows the server to render dynamic HTML
+//  pages using embedded JavaScript (EJS) templates.
 app.set("view engine", "ejs");
+
+//  sets the views directory for an Express app. It uses path.join() to join the current directory
+// (__dirname) with the string "views", and then passes that as an argument into app.set(). This tells
+// Express where to look for view files when it needs them, such as templates or partials.
 app.set("views", path.join(__dirname, "views"));
+
 app.use(logger);
 app.use(errorHandler);
 
@@ -68,29 +84,53 @@ db.on("error", (err) => {
 
 var userProfile;
 
-app.get("/success", (req, res) => res.send(userProfile));
-app.get("/error", (req, res) => res.send("error logging in"));
-
+//  configure Express.js middleware to parse incoming request bodies in a middleware before your
+//  handlers, available under the req.body property. It parses data sent with POST and PUT requests
+//  and makes it easier to extract relevant information from the request body for use within an
+//  application.
 app.use(express.urlencoded({ extended: true }));
+
+//  using the Express.js methodOverride middleware to allow for overriding HTTP verbs, such as POST
+//  and PUT. This allows clients to send requests with custom headers that specify which HTTP verb
+//  they should be routed through, instead of being restricted to just GET and POST requests.
 app.use(methodOverride("_method"));
+
+//  configures Express to serve static files from the public directory. This allows users to access
+//  files such as images, CSS and JavaScript that are stored in this directory when they visit the
+//  website.
 app.use(express.static(path.join(__dirname, "public")));
+
+//  using the mongoSanitize middleware to protect against malicious MongoDB operations. The
+//  "replaceWith" option specifies what character should replace any potentially unsafe characters,
+//  such as "$". This helps prevent attacks like NoSQL injection.
 app.use(
   mongoSanitize({
     replaceWith: "_",
   })
 );
+
 const secret = process.env.MONGOOSE_SECRET;
 
+//  creates a MongoDBStore object that is used to store session data. It takes in an url, secret
+// and touchAfter parameter. The url specifies the location of the database where the session data
+// will be stored, while the secret is used for signing and encrypting cookies. Finally, touchAfter
+// defines how long a given session should remain valid before it needs to be renewed or updated.
 const store = new MongoDBStore({
   url: dbUrl,
   secret,
   touchAfter: 24 * 60 * 60,
 });
 
+//  setting up an error handler for a session store. It will listen for any errors that occur and
+//  log them to the console when they do.
 store.on("error", function (e) {
   console.log("SESSION STORE ERROR", e);
 });
 
+//  sets up a session configuration object for use in an application. It includes settings such as
+//  the store to be used, the name of the session, a secret key, resave and saveUninitialized boolean
+//  values, and cookie options such as httpOnly status and expiration time. This configuration is
+//  necessary for applications that require user authentication or other forms of secure data storage.
 const sessionConfig = {
   store,
   name: "session",
@@ -106,6 +146,10 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
+
+//  setting up the Express.js middleware 'flash' which allows for passing temporary messages
+//  between requests. This is often used to display success or error messages after a form
+//  submission, for example.
 app.use(flash());
 app.use(helmet({ crossOriginEmbedderPolicy: false }));
 
@@ -149,7 +193,7 @@ app.use(
         "'self'",
         "blob:",
         "data:",
-        "https://res.cloudinary.com/dv6keahg3/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        process.env.CLOUDINARY, //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
         "https://images.unsplash.com/",
       ],
       fontSrc: ["'self'", ...fontSrcUrls],
@@ -157,41 +201,38 @@ app.use(
   })
 );
 
-/*  Google AUTH  */
-
-const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-const GOOGLE_CLIENT_ID =
-  "210077088022-tq1gkrurei2n98p8g9uogei0t97e7tc9.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: `${process.env.CLIENT_URL}/auth/google/callback`,
-    },
-    function (accessToken, refreshToken, profile, done) {
-      userProfile = profile;
-      return done(null, userProfile);
-    }
-  )
-);
-
+//  configures the Express application to use Passport. It initializes the Passport middleware,
+//  which allows authentication strategies (such as OAuth) to be used with an Express application.
 app.use(passport.initialize());
+
+//  sets up authentication for a web application. It requires the Passport middleware, which is used
+//  to authenticate requests. It then initializes passport and creates a session so that subsequent
+//  requests can be authenticated. Finally, it tells Express to use passport's session functionality,
+//  allowing users to remain logged in between page visits.
 app.use(passport.session());
+
+//  sets up a LocalStrategy for authentication using the User.authenticate() method. This strategy is
+//  used to authenticate users by verifying their username and password against stored credentials in
+//  a database. It also allows for secure access to protected resources on the server side, such as
+//  user profiles and account information.
 passport.use(new LocalStrategy(User.authenticate()));
 
+//  configure the passport authentication system. The serializeUser method takes a user object and
+//  creates an identifier for it that will be stored in the session. This identifier can then be used
+//  to retrieve the user object from the database when needed.
 passport.serializeUser(User.serializeUser());
+
+//  configures Passport.js to use the User model defined in the application. The serializeUser()
+//  function is used to store user information in a session, while deserializeUser() retrieves that
+//  information from the session and converts it back into a usable object for use within the
+//  application.
 passport.deserializeUser(User.deserializeUser());
 
-// passport.serializeUser(function (user, cb) {
-//   cb(null, user);
-// });
-
-// passport.deserializeUser(function (obj, cb) {
-//   cb(null, obj);
-// });
-
+//  used to set up middleware on the Express application. It sets up a "currentUser" variable in the
+//  response locals, so that it can be accessed from any view template. Additionally, it uses flash
+//  messages for success and error notifications which are accessible through res.locals.success and
+//  res.locals.error respectively. Finally, the next() function is called to move onto the next piece
+//  of middleware if there is one available (or proceed with handling the request).
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
@@ -199,27 +240,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/error" }),
-  function (req, res) {
-    // Successful authentication, redirect success.
-    res.redirect("/success");
-  }
-);
-
-app.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+app.use("/", userRoutes);
+app.use("/campgrounds", campgroundRoutes);
+app.use("/campgrounds/:id/reviews", reviewRoutes);
 
 app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.use("/", userRoutes);
-app.use("/campgrounds", campgroundRoutes);
-app.use("/campgrounds/:id/reviews", reviewRoutes);
+//  a route handler for an HTTP GET request to the "/success" endpoint. When this route is accessed,
+//  it will send back the content of the userProfile variable as a response.
+app.get("/success", (req, res) => res.send(userProfile));
+app.get("/error", (req, res) => res.send("error logging in"));
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
