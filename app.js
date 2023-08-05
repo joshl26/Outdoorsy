@@ -35,15 +35,13 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // user sessions across multiple applications or servers.
 const MongoDBStore = require("connect-mongo")(session);
 
-const dbUrl = process.env.DB_URL;
-
 //  used to connect a Mongoose application to a MongoDB database. It takes the URL of the database
-//  (dbUrl) as an argument and sets several options that are needed for proper connection and operation.
+//  (process.env.DB_URL) as an argument and sets several options that are needed for proper connection and operation.
 //  The useNewUrlParser option ensures that the parser uses current Node.js driver behavior, while
 //  useCreateIndex creates any indexes defined in your model schemas when connecting to the database.
 //  The useUnifiedTopology option allows Mongoose to take advantage of new features in MongoDB drivers,
 //  while useFindAndModify prevents findOneAndUpdate() from returning deprecated values.
-mongoose.connect(dbUrl, {
+mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -116,7 +114,7 @@ const secret = process.env.MONGOOSE_SECRET;
 // will be stored, while the secret is used for signing and encrypting cookies. Finally, touchAfter
 // defines how long a given session should remain valid before it needs to be renewed or updated.
 const store = new MongoDBStore({
-  url: dbUrl,
+  url: process.env.DB_URL,
   secret,
   touchAfter: 24 * 60 * 60,
 });
