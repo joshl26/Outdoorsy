@@ -22,7 +22,6 @@ const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const { logger, logEvents } = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler");
-const cors = require("cors");
 const app = express();
 const fs = require("fs");
 const YAML = require("yaml");
@@ -30,46 +29,7 @@ const YAML = require("yaml");
 const file = fs.readFileSync("./postman/schemas/index.yaml", "utf8");
 const swaggerDocument = YAML.parse(file);
 
-const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Outdoorsy",
-      version: "0.1.0",
-      description:
-        "This is a Campsite review application made with Express and documented with Swagger",
-      license: {
-        name: "MIT",
-        url: "https://github.com/joshl26/Outdoorsy/blob/master/LICENSE",
-      },
-      contact: {
-        name: "Joshua Lehman",
-        url: "https://joshlehman.ca",
-        email: "joshlehman.dev@gmail.com",
-      },
-    },
-    servers: [
-      {
-        url: process.env.SERVER_URL,
-      },
-    ],
-  },
-  apis: ["./routes/*.js"],
-};
-
-// Initialize swagger-jsdoc -> returns validated swagger spec in json format
-const swaggerSpec = swaggerJSDoc(options);
-// Cors Origin for Client Access
-const corsOptions = {
-  origin: process.env.CLIENT_URL,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
 
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

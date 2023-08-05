@@ -373,7 +373,48 @@ paths:
           description: Invalid ID supplied
         "404":
           description: Order not found
-
+  /success:
+    get:
+      tags:
+        - users
+      summary: User logged in successfully
+      description: User logged in successfully
+      operationId: loginUser
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Order not found
+  /error:
+    get:
+      tags:
+        - users
+      summary: Error logging user in
+      description: Error logging user in
+      operationId: loginUserError
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Order not found
 components:
   schemas:
     Campgrounds:
