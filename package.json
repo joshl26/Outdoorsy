@@ -19,6 +19,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "test:watch": "jest --watch",
     "test": "jest",
     "start": "nodemon -e js,yaml app.js"
   },
@@ -57,6 +58,7 @@
   "devDependencies": {
     "jest": "^29.6.2",
     "jsdoc-to-markdown": "^8.0.0",
+    "supertest": "^6.3.3",
     "swagger-inline": "^7.0.0"
   }
 }

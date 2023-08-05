@@ -17,22 +17,27 @@ describe("Connection", () => {
   //     expect(article.title).toBe("This is another post example");
   //   });
 
-  test("Retrieve campsite info", async () => {
-    // const id = "646d919387d1d5003b83728c";
-    // const campground = await Campground.showCampground(id);
-    //   .populate({
-    //     path: "reviews",
-    //     populate: {
-    //       path: "author",
-    //     },
-    //   })
-    //   .populate("author");
-    // if (!campground) {
-    //   req.flash("error", "Cannot find that campground!");
-    //   return res.redirect("/campgrounds");
-    // }
-    // expect(campground.title).toNotBe("");
-    //res.render("campgrounds/show", { campground });
+  // test("Retrieve campsite info", async () => {
+  // const id = "646d919387d1d5003b83728c";
+  // const campground = await Campground.showCampground(id);
+  //   .populate({
+  //     path: "reviews",
+  //     populate: {
+  //       path: "author",
+  //     },
+  //   })
+  //   .populate("author");
+  // if (!campground) {
+  //   req.flash("error", "Cannot find that campground!");
+  //   return res.redirect("/campgrounds");
+  // }
+  // expect(campground.title).toNotBe("");
+  //res.render("campgrounds/show", { campground });
+  // });
+
+  // This test fails because 1 !== 2
+  it("Testing to see if Jest works", () => {
+    expect(1).toBe(2);
   });
 
   afterAll((done) => {
