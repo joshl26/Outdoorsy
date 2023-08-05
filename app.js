@@ -170,9 +170,6 @@ const styleSrcUrls = [
   "https://use.fontawesome.com/",
 ];
 const connectSrcUrls = [
-  "https://3.134.238.10/",
-  "https://3.129.111.220/",
-  "https://52.15.118.168/",
   "https://outdors.ca/",
   "https://api.mapbox.com/",
   "https://a.tiles.mapbox.com/",
