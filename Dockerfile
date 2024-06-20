@@ -1,7 +1,8 @@
 FROM node:18-alpine
 
-WORKDIR /app
-
+WORKDIR /Outdoorsy
+COPY public/ /Outdoorsy/public
+COPY src/ /Outdoorsy/src
 COPY package*.json ./
 RUN npm install
 COPY . .

@@ -4,7 +4,7 @@
   "description": "Outdoorsy",
   "author": "Joshua Lehman",
   "packageManager": "^pnpm@6.32.4",
-  "homepage": "https://github.com/joshl26/Outdoorsy#readme",
+  "homepage": "/outdoorsy/",
   "demo": "https://joshlehman.ca/outdoorsy",
   "repository": {
     "type": "git",

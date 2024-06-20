@@ -168,7 +168,7 @@ const styleSrcUrls = [
   "https://use.fontawesome.com/",
 ];
 const connectSrcUrls = [
-  "localhost:3053",
+  "localhost:3053/",
   "https://joshlehman.ca/outdoorsy/",
   "https://api.mapbox.com/",
   "https://a.tiles.mapbox.com/",
