@@ -21,7 +21,8 @@
   "scripts": {
     "test:watch": "jest --watch",
     "test": "jest",
-    "start": "nodemon -e js,yaml app.js"
+    "start-windows": "set PORT=3053 && nodemon -e js,yaml app.js",
+    "start": "export PORT=3053 && node app.js"
   },
   "keywords": [],
   "license": "MIT",
