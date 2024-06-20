@@ -169,7 +169,7 @@ const styleSrcUrls = [
 ];
 const connectSrcUrls = [
   "localhost:3053",
-  "https://outdors.ca/",
+  "https://joshlehman.ca/outdoorsy/",
   "https://api.mapbox.com/",
   "https://a.tiles.mapbox.com/",
   "https://b.tiles.mapbox.com/",
