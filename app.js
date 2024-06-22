@@ -100,7 +100,7 @@ app.use(methodOverride("_method"));
 //  configures Express to serve static files from the public directory. This allows users to access
 //  files such as images, CSS and JavaScript that are stored in this directory when they visit the
 //  website.
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "/public/")));
 
 //  using the mongoSanitize middleware to protect against malicious MongoDB operations. The
 //  "replaceWith" option specifies what character should replace any potentially unsafe characters,
@@ -173,6 +173,7 @@ const styleSrcUrls = [
 ];
 const connectSrcUrls = [
   "localhost:3001/outdoorsy/",
+  "localhost:3001/outdoorsy/public/",
   "https://joshlehman.ca/outdoorsy/",
   "https://api.mapbox.com/",
   "https://a.tiles.mapbox.com/",
