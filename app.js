@@ -27,7 +27,11 @@ const swaggerUi = require("swagger-ui-express");
 
 //  configures the Express.js application to use the Swagger UI middleware for displaying a Swagger
 //  document. The '/api-docs' route is used as an endpoint for accessing the Swagger UI.
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(
+  "/outdoorsy/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument)
+);
 
 // creates a session store using MongoDB as the backend storage. This allows users to save their
 // sessions in MongoDB, providing a secure and persistent way for them to access their data even
@@ -168,7 +172,7 @@ const styleSrcUrls = [
   "https://use.fontawesome.com/",
 ];
 const connectSrcUrls = [
-  "localhost:3053/",
+  "localhost:3001/",
   "https://joshlehman.ca/outdoorsy/",
   "https://api.mapbox.com/",
   "https://a.tiles.mapbox.com/",
@@ -236,18 +240,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", userRoutes);
-app.use("/campgrounds", campgroundRoutes);
-app.use("/campgrounds/:id/reviews", reviewRoutes);
+app.use("/outdoorsy/", userRoutes);
+app.use("/outdoorsy/campgrounds", campgroundRoutes);
+app.use("/outdoorsy/campgrounds/:id/reviews", reviewRoutes);
 
-app.get("/", (req, res) => {
+app.get("/outdoorsy/", (req, res) => {
   res.render("home");
 });
 
 //  a route handler for an HTTP GET request to the "/success" endpoint. When this route is accessed,
 //  it will send back the content of the userProfile variable as a response.
-app.get("/success", (req, res) => res.send(userProfile));
-app.get("/error", (req, res) => res.send("error logging in"));
+app.get("/outdoorsy/success", (req, res) => res.send(userProfile));
+app.get("/outdoorsy/error", (req, res) => res.send("error logging in"));
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));

@@ -14,17 +14,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/campgrounds">Reviews</a>
-        <a class="nav-link" href="/campgrounds/new">New Campground</a>
-        <a class="nav-link" href="/api-docs">API</a>
+        <a class="nav-link" href="/outdoorsy/">Home</a>
+        <a class="nav-link" href="/outdoorsy/campgrounds">Reviews</a>
+        <a class="nav-link" href="/outdoorsy/campgrounds/new">New Campground</a>
+        <a class="nav-link" href="/outdoorsy/api-docs">API</a>
       </div>
       <div class="navbar-nav ml-auto">
         <% if(!currentUser) {%>
-        <a class="nav-link" href="/login">Login</a>
-        <a class="nav-link" href="/register">Register</a>
+        <a class="nav-link" href="/outdoorsy/login">Login</a>
+        <a class="nav-link" href="/outdoorsy/register">Register</a>
         <% } else {%>
-        <a class="nav-link" href="/logout">Logout</a>
+        <a class="nav-link" href="/outdoorsy/logout">Logout</a>
         <% } %>
       </div>
     </div>
