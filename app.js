@@ -100,9 +100,9 @@ app.use(methodOverride("_method"));
 //  configures Express to serve static files from the public directory. This allows users to access
 //  files such as images, CSS and JavaScript that are stored in this directory when they visit the
 //  website.
-app.use(express.static(path.join(__dirname, "/public")));
+// app.use(express.static(path.join(__dirname, "/public/")));
+app.use(express.static(__dirname + "/public"));
 
-//  using the mongoSanitize middleware to protect against malicious MongoDB operations. The
 //  "replaceWith" option specifies what character should replace any potentially unsafe characters,
 //  such as "$". This helps prevent attacks like NoSQL injection.
 app.use(
@@ -173,8 +173,7 @@ const styleSrcUrls = [
   "https://use.fontawesome.com/",
 ];
 const connectSrcUrls = [
-  "localhost:3001/outdoorsy/",
-  "localhost:3001/outdoorsy/public/",
+  "localhost:3053/outdoorsy/",
   "https://joshlehman.ca/outdoorsy/",
   "https://api.mapbox.com/",
   "https://a.tiles.mapbox.com/",
@@ -265,7 +264,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3053;
 app.listen(port, () => {
   console.log(`Serving on port ${port}`);
 });
