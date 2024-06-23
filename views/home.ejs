@@ -10,7 +10,52 @@
       integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="/stylesheets/home.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/home.css" /> -->
+    <style>
+      body {
+        height: 100vh;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("https://res.cloudinary.com/dv6keahg3/image/upload/v1680772539/f_auto/q_auto/Outdoorsy/camprise_b2cbsv.jpg");
+        background-size: cover;
+        background-position: center;
+        text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+      }
+      .cover-container {
+        max-width: 60vw;
+      }
+
+      nav .navbar-nav li a {
+        color: white !important;
+      }
+
+      .nav-link {
+        padding: 0.25rem 0;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.5);
+        margin-left: 1rem;
+        border-bottom: 0.25rem solid transparent;
+      }
+
+      .nav-link:hover {
+        color: rgba(255, 255, 255, 0.5);
+        border-bottom-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .nav-link.active {
+        color: white;
+        border-bottom-color: white;
+      }
+
+      .btn-secondary,
+      .btn-secondary:hover {
+        color: #333;
+        text-shadow: none;
+      }
+    </style>
   </head>
 
   <body class="d-flex text-center text-white bg-dark">

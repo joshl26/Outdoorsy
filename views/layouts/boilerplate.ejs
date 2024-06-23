@@ -16,7 +16,17 @@
       href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="/stylesheets/app.css" />
+    <style>
+      #cluster-map {
+        width: 100%;
+        height: 500px;
+      }
+
+      #map {
+        width: 100%;
+        height: 300px;
+      }
+    </style>
   </head>
   <body class="d-flex flex-column vh-100">
     <%- include('../partials/navbar')%>
