@@ -2,7 +2,8 @@ name: Publish Image to Docker Hub
 on:
   push:
     branches:
-      - main
+      - '**' # Run on push to any branch
+  workflow_dispatch: # Keep manual trigger
 
 jobs:
   publish_image:
