@@ -3,7 +3,10 @@ on:
   push:
     branches:
       - main
-
+      - develop
+  pull_request:
+    branches:
+      - main
 jobs:
   publish_image:
     runs-on: ubuntu-latest
