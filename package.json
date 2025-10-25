@@ -1,9 +1,9 @@
 {
   "name": "outdoorsy",
   "version": "1.0.0",
-  "description": "Outdoorsy",
-  "author": "Joshua Lehman",
-  "packageManager": "^pnpm@6.32.4",
+  "description": "A modern campground review and discovery platform",
+  "author": "Joshua Lehman <your.email@example.com>",
+  "packageManager": "pnpm@8.15.0",
   "homepage": "/outdoorsy/",
   "demo": "https://joshlehman.ca/outdoorsy",
   "repository": {
@@ -14,52 +14,157 @@
     "url": "https://github.com/joshl26/Outdoorsy/issues"
   },
   "engines": {
-    "npm": ">=8.0.0",
-    "node": ">=17.0.0"
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0",
+    "pnpm": ">=8.0.0"
   },
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "start:dev": "nodemon -e js,ejs,yaml,json app.js",
+    "start:prod": "NODE_ENV=production node app.js",
+    "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "test": "jest",
-    "start-windows": "set PORT=3053 && nodemon -e js,yaml app.js",
-    "start": "export PORT=3053 && node app.js"
+    "test:unit": "jest --testPathPattern=__tests__/unit",
+    "test:integration": "jest --testPathPattern=__tests__/integration",
+    "test:e2e": "jest --testPathPattern=__tests__/e2e",
+    "lint": "eslint \"**/*.js\" --ignore-pattern node_modules/",
+    "lint:fix": "eslint \"**/*.js\" --fix --ignore-pattern node_modules/",
+    "format": "prettier --write \"**/*.{js,json,md,yaml,yml}\"",
+    "format:check": "prettier --check \"**/*.{js,json,md,yaml,yml}\"",
+    "validate": "npm run lint && npm run format:check && npm run test",
+    "prepare": "husky install",
+    "seed": "node seeds/index.js",
+    "db:backup": "node scripts/backup-db.js",
+    "security:audit": "npm audit --production",
+    "security:fix": "npm audit fix",
+    "docs:generate": "jsdoc2md **/*.js > docs/API.md",
+    "docker:build": "docker build -t outdoorsy:latest .",
+    "docker:run": "docker run -p 3053:3053 outdoorsy:latest",
+    "precommit": "lint-staged"
   },
-  "keywords": [],
+  "keywords": [
+    "campground",
+    "camping",
+    "outdoors",
+    "review",
+    "travel",
+    "nature",
+    "express",
+    "mongodb",
+    "nodejs"
+  ],
   "license": "MIT",
   "dependencies": {
-    "@mapbox/mapbox-sdk": "^0.11.0",
-    "@react-oauth/google": "^0.11.0",
-    "cloudinary": "^1.23.0",
+    "@mapbox/mapbox-sdk": "^0.16.0",
+    "cloudinary": "^1.41.0",
+    "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
-    "connect-mongo": "^3.2.0",
+    "connect-mongo": "^5.1.0",
     "cors": "^2.8.5",
-    "date-fns": "^2.30.0",
-    "dotenv": "^8.2.0",
-    "ejs": "^3.1.5",
-    "ejs-mate": "^3.0.0",
-    "express": "^4.17.1",
-    "express-mongo-sanitize": "^2.0.0",
-    "express-session": "^1.17.1",
-    "helmet": "^4.6.0",
-    "joi": "^17.2.1",
+    "csurf": "^1.11.0",
+    "date-fns": "^3.0.0",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.18.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.1.5",
+    "express-session": "^1.17.3",
+    "helmet": "^7.1.0",
+    "joi": "^17.11.0",
     "method-override": "^3.0.0",
-    "mongoose": "^5.10.4",
-    "multer": "^1.4.2",
+    "mongoose": "^8.0.3",
+    "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "passport": "^0.4.1",
-    "passport-google-oauth": "^2.0.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.0.1",
-    "sanitize-html": "^1.27.4",
+    "passport-local-mongoose": "^8.0.0",
+    "sanitize-html": "^2.11.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "uuid": "^9.0.0",
-    "yaml": "^2.3.1"
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0",
+    "yaml": "^2.3.4"
   },
   "devDependencies": {
-    "jest": "^29.6.2",
+    "@types/jest": "^29.5.11",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^27.6.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-security": "^2.1.0",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
     "jsdoc-to-markdown": "^8.0.0",
+    "lint-staged": "^15.2.0",
+    "nodemon": "^3.0.2",
+    "prettier": "^3.1.1",
     "supertest": "^6.3.3",
     "swagger-inline": "^7.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yaml,yml}": [
+      "prettier --write"
+    ]
+  },
+  "nodemonConfig": {
+    "watch": [
+      "app.js",
+      "routes/",
+      "controllers/",
+      "models/",
+      "middleware/",
+      "config/",
+      "utils/"
+    ],
+    "ext": "js,ejs,yaml,json",
+    "ignore": [
+      "node_modules/",
+      "__tests__/",
+      "public/",
+      "docs/"
+    ],
+    "env": {
+      "NODE_ENV": "development"
+    }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "./coverage",
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!node_modules/**",
+      "!coverage/**",
+      "!__tests__/**",
+      "!seeds/**",
+      "!public/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 60,
+        "functions": 60,
+        "lines": 60,
+        "statements": 60
+      }
+    },
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ]
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "printWidth": 80,
+    "arrowParens": "always"
   }
 }

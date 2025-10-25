@@ -2,26 +2,24 @@ const { campgroundSchema, reviewSchema } = require("./schemas.js");
 const ExpressError = require("./utils/ExpressError");
 const Campground = require("./models/campground");
 const Review = require("./models/review");
+const { buildPath } = require("./config/basePath");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl;
     req.flash("error", "You must be signed in first!");
-    return res.redirect("/outdoorsy/login");
+    return res.redirect(buildPath("login"));
   }
   next();
 };
 
 module.exports.validateCampground = (req, res, next) => {
   const { error, value } = campgroundSchema.validate(req.body);
-  // console.log(req.body);
   if (error) {
     const msg = `Validation error: ${error.details
       .map((x) => x.message)
       .join(", ")}`;
     console.log(msg);
-    // next(`Validation error: ${error.details.map((x) => x.message).join(", ")}`);
-    // return catched(msg);
     throw new ExpressError(msg, 418);
   } else {
     next();
@@ -33,7 +31,7 @@ module.exports.isAuthor = async (req, res, next) => {
   const campground = await Campground.findById(id);
   if (!campground.author.equals(req.user._id)) {
     req.flash("error", "You do not have permission to do that!");
-    return res.redirect(`/outdoorsy/campgrounds/${id}`);
+    return res.redirect(buildPath(`campgrounds/${id}`));
   }
   next();
 };
@@ -43,7 +41,7 @@ module.exports.isReviewAuthor = async (req, res, next) => {
   const review = await Review.findById(reviewId);
   if (!review.author.equals(req.user._id)) {
     req.flash("error", "You do not have permission to do that!");
-    return res.redirect(`/outdoorsy/campgrounds/${id}`);
+    return res.redirect(buildPath(`campgrounds/${id}`));
   }
   next();
 };
@@ -56,4 +54,11 @@ module.exports.validateReview = (req, res, next) => {
   } else {
     next();
   }
+};
+
+module.exports.storeReturnTo = (req, res, next) => {
+  if (req.session.returnTo) {
+    res.locals.returnTo = req.session.returnTo;
+  }
+  next();
 };
