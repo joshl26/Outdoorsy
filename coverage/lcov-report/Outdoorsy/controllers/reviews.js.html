@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -84,47 +84,47 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Campground = <span class="cstat-no" title="statement not covered" >require('../models/campground');</span>
-const Review = <span class="cstat-no" title="statement not covered" >require('../models/review');</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Campground = require('../models/campground');
+const Review = require('../models/review');
 &nbsp;
-<span class="cstat-no" title="statement not covered" >module.exports.createReview = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {</span>
-  const campground = <span class="cstat-no" title="statement not covered" >await Campground.findById(req.params.id);</span>
-  const review = <span class="cstat-no" title="statement not covered" >new Review(req.body.review);</span>
-<span class="cstat-no" title="statement not covered" >  review.author = req.user._id;</span>
-<span class="cstat-no" title="statement not covered" >  campground.reviews.push(review);</span>
-<span class="cstat-no" title="statement not covered" >  await review.save();</span>
-<span class="cstat-no" title="statement not covered" >  await campground.save();</span>
-<span class="cstat-no" title="statement not covered" >  req.flash('success', 'Created new review!');</span>
-<span class="cstat-no" title="statement not covered" >  res.redirect(`/outdoorsy/campgrounds/${campground._id}`);</span>
+module.exports.createReview = async (req, res) =&gt; {
+  const campground = await Campground.findById(req.params.id);
+  const review = new Review(req.body.review);
+  review.author = req.user._id;
+  campground.reviews.push(review);
+  await review.save();
+  await campground.save();
+  req.flash('success', 'Created new review!');
+  res.redirect(`/outdoorsy/campgrounds/${campground._id}`);
 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >module.exports.deleteReview = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {</span>
-  const { id, reviewId } = <span class="cstat-no" title="statement not covered" >req.params;</span>
-<span class="cstat-no" title="statement not covered" >  await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });</span>
-<span class="cstat-no" title="statement not covered" >  await Review.findByIdAndDelete(reviewId);</span>
-<span class="cstat-no" title="statement not covered" >  req.flash('success', 'Successfully deleted review');</span>
-<span class="cstat-no" title="statement not covered" >  res.redirect(`/outdoorsy/campgrounds/${id}`);</span>
+module.exports.deleteReview = async (req, res) =&gt; {
+  const { id, reviewId } = req.params;
+  await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+  await Review.findByIdAndDelete(reviewId);
+  req.flash('success', 'Successfully deleted review');
+  res.redirect(`/outdoorsy/campgrounds/${id}`);
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -133,7 +133,7 @@ const Review = <span class="cstat-no" title="statement not covered" >require('..
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-25T18:11:10.903Z
+                at 2025-10-25T19:51:51.718Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

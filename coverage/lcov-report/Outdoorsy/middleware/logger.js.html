@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>17/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>17/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -107,11 +107,11 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -119,43 +119,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { format } = <span class="cstat-no" title="statement not covered" >require('date-fns');</span>
-const { v4: uuid } = <span class="cstat-no" title="statement not covered" >require('uuid');</span>
-const fs = <span class="cstat-no" title="statement not covered" >require('fs');</span>
-const fsPromises = <span class="cstat-no" title="statement not covered" >require('fs').promises;</span>
-const path = <span class="cstat-no" title="statement not covered" >require('path');</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { format } = require('date-fns');
+const { v4: uuid } = require('uuid');
+const fs = require('fs');
+const fsPromises = require('fs').promises;
+const path = require('path');
 &nbsp;
 /**
  * Asynchronously logs events to a specified log file.
@@ -163,21 +163,21 @@ const path = <span class="cstat-no" title="statement not covered" >require('path
  * @param {string} message - The message to log
  * @param {string} logFileName - The log file name (e.g., 'errLog.log')
  */
-const logEvents = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (message, logFileName) =&gt; {</span>
-  const dateTime = <span class="cstat-no" title="statement not covered" >format(new Date(), 'yyyyMMdd\tHH:mm:ss');</span>
-  const logItem = <span class="cstat-no" title="statement not covered" >`${dateTime}\t${uuid()}\t${message}\n`;</span>
-  const logsDir = <span class="cstat-no" title="statement not covered" >path.join(__dirname, '..', 'logs');</span>
-  const logFilePath = <span class="cstat-no" title="statement not covered" >path.join(logsDir, logFileName);</span>
+const logEvents = async (message, logFileName) =&gt; {
+  const dateTime = format(new Date(), 'yyyyMMdd\tHH:mm:ss');
+  const logItem = `${dateTime}\t${uuid()}\t${message}\n`;
+  const logsDir = path.join(__dirname, '..', 'logs');
+  const logFilePath = path.join(logsDir, logFileName);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  try {</span>
+  try {
     // Ensure logs directory exists
-<span class="cstat-no" title="statement not covered" >    if (!fs.existsSync(logsDir)) {</span>
-<span class="cstat-no" title="statement not covered" >      await fsPromises.mkdir(logsDir, { recursive: true });</span>
+    if (!fs.existsSync(logsDir)) {
+      await fsPromises.mkdir(logsDir, { recursive: true });
     }
     // Append log item to the file
-<span class="cstat-no" title="statement not covered" >    await fsPromises.appendFile(logFilePath, logItem);</span>
+    await fsPromises.appendFile(logFilePath, logItem);
   } catch (err) {
-<span class="cstat-no" title="statement not covered" >    console.error(`Failed to write to log file: ${err}`);</span>
+    console.error(`Failed to write to log file: ${err}`);
   }
 };
 &nbsp;
@@ -185,7 +185,7 @@ const logEvents = <span class="cstat-no" title="statement not covered" ><span cl
  * Express middleware to log incoming HTTP requests.
  * Logs method, URL, and origin header.
  */
-const logger = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(r</span>eq, res, next) =&gt; {</span>
+const logger = <span class="fstat-no" title="function not covered" >(r</span>eq, res, next) =&gt; {
 <span class="cstat-no" title="statement not covered" >  logEvents(</span>
     `${req.method}\t${req.url}\t${req.headers.origin || 'no-origin'}`,
     'reqLog.log'
@@ -194,7 +194,7 @@ const logger = <span class="cstat-no" title="statement not covered" ><span class
 <span class="cstat-no" title="statement not covered" >  next();</span>
 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >module.exports = { logEvents, logger };</span>
+module.exports = { logEvents, logger };
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -202,7 +202,7 @@ const logger = <span class="cstat-no" title="statement not covered" ><span class
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-25T18:11:10.903Z
+                at 2025-10-25T19:51:51.718Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

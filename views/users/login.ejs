@@ -1,5 +1,3 @@
-<% layout('layouts/boilerplate')%>
-
 <div class="container d-flex justify-content-center align-items-center mt-5">
   <div class="row">
     <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
@@ -11,7 +9,12 @@
         />
         <div class="card-body">
           <h5 class="card-title">Login</h5>
-          <form action="/outdoorsy/login" method="POST" class="validated-form" novalidate>
+          <form
+            action="/outdoorsy/login"
+            method="POST"
+            class="validated-form"
+            novalidate
+          >
             <div class="mb-3">
               <label class="form-label" for="username">Username</label>
               <input

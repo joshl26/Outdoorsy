@@ -20,8 +20,9 @@
   },
   "main": "app.js",
   "scripts": {
-    "start-windows": "set PORT=3053 && nodemon -e js,ejs,yaml,json app.js",
-    "start": "export PORT=3053 && node app.js",
+    "start-windows": "set PORT=3053 && nodemon -e js,ejs,yaml,json server.js",
+    "start": "cross-env PORT=3053 node server.js",
+    "start:dev": "cross-env PORT=3053 nodemon -e js,ejs,yaml,json server.js",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "test:unit": "jest --testPathPattern=__tests__/unit",
@@ -146,6 +147,9 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ],
     "coverageDirectory": "./coverage",
     "collectCoverageFrom": [
       "**/*.js",

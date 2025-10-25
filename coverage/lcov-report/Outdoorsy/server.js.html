@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for Outdoorsy/routes/campgrounds.test.js</title>
+    <title>Code coverage report for Outdoorsy/server.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">Outdoorsy/routes</a> campgrounds.test.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">Outdoorsy</a> server.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -80,38 +80,50 @@
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const request = <span class="cstat-no" title="statement not covered" >require('supertest');</span>
-const app = <span class="cstat-no" title="statement not covered" >require('../app');</span> // your Express app
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// server.js
+<span class="cstat-no" title="statement not covered" >require('dotenv').config();</span>
+const mongoose = <span class="cstat-no" title="statement not covered" >require('mongoose');</span>
+const app = <span class="cstat-no" title="statement not covered" >require('./app');</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >describe('Campgrounds Routes', <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  it('GET /outdoorsy/campgrounds should return 200 and HTML', <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
-    const res = <span class="cstat-no" title="statement not covered" >await request(app).get('/outdoorsy/campgrounds');</span>
-<span class="cstat-no" title="statement not covered" >    expect(res.statusCode).toBe(200);</span>
-<span class="cstat-no" title="statement not covered" >    expect(res.headers['content-type']).toMatch(/html/);</span>
-  });
+const dbUrl = <span class="cstat-no" title="statement not covered" >process.env.DB_URL || 'mongodb://localhost:27017/outdoorsy';</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  it('GET /outdoorsy/campgrounds/new should return 200 for logged in user', <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
-    // You need to mock authentication or login first
-    // For now, just test unauthenticated access
-    const res = <span class="cstat-no" title="statement not covered" >await request(app).get('/outdoorsy/campgrounds/new');</span>
-<span class="cstat-no" title="statement not covered" >    expect([200, 302]).toContain(res.statusCode); </span>// 302 if redirected to login
+<span class="cstat-no" title="statement not covered" >mongoose.connect(dbUrl, {</span>
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+&nbsp;
+const db = <span class="cstat-no" title="statement not covered" >mongoose.connection;</span>
+<span class="cstat-no" title="statement not covered" >db.on('error', console.error.bind(console, 'MongoDB connection error:'));</span>
+<span class="cstat-no" title="statement not covered" >db.once('open', <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  console.log('MongoDB connected');</span>
+  const port = <span class="cstat-no" title="statement not covered" >process.env.PORT || 3053;</span>
+<span class="cstat-no" title="statement not covered" >  app.listen(port, <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    console.log(`Serving on port ${port}`);</span>
   });
 });
 &nbsp;</pre></td></tr></table></pre>
@@ -121,16 +133,16 @@ const app = <span class="cstat-no" title="statement not covered" >require('../ap
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-25T18:23:54.727Z
+                at 2025-10-25T19:51:51.718Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     
