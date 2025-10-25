@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-  # Optional: keep manual trigger as well
-  workflow_dispatch:
 
 jobs:
   publish_image:
