@@ -1,11 +1,11 @@
-const BaseJoi = require("joi");
-const sanitizeHtml = require("sanitize-html");
+const BaseJoi = require('joi');
+const sanitizeHtml = require('sanitize-html');
 
 const extension = (joi) => ({
-  type: "string",
+  type: 'string',
   base: joi.string(),
   messages: {
-    "string.escapeHTML": "{{#label}} must not include HTML!",
+    'string.escapeHTML': '{{#label}} must not include HTML!',
   },
   rules: {
     escapeHTML: {
@@ -15,7 +15,7 @@ const extension = (joi) => ({
           allowedAttributes: {},
         });
         if (clean !== value)
-          return helpers.error("string.escapeHTML", { value });
+          return helpers.error('string.escapeHTML', { value });
         return clean;
       },
     },
