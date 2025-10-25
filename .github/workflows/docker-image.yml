@@ -23,26 +23,20 @@ jobs:
           echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}"
           echo "CLOUDINARY=${{ secrets.CLOUDINARY }}"
 
-          - name: Make envfile
-
-          uses: SpicyPizza/create-envfile@v2.0
-          with:
-            env: |
-              NODE_ENV=${{ secrets.NODE_ENV }}
-              CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}
-              CLOUDINARY_KEY=${{ secrets.CLOUDINARY_KEY }}
-              CLOUDINARY_SECRET=${{ secrets.CLOUDINARY_SECRET }}
-              MAPBOX_TOKEN=${{ secrets.MAPBOX_TOKEN }}
-              DB_URL=${{ secrets.DB_URL }}
-              MONGOOSE_SECRET=${{ secrets.MONGOOSE_SECRET }}
-              CLIENT_URL=${{ secrets.CLIENT_URL }}
-              SERVER_URL=${{ secrets.SERVER_URL }}
-              GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
-              GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
-              CLOUDINARY=${{ secrets.CLOUDINARY }}
-            file_name: .env
-            fail_on_empty: false
-            sort_keys: false
+      - name: Create .env file
+        run: |
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> .env
+          echo "CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}" >> .env
+          echo "CLOUDINARY_KEY=${{ secrets.CLOUDINARY_KEY }}" >> .env
+          echo "CLOUDINARY_SECRET=${{ secrets.CLOUDINARY_SECRET }}" >> .env
+          echo "MAPBOX_TOKEN=${{ secrets.MAPBOX_TOKEN }}" >> .env
+          echo "DB_URL=${{ secrets.DB_URL }}" >> .env
+          echo "MONGOOSE_SECRET=${{ secrets.MONGOOSE_SECRET }}" >> .env
+          echo "CLIENT_URL=${{ secrets.CLIENT_URL }}" >> .env
+          echo "SERVER_URL=${{ secrets.SERVER_URL }}" >> .env
+          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
+          echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env
+          echo "CLOUDINARY=${{ secrets.CLOUDINARY }}" >> .env
 
       - name: build
         run: |
