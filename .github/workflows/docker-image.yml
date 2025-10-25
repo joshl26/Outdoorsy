@@ -1,5 +1,10 @@
 name: Publish Image to Docker Hub
-on: [workflow_dispatch]
+on:
+  push:
+    branches:
+      - main
+  # Optional: keep manual trigger as well
+  workflow_dispatch:
 
 jobs:
   publish_image:
@@ -7,21 +12,6 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
-
-      - name: Print environment keys
-        run: |
-          echo "NODE_ENV=${{ secrets.NODE_ENV }}"
-          echo "CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}"
-          echo "CLOUDINARY_KEY=${{ secrets.CLOUDINARY_KEY }}"
-          echo "CLOUDINARY_SECRET=${{ secrets.CLOUDINARY_SECRET }}"
-          echo "MAPBOX_TOKEN=${{ secrets.MAPBOX_TOKEN }}"
-          echo "DB_URL=${{ secrets.DB_URL }}"
-          echo "MONGOOSE_SECRET=${{ secrets.MONGOOSE_SECRET }}"
-          echo "CLIENT_URL=${{ secrets.CLIENT_URL }}"
-          echo "SERVER_URL=${{ secrets.SERVER_URL }}"
-          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}"
-          echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}"
-          echo "CLOUDINARY=${{ secrets.CLOUDINARY }}"
 
       - name: Create .env file
         run: |
