@@ -24,6 +24,7 @@ jobs:
           echo "CLOUDINARY=${{ secrets.CLOUDINARY }}"
 
           - name: Make envfile
+
           uses: SpicyPizza/create-envfile@v2.0
           with:
             env: |
