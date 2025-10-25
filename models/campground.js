@@ -2,15 +2,18 @@ const mongoose = require('mongoose');
 const Review = require('./review');
 const Schema = mongoose.Schema;
 
+// Sub-schema for images with a virtual for thumbnail URL
 const ImageSchema = new Schema({
   url: String,
   filename: String,
 });
 
 ImageSchema.virtual('thumbnail').get(function () {
+  // Adjust URL to request a smaller image version (width 200)
   return this.url.replace('/outdoorsy/upload', '/outdoorsy/upload/w_200');
 });
 
+// Enable virtuals to be included when converting documents to JSON
 const opts = { toJSON: { virtuals: true } };
 
 const CampgroundSchema = new Schema(
@@ -20,10 +23,12 @@ const CampgroundSchema = new Schema(
     geometry: {
       type: {
         type: String,
-        enum: ['Point'],
+        enum: ['Point'], // GeoJSON Point type
+        required: true,
       },
       coordinates: {
-        type: [Number],
+        type: [Number], // [longitude, latitude]
+        required: true,
       },
     },
     price: Number,
@@ -32,6 +37,7 @@ const CampgroundSchema = new Schema(
     author: {
       type: Schema.Types.ObjectId,
       ref: 'User',
+      required: true,
     },
     reviews: [
       {
@@ -43,18 +49,18 @@ const CampgroundSchema = new Schema(
   opts
 );
 
+// Virtual property for popup markup used in map popups
 CampgroundSchema.virtual('properties.popUpMarkup').get(function () {
   return `
-    <strong><a href="/outdoorsy/campgrounds/${this._id}">${this.title}</a><strong>
+    <strong><a href="/outdoorsy/campgrounds/${this._id}">${this.title}</a></strong>
     <p>${this.description.substring(0, 20)}...</p>`;
 });
 
+// Middleware to delete all associated reviews when a campground is deleted
 CampgroundSchema.post('findOneAndDelete', async function (doc) {
   if (doc) {
     await Review.deleteMany({
-      _id: {
-        $in: doc.reviews,
-      },
+      _id: { $in: doc.reviews },
     });
   }
 });

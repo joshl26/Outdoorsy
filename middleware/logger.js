@@ -1,28 +1,42 @@
-const { format } = require("date-fns");
-const { v4: uuid } = require("uuid");
-const fs = require("fs");
-const fsPromises = require("fs").promises;
-const path = require("path");
+const { format } = require('date-fns');
+const { v4: uuid } = require('uuid');
+const fs = require('fs');
+const fsPromises = require('fs').promises;
+const path = require('path');
 
+/**
+ * Asynchronously logs events to a specified log file.
+ * Creates the logs directory if it doesn't exist.
+ * @param {string} message - The message to log
+ * @param {string} logFileName - The log file name (e.g., 'errLog.log')
+ */
 const logEvents = async (message, logFileName) => {
-  const dateTime = format(new Date(), "yyyyMMdd\tHH:mm:ss");
+  const dateTime = format(new Date(), 'yyyyMMdd\tHH:mm:ss');
   const logItem = `${dateTime}\t${uuid()}\t${message}\n`;
+  const logsDir = path.join(__dirname, '..', 'logs');
+  const logFilePath = path.join(logsDir, logFileName);
 
   try {
-    if (!fs.existsSync(path.join(__dirname, "..", "logs"))) {
-      await fsPromises.mkdir(path.join(__dirname, "..", "logs"));
+    // Ensure logs directory exists
+    if (!fs.existsSync(logsDir)) {
+      await fsPromises.mkdir(logsDir, { recursive: true });
     }
-    await fsPromises.appendFile(
-      path.join(__dirname, "..", "logs", logFileName),
-      logItem
-    );
+    // Append log item to the file
+    await fsPromises.appendFile(logFilePath, logItem);
   } catch (err) {
-    console.log(err);
+    console.error(`Failed to write to log file: ${err}`);
   }
 };
 
+/**
+ * Express middleware to log incoming HTTP requests.
+ * Logs method, URL, and origin header.
+ */
 const logger = (req, res, next) => {
-  logEvents(`${req.method}\t${req.url}\t${req.headers.origin}`, "reqLog.log");
+  logEvents(
+    `${req.method}\t${req.url}\t${req.headers.origin || 'no-origin'}`,
+    'reqLog.log'
+  );
   console.log(`${req.method} ${req.path}`);
   next();
 };

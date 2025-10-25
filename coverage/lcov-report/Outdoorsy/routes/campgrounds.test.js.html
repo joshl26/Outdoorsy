@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/10</span>
             </div>
         
             
@@ -77,33 +77,42 @@
 <a name='L12'></a><a href='#L12'>12</a>
 <a name='L13'></a><a href='#L13'>13</a>
 <a name='L14'></a><a href='#L14'>14</a>
-<a name='L15'></a><a href='#L15'>15</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const request = <span class="cstat-no" title="statement not covered" >require("supertest");</span>
-const assert = <span class="cstat-no" title="statement not covered" >require("assert");</span>
-const express = <span class="cstat-no" title="statement not covered" >require("express");</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const request = <span class="cstat-no" title="statement not covered" >require('supertest');</span>
+const app = <span class="cstat-no" title="statement not covered" >require('../app');</span> // your Express app
 &nbsp;
-const app = <span class="cstat-no" title="statement not covered" >express();</span>
+<span class="cstat-no" title="statement not covered" >describe('Campgrounds Routes', <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  it('GET /outdoorsy/campgrounds should return 200 and HTML', <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
+    const res = <span class="cstat-no" title="statement not covered" >await request(app).get('/outdoorsy/campgrounds');</span>
+<span class="cstat-no" title="statement not covered" >    expect(res.statusCode).toBe(200);</span>
+<span class="cstat-no" title="statement not covered" >    expect(res.headers['content-type']).toMatch(/html/);</span>
+  });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >describe("Test campground route", <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  request(app)</span>
-    .get("/")
-    .expect(200)
-    .end(<span class="fstat-no" title="function not covered" >fu</span>nction (err, res) {
-<span class="cstat-no" title="statement not covered" >      if (err) <span class="cstat-no" title="statement not covered" >throw err;</span></span>
-    });
+<span class="cstat-no" title="statement not covered" >  it('GET /outdoorsy/campgrounds/new should return 200 for logged in user', <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
+    // You need to mock authentication or login first
+    // For now, just test unauthenticated access
+    const res = <span class="cstat-no" title="statement not covered" >await request(app).get('/outdoorsy/campgrounds/new');</span>
+<span class="cstat-no" title="statement not covered" >    expect([200, 302]).toContain(res.statusCode); </span>// 302 if redirected to login
+  });
 });
 &nbsp;</pre></td></tr></table></pre>
 
@@ -112,7 +121,7 @@ const app = <span class="cstat-no" title="statement not covered" >express();</sp
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-25T15:40:41.648Z
+                at 2025-10-25T17:23:46.072Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
