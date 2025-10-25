@@ -20,9 +20,8 @@
   },
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "start:dev": "nodemon -e js,ejs,yaml,json app.js",
-    "start:prod": "NODE_ENV=production node app.js",
+    "start-windows": "set PORT=3053 && nodemon -e js,ejs,yaml,json app.js",
+    "start": "export PORT=3053 && node app.js",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "test:unit": "jest --testPathPattern=__tests__/unit",
