@@ -1,0 +1,11 @@
+name: Test Auto Trigger
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Workflow triggered on push to branch ${{ github.ref }}"
