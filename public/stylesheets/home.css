@@ -1,40 +1,193 @@
-body {
+/* ===== Homepage Hero Section ===== */
+.home-hero {
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://res.cloudinary.com/dv6keahg3/image/upload/v1680772539/f_auto/q_auto/Outdoorsy/camprise_b2cbsv.jpg");
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('https://res.cloudinary.com/dv6keahg3/image/upload/v1680772539/f_auto/q_auto/Outdoorsy/camprise_b2cbsv.jpg');
   background-size: cover;
   background-position: center;
-  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
 }
-.cover-container {
-  max-width: 60vw;
+
+/* ===== Homepage Text Styling ===== */
+.home-hero h1,
+.home-hero h2,
+.home-hero h3,
+.home-hero p,
+.home-hero .lead {
+  color: #ffffff;
+  text-shadow: 0 0.15rem 0.3rem rgba(0, 0, 0, 0.8);
 }
 
-nav .navbar-nav li a {
+.home-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.home-hero .lead {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Homepage Navigation Override ===== */
+.home-hero nav .navbar-nav li a {
   color: white !important;
+  text-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.8);
 }
 
-.nav-link {
+.home-hero .nav-link {
   padding: 0.25rem 0;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.85);
   margin-left: 1rem;
   border-bottom: 0.25rem solid transparent;
+  transition: all 0.3s ease;
 }
 
-.nav-link:hover {
-  color: rgba(255, 255, 255, 0.5);
-  border-bottom-color: rgba(255, 255, 255, 0.5);
+.home-hero .nav-link:hover {
+  color: rgba(255, 255, 255, 1);
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+  transform: none;
 }
 
-.nav-link.active {
+.home-hero .nav-link.active {
   color: white;
   border-bottom-color: white;
 }
 
-.btn-secondary,
-.btn-secondary:hover {
-  color: #333;
+/* ===== Homepage Content Container ===== */
+.cover-container {
+  max-width: 60vw;
+  text-align: center;
+  padding: 2rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* ===== Homepage Buttons ===== */
+.home-hero .btn {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.5rem;
   text-shadow: none;
+}
+
+.home-hero .btn-primary {
+  background-color: rgba(45, 80, 22, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.home-hero .btn-primary:hover {
+  background-color: rgba(45, 80, 22, 1);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.home-hero .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.home-hero .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.8);
+  color: white;
+}
+
+/* ===== Homepage Features Section ===== */
+.features-section {
+  padding: 4rem 0;
+  background-color: #f8f9fa;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #2d5016;
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #2d5016;
+}
+
+/* ===== Homepage Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive - Homepage ===== */
+@media (max-width: 768px) {
+  .cover-container {
+    max-width: 90vw;
+  }
+
+  .home-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .home-hero .lead {
+    font-size: 1.2rem;
+  }
+
+  .home-hero .btn {
+    padding: 0.625rem 1.5rem;
+    font-size: 1rem;
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .home-hero .nav-link {
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .cover-container {
+    max-width: 95vw;
+    padding: 1rem;
+  }
+
+  .home-hero h1 {
+    font-size: 2rem;
+  }
+
+  .home-hero .lead {
+    font-size: 1.1rem;
+  }
+
+  .home-hero {
+    background-attachment: scroll;
+  }
+}
+
+/* ===== Parallax Effect (Desktop Only) ===== */
+@media (min-width: 769px) {
+  .home-hero {
+    background-attachment: fixed;
+  }
 }

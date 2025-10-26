@@ -6,8 +6,8 @@ const User = require('../models/user'); // Import User model to register schema
 describe('Connection and Campground Model', () => {
   beforeAll(async () => {
     await mongoose.connect(process.env.DB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
     });
   });
 

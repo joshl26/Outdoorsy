@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1761421911752" clover="3.2.0">
-  <project timestamp="1761421911752" name="All files">
-    <metrics statements="325" coveredstatements="287" conditionals="67" coveredconditionals="42" methods="46" coveredmethods="34" elements="438" coveredelements="363" complexity="0" loc="325" ncloc="325" packages="8" files="19" classes="19"/>
+<coverage generated="1761495972179" clover="3.2.0">
+  <project timestamp="1761495972179" name="All files">
+    <metrics statements="328" coveredstatements="290" conditionals="67" coveredconditionals="42" methods="47" coveredmethods="35" elements="442" coveredelements="367" complexity="0" loc="328" ncloc="328" packages="8" files="19" classes="19"/>
     <package name="Outdoorsy">
-      <metrics statements="119" coveredstatements="103" conditionals="29" coveredconditionals="20" methods="15" coveredmethods="12"/>
+      <metrics statements="122" coveredstatements="106" conditionals="29" coveredconditionals="20" methods="16" coveredmethods="13"/>
       <file name="app.js" path="E:\GIT Working Folders\Outdoorsy\app.js">
-        <metrics statements="45" coveredstatements="42" conditionals="7" coveredconditionals="3" methods="3" coveredmethods="2"/>
+        <metrics statements="48" coveredstatements="45" conditionals="7" coveredconditionals="3" methods="4" coveredmethods="3"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -35,22 +35,25 @@
         <line num="48" count="1" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
-        <line num="53" count="3" type="stmt"/>
-        <line num="54" count="3" type="stmt"/>
-        <line num="55" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="56" count="3" type="stmt"/>
-        <line num="57" count="3" type="stmt"/>
-        <line num="58" count="3" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="55" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
         <line num="71" count="1" type="stmt"/>
-        <line num="72" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="73" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="77" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="78" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
       </file>
       <file name="middleware.js" path="E:\GIT Working Folders\Outdoorsy\middleware.js">
         <metrics statements="52" coveredstatements="52" conditionals="16" coveredconditionals="16" methods="8" coveredmethods="8"/>

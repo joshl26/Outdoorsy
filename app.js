@@ -58,6 +58,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  res.locals.currentPath = req.path;
+  next();
+});
+
 // Mount routes with basePath prefix
 app.use(buildPath('campgrounds'), campgroundRoutes);
 app.use(buildPath('campgrounds/:id/reviews'), reviewRoutes);

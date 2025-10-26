@@ -1,7 +1,300 @@
-<footer class="footer bg-dark py-3 mt-auto">
-  <div class="container">
-    <span class="text-muted"
-      >&copy; 2023 - Josh Lehman - BlackRock Design Haus</span
-    >
+<footer class="footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <!-- Brand Section -->
+      <div class="col-lg-4 col-md-6">
+        <h5 class="fw-bold mb-3">
+          <i class="fas fa-campground text-primary me-2"></i>Outdoorsy
+        </h5>
+        <p class="text-muted mb-3">
+          Your gateway to discovering amazing outdoor adventures, connecting
+          with nature lovers, and sharing unforgettable camping experiences.
+        </p>
+        <div class="social-links">
+          <a
+            href="#"
+            class="btn btn-outline-light btn-sm me-2"
+            aria-label="Facebook"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            href="#"
+            class="btn btn-outline-light btn-sm me-2"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            href="#"
+            class="btn btn-outline-light btn-sm me-2"
+            aria-label="Instagram"
+          >
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="btn btn-outline-light btn-sm" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-lg-2 col-md-6">
+        <h6 class="fw-bold mb-3">Explore</h6>
+        <ul class="list-unstyled footer-links">
+          <li>
+            <a href="<%= basePath %>/campgrounds" class="text-muted"
+              >All Campgrounds</a
+            >
+          </li>
+          <li>
+            <a href="<%= basePath %>/campgrounds/new" class="text-muted"
+              >Add Campground</a
+            >
+          </li>
+          <li><a href="#" class="text-muted">Popular Destinations</a></li>
+          <li><a href="#" class="text-muted">Map View</a></li>
+        </ul>
+      </div>
+
+      <!-- Community -->
+      <div class="col-lg-2 col-md-6">
+        <h6 class="fw-bold mb-3">Community</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#" class="text-muted">About Us</a></li>
+          <li><a href="#" class="text-muted">Blog</a></li>
+          <li><a href="#" class="text-muted">Events</a></li>
+          <li><a href="#" class="text-muted">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div class="col-lg-2 col-md-6">
+        <h6 class="fw-bold mb-3">Support</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#" class="text-muted">Help Center</a></li>
+          <li><a href="#" class="text-muted">Safety Tips</a></li>
+          <li><a href="#" class="text-muted">Privacy Policy</a></li>
+          <li><a href="#" class="text-muted">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="col-lg-2 col-md-6">
+        <h6 class="fw-bold mb-3">Stay Updated</h6>
+        <p class="text-muted small mb-3">
+          Get the latest outdoor tips and destinations.
+        </p>
+        <form class="newsletter-form">
+          <div class="input-group input-group-sm">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Your email"
+              aria-label="Email for newsletter"
+              required
+            />
+            <button
+              class="btn btn-primary"
+              type="submit"
+              aria-label="Subscribe"
+            >
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="my-4 border-secondary opacity-25" />
+
+    <!-- Bottom Bar -->
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <p class="text-muted small mb-0">
+          &copy; 2025 Outdoorsy. All rights reserved.
+          <span class="d-none d-md-inline"
+            >| Built with <i class="fas fa-heart text-danger"></i> for nature
+            lovers</span
+          >
+        </p>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <p class="text-muted small mb-0">
+          Designed by
+          <a href="#" class="text-decoration-none fw-semibold">Josh Lehman</a>
+          <span class="mx-2">•</span>
+          <a href="#" class="text-decoration-none">BlackRock Design Haus</a>
+        </p>
+      </div>
+    </div>
   </div>
+
+  <!-- Back to Top Button -->
+  <button
+    class="back-to-top btn btn-primary"
+    id="backToTop"
+    aria-label="Back to top"
+    style="display: none"
+  >
+    <i class="fas fa-arrow-up"></i>
+  </button>
 </footer>
+
+<!-- Footer JavaScript -->
+<script>
+  // Back to top button functionality
+  const backToTopButton = document.getElementById('backToTop');
+
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 300) {
+      backToTopButton.style.display = 'block';
+    } else {
+      backToTopButton.style.display = 'none';
+    }
+  });
+
+  backToTopButton.addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  });
+
+  // Newsletter form submission
+  document
+    .querySelector('.newsletter-form')
+    ?.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      // Add your newsletter subscription logic here
+      alert(
+        "Thanks for subscribing! We'll keep you updated on the best outdoor adventures."
+      );
+      this.reset();
+    });
+</script>
+
+<style>
+  /* Additional Footer Styles */
+  .footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #2d5016, #4ecdc4, #ff6b35);
+  }
+
+  .footer h5,
+  .footer h6 {
+    color: white;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .footer-links a:hover {
+    color: white !important;
+    transform: translateX(5px);
+  }
+
+  .social-links .btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+  }
+
+  .social-links .btn:hover {
+    background: #2d5016;
+    border-color: #2d5016;
+    color: white;
+    transform: translateY(-3px);
+  }
+
+  .newsletter-form .form-control {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 0.375rem 0 0 0.375rem;
+  }
+
+  .newsletter-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .newsletter-form .form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #2d5016;
+    color: white;
+    box-shadow: none;
+  }
+
+  .newsletter-form .btn-primary {
+    border-radius: 0 0.375rem 0.375rem 0;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .back-to-top {
+      bottom: 1rem;
+      right: 1rem;
+      width: 45px;
+      height: 45px;
+    }
+  }
+</style>

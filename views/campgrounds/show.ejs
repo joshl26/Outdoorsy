@@ -135,14 +135,14 @@
   </div>
 </div>
 
-<!-- <script>
-  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-  const campground = <%- JSON.stringify(campground) %>
-</script> -->
 
 <!-- <script src="/javascripts/showPageMap.js"></script> -->
 
 <script>
+  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+  const campground = <%- JSON.stringify(campground) %>
+
+
   mapboxgl.accessToken = mapToken;
   const map = new mapboxgl.Map({
     container: "map",

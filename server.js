@@ -6,8 +6,8 @@ const app = require('./app');
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/outdoorsy';
 
 mongoose.connect(dbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;

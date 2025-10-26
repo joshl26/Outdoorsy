@@ -45,10 +45,8 @@
 
 <script>
   const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
-  const campgrounds = { features: <%- JSON.stringify(campgrounds) %> };
-</script>
+  const campgrounds = { features:   <%- JSON.stringify(campgrounds) %> };
 
-<script>
   mapboxgl.accessToken = mapToken;
   const map = new mapboxgl.Map({
     container: "cluster-map",
