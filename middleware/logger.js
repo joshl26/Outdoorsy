@@ -1,18 +1,30 @@
+// Middleware for logging HTTP requests
+// file: middleware/logger.js
+
 const { logEvents } = require('../utils/logger');
 
-// Express middleware to log incoming HTTP requests
+/**
+ * Express middleware to log incoming HTTP requests.
+ * - Logs method, path, and origin header asynchronously to a log file.
+ * - Also logs method and path to the console for immediate visibility.
+ * - Calls next() to pass control to the next middleware.
+ */
 const logger = (req, res, next) => {
-  // Log request method, URL, and origin header asynchronously
+  // Log request details asynchronously to 'reqLog.log'
   logEvents(
     `${req.method}\t${req.path}\t${req.headers.origin || 'no-origin'}`,
     'reqLog.log'
+  ).catch((err) => {
+    // Log any errors during logging to console
     // eslint-disable-next-line no-console
-  ).catch((err) => console.error('Logging failed:', err));
+    console.error('Logging failed:', err);
+  });
 
-  // Also log to console for immediate visibility
+  // Log request method and path to console
   // eslint-disable-next-line no-console
   console.log(`${req.method} ${req.path}`);
 
+  // Proceed to next middleware
   next();
 };
 

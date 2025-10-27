@@ -1,3 +1,6 @@
+// Main application file for the Outdoorsy web application
+// file: app.js
+
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
@@ -17,23 +20,36 @@ const { logger } = require('./middleware/logger'); // Import logger middleware
 
 const app = express();
 
-app.use(logger); // Use logger middleware early
+// Use custom logger middleware early to log all incoming requests
+app.use(logger);
 
+// Use Helmet for setting various HTTP headers for security
 app.use(helmetConfig);
 
+// Use express-ejs-layouts for layout support in EJS templates
 app.use(expressLayouts);
 
+// Trust first proxy (useful if behind a reverse proxy like Heroku)
 app.set('trust proxy', 1);
+
+// Set view engine to EJS and configure views directory and layout
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('layout', 'layouts/boilerplate');
+
+// Parse URL-encoded bodies (form submissions)
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files under the basePath (e.g., /outdoorsy)
 app.use(basePath, express.static(path.join(__dirname, 'public')));
 
+// Configure session middleware with settings from config/session.js
 app.use(session(sessionConfig));
+
+// Use connect-flash for flash messages stored in session
 app.use(flash());
 
+// During tests, mock CSRF token to avoid errors
 if (process.env.NODE_ENV === 'test') {
   app.use((req, res, next) => {
     req.csrfToken = () => 'test-csrf-token';
@@ -42,10 +58,12 @@ if (process.env.NODE_ENV === 'test') {
   });
 }
 
+// Configure Passport.js authentication
 configurePassport();
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Middleware to set local variables accessible in all views
 app.use((req, res, next) => {
   res.locals.basePath = basePath;
   res.locals.buildPath = buildPath;
@@ -55,27 +73,33 @@ app.use((req, res, next) => {
   next();
 });
 
+// Middleware to expose current request path to views (for active nav links, etc.)
 app.use((req, res, next) => {
   res.locals.currentPath = req.path;
   next();
 });
 
+// Mount routes with appropriate base paths
 app.use(buildPath('campgrounds'), campgroundRoutes);
 app.use(buildPath('campgrounds/:id/reviews'), reviewRoutes);
 app.use(basePath, userRoutes);
 
+// Home page route
 app.get(basePath, (req, res) => {
   res.locals.pageClass = 'home';
   res.locals.pageTitle = 'Outdoorsy - Discover Your Next Adventure';
   res.render('home');
 });
 
+// Catch-all route for undefined paths - triggers 404 error
 app.all('*', (req, res, next) => {
   const err = new Error('Page Not Found');
   err.statusCode = 404;
   next(err);
 });
 
+// Centralized error handling middleware
+// Renders error page with message and stack trace in development
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
@@ -89,6 +113,7 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Setup Swagger API documentation routes
 swaggerSetup(app);
 
 module.exports = app;

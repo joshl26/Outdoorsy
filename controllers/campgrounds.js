@@ -1,4 +1,8 @@
-// controllers/campgrounds.js
+// Controller for managing campground-related operations
+// file: controllers/campgrounds.js
+
+//TODO: Implement proper error handling using our custom error classes
+
 const Campground = require('../models/campground');
 const { cloudinary } = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
@@ -9,6 +13,9 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const NotFoundError = require('../utils/errors/NotFoundError');
 const AppError = require('../utils/errors/AppError');
 
+/**
+ * Display a list of all campgrounds.
+ */
 module.exports.index = async (req, res, next) => {
   try {
     const campgrounds = await Campground.find({});
@@ -18,12 +25,22 @@ module.exports.index = async (req, res, next) => {
   }
 };
 
+/**
+ * Render the form to create a new campground.
+ */
 module.exports.renderNewForm = (req, res) => {
   res.render('campgrounds/new');
 };
 
+/**
+ * Create a new campground.
+ * - Geocode the location string to get coordinates.
+ * - Validate geocoding results.
+ * - Save campground with images and author info.
+ */
 module.exports.createCampground = async (req, res, next) => {
   try {
+    // Geocode the location string to get geographic coordinates
     const geoData = await geocoder
       .forwardGeocode({
         query: req.body.campground.location,
@@ -31,17 +48,27 @@ module.exports.createCampground = async (req, res, next) => {
       })
       .send();
 
+    // If no geocoding results, throw a validation error
     if (!geoData.body.features.length) {
       throw new AppError('Invalid location provided', 400);
     }
 
+    // Create new campground document with form data
     const campground = new Campground(req.body.campground);
+
+    // Assign geometry coordinates from geocoding result
     campground.geometry = geoData.body.features[0].geometry;
+
+    // Map uploaded files to image objects with url and filename
     campground.images = req.files.map((f) => ({
       url: f.path,
       filename: f.filename,
     }));
+
+    // Set the author to the currently logged-in user
     campground.author = req.user._id;
+
+    // Save campground to database
     await campground.save();
 
     req.flash('success', 'Successfully created a new campground!');
@@ -51,6 +78,11 @@ module.exports.createCampground = async (req, res, next) => {
   }
 };
 
+/**
+ * Show details for a specific campground.
+ * - Populate reviews and authors for display.
+ * - Set SEO-friendly page title and description.
+ */
 module.exports.showCampground = async (req, res, next) => {
   try {
     const campground = await Campground.findById(req.params.id)
@@ -60,10 +92,12 @@ module.exports.showCampground = async (req, res, next) => {
       })
       .populate('author');
 
+    // If campground not found, throw 404 error
     if (!campground) {
       throw new NotFoundError('Campground not found');
     }
 
+    // Set page title and description for SEO and display
     res.locals.pageTitle = `${campground.title} - Outdoorsy`;
     res.locals.pageDescription = campground.description
       ? campground.description.substring(0, 160)
@@ -75,6 +109,11 @@ module.exports.showCampground = async (req, res, next) => {
   }
 };
 
+/**
+ * Render the edit form for a campground.
+ * - Fetch campground by ID.
+ * - Throw 404 if not found.
+ */
 module.exports.renderEditForm = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -92,9 +131,17 @@ module.exports.renderEditForm = async (req, res, next) => {
   }
 };
 
+/**
+ * Update a campground.
+ * - Update campground fields from form data.
+ * - Add new uploaded images.
+ * - Delete images if requested (both from Cloudinary and DB).
+ */
 module.exports.updateCampground = async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    // Update campground with new data
     const campground = await Campground.findByIdAndUpdate(id, {
       ...req.body.campground,
     });
@@ -103,10 +150,12 @@ module.exports.updateCampground = async (req, res, next) => {
       throw new NotFoundError('Campground not found');
     }
 
+    // Add new images uploaded in this request
     const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
     campground.images.push(...imgs);
     await campground.save();
 
+    // If images are marked for deletion, remove them from Cloudinary and DB
     if (req.body.deleteImages) {
       for (let filename of req.body.deleteImages) {
         await cloudinary.uploader.destroy(filename);
@@ -123,6 +172,10 @@ module.exports.updateCampground = async (req, res, next) => {
   }
 };
 
+/**
+ * Delete a campground by ID.
+ * - Throw 404 if campground not found.
+ */
 module.exports.deleteCampground = async (req, res, next) => {
   try {
     const { id } = req.params;

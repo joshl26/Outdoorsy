@@ -39,22 +39,21 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 
 ### Development Tools
 
-- [ ] Install and configure ESLint
-- [ ] Install and configure Prettier
-- [ ] Create `.eslintrc.js` configuration
-- [ ] Create `.prettierrc` configuration
-- [ ] Add ESLint + Prettier npm scripts
-- [ ] Install Husky for git hooks
-- [ ] Configure pre-commit hook (lint + format)
-- [ ] Configure commit-msg hook (conventional commits)
-- [ ] Update `.gitignore` as needed
+- [x] Install and configure ESLint
+- [x] Install and configure Prettier
+- [x] Create `.eslintrc.js` configuration
+- [x] Create `.prettierrc` configuration
+- [x] Add ESLint + Prettier npm scripts
+- [x] Install Husky for git hooks
+- [x] Configure pre-commit hook (lint + format)
+- [x] Configure commit-msg hook (conventional commits)
+- [x] Update `.gitignore` as needed
 
 ### Documentation
 
-- [ ] Update README.md with setup instructions
-- [ ] Document all environment variables in `Example_env`
-- [ ] Create `CONTRIBUTING.md`
-- [ ] Add code comments to complex logic
+- [x] Update README.md with setup instructions
+- [x] Document all environment variables in `Example_env`
+- [x] Add code comments to complex logic
 - [ ] Document API endpoints in Swagger
 
 ---
@@ -76,7 +75,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [x] Document security best practices
 - [x] Create security incident response plan
 
-### Testing Infrastructure
+<!-- ### Testing Infrastructure
 
 - [ ] Create `__tests__/unit/` directory structure
 - [ ] Create `__tests__/integration/` directory structure
@@ -91,7 +90,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Write integration tests for user routes
 - [ ] Set up test coverage reporting
 - [ ] Achieve 60%+ test coverage
-- [ ] Configure CI to run tests automatically
+- [ ] Configure CI to run tests automatically -->
 
 ### Performance Optimization
 
