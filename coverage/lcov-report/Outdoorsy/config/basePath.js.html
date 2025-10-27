@@ -140,7 +140,14 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,11 +175,13 @@
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -217,9 +226,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">//config/basePath.js
+&nbsp;
+/**
  * Base Path Configuration
- * 
+ *
  * Centralizes the base path configuration for the application.
  * This allows the app to run on a subpath (e.g., /outdoorsy/)
  * and makes it easy to change or remove the base path in the future.
@@ -231,7 +243,7 @@ const basePath = process.env.BASE_PATH || <span class="branch-1 cbranch-no" titl
  * Helper function to build full paths with base path prefix
  * @param {string} path - The path to append to base path
  * @returns {string} Full path with base path prefix
- * 
+ *
  * @example
  * buildPath('campgrounds') // Returns: '/outdoorsy/campgrounds'
  * buildPath('/campgrounds') // Returns: '/outdoorsy/campgrounds'
@@ -240,15 +252,17 @@ const basePath = process.env.BASE_PATH || <span class="branch-1 cbranch-no" titl
 const buildPath = (path = <span class="branch-0 cbranch-no" title="branch not covered" >'')</span> =&gt; {
   // Remove leading slash from path if present
   const cleanPath = path.startsWith('/') ? <span class="branch-0 cbranch-no" title="branch not covered" >path.slice(1) </span>: path;
-  
+&nbsp;
   // Remove trailing slash from base path if present
-  const cleanBasePath = basePath.endsWith('/') ? <span class="branch-0 cbranch-no" title="branch not covered" >basePath.slice(0, -1) </span>: basePath;
-  
+  const cleanBasePath = basePath.endsWith('/')
+    ? <span class="branch-0 cbranch-no" title="branch not covered" >basePath.slice(0, -1)</span>
+    : basePath;
+&nbsp;
   // Handle empty path
   <span class="missing-if-branch" title="if path not taken" >I</span>if (!cleanPath) {
 <span class="cstat-no" title="statement not covered" >    return cleanBasePath;</span>
   }
-  
+&nbsp;
   return `${cleanBasePath}/${cleanPath}`;
 };
 &nbsp;
@@ -257,7 +271,7 @@ const buildPath = (path = <span class="branch-0 cbranch-no" title="branch not co
  * @param {string} assetType - Type of asset (stylesheets, javascripts, images)
  * @param {string} filename - The filename
  * @returns {string} Full asset path
- * 
+ *
  * @example
  * buildAssetPath('stylesheets', 'app.css') // Returns: '/outdoorsy/stylesheets/app.css'
  */
@@ -269,7 +283,7 @@ const buildAssetPath = <span class="fstat-no" title="function not covered" >(a</
  * Helper function for API paths
  * @param {string} endpoint - API endpoint
  * @returns {string} Full API path
- * 
+ *
  * @example
  * buildApiPath('campgrounds') // Returns: '/outdoorsy/api/v1/campgrounds'
  */
@@ -283,7 +297,7 @@ module.exports = {
   buildPath,
   buildAssetPath,
   buildApiPath,
-  
+&nbsp;
   // Export common paths for convenience
   paths: {
     home: basePath || <span class="branch-1 cbranch-no" title="branch not covered" >'/',</span>
@@ -293,15 +307,16 @@ module.exports = {
     campgrounds: buildPath('campgrounds'),
     reviews: <span class="fstat-no" title="function not covered" >(i</span>d) =&gt; <span class="cstat-no" title="statement not covered" >buildPath(`campgrounds/${id}/reviews`),</span>
     apiDocs: buildPath('api-docs'),
-  }
-};</pre></td></tr></table></pre>
+  },
+};
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-27T04:23:32.878Z
+                at 2025-10-27T15:52:34.657Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
