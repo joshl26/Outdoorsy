@@ -1,8 +1,26 @@
-<div class="row">
-  <div class="col-6 offset-3">
-    <div class="alert alert-danger" role="alert">
-      <h4 class="alert-heading">Error</h4>
-      <p><%= err.message %></p>
+<%
+// error.ejs
+// Variables expected:
+// - pageTitle: string
+// - errorMessage: string
+// - errorStack: string (optional)
+%>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error</h4>
+        <p><%= errorMessage %></p>
+        <% if (errorStack) { %>
+          <hr />
+          <pre class="mb-0" style="white-space: pre-wrap;"><%= errorStack %></pre>
+        <% } %>
+      </div>
+      <div class="text-center mt-3">
+        <a href="/" class="btn btn-primary">Go to Home</a>
+      </div>
     </div>
   </div>
 </div>
+

@@ -14,7 +14,8 @@ module.exports.validateCampground = (req, res, next) => {
 module.exports.validateReview = (req, res, next) => {
   const { error } = reviewSchema.validate(req.body);
   if (error) {
-    const msg = error.details.map((el) => el.message).join(', ');
+    const msg = `Validation error: ${error.details.map((el) => el.message).join(', ')}`;
+    console.error(msg);
     throw new ExpressError(msg, 400);
   }
   next();

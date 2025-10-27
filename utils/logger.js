@@ -1,3 +1,6 @@
+// Utility function to log events to a file with timestamps and unique IDs
+// file: utils/logger.js
+
 const { format } = require('date-fns');
 const { v4: uuid } = require('uuid');
 const fs = require('fs');

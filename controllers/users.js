@@ -12,8 +12,6 @@ module.exports.renderRegister = (req, res) => {
 const registerHandler = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    // Optionally flash errors here if you want global flash messages
-    // req.flash('error', errors.array().map(e => e.msg).join(' | '));
     return res.status(400).render('users/register', {
       errors: errors.array(),
       formData: req.body,
@@ -31,8 +29,7 @@ const registerHandler = async (req, res, next) => {
       res.redirect('/outdoorsy/campgrounds');
     });
   } catch (e) {
-    req.flash('error', 'Registration failed. Please try again.');
-    res.redirect('/outdoorsy/register');
+    next(e); // Pass error to centralized error handler
   }
 };
 

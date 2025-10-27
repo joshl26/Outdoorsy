@@ -1,3 +1,6 @@
+//  Jest tests for authentication middleware functions
+// file: middleware/__tests__/auth.test.js
+
 const authMiddleware = require('../../middleware/auth');
 const Campground = require('../../models/campground');
 const Review = require('../../models/review');
@@ -32,18 +35,13 @@ describe('Auth Middleware', () => {
       expect(next).toHaveBeenCalled();
     });
 
-    it('redirects to login if not authenticated', () => {
+    it('calls next with AuthenticationError if not authenticated', () => {
       req.isAuthenticated.mockReturnValue(false);
       authMiddleware.isLoggedIn(req, res, next);
-      expect(req.session.returnTo).toBe(req.originalUrl);
-      expect(req.flash).toHaveBeenCalledWith(
-        'error',
-        'You must be signed in first!'
-      );
-      expect(res.redirect).toHaveBeenCalledWith(
-        expect.stringContaining('login')
-      );
-      expect(next).not.toHaveBeenCalled();
+      expect(next).toHaveBeenCalled();
+      const error = next.mock.calls[0][0];
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe('You must be signed in first!');
     });
   });
 
@@ -57,31 +55,26 @@ describe('Auth Middleware', () => {
       expect(next).toHaveBeenCalled();
     });
 
-    it('redirects if campground not found', async () => {
+    it('calls next with NotFoundError if campground not found', async () => {
       req.params.id = 'campId';
       Campground.findById.mockResolvedValue(null);
       await authMiddleware.isAuthor(req, res, next);
-      expect(res.redirect).toHaveBeenCalledWith(
-        expect.stringContaining('campgrounds')
-      );
-      expect(req.flash).toHaveBeenCalledWith('error', 'Campground not found');
-      expect(next).not.toHaveBeenCalled();
+      expect(next).toHaveBeenCalled();
+      const error = next.mock.calls[0][0];
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe('Campground not found');
     });
 
-    it('redirects if user is not author', async () => {
+    it('calls next with AppError if user is not author', async () => {
       req.params.id = 'campId';
       Campground.findById.mockResolvedValue({
         author: { equals: () => false },
       });
       await authMiddleware.isAuthor(req, res, next);
-      expect(res.redirect).toHaveBeenCalledWith(
-        expect.stringContaining('campgrounds/campId')
-      );
-      expect(req.flash).toHaveBeenCalledWith(
-        'error',
-        'You do not have permission to do that!'
-      );
-      expect(next).not.toHaveBeenCalled();
+      expect(next).toHaveBeenCalled();
+      const error = next.mock.calls[0][0];
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe('You do not have permission to do that!');
     });
 
     it('calls next with error on exception', async () => {
@@ -104,33 +97,28 @@ describe('Auth Middleware', () => {
       expect(next).toHaveBeenCalled();
     });
 
-    it('redirects if review not found', async () => {
+    it('calls next with NotFoundError if review not found', async () => {
       req.params.id = 'campId';
       req.params.reviewId = 'reviewId';
       Review.findById.mockResolvedValue(null);
       await authMiddleware.isReviewAuthor(req, res, next);
-      expect(res.redirect).toHaveBeenCalledWith(
-        expect.stringContaining('campgrounds/campId')
-      );
-      expect(req.flash).toHaveBeenCalledWith('error', 'Review not found');
-      expect(next).not.toHaveBeenCalled();
+      expect(next).toHaveBeenCalled();
+      const error = next.mock.calls[0][0];
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe('Review not found');
     });
 
-    it('redirects if user is not review author', async () => {
+    it('calls next with AppError if user is not review author', async () => {
       req.params.id = 'campId';
       req.params.reviewId = 'reviewId';
       Review.findById.mockResolvedValue({
         author: { equals: () => false },
       });
       await authMiddleware.isReviewAuthor(req, res, next);
-      expect(res.redirect).toHaveBeenCalledWith(
-        expect.stringContaining('campgrounds/campId')
-      );
-      expect(req.flash).toHaveBeenCalledWith(
-        'error',
-        'You do not have permission to do that!'
-      );
-      expect(next).not.toHaveBeenCalled();
+      expect(next).toHaveBeenCalled();
+      const error = next.mock.calls[0][0];
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe('You do not have permission to do that!');
     });
 
     it('calls next with error on exception', async () => {

@@ -78,9 +78,15 @@ app.all('*', (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  const { statusCode = 500 } = err;
+  const statusCode = err.statusCode || 500;
   if (!err.message) err.message = 'Something went wrong!';
-  res.status(statusCode).render('error', { err });
+  const isDev = process.env.NODE_ENV === 'development';
+
+  res.status(statusCode).render('error', {
+    pageTitle: `Error ${statusCode}`,
+    errorMessage: err.message,
+    errorStack: isDev ? err.stack : null,
+  });
 });
 
 swaggerSetup(app);

@@ -1,3 +1,6 @@
+// Custom Error class for Express applications
+// file: utils/ExpressError.js
+
 class ExpressError extends Error {
   /**
    * Custom error class for Express with status code.

@@ -78,6 +78,7 @@ describe('Users Controller', () => {
         'Welcome to Outdoorsy!'
       );
       expect(res.redirect).toHaveBeenCalledWith('/outdoorsy/campgrounds');
+      expect(next).not.toHaveBeenCalled();
     });
 
     it('renders register page with errors if validation fails', async () => {
@@ -95,9 +96,10 @@ describe('Users Controller', () => {
         formData: req.body,
         csrfToken: 'test-csrf-token',
       });
+      expect(next).not.toHaveBeenCalled();
     });
 
-    it('handles registration errors and redirects', async () => {
+    it('calls next on registration error', async () => {
       expressValidator.validationResult.mockReturnValue({
         isEmpty: () => true,
       });
@@ -105,11 +107,10 @@ describe('Users Controller', () => {
 
       await usersController.registerHandler(req, res, next);
 
-      expect(req.flash).toHaveBeenCalledWith(
-        'error',
-        'Registration failed. Please try again.'
-      );
-      expect(res.redirect).toHaveBeenCalledWith('/outdoorsy/register');
+      expect(next).toHaveBeenCalled();
+      const error = next.mock.calls[0][0];
+      expect(error).toBeInstanceOf(Error);
+      expect(error.message).toBe('Registration error');
     });
 
     it('calls next if login callback returns error', async () => {

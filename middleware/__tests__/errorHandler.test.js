@@ -1,4 +1,6 @@
-// __tests__/errorHandler.test.js
+// middleware/__tests__/errorHandler.test.js
+
+process.env.NODE_ENV = 'development'; // Add this line
 
 const errorHandler = require('../errorHandler');
 const { logEvents } = require('../logger');
@@ -21,6 +23,7 @@ describe('errorHandler middleware', () => {
       json: jest.fn(),
       type: jest.fn().mockReturnThis(),
       send: jest.fn(),
+      render: jest.fn(), // Mock render method to fix tests
     };
     next = jest.fn();
     err = new Error('Test error');
@@ -56,6 +59,7 @@ describe('errorHandler middleware', () => {
     expect(res.json).toHaveBeenCalledWith({
       message: 'Test error',
       status: 500,
+      stack: expect.any(String),
     });
   });
 
@@ -65,15 +69,17 @@ describe('errorHandler middleware', () => {
     errorHandler(err, req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.type).toHaveBeenCalledWith('text/html');
-    expect(res.send).toHaveBeenCalledWith(
-      '<h1>Error 500</h1><p>Test error</p>'
-    );
+    expect(res.render).toHaveBeenCalledWith('error', {
+      pageTitle: 'Error 500',
+      errorMessage: 'Test error',
+      errorStack: expect.any(String),
+    });
   });
 
   it('uses existing res.statusCode if not 200', () => {
     req.accepts.mockReturnValue(true);
     res.statusCode = 400;
+    err.statusCode = 400;
 
     errorHandler(err, req, res, next);
 
@@ -81,6 +87,7 @@ describe('errorHandler middleware', () => {
     expect(res.json).toHaveBeenCalledWith({
       message: 'Test error',
       status: 400,
+      stack: expect.any(String),
     });
   });
 });

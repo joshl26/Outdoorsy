@@ -27,13 +27,13 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [x] Create `middleware/index.js` as central export
 
 ### Error Handling
-- [ ] Create `utils/errors/AppError.js` base class
-- [ ] Create `utils/errors/ValidationError.js`
-- [ ] Create `utils/errors/AuthenticationError.js`
-- [ ] Create `utils/errors/NotFoundError.js`
-- [ ] Implement centralized error handler middleware
-- [ ] Add user-friendly error messages
-- [ ] Add developer error details (dev mode only)
+- [x] Create `utils/errors/AppError.js` base class
+- [x] Create `utils/errors/ValidationError.js`
+- [x] Create `utils/errors/AuthenticationError.js`
+- [x] Create `utils/errors/NotFoundError.js`
+- [x] Implement centralized error handler middleware
+- [x] Add user-friendly error messages
+- [x] Add developer error details (dev mode only)
 
 ### Development Tools
 - [ ] Install and configure ESLint
@@ -58,18 +58,18 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 ## Phase 2: Security, Performance & UI/UX (Weeks 3-6)
 
 ### Security Enhancements
-- [ ] Install and configure `express-rate-limit`
-- [ ] Add rate limiting to authentication routes
-- [ ] Add rate limiting to API endpoints
-- [ ] Implement CSRF protection (`csurf`)
-- [ ] Add CSRF tokens to all forms
-- [ ] Audit all user inputs for validation
-- [ ] Add request size limits
-- [ ] Implement environment variable validation (on startup)
-- [ ] Review and update Helmet CSP policies
-- [ ] Add security headers audit script
-- [ ] Document security best practices
-- [ ] Create security incident response plan
+- [x] Install and configure `express-rate-limit`
+- [x] Add rate limiting to authentication routes
+- [x] Add rate limiting to API endpoints
+- [x] Implement CSRF protection (`csurf`)
+- [x] Add CSRF tokens to all forms
+- [x] Audit all user inputs for validation
+- [x] Add request size limits
+- [x] Implement environment variable validation (on startup)
+- [x] Review and update Helmet CSP policies
+- [x] Add security headers audit script
+- [x] Document security best practices
+- [x] Create security incident response plan
 
 ### Testing Infrastructure
 - [ ] Create `__tests__/unit/` directory structure

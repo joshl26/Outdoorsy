@@ -17,15 +17,14 @@ const Campground = require('../../models/campground');
 const { cloudinary } = require('../../cloudinary');
 jest.mock('../../cloudinary');
 
+const campgroundsController = require('../../controllers/campgrounds');
+const basePath = '/outdoorsy'; // Adjust if your app uses a different basePath
+
 describe('Campgrounds Controller', () => {
-  let campgroundsController;
   let req, res, next;
-  const basePath = '/outdoorsy'; // Adjust if your app uses a different basePath
 
   beforeEach(() => {
     jest.clearAllMocks();
-
-    campgroundsController = require('../../controllers/campgrounds');
 
     req = {
       body: {
@@ -88,7 +87,7 @@ describe('Campgrounds Controller', () => {
     });
   });
 
-  it('showCampground: redirects if campground not found', async () => {
+  it('showCampground: calls next with error if campground not found', async () => {
     const query = {
       populate: jest.fn().mockReturnThis(),
       then: jest.fn((cb) => cb(null)),
@@ -98,8 +97,10 @@ describe('Campgrounds Controller', () => {
 
     await campgroundsController.showCampground(req, res, next);
 
-    expect(req.flash).toHaveBeenCalledWith('error', 'Campground not found');
-    expect(res.redirect).toHaveBeenCalledWith(`${basePath}/campgrounds`);
+    expect(next).toHaveBeenCalled();
+    const error = next.mock.calls[0][0];
+    expect(error).toBeInstanceOf(Error);
+    expect(error.message).toBe('Campground not found');
   });
 
   it('updateCampground: updates campground and redirects', async () => {
@@ -127,8 +128,19 @@ describe('Campgrounds Controller', () => {
     );
   });
 
+  it('deleteCampground: calls next with error if campground not found', async () => {
+    Campground.findByIdAndDelete = jest.fn().mockResolvedValue(null);
+
+    await campgroundsController.deleteCampground(req, res, next);
+
+    expect(next).toHaveBeenCalled();
+    const error = next.mock.calls[0][0];
+    expect(error).toBeInstanceOf(Error);
+    expect(error.message).toBe('Campground not found');
+  });
+
   it('deleteCampground: deletes campground and redirects', async () => {
-    Campground.findByIdAndDelete = jest.fn().mockResolvedValue();
+    Campground.findByIdAndDelete = jest.fn().mockResolvedValue({});
 
     await campgroundsController.deleteCampground(req, res, next);
 

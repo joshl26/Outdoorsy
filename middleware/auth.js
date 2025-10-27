@@ -1,12 +1,18 @@
+// Middleware functions for authentication and authorization
+// file: middleware/auth.js
+
 const Campground = require('../models/campground');
 const Review = require('../models/review');
 const { buildPath } = require('../config/basePath');
+const NotFoundError = require('../utils/errors/NotFoundError');
+const AuthenticationError = require('../utils/errors/AuthenticationError');
+const AppError = require('../utils/errors/AppError');
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl; // Save the url they are requesting
-    req.flash('error', 'You must be signed in first!');
-    return res.redirect(buildPath('login'));
+    // Throw AuthenticationError instead of redirecting here
+    return next(new AuthenticationError('You must be signed in first!'));
   }
   next();
 };
@@ -16,12 +22,10 @@ module.exports.isAuthor = async (req, res, next) => {
     const { id } = req.params;
     const campground = await Campground.findById(id);
     if (!campground) {
-      req.flash('error', 'Campground not found');
-      return res.redirect(buildPath('campgrounds'));
+      throw new NotFoundError('Campground not found');
     }
     if (!campground.author.equals(req.user._id)) {
-      req.flash('error', 'You do not have permission to do that!');
-      return res.redirect(buildPath(`campgrounds/${id}`));
+      throw new AppError('You do not have permission to do that!', 403);
     }
     next();
   } catch (err) {
@@ -34,12 +38,10 @@ module.exports.isReviewAuthor = async (req, res, next) => {
     const { id, reviewId } = req.params;
     const review = await Review.findById(reviewId);
     if (!review) {
-      req.flash('error', 'Review not found');
-      return res.redirect(buildPath(`campgrounds/${id}`));
+      throw new NotFoundError('Review not found');
     }
     if (!review.author.equals(req.user._id)) {
-      req.flash('error', 'You do not have permission to do that!');
-      return res.redirect(buildPath(`campgrounds/${id}`));
+      throw new AppError('You do not have permission to do that!', 403);
     }
     next();
   } catch (err) {
