@@ -14,6 +14,7 @@ const helmetConfig = helmet({
         'https://cdnjs.cloudflare.com',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
         'https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js',
+        'https://static.cloudflareinsights.com',
       ],
       workerSrc: ["'self'", 'blob:'], // Allow blob URLs for web workers
       styleSrc: [
