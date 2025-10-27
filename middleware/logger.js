@@ -6,9 +6,11 @@ const logger = (req, res, next) => {
   logEvents(
     `${req.method}\t${req.path}\t${req.headers.origin || 'no-origin'}`,
     'reqLog.log'
+    // eslint-disable-next-line no-console
   ).catch((err) => console.error('Logging failed:', err));
 
   // Also log to console for immediate visibility
+  // eslint-disable-next-line no-console
   console.log(`${req.method} ${req.path}`);
 
   next();

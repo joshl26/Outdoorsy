@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path');
 const fs = require('fs');
 
 jest.mock('fs', () => ({
@@ -47,10 +47,12 @@ describe('logEvents function', () => {
 
     await logEvents('Failing message', 'testLog.log');
 
+    // eslint-disable-next-line no-console
     expect(console.error).toHaveBeenCalledWith(
       expect.stringContaining('Failed to write to log file')
     );
 
+    // eslint-disable-next-line no-console
     console.error.mockRestore();
   });
 });

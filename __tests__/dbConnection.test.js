@@ -1,6 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const Campground = require('../models/campground');
+// eslint-disable-next-line no-unused-vars
 const User = require('../models/user'); // Import User model to register schema
 
 describe('Connection and Campground Model', () => {

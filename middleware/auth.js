@@ -3,7 +3,7 @@
 
 const Campground = require('../models/campground');
 const Review = require('../models/review');
-const { buildPath } = require('../config/basePath');
+// const { buildPath } = require('../config/basePath');
 const NotFoundError = require('../utils/errors/NotFoundError');
 const AuthenticationError = require('../utils/errors/AuthenticationError');
 const AppError = require('../utils/errors/AppError');
@@ -35,7 +35,10 @@ module.exports.isAuthor = async (req, res, next) => {
 
 module.exports.isReviewAuthor = async (req, res, next) => {
   try {
-    const { id, reviewId } = req.params;
+    const {
+      // id,
+      reviewId,
+    } = req.params;
     const review = await Review.findById(reviewId);
     if (!review) {
       throw new NotFoundError('Review not found');

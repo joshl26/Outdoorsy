@@ -3,7 +3,6 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
-const User = require('./models/user');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
@@ -77,6 +76,7 @@ app.all('*', (req, res, next) => {
   next(err);
 });
 
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   if (!err.message) err.message = 'Something went wrong!';

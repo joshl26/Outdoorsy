@@ -10,8 +10,8 @@ otechie: # Replace with a single Otechie username
 lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
 custom:
   [
-    "https://www.paypal.com/donate/?hosted_button_id=PKXQX549ASWG8",
-    "https://blockchair.com/bitcoin/address/1KWszwDxsjviQvTBHDQjAWkvqJHGCPcanb",
-    "https://blockchair.com/ethereum/address/0x20823db64fe5623d7d2d84626ce2706aa6d56d69",
-    "https://blockchair.com/litecoin/address/LYpp81xAYsf9i1tUrsfVK8bbfnVDWSYcAE",
+    'https://www.paypal.com/donate/?hosted_button_id=PKXQX549ASWG8',
+    'https://blockchair.com/bitcoin/address/1KWszwDxsjviQvTBHDQjAWkvqJHGCPcanb',
+    'https://blockchair.com/ethereum/address/0x20823db64fe5623d7d2d84626ce2706aa6d56d69',
+    'https://blockchair.com/litecoin/address/LYpp81xAYsf9i1tUrsfVK8bbfnVDWSYcAE',
   ]

@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 const request = require('supertest');
-const path = require('path');
+// const path = require('path');
 
 // Mock basePath and buildPath from your config
 jest.mock('../config/basePath', () => ({

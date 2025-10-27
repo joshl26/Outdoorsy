@@ -20,6 +20,7 @@ module.exports.validateCampground = (req, res, next) => {
   const { error } = campgroundSchema.validate(req.body);
   if (error) {
     const msg = `Validation error: ${error.details.map((x) => x.message).join(', ')}`;
+    // eslint-disable-next-line no-console
     console.error(msg);
     throw new ExpressError(msg, 400);
   }

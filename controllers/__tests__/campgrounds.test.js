@@ -14,7 +14,7 @@ jest.mock('@mapbox/mapbox-sdk/services/geocoding', () => {
 });
 
 const Campground = require('../../models/campground');
-const { cloudinary } = require('../../cloudinary');
+// const { cloudinary } = require('../../cloudinary');
 jest.mock('../../cloudinary');
 
 const campgroundsController = require('../../controllers/campgrounds');

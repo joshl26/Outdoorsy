@@ -57,14 +57,12 @@ describe('Campgrounds Routes', () => {
   });
 
   it('POST /outdoorsy/campgrounds should redirect after creation', async () => {
-    const res = await request(app)
-      .post('/outdoorsy/campgrounds')
-      .send({
-        title: 'Test Campground',
-        price: 10,
-        location: 'Test Location',
-        description: 'Nice place',
-      });
+    const res = await request(app).post('/outdoorsy/campgrounds').send({
+      title: 'Test Campground',
+      price: 10,
+      location: 'Test Location',
+      description: 'Nice place',
+    });
     expect(res.statusCode).toBe(302);
     expect(res.headers.location).toBe('/outdoorsy/campgrounds');
   });
@@ -77,14 +75,12 @@ describe('Campgrounds Routes', () => {
   });
 
   it('PUT /outdoorsy/campgrounds/:id should redirect after update', async () => {
-    const res = await request(app)
-      .put('/outdoorsy/campgrounds/123')
-      .send({
-        title: 'Updated Campground',
-        price: 20,
-        location: 'Updated Location',
-        description: 'Updated desc',
-      });
+    const res = await request(app).put('/outdoorsy/campgrounds/123').send({
+      title: 'Updated Campground',
+      price: 20,
+      location: 'Updated Location',
+      description: 'Updated desc',
+    });
     expect(res.statusCode).toBe(302);
     expect(res.headers.location).toBe('/outdoorsy/campgrounds/123');
   });

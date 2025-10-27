@@ -3,7 +3,7 @@
 const express = require('express');
 const request = require('supertest');
 const session = require('express-session');
-const passport = require('passport');
+// const passport = require('passport');
 const usersRouter = require('../users'); // adjust path if needed
 
 // Mock controllers

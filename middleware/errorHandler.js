@@ -1,4 +1,9 @@
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (
+  err,
+  req,
+  res
+  // next
+) => {
   const { logEvents } = require('./logger');
 
   // Log error details to file
@@ -8,6 +13,7 @@ const errorHandler = (err, req, res, next) => {
   );
 
   // Log stack trace to console for debugging
+  // eslint-disable-next-line no-console
   console.error(err.stack);
 
   const status = err.statusCode || 500;

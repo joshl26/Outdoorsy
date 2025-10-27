@@ -15,6 +15,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 ## Phase 1: Foundation & Code Quality (Weeks 1-2)
 
 ### Code Organization & Architecture
+
 - [x] Create `config/` directory structure
 - [x] Extract database configuration to `config/database.js`
 - [x] Extract session configuration to `config/session.js`
@@ -27,6 +28,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [x] Create `middleware/index.js` as central export
 
 ### Error Handling
+
 - [x] Create `utils/errors/AppError.js` base class
 - [x] Create `utils/errors/ValidationError.js`
 - [x] Create `utils/errors/AuthenticationError.js`
@@ -36,6 +38,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [x] Add developer error details (dev mode only)
 
 ### Development Tools
+
 - [ ] Install and configure ESLint
 - [ ] Install and configure Prettier
 - [ ] Create `.eslintrc.js` configuration
@@ -47,6 +50,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Update `.gitignore` as needed
 
 ### Documentation
+
 - [ ] Update README.md with setup instructions
 - [ ] Document all environment variables in `Example_env`
 - [ ] Create `CONTRIBUTING.md`
@@ -58,6 +62,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 ## Phase 2: Security, Performance & UI/UX (Weeks 3-6)
 
 ### Security Enhancements
+
 - [x] Install and configure `express-rate-limit`
 - [x] Add rate limiting to authentication routes
 - [x] Add rate limiting to API endpoints
@@ -72,6 +77,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [x] Create security incident response plan
 
 ### Testing Infrastructure
+
 - [ ] Create `__tests__/unit/` directory structure
 - [ ] Create `__tests__/integration/` directory structure
 - [ ] Create `__tests__/e2e/` directory structure
@@ -88,6 +94,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Configure CI to run tests automatically
 
 ### Performance Optimization
+
 - [ ] Add indexes to Campground model
 - [ ] Add indexes to Review model
 - [ ] Add indexes to User model
@@ -102,6 +109,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Add CDN for static assets (if applicable)
 
 ### Logging & Monitoring
+
 - [ ] Install Winston or Pino for structured logging
 - [ ] Configure log levels (error, warn, info, debug)
 - [ ] Add request ID tracking
@@ -114,6 +122,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Set up basic application metrics
 
 ### UI/UX & Styling
+
 - [ ] Audit current CSS architecture
 - [ ] Implement consistent design system/style guide
 - [ ] Create CSS variables for colors, spacing, typography
@@ -136,6 +145,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Create reusable component library documentation
 
 ### Accessibility (WCAG 2.1 AA)
+
 - [ ] Install accessibility linting tools (eslint-plugin-jsx-a11y)
 - [ ] Audit site with axe DevTools or Lighthouse
 - [ ] Ensure all images have meaningful alt text
@@ -158,6 +168,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Add accessibility testing to CI pipeline
 
 ### SEO Optimization
+
 - [ ] Audit current meta tags
 - [ ] Add unique title tags for all pages
 - [ ] Add meta descriptions (155-160 characters)
@@ -185,6 +196,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Add JSON-LD structured data
 
 ### Performance & Core Web Vitals
+
 - [ ] Measure baseline LCP (Largest Contentful Paint)
 - [ ] Measure baseline FID (First Input Delay)
 - [ ] Measure baseline CLS (Cumulative Layout Shift)
@@ -205,6 +217,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 ## Phase 3: Feature Development (Weeks 7-12)
 
 ### User Management
+
 - [ ] Create user profile page
 - [ ] Add user profile edit functionality
 - [ ] Implement avatar upload
@@ -217,6 +230,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Implement account deactivation
 
 ### Campground Features
+
 - [ ] Implement advanced search functionality
 - [ ] Add filtering (price, location, amenities)
 - [ ] Add sorting options
@@ -229,6 +243,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Create campground comparison feature
 
 ### Review Enhancements
+
 - [ ] Add review helpfulness voting (helpful/not helpful)
 - [ ] Implement review photo uploads
 - [ ] Add "report review" functionality
@@ -238,6 +253,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Add review sorting options
 
 ### API Development
+
 - [ ] Create `/api/v1/` versioned API structure
 - [ ] Implement standardized API response format
 - [ ] Add API authentication (JWT tokens)
@@ -254,6 +270,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 ## Phase 4: Advanced Features (Weeks 13-16)
 
 ### Database Improvements
+
 - [ ] Ensure all models have timestamps
 - [ ] Implement soft delete functionality
 - [ ] Add audit trail for sensitive operations
@@ -265,6 +282,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Set up database backup automation
 
 ### DevOps & Deployment
+
 - [ ] Create multi-stage Dockerfile
 - [ ] Optimize Docker image size
 - [ ] Create `docker-compose.yml` for local dev
@@ -277,6 +295,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Create disaster recovery documentation
 
 ### Monitoring & Observability
+
 - [ ] Integrate APM tool (New Relic/DataDog)
 - [ ] Set up error tracking (Sentry)
 - [ ] Implement user analytics
@@ -291,6 +310,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 ## Phase 5: Long-term Goals (Weeks 17+)
 
 ### Email System
+
 - [ ] Choose email service provider
 - [ ] Set up email templates
 - [ ] Implement welcome email
@@ -300,6 +320,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Implement digest emails (optional)
 
 ### Content & SEO Strategy
+
 - [ ] Create content strategy document
 - [ ] Write unique descriptions for top campgrounds
 - [ ] Add location-based landing pages
@@ -318,6 +339,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Add image captions where appropriate
 
 ### Metadata Management
+
 - [ ] Create meta tag helper/utility
 - [ ] Implement dynamic meta tag generation
 - [ ] Add meta tag testing in CI
@@ -332,6 +354,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Create meta tag audit script
 
 ### Admin Features
+
 - [ ] Create admin dashboard
 - [ ] Add user management interface
 - [ ] Add campground moderation tools
@@ -340,6 +363,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Create admin activity logs
 
 ### Advanced Features
+
 - [ ] Research booking system requirements
 - [ ] Design booking system architecture
 - [ ] Implement availability calendar
@@ -349,6 +373,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Create booking management interface
 
 ### Mobile Consideration
+
 - [ ] Audit mobile responsiveness
 - [ ] Optimize for mobile performance
 - [ ] Consider PWA implementation
@@ -356,6 +381,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Research React Native/Flutter
 
 ### Advanced Accessibility
+
 - [ ] Implement accessibility audit schedule (quarterly)
 - [ ] Add high contrast mode
 - [ ] Support prefers-reduced-motion
@@ -368,6 +394,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Add accessibility compliance badge
 
 ### Advanced SEO
+
 - [ ] Implement A/B testing for meta descriptions
 - [ ] Add FAQ schema to relevant pages
 - [ ] Create video sitemap (if videos present)
@@ -387,6 +414,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 ## Continuous Improvements
 
 ### Ongoing Tasks
+
 - [ ] Regular dependency updates (monthly)
 - [ ] Security vulnerability scanning (weekly)
 - [ ] Performance monitoring review (weekly)
@@ -408,7 +436,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 
 ## Completed Items
 
-*Items will be moved here when checked off above*
+_Items will be moved here when checked off above_
 
 ---
 
@@ -417,24 +445,28 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 ### Architecture Decision Records (ADRs)
 
 #### ADR-001: Maintaining EJS Templates
+
 - **Date:** 2025-10-25
 - **Decision:** Continue using EJS instead of React/Vue
 - **Reasoning:** Simplicity, server-side rendering benefits, team familiarity
 - **Status:** Accepted
 
 #### ADR-002: MongoDB as Primary Database
+
 - **Date:** 2025-10-25
 - **Decision:** Continue using MongoDB with Mongoose
 - **Reasoning:** Schema flexibility, existing data, team expertise
 - **Status:** Accepted
 
 #### ADR-003: WCAG 2.1 AA Compliance Target
+
 - **Date:** 2025-10-25
 - **Decision:** Target WCAG 2.1 Level AA compliance
 - **Reasoning:** Legal requirements, user inclusivity, better UX for all users
 - **Status:** Accepted
 
 #### ADR-004: Design System Implementation
+
 - **Date:** 2025-10-25
 - **Decision:** Create custom design system with CSS variables
 - **Reasoning:** Brand consistency, maintainability, no external dependencies
@@ -444,9 +476,9 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 
 ## Version History
 
-| Version | Date       | Changes                        |
-|---------|------------|--------------------------------|
-| 1.0.0   | 2025-10-25 | Initial roadmap creation       |
+| Version | Date       | Changes                  |
+| ------- | ---------- | ------------------------ |
+| 1.0.0   | 2025-10-25 | Initial roadmap creation |
 
 ---
 

@@ -34,6 +34,7 @@ describe('errorHandler middleware', () => {
   });
 
   afterEach(() => {
+    // eslint-disable-next-line no-console
     console.error.mockRestore();
     jest.clearAllMocks();
   });
@@ -47,6 +48,7 @@ describe('errorHandler middleware', () => {
       expect.stringContaining('TestError: Test error'),
       'errLog.log'
     );
+    // eslint-disable-next-line no-console
     expect(console.error).toHaveBeenCalledWith(err.stack);
   });
 

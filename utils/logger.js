@@ -27,6 +27,7 @@ const logEvents = async (message, logFileName) => {
     // Append log item to the file
     await fsPromises.appendFile(logFilePath, logItem);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(`Failed to write to log file: ${err}`);
   }
 };

@@ -7,6 +7,7 @@ module.exports = {
       `${req.method}\t${req.url}\t${req.headers.origin || 'no-origin'}`,
       'reqLog.log'
     );
+    // eslint-disable-next-line no-console
     console.log(`${req.method} ${req.path}`);
     next();
   }),

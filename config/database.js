@@ -9,8 +9,10 @@ const connectDB = async () => {
       //   useNewUrlParser: true,
       //   useUnifiedTopology: true,
     });
+    // eslint-disable-next-line no-console
     console.log('MongoDB connected');
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('MongoDB connection error:', err);
     process.exit(1);
   }
