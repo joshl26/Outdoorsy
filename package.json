@@ -91,6 +91,8 @@
     "yaml": "^2.3.4"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@types/connect-flash": "^0.0.40",
     "@types/express": "^5.0.4",
     "@types/express-session": "^1.18.2",
