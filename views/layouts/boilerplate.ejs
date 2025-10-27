@@ -1,134 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Primary Meta Tags -->
-    <meta
-      name="title"
-      content="Outdoorsy - Discover & Share Outdoor Adventures"
-    />
-    <meta
-      name="description"
-      content="Explore amazing campgrounds, hiking trails, and outdoor destinations. Share your adventures and discover new places to explore in the great outdoors."
-    />
-    <meta
-      name="keywords"
-      content="camping, hiking, outdoors, campgrounds, trails, nature, adventure, travel"
-    />
-    <meta name="author" content="Outdoorsy" />
-    <meta name="robots" content="index, follow" />
+  <!-- Primary Meta Tags -->
+  <meta
+    name="title"
+    content="<%= typeof pageTitle !== 'undefined' ? pageTitle : 'Outdoorsy - Discover & Share Outdoor Adventures' %>"
+  />
+  <meta
+    name="description"
+    content="<%= typeof pageDescription !== 'undefined' ? pageDescription : 'Explore amazing campgrounds, hiking trails, and outdoor destinations. Share your adventures and discover new places to explore in the great outdoors.' %>"
+  />
+  <meta
+    name="keywords"
+    content="camping, hiking, outdoors, campgrounds, trails, nature, adventure, travel"
+  />
+  <meta name="author" content="Outdoorsy" />
+  <meta name="robots" content="index, follow" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://outdoorsy.com/" />
-    <meta
-      property="og:title"
-      content="Outdoorsy - Discover & Share Outdoor Adventures"
-    />
-    <meta
-      property="og:description"
-      content="Explore amazing campgrounds, hiking trails, and outdoor destinations. Share your adventures and discover new places to explore in the great outdoors."
-    />
-    <meta
-      property="og:image"
-      content="https://outdoorsy.com/outdoorsy/social-preview.jpg"
-    />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://outdoorsy.com<%= typeof currentUrl !== 'undefined' ? currentUrl : '/' %>" />
+  <meta
+    property="og:title"
+    content="<%= typeof pageTitle !== 'undefined' ? pageTitle : 'Outdoorsy - Discover & Share Outdoor Adventures' %>"
+  />
+  <meta
+    property="og:description"
+    content="<%= typeof pageDescription !== 'undefined' ? pageDescription : 'Explore amazing campgrounds, hiking trails, and outdoor destinations. Share your adventures and discover new places to explore in the great outdoors.' %>"
+  />
+  <meta
+    property="og:image"
+    content="https://outdoorsy.com/outdoorsy/social-preview.jpg"
+  />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://outdoorsy.com/" />
-    <meta
-      property="twitter:title"
-      content="Outdoorsy - Discover & Share Outdoor Adventures"
-    />
-    <meta
-      property="twitter:description"
-      content="Explore amazing campgrounds, hiking trails, and outdoor destinations. Share your adventures and discover new places to explore in the great outdoors."
-    />
-    <meta
-      property="twitter:image"
-      content="https://outdoorsy.com/outdoorsy/social-preview.jpg"
-    />
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://outdoorsy.com<%= typeof currentUrl !== 'undefined' ? currentUrl : '/' %>" />
+  <meta
+    property="twitter:title"
+    content="<%= typeof pageTitle !== 'undefined' ? pageTitle : 'Outdoorsy - Discover & Share Outdoor Adventures' %>"
+  />
+  <meta
+    property="twitter:description"
+    content="<%= typeof pageDescription !== 'undefined' ? pageDescription : 'Explore amazing campgrounds, hiking trails, and outdoor destinations. Share your adventures and discover new places to explore in the great outdoors.' %>"
+  />
+  <meta
+    property="twitter:image"
+    content="https://outdoorsy.com/outdoorsy/social-preview.jpg"
+  />
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      href="/outdoorsy/favicon-96x96.png"
-      sizes="96x96"
-    />
-    <link rel="icon" type="image/svg+xml" href="/outdoorsy/favicon.svg" />
-    <link rel="shortcut icon" href="/outdoorsy/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/outdoorsy/apple-touch-icon.png"
-    />
-    <link rel="manifest" href="/outdoorsy/site.webmanifest" />
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="/outdoorsy/favicon-96x96.png"
+    sizes="96x96"
+  />
+  <link rel="icon" type="image/svg+xml" href="/outdoorsy/favicon.svg" />
+  <link rel="shortcut icon" href="/outdoorsy/favicon.ico" />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/outdoorsy/apple-touch-icon.png"
+  />
+  <link rel="manifest" href="/outdoorsy/site.webmanifest" />
 
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#2d5016" />
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#2d5016" />
 
-    <title>Outdoorsy - Discover & Share Outdoor Adventures</title>
+  <title><%= typeof pageTitle !== 'undefined' ? pageTitle : 'Outdoorsy - Discover & Share Outdoor Adventures' %></title>
 
-    <!-- Preconnect to external domains for performance -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link rel="preconnect" href="https://api.mapbox.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <!-- Preconnect to external domains for performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://api.mapbox.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 
-    <!-- Bootstrap CSS (stable v5.3) -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
+  <!-- Bootstrap CSS (stable v5.3) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
 
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
 
-    <!-- Mapbox GL JS CSS -->
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
-    <!-- Custom CSS - Load after vendor styles -->
-    <link rel="stylesheet" href="/outdoorsy/stylesheets/app.css" />
-    
-    <!-- Page-specific CSS (conditionally loaded) -->
-    <% if (typeof isHomePage !== 'undefined' && isHomePage) { %>
-      <link rel="stylesheet" href="/outdoorsy/stylesheets/home.css" />
-    <% } %>
+  <!-- Mapbox GL JS CSS -->
+  <link
+    href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
+    rel="stylesheet"
+  />
 
-    <!-- Mapbox GL JS -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <!-- Custom CSS - Load after vendor styles -->
+  <link rel="stylesheet" href="/outdoorsy/stylesheets/app.css" />
 
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Outdoorsy",
-      "url": "https://outdoorsy.com",
-      "description": "Discover and share outdoor adventures, campgrounds, and hiking trails.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://outdoorsy.com/campgrounds?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+  <!-- Page-specific CSS - Dynamic loading based on pageClass -->
+  <%
+    let pageClass = null;
+    if (typeof locals.pageClass !== 'undefined') {
+      pageClass = locals.pageClass;
+    } else if (typeof pageClassGlobal !== 'undefined') {
+      pageClass = pageClassGlobal;
     }
-    </script>
-  </head>
-  <body class="d-flex flex-column vh-100">
+    const isHome = pageClass === 'home' || (typeof req !== 'undefined' && req.path === '/');
+  %>
+
+  <!-- Mapbox GL JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Outdoorsy",
+    "url": "https://joshlehman.ca/outdoorsy",
+    "description": "Discover and share outdoor adventures, campgrounds, and hiking trails.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://joshlehman.ca/outdoorsy/campgrounds?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  
+</head>
+  
+  <body class="d-flex flex-column page-<%= isHome ? 'home' : (pageClass || 'default') %>">
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -139,23 +148,42 @@
       <div class="container mt-3">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <%= success %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button 
+            type="button" 
+            class="btn-close" 
+            data-bs-dismiss="alert" 
+            aria-label="Close alert"
+          ></button>
         </div>
       </div>
     <% } %>
+    
     <% if (error && error.length) { %>
       <div class="container mt-3">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
           <%= error %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button 
+            type="button" 
+            class="btn-close" 
+            data-bs-dismiss="alert" 
+            aria-label="Close alert"
+          ></button>
         </div>
       </div>
     <% } %>
 
     <!-- Main content area -->
-    <main id="main-content" class="container mt-5 fade-in">
-      <%- body %>
-    </main>
+    <% if (isHome) { %>
+      <!-- Home page uses full-width layout -->
+      <main id="main-content" class="fade-in">
+        <%- body %>
+      </main>
+    <% } else { %>
+      <!-- Standard pages use container layout -->
+      <main id="main-content" class="container mt-5 fade-in">
+        <%- body %>
+      </main>
+    <% } %>
 
     <%- include('../partials/footer') %>
 
@@ -175,8 +203,8 @@
 
     <!-- Custom JavaScript for enhancements -->
     <script defer>
-      // Initialize custom file input
       document.addEventListener('DOMContentLoaded', function() {
+        // Initialize custom file input
         if (typeof bsCustomFileInput !== 'undefined') {
           bsCustomFileInput.init();
         }
@@ -184,25 +212,34 @@
         // Add scrolled class to navbar on scroll
         const navbar = document.querySelector('.navbar');
         if (navbar) {
-          window.addEventListener('scroll', function() {
+          const handleScroll = debounce(function() {
             if (window.scrollY > 50) {
               navbar.classList.add('scrolled');
             } else {
               navbar.classList.remove('scrolled');
             }
-          });
+          }, 10);
+          
+          window.addEventListener('scroll', handleScroll, { passive: true });
         }
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
           anchor.addEventListener('click', function (e) {
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
+            const target = document.querySelector(href);
             if (target) {
               e.preventDefault();
               target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
               });
+              
+              // Update focus for accessibility
+              target.setAttribute('tabindex', '-1');
+              target.focus();
             }
           });
         });
@@ -216,43 +253,46 @@
           }, 5000);
         });
 
-        // Add fade-in animation to cards on scroll
+        // Intersection Observer for fade-in animations
         const observerOptions = {
           threshold: 0.1,
           rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver(function(entries) {
+        const fadeInObserver = new IntersectionObserver(function(entries) {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('fade-in');
-              observer.unobserve(entry.target);
+              fadeInObserver.unobserve(entry.target);
             }
           });
         }, observerOptions);
 
-        // Observe all cards for animation
-        document.querySelectorAll('.card, .feature-card').forEach(card => {
-          observer.observe(card);
+        // Observe all cards and feature cards for animation
+        document.querySelectorAll('.card, .feature-card, .stat-item').forEach(element => {
+          fadeInObserver.observe(element);
         });
 
         // Lazy load images
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              if (img.dataset.src) {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                observer.unobserve(img);
+        if ('IntersectionObserver' in window) {
+          const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                  img.src = img.dataset.src;
+                  img.removeAttribute('data-src');
+                  img.classList.add('loaded');
+                  observer.unobserve(img);
+                }
               }
-            }
+            });
           });
-        });
 
-        document.querySelectorAll('img[data-src]').forEach(img => {
-          imageObserver.observe(img);
-        });
+          document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+          });
+        }
 
         // Form validation enhancement
         const forms = document.querySelectorAll('.needs-validation');
@@ -261,6 +301,12 @@
             if (!form.checkValidity()) {
               event.preventDefault();
               event.stopPropagation();
+              
+              // Focus on first invalid field
+              const firstInvalid = form.querySelector(':invalid');
+              if (firstInvalid) {
+                firstInvalid.focus();
+              }
             }
             form.classList.add('was-validated');
           });
@@ -269,24 +315,28 @@
         // Add loading state to buttons on form submit
         const submitButtons = document.querySelectorAll('form button[type="submit"]');
         submitButtons.forEach(button => {
-          button.closest('form').addEventListener('submit', function() {
-            button.classList.add('loading');
-            button.disabled = true;
-            const originalText = button.innerHTML;
-            button.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Loading...';
-            
-            // Re-enable button after 5 seconds as fallback
-            setTimeout(() => {
-              button.classList.remove('loading');
-              button.disabled = false;
-              button.innerHTML = originalText;
-            }, 5000);
-          });
+          const form = button.closest('form');
+          if (form) {
+            form.addEventListener('submit', function(e) {
+              if (form.checkValidity()) {
+                button.classList.add('loading');
+                button.disabled = true;
+                const originalText = button.innerHTML;
+                button.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Loading...';
+                
+                // Re-enable button after 5 seconds as fallback
+                setTimeout(() => {
+                  button.classList.remove('loading');
+                  button.disabled = false;
+                  button.innerHTML = originalText;
+                }, 5000);
+              }
+            });
+          }
         });
 
         // Mapbox popup enhancement
         if (typeof mapboxgl !== 'undefined') {
-          // Add custom styles to mapbox popups
           const style = document.createElement('style');
           style.textContent = `
             .mapboxgl-popup-content {
@@ -295,9 +345,17 @@
           `;
           document.head.appendChild(style);
         }
+
+        // Announce page changes for screen readers
+        const announcer = document.createElement('div');
+        announcer.setAttribute('role', 'status');
+        announcer.setAttribute('aria-live', 'polite');
+        announcer.setAttribute('aria-atomic', 'true');
+        announcer.className = 'sr-only';
+        document.body.appendChild(announcer);
       });
 
-      // Performance optimization: Debounce scroll events
+      // Performance optimization: Debounce function
       function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -310,7 +368,13 @@
         };
       }
     </script>
-
+ <!-- Bootstrap CSS (stable v5.3) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
     <!-- Analytics placeholder (add your tracking code here) -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
   </body>

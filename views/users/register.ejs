@@ -1,63 +1,148 @@
 <div class="container d-flex justify-content-center align-items-center mt-5">
-  <div class="card shadow">
+  <div class="card shadow" style="max-width: 400px; width: 100%;">
     <img
       src="https://res.cloudinary.com/dv6keahg3/image/upload/v1680645329/Outdoorsy/ibew4ersdrwm46pkunud.png"
-      alt=""
+      alt="Outdoorsy logo"
       class="card-img-top"
+      loading="lazy"
     />
-    <div class="card-body">
-      <h5 class="card-title">Register</h5>
+    <div class="card-body mb-8">
+      <h1 class="card-title h4 mb-4 text-center">Register</h1>
+
+      <% if (errors && errors.length) { %>
+      <div class="alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <strong>Please fix the following errors:</strong>
+        <ul class="mb-0">
+          <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      </div>
+      <% } %>
+
       <form
         action="/outdoorsy/register"
         method="POST"
-        class="validated-form"
+        class="validated-form needs-validation"
         novalidate
+        aria-describedby="formHelp"
+        autocomplete="off"
       >
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="mb-3">
-          <label class="form-label" for="username">Username</label>
+          <label class="form-label" for="username">Username <span class="text-danger">*</span></label>
           <input
-            class="form-control"
+            class="form-control <%= errors && errors.find(e => e.param === 'username') ? 'is-invalid' : '' %>"
             type="text"
             id="username"
             name="username"
             required
             autofocus
+            aria-required="true"
+            aria-describedby="usernameHelp"
+            minlength="3"
+            maxlength="30"
+            pattern="^[a-zA-Z0-9_]+$"
+            title="Username should be 3-30 characters, letters, numbers, and underscores only."
+            value="<%= typeof formData !== 'undefined' ? formData.username : '' %>"
+            autocomplete="username"
           />
-          <div class="valid-feedback">Looks good!</div>
+          <div id="usernameHelp" class="form-text">3-30 characters; letters, numbers, and underscores only.</div>
+          <div class="invalid-feedback">
+            Please enter a valid username (3-30 chars, letters, numbers, underscores).
+          </div>
         </div>
+
         <div class="mb-3">
-          <label class="form-label" for="email">Email</label>
+          <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
           <input
-            class="form-control"
+            class="form-control <%= errors && errors.find(e => e.param === 'email') ? 'is-invalid' : '' %>"
             type="email"
             id="email"
             name="email"
             required
+            aria-required="true"
+            aria-describedby="emailHelp"
+            value="<%= typeof formData !== 'undefined' ? formData.email : '' %>"
+            autocomplete="email"
           />
-          <div class="valid-feedback">Looks good!</div>
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <div class="invalid-feedback">Please enter a valid email address.</div>
         </div>
+
         <div class="mb-3">
-          <label class="form-label" for="password">Password</label>
+          <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
           <input
-            class="form-control"
+            class="form-control <%= errors && errors.find(e => e.param === 'password') ? 'is-invalid' : '' %>"
             type="password"
             id="password"
             name="password"
             required
+            aria-required="true"
+            minlength="8"
+            aria-describedby="passwordHelp"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+            title="Password must be at least 8 characters, including letters and numbers."
+            autocomplete="new-password"
           />
-          <div class="valid-feedback">Looks good!</div>
+          <div id="passwordHelp" class="form-text">At least 8 characters, including letters and numbers.</div>
+          <div class="invalid-feedback">
+            Please enter a valid password (min 8 chars, letters and numbers).
+          </div>
         </div>
-        <button class="btn btn-success btn-block">Register</button>
+
+        <button class="btn btn-success w-100" type="submit" id="submitBtn" aria-live="polite" aria-busy="false">
+          Register
+        </button>
       </form>
-      <div class="container">
-        <div class="jumbotron text-center text-primary">
-          <h1><span class="fa fa-lock"></span> Social Authentication</h1>
-          <p>Login or Register with:</p>
-          <a href="/outdoorsy/auth/google" class="btn btn-danger"
-            ><span class="fa fa-google"></span> SignIn with Google</a
-          >
-        </div>
-      </div>
     </div>
   </div>
 </div>
+
+<script>
+  (function () {
+    'use strict';
+    const form = document.querySelector('.needs-validation');
+    const submitBtn = document.getElementById('submitBtn');
+    const inputs = form.querySelectorAll('input');
+
+    // Validate a single input and toggle validation classes
+    function validateInput(input) {
+      if (input.checkValidity()) {
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+      } else {
+        input.classList.remove('is-valid');
+        input.classList.add('is-invalid');
+      }
+    }
+
+    // Instant validation on input and blur
+    inputs.forEach(input => {
+      input.addEventListener('input', () => validateInput(input));
+      input.addEventListener('blur', () => validateInput(input));
+    });
+
+    // On form submit
+    form.addEventListener('submit', function (event) {
+      let formIsValid = true;
+      inputs.forEach(input => {
+        validateInput(input);
+        if (!input.checkValidity()) {
+          formIsValid = false;
+        }
+      });
+
+      if (!formIsValid) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Registering...';
+      }
+      form.classList.add('was-validated');
+    });
+  })();
+</script>

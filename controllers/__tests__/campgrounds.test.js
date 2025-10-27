@@ -1,4 +1,4 @@
-// __tests__/campgrounds.test.js
+// __tests__/controllers/campgrounds.test.js
 
 // Mock Mapbox SDK before requiring controller
 jest.mock('@mapbox/mapbox-sdk/services/geocoding', () => {
@@ -14,33 +14,34 @@ jest.mock('@mapbox/mapbox-sdk/services/geocoding', () => {
 });
 
 const Campground = require('../../models/campground');
-Campground.find = jest.fn();
-Campground.findById = jest.fn();
-Campground.findByIdAndUpdate = jest.fn();
-Campground.findByIdAndDelete = jest.fn();
-Campground.prototype.save = jest.fn();
-
 const { cloudinary } = require('../../cloudinary');
 jest.mock('../../cloudinary');
 
 describe('Campgrounds Controller', () => {
   let campgroundsController;
   let req, res, next;
+  const basePath = '/outdoorsy'; // Adjust if your app uses a different basePath
 
   beforeEach(() => {
     jest.clearAllMocks();
 
-    // Require controller after mocks are set
     campgroundsController = require('../../controllers/campgrounds');
 
     req = {
-      body: { campground: { location: 'Test Location', title: 'Test' } },
+      body: {
+        campground: {
+          location: 'Test Location',
+          title: 'Test',
+          description: 'Test description',
+        },
+      },
       files: [{ path: 'path1', filename: 'file1' }],
       user: { _id: 'user123' },
       params: { id: 'camp123' },
       flash: jest.fn(),
     };
     res = {
+      locals: {},
       render: jest.fn(),
       redirect: jest.fn(),
     };
@@ -49,7 +50,7 @@ describe('Campgrounds Controller', () => {
 
   it('index: renders campgrounds index', async () => {
     const fakeCampgrounds = [{ title: 'Camp1' }, { title: 'Camp2' }];
-    Campground.find.mockResolvedValue(fakeCampgrounds);
+    Campground.find = jest.fn().mockResolvedValue(fakeCampgrounds);
 
     await campgroundsController.index(req, res, next);
 
@@ -60,39 +61,45 @@ describe('Campgrounds Controller', () => {
   });
 
   it('showCampground: renders campground if found', async () => {
-    const fakeCampground = { _id: 'camp123', title: 'Camp1' };
+    const fakeCampground = {
+      _id: 'camp123',
+      title: 'Camp1',
+      description: 'Test description',
+    };
 
-    const populateMock = jest.fn().mockReturnThis();
+    const query = {
+      populate: jest.fn().mockReturnThis(),
+      then: jest.fn((cb) => cb(fakeCampground)),
+    };
 
-    Campground.findById.mockReturnValue({
-      populate: populateMock,
-      then: (cb) => cb(fakeCampground),
-    });
+    Campground.findById = jest.fn(() => query);
 
     await campgroundsController.showCampground(req, res, next);
 
     expect(Campground.findById).toHaveBeenCalledWith('camp123');
-    expect(populateMock).toHaveBeenCalledTimes(2);
+    expect(query.populate).toHaveBeenCalledTimes(2);
+    expect(query.then).toHaveBeenCalled();
+    expect(res.locals.pageTitle).toBe(`${fakeCampground.title} - Outdoorsy`);
+    expect(res.locals.pageDescription).toBe(
+      fakeCampground.description.substring(0, 160)
+    );
     expect(res.render).toHaveBeenCalledWith('campgrounds/show', {
       campground: fakeCampground,
     });
   });
 
   it('showCampground: redirects if campground not found', async () => {
-    const populateMock = jest.fn().mockReturnThis();
+    const query = {
+      populate: jest.fn().mockReturnThis(),
+      then: jest.fn((cb) => cb(null)),
+    };
 
-    Campground.findById.mockReturnValue({
-      populate: populateMock,
-      then: (cb) => cb(null),
-    });
+    Campground.findById = jest.fn(() => query);
 
     await campgroundsController.showCampground(req, res, next);
 
-    expect(req.flash).toHaveBeenCalledWith(
-      'error',
-      'Cannot find that campground!'
-    );
-    expect(res.redirect).toHaveBeenCalledWith('/outdoorsy/campgrounds');
+    expect(req.flash).toHaveBeenCalledWith('error', 'Campground not found');
+    expect(res.redirect).toHaveBeenCalledWith(`${basePath}/campgrounds`);
   });
 
   it('updateCampground: updates campground and redirects', async () => {
@@ -102,7 +109,7 @@ describe('Campgrounds Controller', () => {
       save: jest.fn().mockResolvedValue(),
       updateOne: jest.fn().mockResolvedValue(),
     };
-    Campground.findByIdAndUpdate.mockResolvedValue(fakeCampground);
+    Campground.findByIdAndUpdate = jest.fn().mockResolvedValue(fakeCampground);
 
     await campgroundsController.updateCampground(req, res, next);
 
@@ -111,7 +118,9 @@ describe('Campgrounds Controller', () => {
       expect.any(Object)
     );
     expect(fakeCampground.save).toHaveBeenCalled();
-    expect(res.redirect).toHaveBeenCalledWith('/outdoorsy/campgrounds/camp123');
+    expect(res.redirect).toHaveBeenCalledWith(
+      `${basePath}/campgrounds/camp123`
+    );
     expect(req.flash).toHaveBeenCalledWith(
       'success',
       'Successfully updated campground!'
@@ -119,7 +128,7 @@ describe('Campgrounds Controller', () => {
   });
 
   it('deleteCampground: deletes campground and redirects', async () => {
-    Campground.findByIdAndDelete.mockResolvedValue();
+    Campground.findByIdAndDelete = jest.fn().mockResolvedValue();
 
     await campgroundsController.deleteCampground(req, res, next);
 
@@ -128,26 +137,26 @@ describe('Campgrounds Controller', () => {
       'success',
       'Successfully deleted campground'
     );
-    expect(res.redirect).toHaveBeenCalledWith('/outdoorsy/campgrounds');
+    expect(res.redirect).toHaveBeenCalledWith(`${basePath}/campgrounds`);
   });
 
-  it('creates a campground and redirects', async () => {
-    Campground.prototype.save.mockResolvedValue();
+  it('createCampground: creates a campground and redirects', async () => {
+    Campground.prototype.save = jest.fn().mockResolvedValue();
 
     await campgroundsController.createCampground(req, res, next);
 
     expect(Campground.prototype.save).toHaveBeenCalled();
     expect(req.flash).toHaveBeenCalledWith(
       'success',
-      'Successfully made a new campground!'
+      'Successfully created a new campground!'
     );
     expect(res.redirect).toHaveBeenCalledWith(
-      expect.stringContaining('/outdoorsy/campgrounds/')
+      expect.stringContaining(`${basePath}/campgrounds/`)
     );
     expect(next).not.toHaveBeenCalled();
   });
 
-  it('calls next on error', async () => {
+  it('createCampground: calls next on error', async () => {
     jest.resetModules();
 
     jest.mock('@mapbox/mapbox-sdk/services/geocoding', () => {
@@ -166,7 +175,7 @@ describe('Campgrounds Controller', () => {
       user: { _id: 'user123' },
       flash: jest.fn(),
     };
-    const resError = { redirect: jest.fn(), render: jest.fn() };
+    const resError = { redirect: jest.fn(), render: jest.fn(), locals: {} };
     const nextError = jest.fn();
 
     await campgroundsControllerError.createCampground(

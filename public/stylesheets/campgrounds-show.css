@@ -1,0 +1,51 @@
+/* ===== Campgrounds Show Page Styles ===== */
+/* Place this file at: public/stylesheets/campgrounds-show.css */
+
+/* ===== Campgrounds Show Page Styles ===== */
+
+#map {
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 3px solid white;
+  transition: all var(--transition-speed) ease;
+  width: 100%;
+  height: 350px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.carousel-inner img {
+  border-radius: var(--border-radius-lg);
+}
+
+.card-footer {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.form-range {
+  width: 100%;
+}
+
+.card-body .btn {
+  min-width: auto;
+}
+
+.card-body.d-flex > * {
+  flex: 1 1 0;
+}
+
+.list-group-item i {
+  color: var(--primary-green);
+}
+
+.starability-basic {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .card-body.d-flex {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}

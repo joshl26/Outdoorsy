@@ -1,45 +1,125 @@
-<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="/outdoorsy/stylesheets/users-login.css" />
+</head>
 <div class="container d-flex justify-content-center align-items-center mt-5">
-  <div class="card">
+  <div class="card shadow" style="max-width: 400px; width: 100%;">
     <img
       src="https://res.cloudinary.com/dv6keahg3/image/upload/v1680772780/Outdoorsy/pexels-brady-knoll-5914157_usg6oo.jpg"
-      alt=""
+      alt="Outdoorsy login image"
       class="card-img-top"
+      loading="lazy"
     />
     <div class="card-body">
-      <h5 class="card-title">Login</h5>
+      <h1 class="card-title h4 mb-4 text-center">Login</h1>
+
+      <% if (error && error.length) { %>
+        <div class="alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true">
+          <%= error %>
+        </div>
+      <% } %>
+
       <form
         action="/outdoorsy/login"
         method="POST"
-        class="validated-form"
+        class="validated-form needs-validation"
         novalidate
+        autocomplete="off"
       >
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
         <div class="mb-3">
-          <label class="form-label" for="username">Username</label>
+          <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
           <input
             class="form-control"
-            type="text"
-            id="username"
-            name="username"
+            type="email"
+            id="email"
+            name="email"
             autofocus
             required
+            aria-required="true"
+            autocomplete="email"
+            minlength="5"
           />
+          <div class="invalid-feedback">Please enter a valid email address.</div>
           <div class="valid-feedback">Looks good!</div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="password">Password</label>
+          <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
           <input
             class="form-control"
             type="password"
             id="password"
             name="password"
             required
+            aria-required="true"
+            autocomplete="current-password"
+            minlength="4"
           />
+          <div class="invalid-feedback">Please enter your password (at least 8 characters).</div>
           <div class="valid-feedback">Looks good!</div>
         </div>
-        <button class="btn btn-success btn-block">Login</button>
+
+        <button class="btn btn-success w-100" type="submit" id="submitBtn" aria-live="polite" aria-busy="false">
+          Login
+        </button>
       </form>
     </div>
   </div>
 </div>
+
+<script>
+  (function () {
+    'use strict';
+    const form = document.querySelector('.needs-validation');
+    const submitBtn = document.getElementById('submitBtn');
+    const emailInput = form.querySelector('#email');
+    const passwordInput = form.querySelector('#password');
+    const inputs = form.querySelectorAll('input');
+
+    function validateInput(input) {
+      let isValid = input.checkValidity();
+
+      // Custom length checks
+      if (input.id === 'email') {
+        isValid = isValid && input.value.trim().length >= 5;
+      }
+      if (input.id === 'password') {
+        isValid = isValid && input.value.length >= 4;
+      }
+
+      if (isValid) {
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+      } else {
+        input.classList.remove('is-valid');
+        input.classList.add('is-invalid');
+      }
+    }
+
+    inputs.forEach(input => {
+      input.addEventListener('input', () => validateInput(input));
+      input.addEventListener('blur', () => validateInput(input));
+    });
+
+    form.addEventListener('submit', function (event) {
+      let formIsValid = true;
+      inputs.forEach(input => {
+        validateInput(input);
+        if (!input.classList.contains('is-valid')) {
+          formIsValid = false;
+        }
+      });
+
+      if (!formIsValid) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Logging in...';
+      }
+      form.classList.add('was-validated');
+    });
+  })();
+</script>

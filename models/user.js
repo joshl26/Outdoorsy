@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   },
 });
 
-// Adds username, hash and salt fields to store username and hashed password
-UserSchema.plugin(passportLocalMongoose);
+// Use email as the username field for passport-local-mongoose
+UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,5 +1,3 @@
-// __tests__/app.test.js
-
 const request = require('supertest');
 const path = require('path');
 
@@ -10,6 +8,13 @@ jest.mock('../config/basePath', () => ({
 }));
 
 const app = require('../app'); // path to your app.js
+
+// Add error logging middleware to catch errors during tests
+app.use((err, req, res, next) => {
+  // Log error stack to console for debugging
+  console.error('Test error:', err.stack);
+  next(err);
+});
 
 describe('Express app basic tests', () => {
   it('GET basePath (home) should return 200 and render home page', async () => {

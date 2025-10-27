@@ -11,10 +11,55 @@ const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
 const { basePath, buildPath } = require('./config/basePath');
 const expressLayouts = require('express-ejs-layouts');
+const helmet = require('helmet');
 
 const app = express();
 
+// Use Helmet early to set secure HTTP headers
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          'https://cdn.jsdelivr.net',
+          'https://api.mapbox.com',
+          'https://cdnjs.cloudflare.com',
+          'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
+          'https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js',
+        ],
+        workerSrc: ["'self'", 'blob:'], // Allow blob URLs for web workers
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          'https://cdn.jsdelivr.net',
+          'https://api.mapbox.com',
+          'https://cdnjs.cloudflare.com',
+          'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+          'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+          'https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css',
+        ],
+        imgSrc: ["'self'", 'data:', 'blob:', 'https://res.cloudinary.com'],
+        connectSrc: [
+          "'self'",
+          'https://api.mapbox.com',
+          'https://cdn.jsdelivr.net',
+          'https://events.mapbox.com',
+        ],
+        fontSrc: ["'self'", 'https://cdnjs.cloudflare.com'],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: [],
+      },
+    },
+    crossOriginEmbedderPolicy: false,
+  })
+);
+
 app.use(expressLayouts);
+
 app.set('trust proxy', 1);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -30,10 +75,9 @@ const sessionConfig = {
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: basePath,
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
@@ -41,10 +85,24 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+// Mock csrfToken in test environment to avoid errors in views
+if (process.env.NODE_ENV === 'test') {
+  app.use((req, res, next) => {
+    req.csrfToken = () => 'test-csrf-token';
+    res.locals.csrfToken = 'test-csrf-token';
+    next();
+  });
+}
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(
+  new LocalStrategy(
+    { usernameField: 'email' }, // Use 'email' instead of 'username'
+    User.authenticate()
+  )
+);
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -58,6 +116,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// Middleware to set current path
 app.use((req, res, next) => {
   res.locals.currentPath = req.path;
   next();
@@ -68,8 +127,18 @@ app.use(buildPath('campgrounds'), campgroundRoutes);
 app.use(buildPath('campgrounds/:id/reviews'), reviewRoutes);
 app.use(basePath, userRoutes);
 
+// Home route
 app.get(basePath, (req, res) => {
+  res.locals.pageClass = 'home';
+  res.locals.pageTitle = 'Outdoorsy - Discover Your Next Adventure';
   res.render('home');
+});
+
+// 404 handler
+app.all('*', (req, res, next) => {
+  const err = new Error('Page Not Found');
+  err.statusCode = 404;
+  next(err);
 });
 
 // Error handler

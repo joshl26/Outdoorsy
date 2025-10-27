@@ -1,139 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
-  <body class="d-flex text-center text-white">
-    <!-- Hero Section -->
-    <div class="home-hero">
-      <main class="px-3">
-        <div class="hero-content">
-          <h1 class="mb-4">Discover Your Next Adventure</h1>
-          <p class="lead">
-            Explore breathtaking campgrounds, hidden trails, and stunning
-            outdoor destinations. Share your adventures and connect with nature
-            lovers worldwide.
+
+<head>
+  <link rel="stylesheet" href="/outdoorsy/stylesheets/home.css" />
+</head>
+<!-- Hero Section -->
+<div class="home-hero">
+  <div class="hero-content">
+    <h1 class="mb-4 gradient-text">Discover Your Next Adventure</h1>
+    <p class="lead text-light">
+      Explore breathtaking campgrounds, hidden trails, and stunning
+      outdoor destinations. Share your adventures and connect with nature
+      lovers worldwide.
+    </p>
+    <div
+      class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4"
+      role="group"
+      aria-label="Primary actions"
+    >
+      <a 
+        href="<%= basePath %>/campgrounds" 
+        class="btn btn-lg btn-primary"
+        aria-label="Explore available campgrounds"
+      >
+        Explore Campgrounds <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
+      </a>
+      <a
+        href="<%= basePath %>/campgrounds/new"
+        class="btn btn-lg btn-outline-light text-light"
+        aria-label="Share your campground location"
+      >
+        Share Your Spot <i class="fas fa-plus ms-2" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <a 
+    href="#features" 
+    class="scroll-indicator text-light"
+    aria-label="Scroll to features section"
+  >
+    <i class="fas fa-chevron-down" aria-hidden="true"></i>
+  </a>
+</div>
+
+<!-- Features Section -->
+<section id="features" class="features-section" aria-labelledby="features-heading">
+  <div class="container">
+    <header class="text-center mb-5">
+      <h2 id="features-heading" class="display-5 fw-bold mb-3 text-primary">
+        Why Choose Outdoorsy?
+      </h2>
+      <p class="lead text-muted">
+        Everything you need for your perfect outdoor experience
+      </p>
+    </header>
+    
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">
+            <i class="fas fa-map-marked-alt text-primary"></i>
+          </div>
+          <h3 class="feature-title text-dark">Discover Locations</h3>
+          <p class="feature-description text-muted">
+            Find hidden gems and popular destinations with detailed
+            maps, photos, and reviews from fellow adventurers.
           </p>
-          <div
-            class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4"
-          >
-            <a href="<%= basePath %>/campgrounds" class="btn btn-lg btn-primary"
-              >Explore Campgrounds <i class="fas fa-arrow-right"></i
-            ></a>
-            <a
-              href="<%= basePath %>/campgrounds/new"
-              class="btn btn-lg btn-outline-light"
-              >Share Your Spot <i class="fas fa-plus"></i
-            ></a>
+        </article>
+      </div>
+      
+      <div class="col-lg-4 col-md-6">
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">
+            <i class="fas fa-users text-primary"></i>
           </div>
-        </div>
-
-        <!-- Features Section -->
-        <section class="features-section">
-          <div class="container">
-            <div class="text-center mb-5">
-              <h2 class="display-5 fw-bold mb-3">Why Choose Outdoorsy?</h2>
-              <p class="lead text-muted">
-                Everything you need for your perfect outdoor experience
-              </p>
-            </div>
-            <div class="row g-4">
-              <div class="col-md-4">
-                <div class="feature-card fade-in">
-                  <div class="feature-icon">
-                    <i class="fas fa-map-marked-alt"></i>
-                  </div>
-                  <h3 class="feature-title">Discover Locations</h3>
-                  <p class="feature-description">
-                    Find hidden gems and popular destinations with detailed
-                    maps, photos, and reviews from fellow adventurers.
-                  </p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="feature-card fade-in">
-                  <div class="feature-icon">
-                    <i class="fas fa-users"></i>
-                  </div>
-                  <h3 class="feature-title">Join Community</h3>
-                  <p class="feature-description">
-                    Connect with outdoor enthusiasts, share experiences, and get
-                    insider tips from seasoned campers.
-                  </p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="feature-card fade-in">
-                  <div class="feature-icon">
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <h3 class="feature-title">Rate & Review</h3>
-                  <p class="feature-description">
-                    Share your honest feedback and help others make informed
-                    decisions about their next camping trip.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <h3 class="feature-title text-dark">Join Community</h3>
+          <p class="feature-description text-muted">
+            Connect with outdoor enthusiasts, share experiences, and get
+            insider tips from seasoned campers.
+          </p>
+        </article>
+      </div>
+      
+      <div class="col-lg-4 col-md-6">
+        <article class="feature-card fade-in">
+          <div class="feature-icon" aria-hidden="true">
+            <i class="fas fa-star text-primary"></i>
           </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="stats-section">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3 col-6">
-                <div class="stat-item">
-                  <span class="stat-number">1,250+</span>
-                  <span class="stat-label">Campgrounds</span>
-                </div>
-              </div>
-              <div class="col-md-3 col-6">
-                <div class="stat-item">
-                  <span class="stat-number">5,400+</span>
-                  <span class="stat-label">Reviews</span>
-                </div>
-              </div>
-              <div class="col-md-3 col-6">
-                <div class="stat-item">
-                  <span class="stat-number">2,800+</span>
-                  <span class="stat-label">Members</span>
-                </div>
-              </div>
-              <div class="col-md-3 col-6">
-                <div class="stat-item">
-                  <span class="stat-number">48</span>
-                  <span class="stat-label">States</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-          <div class="container">
-            <div class="cta-content">
-              <h2>Ready to Start Your Adventure?</h2>
-              <p>
-                Join thousands of outdoor enthusiasts discovering amazing places
-                every day.
-              </p>
-              <a href="<%= basePath %>/register" class="btn btn-lg btn-light">
-                Get Started Free <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <!-- Scroll Indicator -->
-      <div class="scroll-indicator">
-        <i class="fas fa-chevron-down"></i>
+          <h3 class="feature-title text-dark">Rate & Review</h3>
+          <p class="feature-description text-muted">
+            Share your honest feedback and help others make informed
+            decisions about their next camping trip.
+          </p>
+        </article>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Font Awesome (add to your boilerplate if not already included) -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </body>
-</html>
+<!-- Stats Section -->
+<section class="stats-section" aria-labelledby="stats-heading">
+  <div class="container">
+    <h2 id="stats-heading" class="sr-only">Platform Statistics</h2>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6 col-6">
+        <article class="stat-item">
+          <span class="stat-number text-light" aria-label="1,250 plus">1,250+</span>
+          <span class="stat-label text-light">Campgrounds</span>
+        </article>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 col-6">
+        <article class="stat-item">
+          <span class="stat-number text-light" aria-label="5,400 plus">5,400+</span>
+          <span class="stat-label text-light">Reviews</span>
+        </article>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 col-6">
+        <article class="stat-item">
+          <span class="stat-number text-light" aria-label="2,800 plus">2,800+</span>
+          <span class="stat-label text-light">Members</span>
+        </article>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 col-6">
+        <article class="stat-item">
+          <span class="stat-number text-light">48</span>
+          <span class="stat-label text-light">States</span>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="cta-content">
+      <h2 id="cta-heading" class="text-light">Ready to Start Your Adventure?</h2>
+      <p class="text-light">
+        Join thousands of outdoor enthusiasts discovering amazing places
+        every day.
+      </p>
+      <a 
+        href="<%= basePath %>/register" 
+        class="btn btn-lg btn-light text-primary"
+        aria-label="Create a free account"
+      >
+        Get Started Free <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>

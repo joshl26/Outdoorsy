@@ -1,0 +1,47 @@
+/* ===== Campgrounds Index Page Styles ===== */
+/* Place this file at: public/stylesheets/campgrounds-index.css */
+
+.page-campgrounds-index {
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+/* Search and Filter Section */
+.campgrounds-search-section {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+}
+
+.campgrounds-filter-bar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-chip {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 2px solid var(--primary-green);
+  background: white;
+  color: var(--primary-green);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+  background: var(--primary-green);
+  color: white;
+}
+
+/* Campgrounds Grid */
+.campgrounds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
