@@ -6,11 +6,17 @@ const connectDB = async () => {
   try {
     const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/outdoorsy';
     await mongoose.connect(dbUrl, {
-      //   useNewUrlParser: true,
-      //   useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
+
     // eslint-disable-next-line no-console
     console.log('MongoDB connected');
+
+    mongoose.connection.on('error', (err) => {
+      // eslint-disable-next-line no-console
+      console.error('MongoDB connection error:', err);
+    });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('MongoDB connection error:', err);

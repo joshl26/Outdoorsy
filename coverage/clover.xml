@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1761588964600" clover="3.2.0">
-  <project timestamp="1761588964600" name="All files">
-    <metrics statements="490" coveredstatements="427" conditionals="121" coveredconditionals="80" methods="68" coveredmethods="55" elements="679" coveredelements="562" complexity="0" loc="490" ncloc="490" packages="9" files="34" classes="34"/>
+<coverage generated="1761590669986" clover="3.2.0">
+  <project timestamp="1761590669986" name="All files">
+    <metrics statements="492" coveredstatements="427" conditionals="121" coveredconditionals="84" methods="69" coveredmethods="55" elements="682" coveredelements="566" complexity="0" loc="492" ncloc="492" packages="9" files="34" classes="34"/>
     <package name="Outdoorsy">
       <metrics statements="139" coveredstatements="124" conditionals="32" coveredconditionals="23" methods="19" coveredmethods="17"/>
       <file name=".eslintrc.js" path="E:\GIT Working Folders\Outdoorsy\.eslintrc.js">
@@ -154,12 +154,12 @@
         <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="8" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
+        <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
       </file>
     </package>
     <package name="Outdoorsy.cloudinary">
@@ -174,10 +174,10 @@
       </file>
     </package>
     <package name="Outdoorsy.config">
-      <metrics statements="43" coveredstatements="29" conditionals="23" coveredconditionals="9" methods="7" coveredmethods="3"/>
+      <metrics statements="45" coveredstatements="29" conditionals="23" coveredconditionals="13" methods="8" coveredmethods="3"/>
       <file name="basePath.js" path="E:\GIT Working Folders\Outdoorsy\config\basePath.js">
-        <metrics statements="14" coveredstatements="9" conditionals="13" coveredconditionals="5" methods="4" coveredmethods="1"/>
-        <line num="11" count="3" type="cond" truecount="1" falsecount="1"/>
+        <metrics statements="14" coveredstatements="9" conditionals="13" coveredconditionals="6" methods="4" coveredmethods="1"/>
+        <line num="11" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="23" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="25" count="20" type="cond" truecount="1" falsecount="1"/>
         <line num="28" count="20" type="cond" truecount="1" falsecount="1"/>
@@ -193,16 +193,18 @@
         <line num="79" count="0" type="stmt"/>
       </file>
       <file name="database.js" path="E:\GIT Working Folders\Outdoorsy\config\database.js">
-        <metrics statements="9" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="11" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="8" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
       </file>
       <file name="passport.js" path="E:\GIT Working Folders\Outdoorsy\config\passport.js">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -222,12 +224,12 @@
         <line num="44" count="1" type="stmt"/>
       </file>
       <file name="session.js" path="E:\GIT Working Folders\Outdoorsy\config\session.js">
-        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
+        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="3" methods="0" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
       </file>
       <file name="swagger.js" path="E:\GIT Working Folders\Outdoorsy\config\swagger.js">
-        <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
@@ -474,36 +476,36 @@
       <metrics statements="24" coveredstatements="20" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="campground.js" path="E:\GIT Working Folders\Outdoorsy\models\campground.js">
         <metrics statements="14" coveredstatements="10" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="1" count="7" type="stmt"/>
-        <line num="2" count="7" type="stmt"/>
-        <line num="3" count="7" type="stmt"/>
-        <line num="6" count="7" type="stmt"/>
-        <line num="11" count="7" type="stmt"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="11" count="6" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
-        <line num="17" count="7" type="stmt"/>
-        <line num="19" count="7" type="stmt"/>
-        <line num="53" count="7" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="53" count="6" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
-        <line num="60" count="7" type="stmt"/>
+        <line num="60" count="6" type="stmt"/>
         <line num="61" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="62" count="0" type="stmt"/>
-        <line num="68" count="7" type="stmt"/>
+        <line num="68" count="6" type="stmt"/>
       </file>
       <file name="review.js" path="E:\GIT Working Folders\Outdoorsy\models\review.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="7" type="stmt"/>
-        <line num="2" count="7" type="stmt"/>
-        <line num="4" count="7" type="stmt"/>
-        <line num="28" count="7" type="stmt"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
       </file>
       <file name="user.js" path="E:\GIT Working Folders\Outdoorsy\models\user.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="14" count="3" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
       </file>
     </package>
     <package name="Outdoorsy.routes">
@@ -590,8 +592,8 @@
         <line num="24" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="25" count="1" type="stmt"/>
         <line num="28" count="7" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
       </file>
     </package>
     <package name="Outdoorsy.utils.errors">
