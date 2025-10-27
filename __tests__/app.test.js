@@ -9,9 +9,8 @@ jest.mock('../config/basePath', () => ({
 
 const app = require('../app'); // path to your app.js
 
-// Add error logging middleware to catch errors during tests
+// Add error logging middleware early in app for tests
 app.use((err, req, res, next) => {
-  // Log error stack to console for debugging
   console.error('Test error:', err.stack);
   next(err);
 });
@@ -31,5 +30,10 @@ describe('Express app basic tests', () => {
   it('mounts user routes under basePath', async () => {
     const res = await request(app).get('/outdoorsy/login');
     expect([200, 302]).toContain(res.statusCode);
+  });
+
+  it('returns 404 for unknown routes', async () => {
+    const res = await request(app).get('/outdoorsy/nonexistentpath');
+    expect(res.statusCode).toBe(404);
   });
 });

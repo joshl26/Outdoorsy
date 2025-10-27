@@ -15,16 +15,16 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 ## Phase 1: Foundation & Code Quality (Weeks 1-2)
 
 ### Code Organization & Architecture
-- [ ] Create `config/` directory structure
-- [ ] Extract database configuration to `config/database.js`
-- [ ] Extract session configuration to `config/session.js`
-- [ ] Extract Passport configuration to `config/passport.js`
-- [ ] Extract security/Helmet configuration to `config/security.js`
-- [ ] Extract Swagger configuration to `config/swagger.js`
-- [ ] Refactor `app.js` to use modular configs (target < 50 lines)
-- [ ] Move validation middleware to `middleware/validation.js`
-- [ ] Move auth middleware to `middleware/auth.js`
-- [ ] Create `middleware/index.js` as central export
+- [x] Create `config/` directory structure
+- [x] Extract database configuration to `config/database.js`
+- [x] Extract session configuration to `config/session.js`
+- [x] Extract Passport configuration to `config/passport.js`
+- [x] Extract security/Helmet configuration to `config/security.js`
+- [x] Extract Swagger configuration to `config/swagger.js`
+- [x] Refactor `app.js` to use modular configs (target < 50 lines)
+- [x] Move validation middleware to `middleware/validation.js`
+- [x] Move auth middleware to `middleware/auth.js`
+- [x] Create `middleware/index.js` as central export
 
 ### Error Handling
 - [ ] Create `utils/errors/AppError.js` base class

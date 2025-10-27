@@ -14,8 +14,11 @@ const sessionConfig = require('./config/session');
 const configurePassport = require('./config/passport');
 const helmetConfig = require('./config/security');
 const swaggerSetup = require('./config/swagger');
+const { logger } = require('./middleware/logger'); // Import logger middleware
 
 const app = express();
+
+app.use(logger); // Use logger middleware early
 
 app.use(helmetConfig);
 

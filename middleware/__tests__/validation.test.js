@@ -2,6 +2,14 @@ const { validateCampground, validateReview } = require('../validation');
 const ExpressError = require('../../utils/ExpressError');
 
 describe('Validation Middleware', () => {
+  beforeAll(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    console.error.mockRestore();
+  });
+
   describe('validateCampground', () => {
     it('should call next() for valid campground data', () => {
       const req = {
