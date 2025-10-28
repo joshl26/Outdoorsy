@@ -107,7 +107,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Implement response caching strategy
 - [ ] Add CDN for static assets (if applicable)
 
-### Logging & Monitoring
+<!-- ### Logging & Monitoring
 
 - [ ] Install Winston or Pino for structured logging
 - [ ] Configure log levels (error, warn, info, debug)
@@ -118,7 +118,7 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 - [ ] Create log rotation strategy
 - [ ] Add health check endpoint (`/health`)
 - [ ] Add readiness check endpoint (`/ready`)
-- [ ] Set up basic application metrics
+- [ ] Set up basic application metrics -->
 
 ### UI/UX & Styling
 

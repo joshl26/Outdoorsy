@@ -1,8 +1,6 @@
 // Controller for managing campground-related operations
 // file: controllers/campgrounds.js
 
-//TODO: Implement proper error handling using our custom error classes
-
 const Campground = require('../models/campground');
 const { cloudinary } = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
@@ -12,18 +10,6 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 const NotFoundError = require('../utils/errors/NotFoundError');
 const AppError = require('../utils/errors/AppError');
-
-/**
- * Display a list of all campgrounds.
- */
-module.exports.index = async (req, res, next) => {
-  try {
-    const campgrounds = await Campground.find({});
-    res.render('campgrounds/index', { campgrounds });
-  } catch (err) {
-    next(err);
-  }
-};
 
 /**
  * Render the form to create a new campground.
@@ -79,8 +65,56 @@ module.exports.createCampground = async (req, res, next) => {
 };
 
 /**
+ * Display a list of all campgrounds.
+ * Optimized with pagination, projections, and sorting.
+ */
+module.exports.index = async (req, res, next) => {
+  try {
+    // Parse pagination params with defaults and limits
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const limit = Math.min(parseInt(req.query.limit, 10) || 20, 100);
+    const skip = (page - 1) * limit;
+
+    const filter = {};
+    const projection = {
+      title: 1,
+      price: 1,
+      location: 1,
+      'images.url': 1,
+      geometry: 1,
+      createdAt: 1,
+      author: 1,
+    };
+    const sort = { createdAt: -1 };
+
+    // Execute query and count in parallel for performance
+    const [campgrounds, total] = await Promise.all([
+      Campground.find(filter, projection)
+        .sort(sort)
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Campground.countDocuments(filter),
+    ]);
+
+    const totalPages = Math.ceil(total / limit);
+
+    res.render('campgrounds/index', {
+      campgrounds,
+      page,
+      totalPages,
+      total,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
  * Show details for a specific campground.
  * - Populate reviews and authors for display.
+ * - Limit populated fields and number of reviews.
+ * - Use lean for performance.
  * - Set SEO-friendly page title and description.
  */
 module.exports.showCampground = async (req, res, next) => {
@@ -88,9 +122,12 @@ module.exports.showCampground = async (req, res, next) => {
     const campground = await Campground.findById(req.params.id)
       .populate({
         path: 'reviews',
-        populate: { path: 'author' },
+        select: 'rating body author createdAt',
+        options: { sort: { createdAt: -1 }, limit: 20 },
+        populate: { path: 'author', select: 'email username' },
       })
-      .populate('author');
+      .populate({ path: 'author', select: 'email username' })
+      .lean();
 
     // If campground not found, throw 404 error
     if (!campground) {
@@ -141,10 +178,12 @@ module.exports.updateCampground = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    // Update campground with new data
-    const campground = await Campground.findByIdAndUpdate(id, {
-      ...req.body.campground,
-    });
+    // Update campground with new data (return the doc for subsequent save)
+    const campground = await Campground.findByIdAndUpdate(
+      id,
+      { ...req.body.campground },
+      { new: true }
+    );
 
     if (!campground) {
       throw new NotFoundError('Campground not found');

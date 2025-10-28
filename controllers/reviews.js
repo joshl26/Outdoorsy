@@ -28,13 +28,14 @@ module.exports.createReview = async (req, res, next) => {
     // Set the author of the review to the logged-in user
     review.author = req.user._id;
 
+    // If you later add review.campground, set it here:
+    // review.campground = campground._id;
+
     // Add review reference to campground's reviews array
     campground.reviews.push(review);
 
-    // Save the review document
+    // Save the review document and updated campground
     await review.save();
-
-    // Save the updated campground document
     await campground.save();
 
     req.flash('success', 'Created new review!');

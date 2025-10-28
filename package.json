@@ -41,7 +41,11 @@
     "docs:generate": "jsdoc2md **/*.js > docs/API.md",
     "docker:build": "docker build -t outdoorsy:latest .",
     "docker:run": "docker run -p 3053:3053 outdoorsy:latest",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "migrate": "node scripts/migrate.js up",
+    "migrate:down": "node scripts/migrate.js down",
+    "migrate:status": "node scripts/migrate.js status",
+    "migrate:create": "node scripts/migrate.js create"
   },
   "keywords": [
     "campground",

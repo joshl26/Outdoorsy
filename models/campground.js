@@ -27,7 +27,7 @@ const opts = { toJSON: { virtuals: true } };
  */
 const CampgroundSchema = new Schema(
   {
-    title: String,
+    title: { type: String, trim: true },
     images: [ImageSchema],
     geometry: {
       type: {
@@ -40,13 +40,14 @@ const CampgroundSchema = new Schema(
         required: true,
       },
     },
-    price: Number,
+    price: { type: Number, index: true },
     description: String,
-    location: String,
+    location: { type: String, trim: true },
     author: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+      index: true,
     },
     reviews: [
       {
@@ -55,8 +56,20 @@ const CampgroundSchema = new Schema(
       },
     ],
   },
-  opts
+  { ...opts, timestamps: true } // add timestamps for createdAt/updatedAt
 );
+
+/**
+ * Indexes for performance
+ */
+CampgroundSchema.index({ geometry: '2dsphere' });
+CampgroundSchema.index({ author: 1, createdAt: -1 });
+CampgroundSchema.index({ price: 1 });
+// Optional indexes for future filters/search. Uncomment as needed.
+// CampgroundSchema.index({ title: 1 });
+// CampgroundSchema.index({ location: 1 });
+// Example if you plan to filter by price range and location frequently:
+// CampgroundSchema.index({ location: 1, price: 1 });
 
 /**
  * Virtual property for popup markup used in map popups.
@@ -64,7 +77,7 @@ const CampgroundSchema = new Schema(
 CampgroundSchema.virtual('properties.popUpMarkup').get(function () {
   return `
     <strong><a href="/outdoorsy/campgrounds/${this._id}">${this.title}</a></strong>
-    <p>${this.description.substring(0, 20)}...</p>`;
+    <p>${this.description ? this.description.substring(0, 20) : ''}...</p>`;
 });
 
 /**

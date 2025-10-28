@@ -1,3 +1,6 @@
+// Mongoose schema and model for user reviews on campgrounds.
+// file: models/review.js
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -29,11 +32,20 @@ const reviewSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+      index: true,
     },
+    // Optional future-proofing: store campground ref to enable direct queries on reviews
+    campground: { type: Schema.Types.ObjectId, ref: 'Campground', index: true },
   },
   {
     timestamps: true, // Automatically add createdAt and updatedAt fields
   }
 );
+
+// Helpful index for "user's recent reviews" lists
+reviewSchema.index({ author: 1, createdAt: -1 });
+
+// If you add campground field above, also consider:
+reviewSchema.index({ campground: 1, createdAt: -1 });
 
 module.exports = mongoose.model('Review', reviewSchema);
