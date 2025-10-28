@@ -15,37 +15,32 @@ const Schema = mongoose.Schema;
  * - createdAt: Date when the review was created.
  * - updatedAt: Date when the review was last updated.
  */
-const reviewSchema = new Schema(
+const ReviewSchema = new Schema(
   {
-    body: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    rating: {
-      type: Number,
-      required: true,
-      min: 1,
-      max: 5,
-    },
-    author: {
+    rating: { type: Number, min: 1, max: 5, required: true },
+    body: { type: String, required: true },
+    author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    campground: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Campground',
       required: true,
-      index: true,
     },
-    // Optional future-proofing: store campground ref to enable direct queries on reviews
-    campground: { type: Schema.Types.ObjectId, ref: 'Campground', index: true },
   },
-  {
-    timestamps: true, // Automatically add createdAt and updatedAt fields
-  }
+  { timestamps: true }
 );
 
-// Helpful index for "user's recent reviews" lists
-reviewSchema.index({ author: 1, createdAt: -1 });
+// Keep only compound indexes you actually query by
+ReviewSchema.index(
+  { campground: 1, createdAt: -1 },
+  { name: 'campground_1_createdAt_-1' }
+);
+ReviewSchema.index(
+  { author: 1, createdAt: -1 },
+  { name: 'author_1_createdAt_-1' }
+);
 
-// If you add campground field above, also consider:
-reviewSchema.index({ campground: 1, createdAt: -1 });
+// Remove if present:
+// ReviewSchema.index({ campground: 1 });
+// ReviewSchema.index({ author: 1 });
 
-module.exports = mongoose.model('Review', reviewSchema);
+module.exports = mongoose.model('Review', ReviewSchema);

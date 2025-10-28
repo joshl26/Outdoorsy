@@ -1,0 +1,159 @@
+<!-- views/campgrounds/favorites.ejs -->
+<link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-index.css" />
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h1 class="text-primary m-0">
+    <i class="fas fa-heart me-2"></i>My Favorites
+  </h1>
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">
+      <i class="fas fa-compass me-1"></i> Explore More
+    </a>
+    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/nearby">
+      <i class="fas fa-location-arrow me-1"></i> Nearby
+    </a>
+  </div>
+</div>
+
+<div class="text-muted mb-3">
+  <%= total %> favorite<%= total === 1 ? '' : 's' %>
+</div>
+
+<% if (!campgrounds || campgrounds.length === 0) { %>
+  <div class="card shadow-sm">
+    <div class="card-body text-center py-5">
+      <i class="fas fa-heart text-muted mb-3" style="font-size: 4rem; opacity: 0.3;"></i>
+      <h4 class="text-muted mb-3">No favorites yet</h4>
+      <p class="text-muted mb-4">
+        Browse campgrounds and click the <i class="fas fa-heart text-danger"></i> button to save your favorites here.
+      </p>
+      <a class="btn btn-primary" href="/outdoorsy/campgrounds">
+        <i class="fas fa-compass me-1"></i> Explore Campgrounds
+      </a>
+    </div>
+  </div>
+<% } else { %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% campgrounds.forEach(cg => { %>
+      <div class="col">
+        <div class="card h-100 shadow-sm campground-card" data-id="<%= cg._id %>">
+          <% const cover = (cg.images && cg.images.length) ? cg.images[0].url : 'https://placehold.co/600x400?text=No+Image'; %>
+          <img src="<%= cover %>" class="card-img-top" alt="<%= cg.title %> cover" style="height: 200px; object-fit: cover;">
+          
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">
+              <a class="text-decoration-none" href="/outdoorsy/campgrounds/<%= cg._id %>">
+                <%= cg.title %>
+              </a>
+            </h5>
+            
+            <p class="card-text text-muted mb-2">
+              <i class="fas fa-map-marker-alt me-1"></i>
+              <%= cg.location %>
+            </p>
+            
+            <div class="fw-bold mb-3">
+              $<%= cg.price %> / night
+            </div>
+            
+            <div class="mt-auto d-flex gap-2">
+              <a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/<%= cg._id %>">
+                <i class="fas fa-eye me-1"></i> View
+              </a>
+              <% if (currentUser) { %>
+                <button 
+                  class="btn btn-sm btn-danger remove-fav-btn" 
+                  data-id="<%= cg._id %>"
+                  title="Remove from favorites">
+                  <i class="fas fa-heart-broken"></i>
+                </button>
+              <% } %>
+            </div>
+          </div>
+          
+          <% if (cg.createdAt) { %>
+            <div class="card-footer text-muted small">
+              <i class="far fa-clock me-1"></i>
+              Added <%= new Date(cg.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<script>
+  // Remove from favorites (AJAX)
+  document.querySelectorAll('.remove-fav-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const id = btn.getAttribute('data-id');
+      const card = document.querySelector(`.campground-card[data-id="${id}"]`);
+      
+      if (!confirm('Remove this campground from your favorites?')) {
+        return;
+      }
+
+      try {
+        const res = await fetch(`/outdoorsy/campgrounds/${id}/favorite`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin'
+        });
+        
+        if (res.status === 401) {
+          window.location = '/outdoorsy/login';
+          return;
+        }
+        
+        const data = await res.json();
+        
+        if (data.status === 'removed') {
+          // Fade out and remove the card
+          card.style.transition = 'opacity 0.3s ease';
+          card.style.opacity = '0';
+          
+          setTimeout(() => {
+            const col = card.closest('.col');
+            col.remove();
+            
+            // Update count
+            const remaining = document.querySelectorAll('.campground-card').length;
+            const countEl = document.querySelector('.text-muted.mb-3');
+            if (countEl) {
+              countEl.textContent = `${remaining} favorite${remaining === 1 ? '' : 's'}`;
+            }
+            
+            // Show empty state if no favorites left
+            if (remaining === 0) {
+              location.reload();
+            }
+          }, 300);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Could not remove favorite. Please try again.');
+      }
+    });
+  });
+</script>
+
+<style>
+  .campground-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .campground-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  .remove-fav-btn {
+    transition: all 0.2s ease;
+  }
+  
+  .remove-fav-btn:hover {
+    transform: scale(1.1);
+  }
+</style>

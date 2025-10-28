@@ -1,68 +1,64 @@
-
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Code coverage report for Outdoorsy/controllers/campgrounds.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
     <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style type='text/css'>
-        .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
-        }
+    <style type="text/css">
+      .coverage-summary .sorter {
+        background-image: url(../../sort-arrow-sprite.png);
+      }
     </style>
-</head>
-    
-<body>
-<div class='wrapper'>
-    <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">Outdoorsy/controllers</a> campgrounds.js</h1>
-        <div class='clearfix'>
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
-                <span class="quiet">Statements</span>
-                <span class='fraction'>80/80</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">94.44% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>17/18</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>9/9</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
-                <span class="quiet">Lines</span>
-                <span class='fraction'>78/78</span>
-            </div>
-        
-            
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="pad1">
+        <h1>
+          <a href="../../index.html">All files</a> /
+          <a href="index.html">Outdoorsy/controllers</a> campgrounds.js
+        </h1>
+        <div class="clearfix">
+          <div class="fl pad1y space-right2">
+            <span class="strong">34.97% </span>
+            <span class="quiet">Statements</span>
+            <span class="fraction">85/243</span>
+          </div>
+
+          <div class="fl pad1y space-right2">
+            <span class="strong">32.96% </span>
+            <span class="quiet">Branches</span>
+            <span class="fraction">60/182</span>
+          </div>
+
+          <div class="fl pad1y space-right2">
+            <span class="strong">26.31% </span>
+            <span class="quiet">Functions</span>
+            <span class="fraction">5/19</span>
+          </div>
+
+          <div class="fl pad1y space-right2">
+            <span class="strong">35.52% </span>
+            <span class="quiet">Lines</span>
+            <span class="fraction">81/228</span>
+          </div>
         </div>
         <p class="quiet">
-            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+          Press <em>n</em> or <em>j</em> to go to the next uncovered block,
+          <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
         <template id="filterTemplate">
-            <div class="quiet">
-                Filter:
-                <input type="search" id="fileSearch">
-            </div>
+          <div class="quiet">
+            Filter:
+            <input type="search" id="fileSearch" />
+          </div>
         </template>
-    </div>
-    <div class='status-line high'></div>
-    <pre><table class="coverage">
+      </div>
+      <div class="status-line low"></div>
+      <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
 <a name='L3'></a><a href='#L3'>3</a>
@@ -295,7 +291,386 @@
 <a name='L230'></a><a href='#L230'>230</a>
 <a name='L231'></a><a href='#L231'>231</a>
 <a name='L232'></a><a href='#L232'>232</a>
-<a name='L233'></a><a href='#L233'>233</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L233'></a><a href='#L233'>233</a>
+<a name='L234'></a><a href='#L234'>234</a>
+<a name='L235'></a><a href='#L235'>235</a>
+<a name='L236'></a><a href='#L236'>236</a>
+<a name='L237'></a><a href='#L237'>237</a>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a>
+<a name='L240'></a><a href='#L240'>240</a>
+<a name='L241'></a><a href='#L241'>241</a>
+<a name='L242'></a><a href='#L242'>242</a>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a>
+<a name='L306'></a><a href='#L306'>306</a>
+<a name='L307'></a><a href='#L307'>307</a>
+<a name='L308'></a><a href='#L308'>308</a>
+<a name='L309'></a><a href='#L309'>309</a>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a>
+<a name='L324'></a><a href='#L324'>324</a>
+<a name='L325'></a><a href='#L325'>325</a>
+<a name='L326'></a><a href='#L326'>326</a>
+<a name='L327'></a><a href='#L327'>327</a>
+<a name='L328'></a><a href='#L328'>328</a>
+<a name='L329'></a><a href='#L329'>329</a>
+<a name='L330'></a><a href='#L330'>330</a>
+<a name='L331'></a><a href='#L331'>331</a>
+<a name='L332'></a><a href='#L332'>332</a>
+<a name='L333'></a><a href='#L333'>333</a>
+<a name='L334'></a><a href='#L334'>334</a>
+<a name='L335'></a><a href='#L335'>335</a>
+<a name='L336'></a><a href='#L336'>336</a>
+<a name='L337'></a><a href='#L337'>337</a>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a>
+<a name='L340'></a><a href='#L340'>340</a>
+<a name='L341'></a><a href='#L341'>341</a>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a>
+<a name='L344'></a><a href='#L344'>344</a>
+<a name='L345'></a><a href='#L345'>345</a>
+<a name='L346'></a><a href='#L346'>346</a>
+<a name='L347'></a><a href='#L347'>347</a>
+<a name='L348'></a><a href='#L348'>348</a>
+<a name='L349'></a><a href='#L349'>349</a>
+<a name='L350'></a><a href='#L350'>350</a>
+<a name='L351'></a><a href='#L351'>351</a>
+<a name='L352'></a><a href='#L352'>352</a>
+<a name='L353'></a><a href='#L353'>353</a>
+<a name='L354'></a><a href='#L354'>354</a>
+<a name='L355'></a><a href='#L355'>355</a>
+<a name='L356'></a><a href='#L356'>356</a>
+<a name='L357'></a><a href='#L357'>357</a>
+<a name='L358'></a><a href='#L358'>358</a>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a>
+<a name='L396'></a><a href='#L396'>396</a>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a>
+<a name='L408'></a><a href='#L408'>408</a>
+<a name='L409'></a><a href='#L409'>409</a>
+<a name='L410'></a><a href='#L410'>410</a>
+<a name='L411'></a><a href='#L411'>411</a>
+<a name='L412'></a><a href='#L412'>412</a>
+<a name='L413'></a><a href='#L413'>413</a>
+<a name='L414'></a><a href='#L414'>414</a>
+<a name='L415'></a><a href='#L415'>415</a>
+<a name='L416'></a><a href='#L416'>416</a>
+<a name='L417'></a><a href='#L417'>417</a>
+<a name='L418'></a><a href='#L418'>418</a>
+<a name='L419'></a><a href='#L419'>419</a>
+<a name='L420'></a><a href='#L420'>420</a>
+<a name='L421'></a><a href='#L421'>421</a>
+<a name='L422'></a><a href='#L422'>422</a>
+<a name='L423'></a><a href='#L423'>423</a>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a>
+<a name='L427'></a><a href='#L427'>427</a>
+<a name='L428'></a><a href='#L428'>428</a>
+<a name='L429'></a><a href='#L429'>429</a>
+<a name='L430'></a><a href='#L430'>430</a>
+<a name='L431'></a><a href='#L431'>431</a>
+<a name='L432'></a><a href='#L432'>432</a>
+<a name='L433'></a><a href='#L433'>433</a>
+<a name='L434'></a><a href='#L434'>434</a>
+<a name='L435'></a><a href='#L435'>435</a>
+<a name='L436'></a><a href='#L436'>436</a>
+<a name='L437'></a><a href='#L437'>437</a>
+<a name='L438'></a><a href='#L438'>438</a>
+<a name='L439'></a><a href='#L439'>439</a>
+<a name='L440'></a><a href='#L440'>440</a>
+<a name='L441'></a><a href='#L441'>441</a>
+<a name='L442'></a><a href='#L442'>442</a>
+<a name='L443'></a><a href='#L443'>443</a>
+<a name='L444'></a><a href='#L444'>444</a>
+<a name='L445'></a><a href='#L445'>445</a>
+<a name='L446'></a><a href='#L446'>446</a>
+<a name='L447'></a><a href='#L447'>447</a>
+<a name='L448'></a><a href='#L448'>448</a>
+<a name='L449'></a><a href='#L449'>449</a>
+<a name='L450'></a><a href='#L450'>450</a>
+<a name='L451'></a><a href='#L451'>451</a>
+<a name='L452'></a><a href='#L452'>452</a>
+<a name='L453'></a><a href='#L453'>453</a>
+<a name='L454'></a><a href='#L454'>454</a>
+<a name='L455'></a><a href='#L455'>455</a>
+<a name='L456'></a><a href='#L456'>456</a>
+<a name='L457'></a><a href='#L457'>457</a>
+<a name='L458'></a><a href='#L458'>458</a>
+<a name='L459'></a><a href='#L459'>459</a>
+<a name='L460'></a><a href='#L460'>460</a>
+<a name='L461'></a><a href='#L461'>461</a>
+<a name='L462'></a><a href='#L462'>462</a>
+<a name='L463'></a><a href='#L463'>463</a>
+<a name='L464'></a><a href='#L464'>464</a>
+<a name='L465'></a><a href='#L465'>465</a>
+<a name='L466'></a><a href='#L466'>466</a>
+<a name='L467'></a><a href='#L467'>467</a>
+<a name='L468'></a><a href='#L468'>468</a>
+<a name='L469'></a><a href='#L469'>469</a>
+<a name='L470'></a><a href='#L470'>470</a>
+<a name='L471'></a><a href='#L471'>471</a>
+<a name='L472'></a><a href='#L472'>472</a>
+<a name='L473'></a><a href='#L473'>473</a>
+<a name='L474'></a><a href='#L474'>474</a>
+<a name='L475'></a><a href='#L475'>475</a>
+<a name='L476'></a><a href='#L476'>476</a>
+<a name='L477'></a><a href='#L477'>477</a>
+<a name='L478'></a><a href='#L478'>478</a>
+<a name='L479'></a><a href='#L479'>479</a>
+<a name='L480'></a><a href='#L480'>480</a>
+<a name='L481'></a><a href='#L481'>481</a>
+<a name='L482'></a><a href='#L482'>482</a>
+<a name='L483'></a><a href='#L483'>483</a>
+<a name='L484'></a><a href='#L484'>484</a>
+<a name='L485'></a><a href='#L485'>485</a>
+<a name='L486'></a><a href='#L486'>486</a>
+<a name='L487'></a><a href='#L487'>487</a>
+<a name='L488'></a><a href='#L488'>488</a>
+<a name='L489'></a><a href='#L489'>489</a>
+<a name='L490'></a><a href='#L490'>490</a>
+<a name='L491'></a><a href='#L491'>491</a>
+<a name='L492'></a><a href='#L492'>492</a>
+<a name='L493'></a><a href='#L493'>493</a>
+<a name='L494'></a><a href='#L494'>494</a>
+<a name='L495'></a><a href='#L495'>495</a>
+<a name='L496'></a><a href='#L496'>496</a>
+<a name='L497'></a><a href='#L497'>497</a>
+<a name='L498'></a><a href='#L498'>498</a>
+<a name='L499'></a><a href='#L499'>499</a>
+<a name='L500'></a><a href='#L500'>500</a>
+<a name='L501'></a><a href='#L501'>501</a>
+<a name='L502'></a><a href='#L502'>502</a>
+<a name='L503'></a><a href='#L503'>503</a>
+<a name='L504'></a><a href='#L504'>504</a>
+<a name='L505'></a><a href='#L505'>505</a>
+<a name='L506'></a><a href='#L506'>506</a>
+<a name='L507'></a><a href='#L507'>507</a>
+<a name='L508'></a><a href='#L508'>508</a>
+<a name='L509'></a><a href='#L509'>509</a>
+<a name='L510'></a><a href='#L510'>510</a>
+<a name='L511'></a><a href='#L511'>511</a>
+<a name='L512'></a><a href='#L512'>512</a>
+<a name='L513'></a><a href='#L513'>513</a>
+<a name='L514'></a><a href='#L514'>514</a>
+<a name='L515'></a><a href='#L515'>515</a>
+<a name='L516'></a><a href='#L516'>516</a>
+<a name='L517'></a><a href='#L517'>517</a>
+<a name='L518'></a><a href='#L518'>518</a>
+<a name='L519'></a><a href='#L519'>519</a>
+<a name='L520'></a><a href='#L520'>520</a>
+<a name='L521'></a><a href='#L521'>521</a>
+<a name='L522'></a><a href='#L522'>522</a>
+<a name='L523'></a><a href='#L523'>523</a>
+<a name='L524'></a><a href='#L524'>524</a>
+<a name='L525'></a><a href='#L525'>525</a>
+<a name='L526'></a><a href='#L526'>526</a>
+<a name='L527'></a><a href='#L527'>527</a>
+<a name='L528'></a><a href='#L528'>528</a>
+<a name='L529'></a><a href='#L529'>529</a>
+<a name='L530'></a><a href='#L530'>530</a>
+<a name='L531'></a><a href='#L531'>531</a>
+<a name='L532'></a><a href='#L532'>532</a>
+<a name='L533'></a><a href='#L533'>533</a>
+<a name='L534'></a><a href='#L534'>534</a>
+<a name='L535'></a><a href='#L535'>535</a>
+<a name='L536'></a><a href='#L536'>536</a>
+<a name='L537'></a><a href='#L537'>537</a>
+<a name='L538'></a><a href='#L538'>538</a>
+<a name='L539'></a><a href='#L539'>539</a>
+<a name='L540'></a><a href='#L540'>540</a>
+<a name='L541'></a><a href='#L541'>541</a>
+<a name='L542'></a><a href='#L542'>542</a>
+<a name='L543'></a><a href='#L543'>543</a>
+<a name='L544'></a><a href='#L544'>544</a>
+<a name='L545'></a><a href='#L545'>545</a>
+<a name='L546'></a><a href='#L546'>546</a>
+<a name='L547'></a><a href='#L547'>547</a>
+<a name='L548'></a><a href='#L548'>548</a>
+<a name='L549'></a><a href='#L549'>549</a>
+<a name='L550'></a><a href='#L550'>550</a>
+<a name='L551'></a><a href='#L551'>551</a>
+<a name='L552'></a><a href='#L552'>552</a>
+<a name='L553'></a><a href='#L553'>553</a>
+<a name='L554'></a><a href='#L554'>554</a>
+<a name='L555'></a><a href='#L555'>555</a>
+<a name='L556'></a><a href='#L556'>556</a>
+<a name='L557'></a><a href='#L557'>557</a>
+<a name='L558'></a><a href='#L558'>558</a>
+<a name='L559'></a><a href='#L559'>559</a>
+<a name='L560'></a><a href='#L560'>560</a>
+<a name='L561'></a><a href='#L561'>561</a>
+<a name='L562'></a><a href='#L562'>562</a>
+<a name='L563'></a><a href='#L563'>563</a>
+<a name='L564'></a><a href='#L564'>564</a>
+<a name='L565'></a><a href='#L565'>565</a>
+<a name='L566'></a><a href='#L566'>566</a>
+<a name='L567'></a><a href='#L567'>567</a>
+<a name='L568'></a><a href='#L568'>568</a>
+<a name='L569'></a><a href='#L569'>569</a>
+<a name='L570'></a><a href='#L570'>570</a>
+<a name='L571'></a><a href='#L571'>571</a>
+<a name='L572'></a><a href='#L572'>572</a>
+<a name='L573'></a><a href='#L573'>573</a>
+<a name='L574'></a><a href='#L574'>574</a>
+<a name='L575'></a><a href='#L575'>575</a>
+<a name='L576'></a><a href='#L576'>576</a>
+<a name='L577'></a><a href='#L577'>577</a>
+<a name='L578'></a><a href='#L578'>578</a>
+<a name='L579'></a><a href='#L579'>579</a>
+<a name='L580'></a><a href='#L580'>580</a>
+<a name='L581'></a><a href='#L581'>581</a>
+<a name='L582'></a><a href='#L582'>582</a>
+<a name='L583'></a><a href='#L583'>583</a>
+<a name='L584'></a><a href='#L584'>584</a>
+<a name='L585'></a><a href='#L585'>585</a>
+<a name='L586'></a><a href='#L586'>586</a>
+<a name='L587'></a><a href='#L587'>587</a>
+<a name='L588'></a><a href='#L588'>588</a>
+<a name='L589'></a><a href='#L589'>589</a>
+<a name='L590'></a><a href='#L590'>590</a>
+<a name='L591'></a><a href='#L591'>591</a>
+<a name='L592'></a><a href='#L592'>592</a>
+<a name='L593'></a><a href='#L593'>593</a>
+<a name='L594'></a><a href='#L594'>594</a>
+<a name='L595'></a><a href='#L595'>595</a>
+<a name='L596'></a><a href='#L596'>596</a>
+<a name='L597'></a><a href='#L597'>597</a>
+<a name='L598'></a><a href='#L598'>598</a>
+<a name='L599'></a><a href='#L599'>599</a>
+<a name='L600'></a><a href='#L600'>600</a>
+<a name='L601'></a><a href='#L601'>601</a>
+<a name='L602'></a><a href='#L602'>602</a>
+<a name='L603'></a><a href='#L603'>603</a>
+<a name='L604'></a><a href='#L604'>604</a>
+<a name='L605'></a><a href='#L605'>605</a>
+<a name='L606'></a><a href='#L606'>606</a>
+<a name='L607'></a><a href='#L607'>607</a>
+<a name='L608'></a><a href='#L608'>608</a>
+<a name='L609'></a><a href='#L609'>609</a>
+<a name='L610'></a><a href='#L610'>610</a>
+<a name='L611'></a><a href='#L611'>611</a>
+<a name='L612'></a><a href='#L612'>612</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -304,24 +679,18 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -331,49 +700,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -383,27 +711,45 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -416,6 +762,61 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -428,52 +829,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -482,29 +837,268 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -513,38 +1107,212 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Controller for managing campground-related operations
 // file: controllers/campgrounds.js
 &nbsp;
 const Campground = require('../models/campground');
+const Review = require('../models/review');
+const User = require('../models/user');
 const { cloudinary } = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const { basePath } = require('../config/basePath');
-const mapBoxToken = process.env.MAPBOX_TOKEN;
+const mapBoxToken = process.env.MAPBOX_MAPBOX_TOKEN || process.env.MAPBOX_TOKEN; // tolerate either var
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 &nbsp;
 const NotFoundError = require('../utils/errors/NotFoundError');
 const AppError = require('../utils/errors/AppError');
 &nbsp;
+// Optional caching (enabled if utils/cache exists and OUTDOORSY_CACHE !== '0')
+let cacheGetOrSet = null;
+const enableCache = process.env.OUTDOORSY_CACHE !== '0';
+<span class="missing-if-branch" title="else path not taken" >E</span>if (enableCache) {
+  try {
+    // provide ../utils/cache.js with getOrSet(key, ttlSeconds, fetchFn)
+    cacheGetOrSet = require('../utils/cache').getOrSet;
+  } catch {
+    cacheGetOrSet = null;
+  }
+}
+&nbsp;
 /**
  * Render the form to create a new campground.
  */
-module.exports.renderNewForm = (req, res) =&gt; {
-  res.render('campgrounds/new');
+module.exports.renderNewForm = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >  res.render('campgrounds/new');</span>
 };
 &nbsp;
 /**
@@ -553,229 +1321,600 @@ module.exports.renderNewForm = (req, res) =&gt; {
  * - Validate geocoding results.
  * - Save campground with images and author info.
  */
-module.exports.createCampground = async (req, res, next) =&gt; {
-  try {
-    // Geocode the location string to get geographic coordinates
-    const geoData = await geocoder
-      .forwardGeocode({
-        query: req.body.campground.location,
-        limit: 1,
-      })
-      .send();
-&nbsp;
-    // If no geocoding results, throw a validation error
-    if (!geoData.body.features.length) {
-      throw new AppError('Invalid location provided', 400);
+module.exports.createCampground = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (!mapBoxToken) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new AppError(</span>
+        'Geocoding is not configured. Missing MAPBOX_TOKEN.',
+        500
+      );
     }
 &nbsp;
-    // Create new campground document with form data
-    const campground = new Campground(req.body.campground);
+    const location = <span class="cstat-no" title="statement not covered" >req.body?.campground?.location || '';</span>
 &nbsp;
-    // Assign geometry coordinates from geocoding result
-    campground.geometry = geoData.body.features[0].geometry;
+    const geocodeFetch = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      return await geocoder</span>
+        .forwardGeocode({ query: location, limit: 1 })
+        .send();
+    };
+    const geoData = <span class="cstat-no" title="statement not covered" >cacheGetOrSet</span>
+      ? await cacheGetOrSet(`geo:${location}`, 86400, geocodeFetch)
+      : await geocodeFetch();
 &nbsp;
-    // Map uploaded files to image objects with url and filename
-    campground.images = req.files.map((f) =&gt; ({
+<span class="cstat-no" title="statement not covered" >    if (!geoData?.body?.features?.length) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new AppError('Invalid location provided', 400);</span>
+    }
+&nbsp;
+    const campground = <span class="cstat-no" title="statement not covered" >new Campground(req.body.campground);</span>
+<span class="cstat-no" title="statement not covered" >    campground.geometry = geoData.body.features[0].geometry;</span>
+<span class="cstat-no" title="statement not covered" >    campground.images = (req.files || []).map(<span class="fstat-no" title="function not covered" >(f</span>) =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
       url: f.path,
       filename: f.filename,
     }));
+<span class="cstat-no" title="statement not covered" >    campground.author = req.user._id;</span>
 &nbsp;
-    // Set the author to the currently logged-in user
-    campground.author = req.user._id;
+<span class="cstat-no" title="statement not covered" >    await campground.save();</span>
 &nbsp;
-    // Save campground to database
-    await campground.save();
-&nbsp;
-    req.flash('success', 'Successfully created a new campground!');
-    res.redirect(`${basePath}/campgrounds/${campground._id}`);
+<span class="cstat-no" title="statement not covered" >    req.flash('success', 'Successfully created a new campground!');</span>
+<span class="cstat-no" title="statement not covered" >    res.redirect(`${basePath}/campgrounds/${campground._id}`);</span>
   } catch (err) {
-    next(err);
+<span class="cstat-no" title="statement not covered" >    next(err);</span>
   }
 };
 &nbsp;
 /**
- * Display a list of all campgrounds.
- * Optimized with pagination, projections, and sorting.
+ * Display campgrounds with filters and pagination.
+ * Filters:
+ * - q: text search across title, description, location (regex-based)
+ * - minPrice, maxPrice: numeric range
+ * - lat, lng, radiusKm: geo radius in kilometers (requires 2dsphere index)
+ * Pagination:
+ * - page, limit
  */
 module.exports.index = async (req, res, next) =&gt; {
   try {
-    // Parse pagination params with defaults and limits
-    const page = Math.max(parseInt(req.query.page, 10) || <span class="branch-1 cbranch-no" title="branch not covered" >1,</span> 1);
+    // Pagination
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
     const limit = Math.min(parseInt(req.query.limit, 10) || 20, 100);
     const skip = (page - 1) * limit;
 &nbsp;
+    // Filters
     const filter = {};
+&nbsp;
+    // Helpers for robust parsing
+    const isFiniteNum = (v) =&gt; typeof v === 'number' &amp;&amp; Number.isFinite(v);
+    const parseNum = (val) =&gt; {
+      if (val === undefined || val === null) return undefined;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof val === 'string' &amp;&amp; val.trim() === '') <span class="cstat-no" title="statement not covered" >return undefined;</span>
+      const n = Number(val);
+      return Number.isFinite(n) ? n : <span class="branch-1 cbranch-no" title="branch not covered" >undefined;</span>
+    };
+&nbsp;
+    // Text search (regex OR). For large scale, consider MongoDB text index.
+    const q = (req.query.q || '').trim();
+    if (q) {
+      const safe = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;');
+      const regex = new RegExp(safe, 'i');
+      filter.$or = [
+        { title: regex },
+        { description: regex },
+        { location: regex },
+      ];
+    }
+&nbsp;
+    // Price range
+    const minPrice = parseNum(req.query.minPrice);
+    const maxPrice = parseNum(req.query.maxPrice);
+    if (isFiniteNum(minPrice) || isFiniteNum(maxPrice)) {
+      filter.price = {};
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (isFiniteNum(minPrice)) filter.price.$gte = minPrice;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (isFiniteNum(maxPrice)) filter.price.$lte = maxPrice;
+    }
+&nbsp;
+    // Geo radius (Point [lng, lat])
+    const lat = parseNum(req.query.lat);
+    const lng = parseNum(req.query.lng);
+    const radiusKm = parseNum(req.query.radiusKm);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (
+      isFiniteNum(lat) &amp;&amp;
+<span class="branch-1 cbranch-no" title="branch not covered" >      isFiniteNum(lng) </span>&amp;&amp;
+<span class="branch-2 cbranch-no" title="branch not covered" >      isFiniteNum(radiusKm) </span>&amp;&amp;
+<span class="branch-3 cbranch-no" title="branch not covered" >      radiusKm &gt; 0</span>
+    ) {
+      const earthRadiusKm = <span class="cstat-no" title="statement not covered" >6378.1;</span>
+      const radiusRadians = <span class="cstat-no" title="statement not covered" >Math.min(radiusKm, 500) / earthRadiusKm;</span> // cap to 500km
+<span class="cstat-no" title="statement not covered" >      filter.geometry = {</span>
+        $geoWithin: { $centerSphere: [[lng, lat], radiusRadians] },
+      };
+    }
+&nbsp;
     const projection = {
       title: 1,
       price: 1,
       location: 1,
       'images.url': 1,
+      'images.filename': 1,
       geometry: 1,
       createdAt: 1,
       author: 1,
+      description: 1,
     };
     const sort = { createdAt: -1 };
 &nbsp;
-    // Execute query and count in parallel for performance
-    const [campgrounds, total] = await Promise.all([
-      Campground.find(filter, projection)
-        .sort(sort)
-        .skip(skip)
-        .limit(limit)
-        .lean(),
-      Campground.countDocuments(filter),
-    ]);
+    // Optional caching
+    const keyParts = [
+      `p${page}`,
+      `l${limit}`,
+      q ? `q:${q}` : '',
+      Number.isFinite(minPrice) ? `min:${minPrice}` : '',
+      Number.isFinite(maxPrice) ? `max:${maxPrice}` : '',
+      Number.isFinite(lat) &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >Number.isFinite(lng) </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >Number.isFinite(radiusKm)</span>
+        ? <span class="branch-0 cbranch-no" title="branch not covered" >`geo:${lat},${lng},${radiusKm}`</span>
+        : '',
+    ].filter(Boolean);
+    const cacheKey = `cg:index:v3:${keyParts.join(':')}`;
 &nbsp;
-    const totalPages = Math.ceil(total / limit);
+    const fetchIndex = async () =&gt; {
+      const [campgrounds, total] = await Promise.all([
+        Campground.find(filter, projection)
+          .sort(sort)
+          .skip(skip)
+          .limit(limit)
+          .lean(),
+        Campground.countDocuments(filter),
+      ]);
+      return { campgrounds, total };
+    };
+&nbsp;
+    const data = cacheGetOrSet
+      ? <span class="branch-0 cbranch-no" title="branch not covered" >await cacheGetOrSet(cacheKey, 60, fetchIndex)</span>
+      : await fetchIndex();
+    const totalPages = Math.ceil(data.total / limit);
+&nbsp;
+    // Favorites for current user to pre-highlight hearts
+    let favorites = [];
+    if (req.user) {
+      if (Array.isArray(req.user.favorites)) {
+        favorites = req.user.favorites.map(String);
+      } else <span class="missing-if-branch" title="else path not taken" >E</span>{
+        const userDoc = <span class="cstat-no" title="statement not covered" >await User.findById(req.user._id)</span>
+          .select('favorites')
+          .lean();
+<span class="cstat-no" title="statement not covered" >        favorites = (userDoc?.favorites || []).map(String);</span>
+      }
+    }
 &nbsp;
     res.render('campgrounds/index', {
+      campgrounds: data.campgrounds,
+      page,
+      totalPages,
+      total: data.total,
+      // Echo filters for form/UI (undefined -&gt; '')
+      q,
+      minPrice: minPrice ?? '',
+      maxPrice: maxPrice ?? '',
+      lat: lat ?? '',
+      lng: lng ?? '',
+      radiusKm: radiusKm ?? '',
+      favorites,
+    });
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    next(err);</span>
+  }
+};
+&nbsp;
+/**
+ * Nearby: closest-first using $geoNear (separate page from index).
+ * Requires: lat, lng, radiusKm
+ * Optional: q, minPrice, maxPrice, sort
+ * Pagination: page, limit
+ */
+module.exports.nearby = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    // Helpers
+    const isFiniteNum = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >typeof v === 'number' &amp;&amp; Number.isFinite(v);</span></span>
+    const parseNum = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(v</span>al) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (val === undefined || val === null) <span class="cstat-no" title="statement not covered" >return undefined;</span></span>
+<span class="cstat-no" title="statement not covered" >      if (typeof val === 'string' &amp;&amp; val.trim() === '') <span class="cstat-no" title="statement not covered" >return undefined;</span></span>
+      const n = <span class="cstat-no" title="statement not covered" >Number(val);</span>
+<span class="cstat-no" title="statement not covered" >      return Number.isFinite(n) ? n : undefined;</span>
+    };
+&nbsp;
+    // Required geo inputs
+    const lat = <span class="cstat-no" title="statement not covered" >parseNum(req.query.lat);</span>
+    const lng = <span class="cstat-no" title="statement not covered" >parseNum(req.query.lng);</span>
+    const radiusKm = <span class="cstat-no" title="statement not covered" >parseNum(req.query.radiusKm);</span>
+&nbsp;
+    // If no valid geo params provided, render empty state (initial page load)
+<span class="cstat-no" title="statement not covered" >    if (lat === undefined &amp;&amp; lng === undefined &amp;&amp; radiusKm === undefined) {</span>
+      // favorites for logged-in users (empty grid still needs heart state if we show examples later)
+      let favorites = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >      if (req.user?.favorites) {</span>
+<span class="cstat-no" title="statement not covered" >        favorites = req.user.favorites.map(String);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return res.render('campgrounds/nearby', {</span>
+        campgrounds: [],
+        page: 1,
+        totalPages: 0,
+        total: 0,
+        q: '',
+        minPrice: '',
+        maxPrice: '',
+        lat: '',
+        lng: '',
+        radiusKm: 25, // default radius
+        sort: 'distance', // default sort
+        favorites,
+      });
+    }
+&nbsp;
+    // If params provided but invalid, throw error
+<span class="cstat-no" title="statement not covered" >    if (</span>
+      !isFiniteNum(lat) ||
+      !isFiniteNum(lng) ||
+      !isFiniteNum(radiusKm) ||
+      radiusKm &lt;= 0
+    ) {
+      const err = <span class="cstat-no" title="statement not covered" >new Error(</span>
+        'lat, lng, and radiusKm are required for Nearby search'
+      );
+<span class="cstat-no" title="statement not covered" >      err.status = 400;</span>
+<span class="cstat-no" title="statement not covered" >      throw err;</span>
+    }
+&nbsp;
+    // Pagination
+    const page = <span class="cstat-no" title="statement not covered" >Math.max(parseInt(req.query.page, 10) || 1, 1);</span>
+    const limit = <span class="cstat-no" title="statement not covered" >Math.min(parseInt(req.query.limit, 10) || 20, 100);</span>
+    const skip = <span class="cstat-no" title="statement not covered" >(page - 1) * limit;</span>
+&nbsp;
+    // Optional filters
+    const q = <span class="cstat-no" title="statement not covered" >(req.query.q || '').trim();</span>
+    const minPrice = <span class="cstat-no" title="statement not covered" >parseNum(req.query.minPrice);</span>
+    const maxPrice = <span class="cstat-no" title="statement not covered" >parseNum(req.query.maxPrice);</span>
+    const sort = <span class="cstat-no" title="statement not covered" >req.query.sort || 'distance';</span>
+&nbsp;
+    const nonGeoMatch = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >    if (q) {</span>
+      const safe = <span class="cstat-no" title="statement not covered" >q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&amp;');</span>
+      const regex = <span class="cstat-no" title="statement not covered" >new RegExp(safe, 'i');</span>
+<span class="cstat-no" title="statement not covered" >      nonGeoMatch.$or = [</span>
+        { title: regex },
+        { description: regex },
+        { location: regex },
+      ];
+    }
+<span class="cstat-no" title="statement not covered" >    if (isFiniteNum(minPrice) || isFiniteNum(maxPrice)) {</span>
+<span class="cstat-no" title="statement not covered" >      nonGeoMatch.price = {};</span>
+<span class="cstat-no" title="statement not covered" >      if (isFiniteNum(minPrice)) <span class="cstat-no" title="statement not covered" >nonGeoMatch.price.$gte = minPrice;</span></span>
+<span class="cstat-no" title="statement not covered" >      if (isFiniteNum(maxPrice)) <span class="cstat-no" title="statement not covered" >nonGeoMatch.price.$lte = maxPrice;</span></span>
+    }
+&nbsp;
+    // Geo stage
+    const radiusMeters = <span class="cstat-no" title="statement not covered" >Math.min(radiusKm, 500) * 1000;</span>
+    const geoNearStage = <span class="cstat-no" title="statement not covered" >{</span>
+      $geoNear: {
+        near: { type: 'Point', coordinates: [lng, lat] },
+        distanceField: 'distance', // in meters
+        maxDistance: radiusMeters,
+        spherical: true,
+        key: 'geometry',
+      },
+    };
+&nbsp;
+    const projectStage = <span class="cstat-no" title="statement not covered" >{</span>
+      $project: {
+        title: 1,
+        price: 1,
+        location: 1,
+        'images.url': 1,
+        'images.filename': 1,
+        geometry: 1,
+        createdAt: 1,
+        author: 1,
+        description: 1,
+        distance: 1,
+      },
+    };
+&nbsp;
+    // Sort stage based on user selection
+    let sortStage;
+<span class="cstat-no" title="statement not covered" >    if (sort === 'priceAsc') {</span>
+<span class="cstat-no" title="statement not covered" >      sortStage = { $sort: { price: 1, distance: 1 } };</span>
+    } else <span class="cstat-no" title="statement not covered" >if (sort === 'priceDesc') {</span>
+<span class="cstat-no" title="statement not covered" >      sortStage = { $sort: { price: -1, distance: 1 } };</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      sortStage = { $sort: { distance: 1 } }; </span>// default: closest first
+    }
+&nbsp;
+    // Build pipelines
+    const dataPipeline = <span class="cstat-no" title="statement not covered" >[geoNearStage];</span>
+<span class="cstat-no" title="statement not covered" >    if (Object.keys(nonGeoMatch).length)</span>
+<span class="cstat-no" title="statement not covered" >      dataPipeline.push({ $match: nonGeoMatch });</span>
+<span class="cstat-no" title="statement not covered" >    dataPipeline.push(</span>
+      projectStage,
+      sortStage,
+      { $skip: skip },
+      { $limit: limit }
+    );
+&nbsp;
+    const countPipeline = <span class="cstat-no" title="statement not covered" >[geoNearStage];</span>
+<span class="cstat-no" title="statement not covered" >    if (Object.keys(nonGeoMatch).length)</span>
+<span class="cstat-no" title="statement not covered" >      countPipeline.push({ $match: nonGeoMatch });</span>
+<span class="cstat-no" title="statement not covered" >    countPipeline.push({ $count: 'total' });</span>
+&nbsp;
+    // Execute (aggregation returns plain objects)
+    const [campgrounds, countDoc] = <span class="cstat-no" title="statement not covered" >await Promise.all([</span>
+      Campground.aggregate(dataPipeline),
+      Campground.aggregate(countPipeline),
+    ]);
+&nbsp;
+    const total = <span class="cstat-no" title="statement not covered" >countDoc[0]?.total ?? 0;</span>
+    const totalPages = <span class="cstat-no" title="statement not covered" >Math.ceil(total / limit);</span>
+&nbsp;
+    // Favorites for current user
+    let favorites = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >    if (req.user) {</span>
+<span class="cstat-no" title="statement not covered" >      if (Array.isArray(req.user.favorites)) {</span>
+<span class="cstat-no" title="statement not covered" >        favorites = req.user.favorites.map(String);</span>
+      } else {
+        const userDoc = <span class="cstat-no" title="statement not covered" >await User.findById(req.user._id)</span>
+          .select('favorites')
+          .lean();
+<span class="cstat-no" title="statement not covered" >        favorites = (userDoc?.favorites || []).map(String);</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    res.render('campgrounds/nearby', {</span>
       campgrounds,
       page,
       totalPages,
       total,
+      // Echo inputs
+      q,
+      minPrice: isFiniteNum(minPrice) ? minPrice : '',
+      maxPrice: isFiniteNum(maxPrice) ? maxPrice : '',
+      lat,
+      lng,
+      radiusKm,
+      sort,
+      favorites,
     });
   } catch (err) {
-    next(err);
+<span class="cstat-no" title="statement not covered" >    next(err);</span>
   }
 };
 &nbsp;
 /**
  * Show details for a specific campground.
- * - Populate reviews and authors for display.
- * - Limit populated fields and number of reviews.
- * - Use lean for performance.
- * - Set SEO-friendly page title and description.
+ * - Paginated reviews via separate query for scalability
+ * - Populate campground author
+ * - SEO-friendly locals
  */
 module.exports.showCampground = async (req, res, next) =&gt; {
   try {
-    const campground = await Campground.findById(req.params.id)
-      .populate({
-        path: 'reviews',
-        select: 'rating body author createdAt',
-        options: { sort: { createdAt: -1 }, limit: 20 },
-        populate: { path: 'author', select: 'email username' },
-      })
+    const { id } = req.params;
+&nbsp;
+    // Reviews pagination for show page
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const limit = Math.min(parseInt(req.query.limit, 10) || 10, 50);
+    const skip = (page - 1) * limit;
+&nbsp;
+    const campground = await Campground.findById(id)
       .populate({ path: 'author', select: 'email username' })
       .lean();
 &nbsp;
-    // If campground not found, throw 404 error
-    if (!campground) {
-      throw new NotFoundError('Campground not found');
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!campground) {
+<span class="cstat-no" title="statement not covered" >      throw new NotFoundError('Campground not found');</span>
     }
 &nbsp;
-    // Set page title and description for SEO and display
+    const [reviews, totalReviews] = await Promise.all([
+      Review.find({ campground: id })
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .populate({ path: 'author', select: 'email username' })
+        .lean(),
+      Review.countDocuments({ campground: id }),
+    ]);
+&nbsp;
+    const totalPages = Math.ceil(totalReviews / limit);
+&nbsp;
+    // Compute isFavorited for initial heart state
+    let isFavorited = false;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (req.user) {
+      const favs = <span class="cstat-no" title="statement not covered" >Array.isArray(req.user.favorites)</span>
+        ? req.user.favorites.map(String)
+        : (
+            (await User.findById(req.user._id).select('favorites').lean())
+              ?.favorites || []
+          ).map(String);
+<span class="cstat-no" title="statement not covered" >      isFavorited = favs.includes(String(id));</span>
+    }
+&nbsp;
+    // Ensure res.locals exists in test/middleware-less environments
+    res.locals = res.locals || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
     res.locals.pageTitle = `${campground.title} - Outdoorsy`;
     res.locals.pageDescription = campground.description
       ? campground.description.substring(0, 160)
       : `Explore ${campground.title} on Outdoorsy`;
 &nbsp;
-    res.render('campgrounds/show', { campground });
+    res.render('campgrounds/show', {
+      campground,
+      reviews,
+      reviewsPage: page,
+      reviewsTotalPages: totalPages,
+      reviewsTotal: totalReviews,
+      reviewsLimit: limit,
+      isFavorited,
+    });
   } catch (err) {
-    next(err);
+<span class="cstat-no" title="statement not covered" >    next(err);</span>
   }
 };
 &nbsp;
 /**
  * Render the edit form for a campground.
- * - Fetch campground by ID.
- * - Throw 404 if not found.
  */
-module.exports.renderEditForm = async (req, res, next) =&gt; {
-  try {
-    const { id } = req.params;
-    const campground = await Campground.findById(id);
+module.exports.renderEditForm = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+    const campground = <span class="cstat-no" title="statement not covered" >await Campground.findById(id);</span>
 &nbsp;
-    if (!campground) {
-      throw new NotFoundError('Campground not found');
+<span class="cstat-no" title="statement not covered" >    if (!campground) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new NotFoundError('Campground not found');</span>
     }
 &nbsp;
-    res.locals.pageTitle = `Edit ${campground.title} - Outdoorsy`;
+<span class="cstat-no" title="statement not covered" >    res.locals.pageTitle = `Edit ${campground.title} - Outdoorsy`;</span>
 &nbsp;
-    res.render('campgrounds/edit', { campground });
+<span class="cstat-no" title="statement not covered" >    res.render('campgrounds/edit', { campground });</span>
   } catch (err) {
-    next(err);
+<span class="cstat-no" title="statement not covered" >    next(err);</span>
   }
 };
 &nbsp;
 /**
  * Update a campground.
- * - Update campground fields from form data.
- * - Add new uploaded images.
- * - Delete images if requested (both from Cloudinary and DB).
+ * - Update fields
+ * - Add new uploaded images
+ * - Delete images if requested
  */
-module.exports.updateCampground = async (req, res, next) =&gt; {
-  try {
-    const { id } = req.params;
+module.exports.updateCampground = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
 &nbsp;
-    // Update campground with new data (return the doc for subsequent save)
-    const campground = await Campground.findByIdAndUpdate(
+    const campground = <span class="cstat-no" title="statement not covered" >await Campground.findByIdAndUpdate(</span>
       id,
       { ...req.body.campground },
       { new: true }
     );
 &nbsp;
-    if (!campground) {
-      throw new NotFoundError('Campground not found');
+<span class="cstat-no" title="statement not covered" >    if (!campground) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new NotFoundError('Campground not found');</span>
     }
 &nbsp;
-    // Add new images uploaded in this request
-    const imgs = req.files.map((f) =&gt; ({ url: f.path, filename: f.filename }));
-    campground.images.push(...imgs);
-    await campground.save();
+    const imgs = <span class="cstat-no" title="statement not covered" >(req.files || []).map(<span class="fstat-no" title="function not covered" >(f</span>) =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
+      url: f.path,
+      filename: f.filename,
+    }));
+<span class="cstat-no" title="statement not covered" >    if (imgs.length) {</span>
+<span class="cstat-no" title="statement not covered" >      campground.images.push(...imgs);</span>
+<span class="cstat-no" title="statement not covered" >      await campground.save();</span>
+    }
 &nbsp;
-    // If images are marked for deletion, remove them from Cloudinary and DB
-    if (req.body.deleteImages) {
-      for (let filename of req.body.deleteImages) {
-        await cloudinary.uploader.destroy(filename);
+<span class="cstat-no" title="statement not covered" >    if (req.body.deleteImages &amp;&amp; req.body.deleteImages.length) {</span>
+<span class="cstat-no" title="statement not covered" >      for (let filename of req.body.deleteImages) {</span>
+<span class="cstat-no" title="statement not covered" >        await cloudinary.uploader.destroy(filename);</span>
       }
-      await campground.updateOne({
+<span class="cstat-no" title="statement not covered" >      await campground.updateOne({</span>
         $pull: { images: { filename: { $in: req.body.deleteImages } } },
       });
     }
 &nbsp;
-    req.flash('success', 'Successfully updated campground!');
-    res.redirect(`${basePath}/campgrounds/${campground._id}`);
+<span class="cstat-no" title="statement not covered" >    req.flash('success', 'Successfully updated campground!');</span>
+<span class="cstat-no" title="statement not covered" >    res.redirect(`${basePath}/campgrounds/${campground._id}`);</span>
   } catch (err) {
-    next(err);
+<span class="cstat-no" title="statement not covered" >    next(err);</span>
   }
 };
 &nbsp;
 /**
  * Delete a campground by ID.
- * - Throw 404 if campground not found.
  */
-module.exports.deleteCampground = async (req, res, next) =&gt; {
-  try {
-    const { id } = req.params;
-    const campground = await Campground.findByIdAndDelete(id);
+module.exports.deleteCampground = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+    const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+    const campground = <span class="cstat-no" title="statement not covered" >await Campground.findByIdAndDelete(id);</span>
 &nbsp;
-    if (!campground) {
-      throw new NotFoundError('Campground not found');
+<span class="cstat-no" title="statement not covered" >    if (!campground) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new NotFoundError('Campground not found');</span>
     }
 &nbsp;
-    req.flash('success', 'Successfully deleted campground');
-    res.redirect(`${basePath}/campgrounds`);
+<span class="cstat-no" title="statement not covered" >    req.flash('success', 'Successfully deleted campground');</span>
+<span class="cstat-no" title="statement not covered" >    res.redirect(`${basePath}/campgrounds`);</span>
   } catch (err) {
-    next(err);
+<span class="cstat-no" title="statement not covered" >    next(err);</span>
+  }
+};
+&nbsp;
+/**
+ * Toggle favorite for the current user.
+ * POST /campgrounds/:id/favorite
+ */
+module.exports.toggleFavorite = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (!req.user) {</span>
+<span class="cstat-no" title="statement not covered" >      return res.status(401).json({ error: 'Unauthorized' });</span>
+    }
+    const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+&nbsp;
+    const user = <span class="cstat-no" title="statement not covered" >await User.findById(req.user._id).select('favorites');</span>
+<span class="cstat-no" title="statement not covered" >    if (!user) <span class="cstat-no" title="statement not covered" >return res.status(401).json({ error: 'Unauthorized' });</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!Array.isArray(user.favorites)) <span class="cstat-no" title="statement not covered" >user.favorites = [];</span></span>
+&nbsp;
+    const idx = <span class="cstat-no" title="statement not covered" >user.favorites.findIndex(<span class="fstat-no" title="function not covered" >(f</span>id) =&gt; <span class="cstat-no" title="statement not covered" >String(fid) === String(id))</span>;</span>
+    let status = <span class="cstat-no" title="statement not covered" >'added';</span>
+<span class="cstat-no" title="statement not covered" >    if (idx &gt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >      user.favorites.splice(idx, 1);</span>
+<span class="cstat-no" title="statement not covered" >      status = 'removed';</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      user.favorites.push(id);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    await user.save();</span>
+<span class="cstat-no" title="statement not covered" >    return res.json({ status });</span>
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    next(err);</span>
+  }
+};
+&nbsp;
+/**
+ * List favorites for the current user.
+ * GET /campgrounds/favorites
+ */
+module.exports.listFavorites = <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    if (!req.user) {</span>
+<span class="cstat-no" title="statement not covered" >      req.flash('error', 'Please sign in to view favorites.');</span>
+<span class="cstat-no" title="statement not covered" >      return res.redirect(`${basePath}/login`);</span>
+    }
+&nbsp;
+    const user = <span class="cstat-no" title="statement not covered" >await User.findById(req.user._id).select('favorites').lean();</span>
+    const favIds = <span class="cstat-no" title="statement not covered" >user?.favorites || [];</span>
+&nbsp;
+    const campgrounds = <span class="cstat-no" title="statement not covered" >await Campground.find({ _id: { $in: favIds } })</span>
+      .select('title price location images createdAt')
+      .lean();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    res.render('campgrounds/favorites', {</span>
+      campgrounds,
+      total: campgrounds.length,
+    });
+  } catch (err) {
+<span class="cstat-no" title="statement not covered" >    next(err);</span>
   }
 };
 &nbsp;</pre></td></tr></table></pre>
 
-                <div class='push'></div><!-- for sticky footer -->
-            </div><!-- /wrapper -->
-            <div class='footer quiet pad2 space-top1 center small'>
-                Code coverage generated by
-                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-28T16:12:09.963Z
-            </div>
-        <script src="../../prettify.js"></script>
-        <script>
-            window.onload = function () {
-                prettyPrint();
-            };
-        </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
-    </body>
+      <div class="push"></div>
+      <!-- for sticky footer -->
+    </div>
+    <!-- /wrapper -->
+    <div class="footer quiet pad2 space-top1 center small">
+      Code coverage generated by
+      <a
+        href="https://istanbul.js.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+        >istanbul</a
+      >
+      at 2025-10-28T19:36:47.804Z
+    </div>
+    <script src="../../prettify.js"></script>
+    <script>
+      window.onload = function () {
+        prettyPrint();
+      };
+    </script>
+    <script src="../../sorter.js"></script>
+    <script src="../../block-navigation.js"></script>
+  </body>
 </html>
-    

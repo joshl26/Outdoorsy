@@ -31,6 +31,25 @@ router
 router.get('/new', isLoggedIn, campgrounds.renderNewForm);
 
 /**
+ * Route for nearby campgrounds (closest-first using $geoNear).
+ * Must come before /:id routes to avoid treating "nearby" as an id.
+ */
+router.get('/nearby', catchAsync(campgrounds.nearby));
+
+/**
+ * Favorites routes.
+ * - GET /campgrounds/favorites: list the user's favorite campgrounds
+ * - POST /campgrounds/:id/favorite: toggle favorite on/off
+ * Place these above the '/:id' routes to avoid conflicts.
+ */
+router.get('/favorites', isLoggedIn, catchAsync(campgrounds.listFavorites));
+router.post(
+  '/:id/favorite',
+  isLoggedIn,
+  catchAsync(campgrounds.toggleFavorite)
+);
+
+/**
  * Routes for showing, updating, and deleting a specific campground.
  * PUT and DELETE require authentication and authorization.
  */

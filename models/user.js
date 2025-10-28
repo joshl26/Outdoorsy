@@ -9,25 +9,34 @@ const passportLocalMongoose = require('passport-local-mongoose');
  * User schema for storing user accounts.
  * Fields:
  * - email: User's email address, required and unique.
+ * - favorites: Array of Campground ObjectIds the user has bookmarked.
  *
  * Uses passport-local-mongoose plugin to add:
  * - username and password fields (username replaced by email here)
  * - password hashing and authentication methods
+ * - createdAt and updatedAt timestamps
  */
-const UserSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true, // creates a unique index (ensure created in production!)
-    lowercase: true,
-    trim: true,
+const UserSchema = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true, // This creates the unique index - no need for schema.index()
+      trim: true,
+      lowercase: true,
+    },
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Campground',
+      },
+    ],
   },
-  // If you keep a display username, you can index it if needed:
-  // username: { type: String, trim: true, index: true },
-});
+  { timestamps: true } // Adds createdAt and updatedAt automatically
+);
 
-// Ensure index explicitly (Mongoose will create based on unique, this clarifies intent)
-UserSchema.index({ email: 1 }, { unique: true });
+// Optional index for faster favorites membership checks
+UserSchema.index({ favorites: 1 });
 
 // Configure passport-local-mongoose to use 'email' as the username field
 UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });

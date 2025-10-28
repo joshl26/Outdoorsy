@@ -1,4 +1,3 @@
-
 <head>
   <link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/navbar.css" />
 </head>
@@ -48,6 +47,19 @@
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
               <span class="nav-text">Explore</span>
+            </a>
+          </li>
+          <li class="nav-item" role="none">
+            <a class="nav-link" href="<%= basePath %>/campgrounds/nearby" role="menuitem">
+              <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+                <line x1="12" y1="2" x2="12" y2="6"></line>
+                <line x1="12" y1="14" x2="12" y2="18"></line>
+                <line x1="6" y1="10" x2="2" y2="10"></line>
+                <line x1="22" y1="10" x2="18" y2="10"></line>
+              </svg>
+              <span class="nav-text">Nearby</span>
             </a>
           </li>
           <% if (currentUser) { %>

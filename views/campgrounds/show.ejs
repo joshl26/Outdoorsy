@@ -1,161 +1,217 @@
-<link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/stars.css" />
+<!-- views/campgrounds/show.ejs -->
 <link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-show.css" />
-<div class="row g-4">
-  <div class="col-12 col-md-6">
-    <div id="campgroundCarousel" class="carousel slide mb-4" data-ride="carousel">
-      <div class="carousel-inner rounded shadow-sm">
-        <% campground.images.forEach((img, i) => { %>
-        <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
-          <img src="<%= img.url%>" class="d-block w-100 rounded" alt="<%= campground.title %> image <%= i+1 %>" />
-        </div>
-        <% }) %>
-      </div>
-      <% if(campground.images.length > 1) {%>
-      <a
-        class="carousel-control-prev"
-        href="#campgroundCarousel"
-        role="button"
-        data-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a
-        class="carousel-control-next"
-        href="#campgroundCarousel"
-        role="button"
-        data-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-      <% } %>
-    </div>
 
-    <div class="card mb-4 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title text-primary"><%= campground.title%></h5>
-        <p class="card-text text-muted"><%= campground.description%></p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item text-muted"><i class="fas fa-map-marker-alt me-2"></i><%= campground.location%></li>
-        <li class="list-group-item">Submitted by <span class="text-primary"><%= campground.author.username%></span></li>
-        <li class="list-group-item fw-bold">$<%= campground.price%>/night</li>
-      </ul>
-      <% if( currentUser && campground.author.equals(currentUser._id)) {%>
-      <div class="card-body d-flex gap-3">
-        <a
-          class="btn btn-info flex-grow-1"
-          href="/outdoorsy/campgrounds/<%=campground._id%>/edit"
-          >Edit</a
-        >
-        <form
-          class="d-inline flex-grow-1"
-          action="/outdoorsy/campgrounds/<%=campground._id%>?_method=DELETE"
-          method="POST"
-        >
-          <button class="btn btn-danger w-100">Delete</button>
-        </form>
-      </div>
-      <% } %>
-      <div class="card-footer text-muted small">2 days ago</div>
-    </div>
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <div class="d-flex align-items-center gap-2">
+    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">
+      <i class="fas fa-arrow-left me-1"></i> Back
+    </a>
+    <h1 class="m-0"><%= campground.title %></h1>
   </div>
-
-  <div class="col-12 col-md-6">
-    <div id="map" class="mb-4 rounded shadow-sm" style="height: 350px;"></div>
-
-    <% if(currentUser){ %>
-    <h2 class="mb-3 text-primary">Leave a Review</h2>
-    <form
-      action="/outdoorsy/campgrounds/<%=campground._id%>/reviews"
-      method="POST"
-      class="mb-4 validated-form"
-      novalidate
-    >
-      <div class="mb-3">
-        <label class="form-label" for="rating">Rating</label>
-        <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating" />
-      </div>
-      <fieldset class="starability-basic mb-3">
-        <input
-          type="radio"
-          id="no-rate"
-          class="input-no-rate"
-          name="review[rating]"
-          value="1"
-          checked
-          aria-label="No rating."
-        />
-        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-        <label for="first-rate1" title="Terrible">1 star</label>
-        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-        <label for="first-rate2" title="Not good">2 stars</label>
-        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-        <label for="first-rate3" title="Average">3 stars</label>
-        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-        <label for="first-rate4" title="Very good">4 stars</label>
-        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-        <label for="first-rate5" title="Amazing">5 stars</label>
-      </fieldset>
-      <div class="mb-3">
-        <label class="form-label" for="body">Review Text</label>
-        <textarea
-          class="form-control"
-          name="review[body]"
-          id="body"
-          cols="30"
-          rows="3"
-          required
-        ></textarea>
-        <div class="valid-feedback">Looks good!</div>
-      </div>
-      <button class="btn btn-success w-100">Submit</button>
-    </form>
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/nearby?lat=<%= campground.geometry?.coordinates?.[1] ?? '' %>&lng=<%= campground.geometry?.coordinates?.[0] ?? '' %>&radiusKm=25">
+      <i class="fas fa-location-arrow me-1"></i> Nearby
+    </a>
+    <% if (currentUser && String(currentUser._id) === String(campground.author?._id || campground.author)) { %>
+      <a class="btn btn-outline-primary" href="/outdoorsy/campgrounds/<%= campground._id %>/edit">
+        <i class="fas fa-edit me-1"></i> Edit
+      </a>
     <% } %>
+    <% if (currentUser) { %>
+      <form method="POST" action="/outdoorsy/campgrounds/<%= campground._id %>?_method=DELETE" class="d-inline" onsubmit="return confirm('Delete this campground?');">
+        <% if (String(currentUser._id) === String(campground.author?._id || campground.author)) { %>
+          <button class="btn btn-outline-danger" type="submit">
+            <i class="fas fa-trash me-1"></i> Delete
+          </button>
+        <% } %>
+      </form>
+<button 
+  class="btn btn-sm <%= isFavorited ? 'btn-danger' : 'btn-outline-danger' %> toggle-fav-btn"
+  data-id="<%= campground._id %>"
+  aria-pressed="<%= isFavorited ? 'true' : 'false' %>"
+  title="<%= isFavorited ? 'Remove from favorites' : 'Add to favorites' %>">
+  <i class="fas fa-heart me-1"></i> Favorite
+</button>    <% } %>
+  </div>
+</div>
 
-    <% for(let review of campground.reviews) { %>
-    <div class="card mb-3 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title text-primary"><%= review.author.username%></h5>
-        <p class="starability-result" data-rating="<%=review.rating%>">
-          Rated: <%= review.rating %> stars
-        </p>
-        <p class="card-text text-muted">Review: <%= review.body %></p>
-        <% if( currentUser && review.author.equals(currentUser._id)) {%>
-        <form
-          action="/outdoorsy/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE"
-          method="POST"
-        >
-          <button class="btn btn-sm btn-danger">Delete</button>
-        </form>
+<div class="row g-4">
+  <div class="col-12 col-lg-8">
+    <!-- Images carousel / gallery -->
+    <div class="card shadow-sm mb-3">
+      <div class="card-body p-0">
+        <% if (campground.images && campground.images.length) { %>
+          <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% campground.images.forEach((img, idx) => { %>
+                <div class="carousel-item <%= idx === 0 ? 'active' : '' %>">
+                  <img src="<%= img.url %>" class="d-block w-100" alt="Image <%= idx + 1 %>" style="max-height: 500px; object-fit: cover;">
+                </div>
+              <% }) %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        <% } else { %>
+          <img src="https://placehold.co/1200x500?text=No+Image" class="w-100" alt="No images">
         <% } %>
       </div>
     </div>
+
+    <!-- Details -->
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title mb-3">About this campground</h5>
+        <p class="card-text"><%= campground.description || 'No description provided.' %></p>
+        <div class="d-flex align-items-center gap-3">
+          <div class="fw-bold fs-5">$<%= campground.price %> / night</div>
+          <div class="text-muted">
+            <i class="fas fa-map-marker-alt me-1"></i>
+            <%= campground.location %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Reviews</h5>
+
+        <% if (!reviews || reviews.length === 0) { %>
+          <div class="text-muted">No reviews yet.</div>
+        <% } else { %>
+          <div class="list-group">
+            <% reviews.forEach(r => { %>
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <strong><%= r.author?.username || r.author?.email || 'Anonymous' %></strong>
+                    <span class="text-muted small ms-2">
+                      <%= new Date(r.createdAt).toLocaleString() %>
+                    </span>
+                  </div>
+                </div>
+                <p class="mb-1 mt-2"><%= r.body %></p>
+                <% if (typeof r.rating === 'number') { %>
+                  <div class="text-warning">
+                    <% for (let i=0;i<r.rating;i++){ %><i class="fas fa-star"></i><% } %>
+                    <% for (let i=r.rating;i<5;i++){ %><i class="far fa-star"></i><% } %>
+                  </div>
+                <% } %>
+              </div>
+            <% }) %>
+          </div>
+
+          <% if (typeof reviewsTotalPages !== 'undefined' && reviewsTotalPages > 1) { %>
+            <nav aria-label="Reviews pagination" class="mt-3">
+              <ul class="pagination justify-content-center">
+                <li class="page-item <%= reviewsPage <= 1 ? 'disabled' : '' %>">
+                  <a class="page-link" href="?page=<%= reviewsPage - 1 %>&limit=<%= reviewsLimit %>">Previous</a>
+                </li>
+                <% for (let p = 1; p <= reviewsTotalPages; p++) { %>
+                  <li class="page-item <%= p === reviewsPage ? 'active' : '' %>">
+                    <a class="page-link" href="?page=<%= p %>&limit=<%= reviewsLimit %>"><%= p %></a>
+                  </li>
+                <% } %>
+                <li class="page-item <%= reviewsPage >= reviewsTotalPages ? 'disabled' : '' %>">
+                  <a class="page-link" href="?page=<%= reviewsPage + 1 %>&limit=<%= reviewsLimit %>">Next</a>
+                </li>
+              </ul>
+            </nav>
+          <% } %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Host</h5>
+        <p class="mb-1"><strong><%= campground.author?.username || campground.author?.email || 'Unknown' %></strong></p>
+        <p class="text-muted mb-0">
+          <i class="far fa-clock me-1"></i>
+          Listed <%= campground.createdAt ? new Date(campground.createdAt).toLocaleDateString() : '' %>
+        </p>
+      </div>
+    </div>
+
+    <!-- Static map (optional) -->
+    <% if (campground.geometry?.coordinates?.length === 2) { %>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Location</h5>
+          <div class="text-muted mb-2"><%= campground.location %></div>
+          <div class="ratio ratio-16x9 bg-light rounded" id="staticMap" style="background-size: cover; background-position: center;"></div>
+        </div>
+      </div>
+      <script>
+        // If you have a Mapbox static token, you can render a static image map
+        (function() {
+          const lng = <%= campground.geometry.coordinates[0] %>;
+          const lat = <%= campground.geometry.coordinates[1] %>;
+          const token = '<%- process.env.MAPBOX_TOKEN || "" %>';
+          if (!token) return;
+          const url = `https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/pin-s+ff0000(${lng},${lat})/${lng},${lat},10,0/800x450@2x?access_token=${token}`;
+          const el = document.getElementById('staticMap');
+          if (el) el.style.backgroundImage = 'url(' + url + ')';
+        })();
+      </script>
     <% } %>
   </div>
 </div>
 
 <script>
-  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-  const campground = <%- JSON.stringify(campground) %>;
+  // Set initial favorite state if server provided favorites via locals (optional)
+  // If you pass 'favorites' with just campground page, you can set button state initially.
+  const favBtn = document.querySelector('.toggle-fav-btn');
+  // You can optionally set initial state by checking if it's already favorited server-side.
 
-  mapboxgl.accessToken = mapToken;
-  const map = new mapboxgl.Map({
-    container: "map",
-    style: "mapbox://styles/mapbox/light-v10",
-    center: campground.geometry.coordinates,
-    zoom: 10,
-  });
-
-  map.addControl(new mapboxgl.NavigationControl());
-
-  new mapboxgl.Marker()
-    .setLngLat(campground.geometry.coordinates)
-    .setPopup(
-      new mapboxgl.Popup({ offset: 25 }).setHTML(
-        `<h3>${campground.title}</h3><p>${campground.location}</p>`
-      )
-    )
-    .addTo(map);
+  // Favorites toggle (AJAX)
+  if (favBtn) {
+    favBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const id = favBtn.getAttribute('data-id');
+      try {
+        const res = await fetch(`/outdoorsy/campgrounds/${id}/favorite`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin'
+        });
+        if (res.status === 401) {
+          window.location = '/outdoorsy/login';
+          return;
+        }
+        const data = await res.json();
+        if (data.status === 'added') {
+          favBtn.classList.remove('btn-outline-danger');
+          favBtn.classList.add('btn-danger');
+          favBtn.setAttribute('aria-pressed', 'true');
+          favBtn.title = 'Remove from favorites';
+        } else if (data.status === 'removed') {
+          favBtn.classList.remove('btn-danger');
+          favBtn.classList.add('btn-outline-danger');
+          favBtn.setAttribute('aria-pressed', 'false');
+          favBtn.title = 'Add to favorites';
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Could not update favorite. Please try again.');
+      }
+    });
+  }
 </script>
+
+<style>
+  .carousel .carousel-item img {
+    border-radius: .5rem;
+  }
+</style>
