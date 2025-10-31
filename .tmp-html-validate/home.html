@@ -1,4 +1,3 @@
-
 <head>
   <link rel="stylesheet" href="/outdoorsy/stylesheets/home.css" />
 </head>
@@ -7,21 +6,22 @@
   <div class="hero-content">
     <h1 class="mb-4 gradient-text">Discover Your Next Adventure</h1>
     <p class="lead text-light">
-      Explore breathtaking campgrounds, hidden trails, and stunning
-      outdoor destinations. Share your adventures and connect with nature
-      lovers worldwide.
+      Explore breathtaking campgrounds, hidden trails, and stunning outdoor
+      destinations. Share your adventures and connect with nature lovers
+      worldwide.
     </p>
     <div
       class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4"
       role="group"
       aria-label="Primary actions"
     >
-      <a 
-        href="X/campgrounds" 
+      <a
+        href="X/campgrounds"
         class="btn btn-lg btn-primary"
         aria-label="Explore available campgrounds"
       >
-        Explore Campgrounds <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
+        Explore Campgrounds
+        <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
       </a>
       <a
         href="X/campgrounds/new"
@@ -34,8 +34,8 @@
   </div>
 
   <!-- Scroll Indicator -->
-  <a 
-    href="#features" 
+  <a
+    href="#features"
     class="scroll-indicator text-light"
     aria-label="Scroll to features section"
   >
@@ -44,7 +44,11 @@
 </div>
 
 <!-- Features Section -->
-<section id="features" class="features-section" aria-labelledby="features-heading">
+<section
+  id="features"
+  class="features-section"
+  aria-labelledby="features-heading"
+>
   <div class="container">
     <header class="text-center mb-5">
       <h2 id="features-heading" class="display-5 fw-bold mb-3 text-primary">
@@ -54,7 +58,7 @@
         Everything you need for your perfect outdoor experience
       </p>
     </header>
-    
+
     <div class="row g-4">
       <div class="col-lg-4 col-md-6">
         <article class="feature-card fade-in">
@@ -63,12 +67,12 @@
           </div>
           <h3 class="feature-title text-dark">Discover Locations</h3>
           <p class="feature-description text-muted">
-            Find hidden gems and popular destinations with detailed
-            maps, photos, and reviews from fellow adventurers.
+            Find hidden gems and popular destinations with detailed maps,
+            photos, and reviews from fellow adventurers.
           </p>
         </article>
       </div>
-      
+
       <div class="col-lg-4 col-md-6">
         <article class="feature-card fade-in">
           <div class="feature-icon" aria-hidden="true">
@@ -76,12 +80,12 @@
           </div>
           <h3 class="feature-title text-dark">Join Community</h3>
           <p class="feature-description text-muted">
-            Connect with outdoor enthusiasts, share experiences, and get
-            insider tips from seasoned campers.
+            Connect with outdoor enthusiasts, share experiences, and get insider
+            tips from seasoned campers.
           </p>
         </article>
       </div>
-      
+
       <div class="col-lg-4 col-md-6">
         <article class="feature-card fade-in">
           <div class="feature-icon" aria-hidden="true">
@@ -89,8 +93,8 @@
           </div>
           <h3 class="feature-title text-dark">Rate & Review</h3>
           <p class="feature-description text-muted">
-            Share your honest feedback and help others make informed
-            decisions about their next camping trip.
+            Share your honest feedback and help others make informed decisions
+            about their next camping trip.
           </p>
         </article>
       </div>
@@ -105,25 +109,25 @@
     <div class="row g-4">
       <div class="col-lg-3 col-md-6 col-6">
         <article class="stat-item">
-          <span class="stat-number text-light" >1,250+</span>
+          <span class="stat-number text-light">1,250+</span>
           <span class="stat-label text-light">Campgrounds</span>
         </article>
       </div>
-      
+
       <div class="col-lg-3 col-md-6 col-6">
         <article class="stat-item">
-          <span class="stat-number text-light" >5,400+</span>
+          <span class="stat-number text-light">5,400+</span>
           <span class="stat-label text-light">Reviews</span>
         </article>
       </div>
-      
+
       <div class="col-lg-3 col-md-6 col-6">
         <article class="stat-item">
-          <span class="stat-number text-light" >2,800+</span>
+          <span class="stat-number text-light">2,800+</span>
           <span class="stat-label text-light">Members</span>
         </article>
       </div>
-      
+
       <div class="col-lg-3 col-md-6 col-6">
         <article class="stat-item">
           <span class="stat-number text-light">48</span>
@@ -138,17 +142,20 @@
 <section class="cta-section" aria-labelledby="cta-heading">
   <div class="container">
     <div class="cta-content">
-      <h2 id="cta-heading" class="text-light">Ready to Start Your Adventure?</h2>
+      <h2 id="cta-heading" class="text-light">
+        Ready to Start Your Adventure?
+      </h2>
       <p class="text-light">
-        Join thousands of outdoor enthusiasts discovering amazing places
-        every day.
+        Join thousands of outdoor enthusiasts discovering amazing places every
+        day.
       </p>
-      <a 
-        href="X/register" 
+      <a
+        href="X/register"
         class="btn btn-lg btn-light text-primary"
         aria-label="Create a free account"
       >
-        Get Started Free <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
+        Get Started Free
+        <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
       </a>
     </div>
   </div>
@@ -156,7 +163,9 @@
 <script>
   (function () {
     // Respect user motion preferences
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
 
     // Collect targets (feature cards and any other fade-in elements)
     const targets = document.querySelectorAll('.fade-in');
@@ -165,45 +174,54 @@
 
     // If reduced motion, reveal instantly without animation
     if (prefersReducedMotion) {
-      targets.forEach(el => el.classList.add('visible'));
+      targets.forEach((el) => el.classList.add('visible'));
       return;
     }
 
     // IntersectionObserver with stagger reveal
-    const io = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
+    const io = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
 
-        const el = entry.target;
+          const el = entry.target;
 
-        // Optional stagger based on index or data attribute
-        const baseDelay = parseInt(el.getAttribute('data-fade-delay') || '0', 10);
-        const incrementalDelay = parseInt(el.getAttribute('data-fade-step') || '80', 10);
+          // Optional stagger based on index or data attribute
+          const baseDelay = parseInt(
+            el.getAttribute('data-fade-delay') || '0',
+            10
+          );
+          const incrementalDelay = parseInt(
+            el.getAttribute('data-fade-step') || '80',
+            10
+          );
 
-        // Compute index-based delay if not explicitly set
-        let indexDelay = 0;
-        if (!el.hasAttribute('data-fade-delay')) {
-          // Use DOM order within its row/parent for a subtle cascade
-          const siblings = Array.from(el.parentElement?.children || []);
-          const idx = Math.max(0, siblings.indexOf(el));
-          indexDelay = idx * incrementalDelay;
-        }
+          // Compute index-based delay if not explicitly set
+          let indexDelay = 0;
+          if (!el.hasAttribute('data-fade-delay')) {
+            // Use DOM order within its row/parent for a subtle cascade
+            const siblings = Array.from(el.parentElement?.children || []);
+            const idx = Math.max(0, siblings.indexOf(el));
+            indexDelay = idx * incrementalDelay;
+          }
 
-        const delay = Math.min(600, baseDelay + indexDelay); // cap delay for snappiness
+          const delay = Math.min(600, baseDelay + indexDelay); // cap delay for snappiness
 
-        // Apply a one-time staggered reveal
-        setTimeout(() => {
-          el.classList.add('visible');
-        }, delay);
+          // Apply a one-time staggered reveal
+          setTimeout(() => {
+            el.classList.add('visible');
+          }, delay);
 
-        observer.unobserve(el);
-      });
-    }, {
-      root: null,
-      rootMargin: '0px 0px -10% 0px', // start a bit before the element fully enters
-      threshold: 0.2
-    });
+          observer.unobserve(el);
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px -10% 0px', // start a bit before the element fully enters
+        threshold: 0.2,
+      }
+    );
 
-    targets.forEach(el => io.observe(el));
+    targets.forEach((el) => io.observe(el));
   })();
 </script>

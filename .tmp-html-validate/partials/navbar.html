@@ -1,14 +1,14 @@
 <!-- views/partials/navbar.ejs -->
 <head>
-  <link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/navbar.css" />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/outdoorsy/stylesheets/navbar.css"
+  />
 </head>
 
-<header class="site-header" >
-  <nav
-    class="navbar navbar-expand-lg"
-    aria-label="Main navigation"
-    
-  >
+<header class="site-header">
+  <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
     <div class="container-fluid">
       <!-- Brand / Logo -->
       <a
@@ -81,11 +81,7 @@
           </li>
 
           <li class="nav-item" role="none">
-            <a
-              class="nav-link"
-              href="X/campgrounds"
-              role="menuitem"
-            >
+            <a class="nav-link" href="X/campgrounds" role="menuitem">
               <svg
                 class="nav-icon"
                 width="18"
@@ -96,9 +92,7 @@
                 stroke-width="2"
                 aria-hidden="true"
               >
-                <path
-                  d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
-                ></path>
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
               <span class="nav-text">Explore</span>
@@ -106,11 +100,7 @@
           </li>
 
           <li class="nav-item" role="none">
-            <a
-              class="nav-link"
-              href="X/campgrounds/nearby"
-              role="menuitem"
-            >
+            <a class="nav-link" href="X/campgrounds/nearby" role="menuitem">
               <svg
                 class="nav-icon"
                 aria-hidden="true"
@@ -120,9 +110,7 @@
                 stroke="currentColor"
                 stroke-width="2"
               >
-                <path
-                  d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
-                ></path>
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
                 <line x1="12" y1="2" x2="12" y2="6"></line>
               </svg>
@@ -130,31 +118,25 @@
             </a>
           </li>
 
-          
-            <li class="nav-item" role="none">
-              <a
-                class="nav-link"
-                href="X/campgrounds/new"
-                role="menuitem"
+          <li class="nav-item" role="none">
+            <a class="nav-link" href="X/campgrounds/new" role="menuitem">
+              <svg
+                class="nav-icon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
               >
-                <svg
-                  class="nav-icon"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="8" x2="12" y2="16" />
-                  <line x1="8" y1="12" x2="16" y2="12" />
-                </svg>
-                <span class="nav-text">Add Spot</span>
-              </a>
-            </li>
-          
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="16" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+              </svg>
+              <span class="nav-text">Add Spot</span>
+            </a>
+          </li>
 
           <!-- Discover Dropdown -->
           <li class="nav-item dropdown" role="none">
@@ -236,11 +218,7 @@
               </li>
               <li role="none"><hr class="dropdown-divider" /></li>
               <li role="none">
-                <a
-                  class="dropdown-item"
-                  href="X/api-docs"
-                  role="menuitem"
-                >
+                <a class="dropdown-item" href="X/api-docs" role="menuitem">
                   <svg
                     class="dropdown-icon"
                     width="16"
@@ -260,183 +238,156 @@
           </li>
         </ul>
 
-       <!-- Search Bar -->
-<form
-  class="search-form d-flex align-items-center position-relative me-lg-3"
-  role="search"
-  action="X/campgrounds"
-  method="GET"
->
-  <div class="input-group search-wrapper">
-   
-    <input
-      class="form-control border-start-0 ps-3 search-input"
-      type="search"
-      placeholder="Search destinations..."
-      aria-label="Search campgrounds"
-      name="search"
-    />
-    <button
-      type="submit"
-      class="btn btn-primary px-3"
-      aria-label="Submit search"
-    >
-      <i class="fas fa-search" aria-hidden="true"></i>
-    </button>
-  </div>
-</form>
+        <!-- Search Bar -->
+        <form
+          class="search-form d-flex align-items-center position-relative me-lg-3"
+          role="search"
+          action="X/campgrounds"
+          method="GET"
+        >
+          <div class="input-group search-wrapper">
+            <input
+              class="form-control border-start-0 ps-3 search-input"
+              type="search"
+              placeholder="Search destinations..."
+              aria-label="Search campgrounds"
+              name="search"
+            />
+            <button
+              type="submit"
+              class="btn btn-primary px-3"
+              aria-label="Submit search"
+            >
+              <i class="fas fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
 
         <!-- User Actions -->
         <ul class="navbar-nav user-actions" role="menubar">
-          
-            <li class="nav-item" role="none">
-              <a class="nav-link" href="X/login" role="menuitem">
+          <li class="nav-item" role="none">
+            <a class="nav-link" href="X/login" role="menuitem">
+              <svg
+                class="nav-icon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+              </svg>
+              <span class="nav-text">Sign In</span>
+            </a>
+          </li>
+
+          <li class="nav-item" role="none">
+            <a
+              class="btn btn-primary btn-signup"
+              href="X/register"
+              role="menuitem"
+            >
+              <svg
+                class="btn-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
+              <span>Join Free</span>
+            </a>
+          </li>
+
+          <!-- User Dropdown -->
+          <li class="nav-item dropdown user-dropdown" role="none">
+            <a
+              class="nav-link dropdown-toggle user-menu-toggle"
+              href="#"
+              id="userMenu"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              aria-haspopup="true"
+              role="menuitem"
+            >
+              <div class="user-avatar">
+                <img src="X" alt="X profile picture" loading="lazy" />
+
                 <svg
-                  class="nav-icon"
-                  width="18"
-                  height="18"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
-                  fill="none"
                   stroke="currentColor"
                   stroke-width="2"
                   aria-hidden="true"
                 >
-                  <path
-                    d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"
-                  ></path>
-                  <polyline points="10 17 15 12 10 7"></polyline>
-                  <line x1="15" y1="12" x2="3" y2="12"></line>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                <span class="nav-text">Sign In</span>
-              </a>
-            </li>
+              </div>
+              <span class="user-name d-none d-lg-inline">X</span>
+            </a>
 
-            <li class="nav-item" role="none">
-              <a
-                class="btn btn-primary btn-signup"
-                href="X/register"
-                role="menuitem"
-              >
-                <svg
-                  class="btn-icon"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
-                  ></path>
-                  <circle cx="8.5" cy="7" r="4"></circle>
-                  <line x1="20" y1="8" x2="20" y2="14"></line>
-                  <line x1="23" y1="11" x2="17" y2="11"></line>
-                </svg>
-                <span>Join Free</span>
-              </a>
-            </li>
-
-          
-            <!-- User Dropdown -->
-            <li class="nav-item dropdown user-dropdown" role="none">
-              <a
-                class="nav-link dropdown-toggle user-menu-toggle"
-                href="#"
-                id="userMenu"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                aria-haspopup="true"
-                role="menuitem"
-              >
-                <div class="user-avatar">
-                  
-                    <img
-                      src="X"
-                      alt="X profile picture"
-                      loading="lazy"
-                    />
-                  
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
-                      ></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                  
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-modern user-menu"
+              aria-labelledby="userMenu"
+              role="menu"
+            >
+              <li class="dropdown-header" role="none">
+                <div class="user-info">
+                  <strong class="d-block">X</strong>
+                  <small class="text-muted">X</small>
                 </div>
-                <span class="user-name d-none d-lg-inline"
-                  >X</span
+              </li>
+              <li role="none"><hr class="dropdown-divider" /></li>
+
+              <li role="none">
+                <a class="dropdown-item" href="X/profile" role="menuitem">
+                  <i class="fas fa-user me-2" aria-hidden="true"></i> My Profile
+                </a>
+              </li>
+
+              <li role="none">
+                <a
+                  class="dropdown-item"
+                  href="X/campgrounds?user=X"
+                  role="menuitem"
                 >
-              </a>
+                  <i class="fas fa-tree me-2" aria-hidden="true"></i> My
+                  Campgrounds
+                </a>
+              </li>
 
-              <ul
-                class="dropdown-menu dropdown-menu-end dropdown-menu-modern user-menu"
-                aria-labelledby="userMenu"
-                role="menu"
-              >
-                <li class="dropdown-header" role="none">
-                  <div class="user-info">
-                    <strong class="d-block">X</strong>
-                    <small class="text-muted"
-                      >X</small
-                    >
-                  </div>
-                </li>
-                <li role="none"><hr class="dropdown-divider" /></li>
+              <li role="none">
+                <a class="dropdown-item" href="X/favorites" role="menuitem">
+                  <i class="fas fa-heart me-2" aria-hidden="true"></i> Favorites
+                </a>
+              </li>
 
-                <li role="none">
-                  <a
-                    class="dropdown-item"
-                    href="X/profile"
-                    role="menuitem"
-                  >
-                    <i class="fas fa-user me-2" aria-hidden="true"></i> My Profile
-                  </a>
-                </li>
-
-                <li role="none">
-                  <a
-                    class="dropdown-item"
-                    href="X/campgrounds?user=X"
-                    role="menuitem"
-                  >
-                    <i class="fas fa-tree me-2" aria-hidden="true"></i> My Campgrounds
-                  </a>
-                </li>
-
-                <li role="none">
-                  <a
-                    class="dropdown-item"
-                    href="X/favorites"
-                    role="menuitem"
-                  >
-                    <i class="fas fa-heart me-2" aria-hidden="true"></i> Favorites
-                  </a>
-                </li>
-
-                <li role="none"><hr class="dropdown-divider" /></li>
-                <li role="none">
-                  <a
-                    class="dropdown-item dropdown-item-logout"
-                    href="X/logout"
-                    role="menuitem"
-                  >
-                    <i class="fas fa-sign-out-alt me-2" aria-hidden="true"></i>
-                    Sign Out
-                  </a>
-                </li>
-              </ul>
-            </li>
-          
+              <li role="none"><hr class="dropdown-divider" /></li>
+              <li role="none">
+                <a
+                  class="dropdown-item dropdown-item-logout"
+                  href="X/logout"
+                  role="menuitem"
+                >
+                  <i class="fas fa-sign-out-alt me-2" aria-hidden="true"></i>
+                  Sign Out
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -451,46 +402,54 @@
 </header>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const header = document.querySelector(".site-header");
-    const navLinks = document.querySelectorAll(".navbar-nav .nav-link:not(.dropdown-toggle)");
-    const dropdownItems = document.querySelectorAll(".dropdown-item");
-    const navCollapse = document.querySelector(".navbar-collapse");
-    const progressBar = document.querySelector(".scroll-progress");
+  document.addEventListener('DOMContentLoaded', function () {
+    const header = document.querySelector('.site-header');
+    const navLinks = document.querySelectorAll(
+      '.navbar-nav .nav-link:not(.dropdown-toggle)'
+    );
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    const navCollapse = document.querySelector('.navbar-collapse');
+    const progressBar = document.querySelector('.scroll-progress');
 
     // Highlight active link
     const currentPath = window.location.pathname;
     navLinks.forEach((link) => {
-      const href = link.getAttribute("href");
-      if (currentPath === href || (href !== "/" && currentPath.startsWith(href))) {
-        link.classList.add("active");
-        link.setAttribute("aria-current", "page");
+      const href = link.getAttribute('href');
+      if (
+        currentPath === href ||
+        (href !== '/' && currentPath.startsWith(href))
+      ) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
       }
     });
 
     // Scroll progress & header effect
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       const currentScroll = window.scrollY;
-      header.classList.toggle("scrolled", currentScroll > 20);
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      progressBar.style.width = (currentScroll / windowHeight) * 100 + "%";
+      header.classList.toggle('scrolled', currentScroll > 20);
+      const windowHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      progressBar.style.width = (currentScroll / windowHeight) * 100 + '%';
     });
 
     // Collapse nav on link click (mobile)
     [...navLinks, ...dropdownItems].forEach((link) => {
-      link.addEventListener("click", () => {
-        if (window.innerWidth < 992 && navCollapse.classList.contains("show")) {
-          const bsCollapse = bootstrap.Collapse.getInstance(navCollapse)
-            || new bootstrap.Collapse(navCollapse);
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 992 && navCollapse.classList.contains('show')) {
+          const bsCollapse =
+            bootstrap.Collapse.getInstance(navCollapse) ||
+            new bootstrap.Collapse(navCollapse);
           bsCollapse.hide();
         }
       });
     });
 
     // Dropdown Escape key support
-    document.querySelectorAll(".dropdown").forEach((dropdown) => {
-      dropdown.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
+    document.querySelectorAll('.dropdown').forEach((dropdown) => {
+      dropdown.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
           const toggle = dropdown.querySelector("[data-bs-toggle='dropdown']");
           bootstrap.Dropdown.getInstance(toggle)?.hide();
           toggle.focus();

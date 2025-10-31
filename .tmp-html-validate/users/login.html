@@ -1,8 +1,8 @@
 <head>
   <link rel="stylesheet" href="/outdoorsy/stylesheets/users-login.css" />
 </head>
-<div class="container d-flex justify-content-center align-items-center ">
-  <div class="card shadow" style="max-width: 400px; width: 100%;">
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="card shadow" style="max-width: 400px; width: 100%">
     <img
       src="https://res.cloudinary.com/dv6keahg3/image/upload/v1680772780/Outdoorsy/pexels-brady-knoll-5914157_usg6oo.jpg"
       alt="Outdoorsy login image"
@@ -12,11 +12,14 @@
     <div class="card-body">
       <h1 class="card-title h4 mb-4 text-center">Login</h1>
 
-      
-        <div class="alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true">
-          X
-        </div>
-      
+      <div
+        class="alert alert-danger"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        X
+      </div>
 
       <form
         action="/outdoorsy/login"
@@ -28,7 +31,9 @@
         <input type="hidden" name="_csrf" value="X" />
 
         <div class="mb-3">
-          <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
+          <label class="form-label" for="email"
+            >Email <span class="text-danger">*</span></label
+          >
           <input
             class="form-control"
             type="email"
@@ -40,12 +45,16 @@
             autocomplete="email"
             minlength="5"
           />
-          <div class="invalid-feedback">Please enter a valid email address.</div>
+          <div class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
           <div class="valid-feedback">Looks good!</div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
+          <label class="form-label" for="password"
+            >Password <span class="text-danger">*</span></label
+          >
           <input
             class="form-control"
             type="password"
@@ -56,11 +65,19 @@
             autocomplete="current-password"
             minlength="4"
           />
-          <div class="invalid-feedback">Please enter your password (at least 8 characters).</div>
+          <div class="invalid-feedback">
+            Please enter your password (at least 8 characters).
+          </div>
           <div class="valid-feedback">Looks good!</div>
         </div>
 
-        <button class="btn btn-success w-100" type="submit" id="submitBtn" aria-live="polite" aria-busy="false">
+        <button
+          class="btn btn-success w-100"
+          type="submit"
+          id="submitBtn"
+          aria-live="polite"
+          aria-busy="false"
+        >
           Login
         </button>
       </form>
@@ -97,14 +114,14 @@
       }
     }
 
-    inputs.forEach(input => {
+    inputs.forEach((input) => {
       input.addEventListener('input', () => validateInput(input));
       input.addEventListener('blur', () => validateInput(input));
     });
 
     form.addEventListener('submit', function (event) {
       let formIsValid = true;
-      inputs.forEach(input => {
+      inputs.forEach((input) => {
         validateInput(input);
         if (!input.classList.contains('is-valid')) {
           formIsValid = false;
@@ -117,7 +134,8 @@
       } else {
         submitBtn.disabled = true;
         submitBtn.setAttribute('aria-busy', 'true');
-        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Logging in...';
+        submitBtn.innerHTML =
+          '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Logging in...';
       }
       form.classList.add('was-validated');
     });

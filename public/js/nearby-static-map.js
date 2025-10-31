@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // public/js/nearby-static-map.js
 (function () {
   function ready(fn) {

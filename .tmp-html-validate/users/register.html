@@ -13,16 +13,17 @@
     <div class="card-body mb-8">
       <h1 class="card-title h4 mb-4 text-center">Register</h1>
 
-      
-        <div class="alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true">
-          <strong>Please fix the following errors:</strong>
-          <ul class="mb-0">
-            
-              <li>X</li>
-            
-          </ul>
-        </div>
-      
+      <div
+        class="alert alert-danger"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <strong>Please fix the following errors:</strong>
+        <ul class="mb-0">
+          <li>X</li>
+        </ul>
+      </div>
 
       <form
         action="/outdoorsy/register"
@@ -32,11 +33,13 @@
         aria-describedby="formHelp"
         autocomplete="off"
       >
-        <input type="hidden" name="_csrf" value="X">
+        <input type="hidden" name="_csrf" value="X" />
 
         <!-- Username -->
         <div class="mb-3">
-          <label class="form-label" for="username">Username <span class="text-danger">*</span></label>
+          <label class="form-label" for="username"
+            >Username <span class="text-danger">*</span></label
+          >
           <input
             class="form-control X"
             type="text"
@@ -54,15 +57,20 @@
             autocomplete="username"
             inputmode="text"
           />
-          <div id="usernameHelp" class="form-text">3-30 characters; letters, numbers, and underscores only.</div>
+          <div id="usernameHelp" class="form-text">
+            3-30 characters; letters, numbers, and underscores only.
+          </div>
           <div class="invalid-feedback">
-            Please enter a valid username (3-30 chars, letters, numbers, underscores).
+            Please enter a valid username (3-30 chars, letters, numbers,
+            underscores).
           </div>
         </div>
 
         <!-- Email -->
         <div class="mb-3">
-          <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
+          <label class="form-label" for="email"
+            >Email <span class="text-danger">*</span></label
+          >
           <input
             class="form-control X"
             type="email"
@@ -75,13 +83,19 @@
             autocomplete="email"
             inputmode="email"
           />
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-          <div class="invalid-feedback">Please enter a valid email address.</div>
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+          <div class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
         </div>
 
         <!-- Password -->
         <div class="mb-3">
-          <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
+          <label class="form-label" for="password"
+            >Password <span class="text-danger">*</span></label
+          >
           <div class="password-wrapper">
             <input
               class="form-control X"
@@ -96,15 +110,27 @@
               title="Password must be at least 8 characters, including letters and numbers."
               autocomplete="new-password"
             />
-            <button type="button" class="toggle-visibility" aria-label="Show password" aria-pressed="false" data-target="password">
+            <button
+              type="button"
+              class="toggle-visibility"
+              aria-label="Show password"
+              aria-pressed="false"
+              data-target="password"
+            >
               <i class="fas fa-eye" aria-hidden="true"></i>
             </button>
           </div>
           <div class="strength-meter" aria-hidden="true">
             <div class="strength-meter-bar" id="passwordStrengthBar"></div>
           </div>
-          <div id="passwordStrengthText" class="form-text small-muted mt-1" aria-live="polite"></div>
-          <div id="passwordHelp" class="form-text">At least 8 characters, including letters and numbers.</div>
+          <div
+            id="passwordStrengthText"
+            class="form-text small-muted mt-1"
+            aria-live="polite"
+          ></div>
+          <div id="passwordHelp" class="form-text">
+            At least 8 characters, including letters and numbers.
+          </div>
           <div class="invalid-feedback">
             Please enter a valid password (min 8 chars, letters and numbers).
           </div>
@@ -112,7 +138,9 @@
 
         <!-- Confirm Password -->
         <div class="mb-4">
-          <label class="form-label" for="confirmPassword">Confirm Password <span class="text-danger">*</span></label>
+          <label class="form-label" for="confirmPassword"
+            >Confirm Password <span class="text-danger">*</span></label
+          >
           <div class="password-wrapper">
             <input
               class="form-control"
@@ -124,19 +152,34 @@
               aria-describedby="confirmHelp"
               autocomplete="new-password"
             />
-            <button type="button" class="toggle-visibility" aria-label="Show confirm password" aria-pressed="false" data-target="confirmPassword">
+            <button
+              type="button"
+              class="toggle-visibility"
+              aria-label="Show confirm password"
+              aria-pressed="false"
+              data-target="confirmPassword"
+            >
               <i class="fas fa-eye" aria-hidden="true"></i>
             </button>
           </div>
-          <div id="confirmHelp" class="form-text">Re-enter your password to confirm.</div>
+          <div id="confirmHelp" class="form-text">
+            Re-enter your password to confirm.
+          </div>
           <div class="invalid-feedback">Passwords must match.</div>
         </div>
 
-<button class="btn btn-primary w-100" type="submit" id="submitBtn" aria-live="polite" aria-busy="false">
-  Register
-</button>        
+        <button
+          class="btn btn-primary w-100"
+          type="submit"
+          id="submitBtn"
+          aria-live="polite"
+          aria-busy="false"
+        >
+          Register
+        </button>
         <p id="formHelp" class="form-text text-center mt-3">
-          By registering, you agree to our <a href="X/terms">Terms</a> and <a href="X/privacy">Privacy Policy</a>.
+          By registering, you agree to our <a href="X/terms">Terms</a> and
+          <a href="X/privacy">Privacy Policy</a>.
         </p>
       </form>
     </div>
@@ -183,10 +226,23 @@
       let color = '#dc3545';
       let label = '';
 
-      if (score > 70) { width = '100%'; color = '#198754'; label = 'Strong'; }
-      else if (score > 50) { width = '75%'; color = '#20c997'; label = 'Good'; }
-      else if (score > 30) { width = '50%'; color = '#fd7e14'; label = 'Fair'; }
-      else if (score > 0) { width = '25%'; color = '#dc3545'; label = 'Weak'; }
+      if (score > 70) {
+        width = '100%';
+        color = '#198754';
+        label = 'Strong';
+      } else if (score > 50) {
+        width = '75%';
+        color = '#20c997';
+        label = 'Good';
+      } else if (score > 30) {
+        width = '50%';
+        color = '#fd7e14';
+        label = 'Fair';
+      } else if (score > 0) {
+        width = '25%';
+        color = '#dc3545';
+        label = 'Weak';
+      }
 
       strengthBar.style.width = width;
       strengthBar.style.backgroundColor = color;
@@ -194,7 +250,8 @@
     }
 
     function validateConfirmPassword() {
-      const match = confirmPwd.value && pwd.value && confirmPwd.value === pwd.value;
+      const match =
+        confirmPwd.value && pwd.value && confirmPwd.value === pwd.value;
       if (match) {
         confirmPwd.classList.remove('is-invalid');
         confirmPwd.classList.add('is-valid');
@@ -206,14 +263,17 @@
     }
 
     // Toggle password visibility
-    document.querySelectorAll('.toggle-visibility').forEach(btn => {
+    document.querySelectorAll('.toggle-visibility').forEach((btn) => {
       btn.addEventListener('click', () => {
         const targetId = btn.getAttribute('data-target');
         const input = document.getElementById(targetId);
         const isPassword = input.getAttribute('type') === 'password';
         input.setAttribute('type', isPassword ? 'text' : 'password');
         btn.setAttribute('aria-pressed', String(isPassword));
-        btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+        btn.setAttribute(
+          'aria-label',
+          isPassword ? 'Hide password' : 'Show password'
+        );
         btn.innerHTML = isPassword
           ? '<i class="fas fa-eye-slash" aria-hidden="true"></i>'
           : '<i class="fas fa-eye" aria-hidden="true"></i>';
@@ -240,7 +300,7 @@
       if (input === pwd && confirmPwd.value) validateConfirmPassword();
     }
 
-    inputs.forEach(input => {
+    inputs.forEach((input) => {
       input.addEventListener('input', () => validateInput(input));
       input.addEventListener('blur', () => validateInput(input));
     });
@@ -248,7 +308,7 @@
     // On form submit
     form.addEventListener('submit', function (event) {
       let formIsValid = true;
-      inputs.forEach(input => {
+      inputs.forEach((input) => {
         validateInput(input);
         if (!input.checkValidity()) formIsValid = false;
       });

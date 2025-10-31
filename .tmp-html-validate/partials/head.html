@@ -2,15 +2,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  
-
   <!-- Basic Meta -->
   <title>X</title>
   <meta name="description" content="X" />
-  <meta name="robots" content="X">
-  <link rel="canonical" href="X">
-  <link rel="prev" href="X">
-  <link rel="next" href="X">
+  <meta name="robots" content="X" />
+  <link rel="canonical" href="X" />
+  <link rel="prev" href="X" />
+  <link rel="next" href="X" />
 
   <!-- ============================================ -->
   <!-- CORE WEB VITALS: Resource Hints & Preloads  -->
@@ -25,49 +23,62 @@
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
   <!-- Preload LCP image (hero/gallery first image) with responsive srcset -->
-  
-    <link
-      rel="preload"
-      as="image"
-      href="X"
-      imagesrcset="
+
+  <link
+    rel="preload"
+    as="image"
+    href="X"
+    imagesrcset="
         X 400w,
         X 800w,
         X 1200w
       "
-      imagesizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 800px"
-      fetchpriority="high"
-    />
-  
+    imagesizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 800px"
+    fetchpriority="high"
+  />
 
   <!-- Favicon & Manifest (root-relative for same-origin in dev and prod) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="X/icons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="X/icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="X/icons/favicon-16x16.png">
-  <link rel="manifest" href="X/site.webmanifest">
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="X/icons/apple-touch-icon.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="X/icons/favicon-32x32.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="X/icons/favicon-16x16.png"
+  />
+  <link rel="manifest" href="X/site.webmanifest" />
   <meta name="theme-color" content="#2b4d2f" />
 
   <!-- Open Graph -->
-  <meta property="og:type" content="X">
-  <meta property="og:title" content="X">
-  <meta property="og:description" content="X">
-  <meta property="og:url" content="X">
-  
-    <meta property="og:image" content="X">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-  
-  <meta property="og:site_name" content="Outdoorsy">
+  <meta property="og:type" content="X" />
+  <meta property="og:title" content="X" />
+  <meta property="og:description" content="X" />
+  <meta property="og:url" content="X" />
+
+  <meta property="og:image" content="X" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta property="og:site_name" content="Outdoorsy" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="X">
-  <meta name="twitter:title" content="X">
-  <meta name="twitter:description" content="X">
-  <meta name="twitter:image" content="X">
+  <meta name="twitter:card" content="X" />
+  <meta name="twitter:title" content="X" />
+  <meta name="twitter:description" content="X" />
+  <meta name="twitter:image" content="X" />
 
   <!-- JSON-LD (extends main graph; references main @ids without redefining them) -->
   <script type="application/ld+json">
-  X
+    X
   </script>
 
   <!-- Bootstrap CSS (loaded normally, no preload) -->
@@ -79,25 +90,37 @@
   />
 
   <!-- Mapbox GL JS CSS -->
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link
+    href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
+    rel="stylesheet"
+  />
 
-<!-- Mapbox GL JS script -->
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js" defer></script>
+  <!-- Mapbox GL JS script -->
+  <script
+    src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"
+    defer
+  ></script>
 
   <!-- Site stylesheets (after Bootstrap to allow overrides) -->
   <link rel="stylesheet" href="X/stylesheets/skeleton.css" />
   <link rel="stylesheet" href="X/stylesheets/app.css" />
 
   <!-- Optional per-page styles -->
-  
-    X
-  
+
+  X
 
   <!-- CLS mitigation: default image styles + aspect-ratio hints -->
   <style>
-    img[loading="lazy"] { content-visibility: auto; }
-    img { height: auto; max-width: 100%; }
+    img[loading='lazy'] {
+      content-visibility: auto;
+    }
+    img {
+      height: auto;
+      max-width: 100%;
+    }
     /* Ensure images with width/height maintain aspect ratio */
-    img[width][height] { aspect-ratio: attr(width) / attr(height); }
+    img[width][height] {
+      aspect-ratio: attr(width) / attr(height);
+    }
   </style>
 </head>

@@ -1,5 +1,9 @@
 <!-- views/campgrounds/index.ejs -->
-<link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-index.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/outdoorsy/stylesheets/campgrounds-index.css"
+/>
 
 <div class="d-flex align-items-center justify-content-between mb-3">
   <h1 class="text-primary m-0">All Campgrounds</h1>
@@ -8,18 +12,19 @@
       <i class="fas fa-location-arrow me-1" aria-hidden="true"></i>
       <span>Nearby</span>
     </a>
-    
-      <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/favorites">
-        <i class="fas fa-heart me-1" aria-hidden="true"></i>
-        <span>My Favorites</span>
-      </a>
-    
-    
-      <a class="btn btn-primary" href="/outdoorsy/campgrounds/new">
-        <i class="fas fa-plus me-1" aria-hidden="true"></i>
-        <span>New Campground</span>
-      </a>
-    
+
+    <a
+      class="btn btn-outline-secondary"
+      href="/outdoorsy/campgrounds/favorites"
+    >
+      <i class="fas fa-heart me-1" aria-hidden="true"></i>
+      <span>My Favorites</span>
+    </a>
+
+    <a class="btn btn-primary" href="/outdoorsy/campgrounds/new">
+      <i class="fas fa-plus me-1" aria-hidden="true"></i>
+      <span>New Campground</span>
+    </a>
   </div>
 </div>
 
@@ -27,7 +32,13 @@
 <section aria-labelledby="filters-heading" class="card mb-4 shadow-sm">
   <div class="card-body">
     <h2 id="filters-heading" class="h5 mb-3">Filters</h2>
-    <form method="GET" action="/outdoorsy/campgrounds" class="row g-3" id="indexFilterForm" novalidate>
+    <form
+      method="GET"
+      action="/outdoorsy/campgrounds"
+      class="row g-3"
+      id="indexFilterForm"
+      novalidate
+    >
       <div class="col-12 col-md-3">
         <label for="q" class="form-label">Search</label>
         <input
@@ -37,7 +48,7 @@
           class="form-control"
           placeholder="Title, description, location..."
           value="X"
-        >
+        />
       </div>
 
       <div class="col-6 col-md-2">
@@ -50,7 +61,7 @@
           min="0"
           step="1"
           value="X"
-        >
+        />
       </div>
       <div class="col-6 col-md-2">
         <label for="maxPrice" class="form-label">Max Price</label>
@@ -62,7 +73,7 @@
           min="0"
           step="1"
           value="X"
-        >
+        />
       </div>
 
       <div class="col-6 col-md-2">
@@ -76,7 +87,7 @@
           min="-90"
           max="90"
           value="X"
-        >
+        />
       </div>
       <div class="col-6 col-md-2">
         <label for="lng" class="form-label">Lng</label>
@@ -89,7 +100,7 @@
           min="-180"
           max="180"
           value="X"
-        >
+        />
       </div>
       <div class="col-6 col-md-2">
         <label for="radiusKm" class="form-label">Radius (km)</label>
@@ -102,7 +113,7 @@
           max="500"
           step="1"
           value="X"
-        >
+        />
       </div>
 
       <div class="col-12 col-md-6 d-flex align-items-end gap-2">
@@ -110,7 +121,9 @@
           <i class="fas fa-search me-1" aria-hidden="true"></i>
           <span>Apply Filters</span>
         </button>
-        <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">Reset</a>
+        <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds"
+          >Reset</a
+        >
       </div>
     </form>
   </div>
@@ -121,98 +134,85 @@
   <h2 id="results-heading" class="visually-hidden">Campground Results</h2>
 
   <div class="d-flex justify-content-between align-items-center mb-2">
-    <div class="text-muted" aria-live="polite">
-      X resultX
-    </div>
-    
-      <div class="text-muted">Page X of X</div>
-    
+    <div class="text-muted" aria-live="polite">X resultX</div>
+
+    <div class="text-muted">Page X of X</div>
   </div>
 
   <!-- Cards -->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    
-      <div class="col">
-        <article class="card h-100 shadow-sm">
-          
-          <img
-            src="X"
-            class="card-img-top"
-            alt="X cover"
-            style="height: 200px; object-fit: cover;"
-          >
-          <div class="card-body d-flex flex-column">
-            <h3 class="card-title h5 mb-1">
-              <a class="text-decoration-none" href="/outdoorsy/campgrounds/X">X</a>
-            </h3>
-            <p class="card-text text-muted mb-2">
-              <i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i>
-              X
-            </p>
-            <div class="fw-bold mb-3">
-              $X / night
-            </div>
-            <div class="mt-auto d-flex gap-2">
-              <a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/X">View</a>
-              
-                <button
-                  type="button"
-                  class="btn btn-sm X toggle-fav-btn"
-                  data-id="X"
-                  aria-pressed="X"
-                  aria-label="X"
-                  title="X"
-                >
-                  <i class="fas fa-heart" aria-hidden="true"></i>
-                  <span class="visually-hidden">
-                    X
-                  </span>
-                  <span>Favorite</span>
-                </button>
-              
-            </div>
+    <div class="col">
+      <article class="card h-100 shadow-sm">
+        <img
+          src="X"
+          class="card-img-top"
+          alt="X cover"
+          style="height: 200px; object-fit: cover"
+        />
+        <div class="card-body d-flex flex-column">
+          <h3 class="card-title h5 mb-1">
+            <a class="text-decoration-none" href="/outdoorsy/campgrounds/X"
+              >X</a
+            >
+          </h3>
+          <p class="card-text text-muted mb-2">
+            <i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i>
+            X
+          </p>
+          <div class="fw-bold mb-3">$X / night</div>
+          <div class="mt-auto d-flex gap-2">
+            <a
+              class="btn btn-sm btn-primary flex-grow-1"
+              href="/outdoorsy/campgrounds/X"
+              >View</a
+            >
+
+            <button
+              type="button"
+              class="btn btn-sm X toggle-fav-btn"
+              data-id="X"
+              aria-pressed="X"
+              aria-label="X"
+              title="X"
+            >
+              <i class="fas fa-heart" aria-hidden="true"></i>
+              <span class="visually-hidden"> X </span>
+              <span>Favorite</span>
+            </button>
           </div>
-        </article>
-      </div>
-    
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
 <!-- Pagination -->
 
-  
-  <nav aria-label="Campgrounds pagination" class="mt-4">
-    <ul class="pagination justify-content-center">
-      <li class="page-item X">
-        
-          <span class="page-link" aria-disabled="true">Previous</span>
-        
-          <a class="page-link" href="X">Previous</a>
-        
-      </li>
-      
-        <li class="page-item X">
-          
-            <span class="page-link" aria-current="page">Page X</span>
-          
-            <a class="page-link" href="X">Page X</a>
-          
-        </li>
-      
-      <li class="page-item X">
-        
-          <span class="page-link" aria-disabled="true">Next</span>
-        
-          <a class="page-link" href="X">Next</a>
-        
-      </li>
-    </ul>
-  </nav>
+<nav aria-label="Campgrounds pagination" class="mt-4">
+  <ul class="pagination justify-content-center">
+    <li class="page-item X">
+      <span class="page-link" aria-disabled="true">Previous</span>
 
+      <a class="page-link" href="X">Previous</a>
+    </li>
+
+    <li class="page-item X">
+      <span class="page-link" aria-current="page">Page X</span>
+
+      <a class="page-link" href="X">Page X</a>
+    </li>
+
+    <li class="page-item X">
+      <span class="page-link" aria-disabled="true">Next</span>
+
+      <a class="page-link" href="X">Next</a>
+    </li>
+  </ul>
+</nav>
 
 <script>
   // Favorites toggle (AJAX)
-  document.querySelectorAll('.toggle-fav-btn').forEach(btn => {
+  document.querySelectorAll('.toggle-fav-btn').forEach((btn) => {
     btn.addEventListener('click', async (e) => {
       e.preventDefault();
       const id = btn.getAttribute('data-id');
@@ -220,7 +220,7 @@
         const res = await fetch(`/outdoorsy/campgrounds/${id}/favorite`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin'
+          credentials: 'same-origin',
         });
         if (res.status === 401) {
           window.location = '/outdoorsy/login';

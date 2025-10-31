@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 (function () {
   var favBtn = document.querySelector('.toggle-fav-btn');
   if (!favBtn) return;

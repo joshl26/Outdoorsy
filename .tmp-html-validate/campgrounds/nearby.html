@@ -1,8 +1,10 @@
 <!-- views/campgrounds/nearby.ejs -->
 <link rel="stylesheet" href="/outdoorsy/stylesheets/skeleton.css" />
-<link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-nearby.css" />
-
-
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/outdoorsy/stylesheets/campgrounds-nearby.css"
+/>
 
 <div class="fade-in">
   <div class="d-flex align-items-center justify-content-between mb-3">
@@ -52,23 +54,23 @@
             <div class="col-6 col-md-3 col-lg-2">
               <label for="sort" class="form-label">Sort By</label>
               <select id="sort" name="sort" class="form-select">
-                
-                  <option value="distance">Distance</option>
-                  <option value="priceAsc" selected>Price: Low to High</option>
-                  <option value="priceDesc">Price: High to Low</option>
-                
-                  <option value="distance">Distance</option>
-                  <option value="priceAsc">Price: Low to High</option>
-                  <option value="priceDesc" selected>Price: High to Low</option>
-                
-                  <option value="distance" selected>Distance</option>
-                  <option value="priceAsc">Price: Low to High</option>
-                  <option value="priceDesc">Price: High to Low</option>
-                
+                <option value="distance">Distance</option>
+                <option value="priceAsc" selected>Price: Low to High</option>
+                <option value="priceDesc">Price: High to Low</option>
+
+                <option value="distance">Distance</option>
+                <option value="priceAsc">Price: Low to High</option>
+                <option value="priceDesc" selected>Price: High to Low</option>
+
+                <option value="distance" selected>Distance</option>
+                <option value="priceAsc">Price: Low to High</option>
+                <option value="priceDesc">Price: High to Low</option>
               </select>
             </div>
 
-            <div class="col-12 col-md-3 col-lg-5 order-md-last d-none d-md-flex justify-content-end gap-2">
+            <div
+              class="col-12 col-md-3 col-lg-5 order-md-last d-none d-md-flex justify-content-end gap-2"
+            >
               <button
                 type="button"
                 class="btn btn-outline-primary"
@@ -155,7 +157,10 @@
             </div>
 
             <div class="col-12 col-md-4 col-lg-4">
-              <label for="radiusKm" class="form-label d-flex align-items-center justify-content-between">
+              <label
+                for="radiusKm"
+                class="form-label d-flex align-items-center justify-content-between"
+              >
                 <span>Radius (km)</span>
                 <small class="text-muted ms-2">max 500</small>
               </label>
@@ -174,12 +179,18 @@
                 />
                 <span class="input-group-text">km</span>
               </div>
-              <div id="radiusHelp" class="form-text">Distance in kilometers</div>
+              <div id="radiusHelp" class="form-text">
+                Distance in kilometers
+              </div>
             </div>
           </div>
 
           <div class="d-flex d-md-none gap-2 mt-3">
-            <button type="button" class="btn btn-outline-primary flex-grow-1" id="useLocationBtn_sm">
+            <button
+              type="button"
+              class="btn btn-outline-primary flex-grow-1"
+              id="useLocationBtn_sm"
+            >
               <i class="fas fa-crosshairs me-1" aria-hidden="true"></i>
               Use My Location
             </button>
@@ -193,17 +204,21 @@
     </div>
   </section>
 
-  
-    <div class="alert alert-info d-flex align-items-center" role="status">
-      <i class="fas fa-info-circle me-2" aria-hidden="true"></i>
-      <div>X</div>
-    </div>
-  
+  <div class="alert alert-info d-flex align-items-center" role="status">
+    <i class="fas fa-info-circle me-2" aria-hidden="true"></i>
+    <div>X</div>
+  </div>
 
   <!-- View Toggle -->
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="btn-group" role="group">
-      <input type="radio" class="btn-check" name="viewMode" id="viewGrid" checked />
+      <input
+        type="radio"
+        class="btn-check"
+        name="viewMode"
+        id="viewGrid"
+        checked
+      />
       <label class="btn btn-outline-primary" for="viewGrid">
         <i class="fas fa-th me-1" aria-hidden="true"></i> Grid
       </label>
@@ -217,12 +232,12 @@
   <!-- Map Section -->
   <section aria-labelledby="nearby-map-heading">
     <h2 id="nearby-map-heading" class="visually-hidden">Map Results</h2>
-    <div id="mapContainer" class="card mb-4 shadow-sm" style="display:none;">
+    <div id="mapContainer" class="card mb-4 shadow-sm" style="display: none">
       <!-- Skeleton Map -->
       <div class="skeleton-map"></div>
 
       <!-- Real Map -->
-      <div class="card-body real-map-content" style="display:none;">
+      <div class="card-body real-map-content" style="display: none">
         <div
           id="nearbyStaticMap"
           class="ratio ratio-16x9 bg-light rounded js-static-map"
@@ -239,133 +254,134 @@
 
   <!-- Grid Section -->
   <section aria-labelledby="nearby-results-heading" id="gridContainer">
-    <h2 id="nearby-results-heading" class="visually-hidden">Campground Results</h2>
+    <h2 id="nearby-results-heading" class="visually-hidden">
+      Campground Results
+    </h2>
 
     <!-- Skeleton Grid (displayed before load) -->
-    <div class="skeleton-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
-      
-        <div class="col">
-          <div class="skeleton-card">
-            <div class="skeleton-card-img"></div>
-            <div class="skeleton-card-body">
-              <div class="skeleton skeleton-title"></div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text short"></div>
-              <div class="d-flex gap-2 mt-2 mb-3">
-                <div class="skeleton skeleton-badge"></div>
-                <div class="skeleton skeleton-badge"></div>
-              </div>
-              <div class="skeleton skeleton-btn"></div>
+    <div
+      class="skeleton-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4"
+    >
+      <div class="col">
+        <div class="skeleton-card">
+          <div class="skeleton-card-img"></div>
+          <div class="skeleton-card-body">
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text short"></div>
+            <div class="d-flex gap-2 mt-2 mb-3">
+              <div class="skeleton skeleton-badge"></div>
+              <div class="skeleton skeleton-badge"></div>
             </div>
+            <div class="skeleton skeleton-btn"></div>
           </div>
         </div>
-      
+      </div>
     </div>
 
     <!-- Real Grid (hidden until JS shows) -->
-    <div class="real-grid-content" style="display:none;">
-      
-        <div class="alert alert-info">
-          <i class="fas fa-info-circle me-2"></i> No campgrounds found matching your criteria.
-        </div>
-      
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          
-            <div class="col">
-              <article class="card h-100 shadow-sm fade-in-content">
-                
-                  <img 
-                    src="X" 
-                    srcset="
-                      X 300w,
-                      X 600w,
-                      X 900w
-                    "
-                    sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 33vw"
-                    class="card-img-top" 
-                    alt="X cover" 
-                    width="600"
-                    height="400"
-                    loading="X"
-                    decoding="async"
-                    style="aspect-ratio: 3 / 2; object-fit: cover; object-position: center;"
-                  />
-                
-                  <img 
-                    src="X" 
-                    class="card-img-top" 
-                    alt="X cover" 
-                    width="600"
-                    height="400"
-                    loading="X"
-                    decoding="async"
-                    style="aspect-ratio: 3 / 2; object-fit: cover; object-position: center;"
-                  />
-                
-                <div class="card-body d-flex flex-column">
-                  <h3 class="card-title h5">
-<a class="text-decoration-none" href="/outdoorsy/campgrounds/X">X</a>                  </h3>
-                  <p class="card-text text-muted mb-1">
-                    <i class="fas fa-map-marker-alt me-1"></i> X
-                  </p>
-                  <div class="d-flex align-items-center gap-2 mb-2">
-                    <div class="fw-bold">$X/night</div>
-                    
-                      <span class="badge bg-info-subtle text-info border">
-                        <i class="fas fa-route me-1"></i> X km
-                      </span>
-                    
-                  </div>
-                  <div class="mt-auto d-flex gap-2">
-<a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/X">View</a>                    
-                      <button
-                        type="button"
-                        class="btn btn-sm X toggle-fav-btn"
-                        data-id="X"
-                        aria-pressed="X">
-                        <i class="fas fa-heart"></i> Favorite
-                      </button>
-                    
-                  </div>
-                </div>
-              </article>
+    <div class="real-grid-content" style="display: none">
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle me-2"></i> No campgrounds found matching
+        your criteria.
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="col">
+          <article class="card h-100 shadow-sm fade-in-content">
+            <img
+              src="X"
+              srcset="X 300w, X 600w, X 900w"
+              sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 33vw"
+              class="card-img-top"
+              alt="X cover"
+              width="600"
+              height="400"
+              loading="X"
+              decoding="async"
+              style="
+                aspect-ratio: 3 / 2;
+                object-fit: cover;
+                object-position: center;
+              "
+            />
+
+            <img
+              src="X"
+              class="card-img-top"
+              alt="X cover"
+              width="600"
+              height="400"
+              loading="X"
+              decoding="async"
+              style="
+                aspect-ratio: 3 / 2;
+                object-fit: cover;
+                object-position: center;
+              "
+            />
+
+            <div class="card-body d-flex flex-column">
+              <h3 class="card-title h5">
+                <a class="text-decoration-none" href="/outdoorsy/campgrounds/X"
+                  >X</a
+                >
+              </h3>
+              <p class="card-text text-muted mb-1">
+                <i class="fas fa-map-marker-alt me-1"></i> X
+              </p>
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <div class="fw-bold">$X/night</div>
+
+                <span class="badge bg-info-subtle text-info border">
+                  <i class="fas fa-route me-1"></i> X km
+                </span>
+              </div>
+              <div class="mt-auto d-flex gap-2">
+                <a
+                  class="btn btn-sm btn-primary flex-grow-1"
+                  href="/outdoorsy/campgrounds/X"
+                  >View</a
+                >
+                <button
+                  type="button"
+                  class="btn btn-sm X toggle-fav-btn"
+                  data-id="X"
+                  aria-pressed="X"
+                >
+                  <i class="fas fa-heart"></i> Favorite
+                </button>
+              </div>
             </div>
-          
+          </article>
         </div>
-      
+      </div>
     </div>
   </section>
 
   <!-- Pagination -->
-  
-    <nav aria-label="Nearby pagination" class="mt-4">
-      <ul class="pagination justify-content-center">
-        <li class="page-item X">
-          
-            <span class="page-link">Previous</span>
-          
-            <a class="page-link" href="?page=X">Previous</a>
-          
-        </li>
-        
-          <li class="page-item X">
-            
-              <span class="page-link">Page X</span>
-            
-              <a class="page-link" href="?page=X">Page X</a>
-            
-          </li>
-        
-        <li class="page-item X">
-          
-            <span class="page-link">Next</span>
-          
-            <a class="page-link" href="?page=X">Next</a>
-          
-        </li>
-      </ul>
-    </nav>
-  
+
+  <nav aria-label="Nearby pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item X">
+        <span class="page-link">Previous</span>
+
+        <a class="page-link" href="?page=X">Previous</a>
+      </li>
+
+      <li class="page-item X">
+        <span class="page-link">Page X</span>
+
+        <a class="page-link" href="?page=X">Page X</a>
+      </li>
+
+      <li class="page-item X">
+        <span class="page-link">Next</span>
+
+        <a class="page-link" href="?page=X">Next</a>
+      </li>
+    </ul>
+  </nav>
 
   <!-- Scripts -->
   <script defer src="/outdoorsy/js/nearby-geolocate.js"></script>

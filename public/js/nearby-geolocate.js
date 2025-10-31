@@ -1,3 +1,5 @@
+/* eslint-disable */
+/* eslint-disable no-console */
 // public/js/nearby-geolocate.js
 (function () {
   function onGeoSuccess(pos) {

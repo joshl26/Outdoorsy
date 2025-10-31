@@ -16,7 +16,8 @@
       aria-describedby="edit-cg-help"
     >
       <p id="edit-cg-help" class="visually-hidden">
-        Update the campground title, location, price, description, and images, then submit to save changes.
+        Update the campground title, location, price, description, and images,
+        then submit to save changes.
       </p>
 
       <!-- Title -->
@@ -30,7 +31,7 @@
           name="campground[title]"
           value="X"
           required
-        >
+        />
         <div class="valid-feedback" aria-live="polite">Looks good!</div>
       </div>
 
@@ -45,7 +46,7 @@
           name="campground[location]"
           value="X"
           required
-        >
+        />
         <div class="valid-feedback" aria-live="polite">Looks good!</div>
       </div>
 
@@ -67,7 +68,7 @@
             pattern="^\\d+(\\.\\d{1,2})?$"
             value="X"
             required
-          >
+          />
           <div class="valid-feedback" aria-live="polite">Looks good!</div>
         </div>
         <div class="form-text">Enter a number like 25 or 25.50</div>
@@ -83,7 +84,9 @@
           name="campground[description]"
           rows="4"
           required
-        >X</textarea>
+        >
+X</textarea
+        >
         <div class="valid-feedback" aria-live="polite">Looks good!</div>
       </div>
 
@@ -98,50 +101,44 @@
           name="image"
           multiple
           aria-describedby="cg-images-help"
-        >
-        <div id="cg-images-help" class="form-text">You can select multiple files.</div>
+        />
+        <div id="cg-images-help" class="form-text">
+          You can select multiple files.
+        </div>
       </div>
 
       <!-- Existing Images with Delete checkboxes -->
-      
-        <fieldset class="mb-3">
-          <legend class="h6 mb-2">Existing Images</legend>
-          <div class="row g-3">
-            
-              <div class="col-12 d-flex align-items-start gap-3">
-                <img
-                  src="X"
-                  class="img-thumbnail"
-                  alt="X"
-                  style="max-width: 160px; height: auto;"
-                >
-                <div class="form-check mt-2">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="X"
-                    name="deleteImages[X]"
-                    value="X"
-                  >
-                  <label class="form-check-label" for="X">
-                    Delete this image
-                  </label>
-                </div>
-              </div>
-            
+
+      <fieldset class="mb-3">
+        <legend class="h6 mb-2">Existing Images</legend>
+        <div class="row g-3">
+          <div class="col-12 d-flex align-items-start gap-3">
+            <img
+              src="X"
+              class="img-thumbnail"
+              alt="X"
+              style="max-width: 160px; height: auto"
+            />
+            <div class="form-check mt-2">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="X"
+                name="deleteImages[X]"
+                value="X"
+              />
+              <label class="form-check-label" for="X">
+                Delete this image
+              </label>
+            </div>
           </div>
-        </fieldset>
-      
+        </div>
+      </fieldset>
 
       <!-- Submit -->
       <div class="mb-3 d-flex gap-2">
-        <button type="submit" class="btn btn-info">
-          Update Campground
-        </button>
-        <a
-          class="btn btn-outline-secondary"
-          href="/outdoorsy/campgrounds/X"
-        >
+        <button type="submit" class="btn btn-info">Update Campground</button>
+        <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/X">
           Back to Campground
         </a>
       </div>

@@ -37,7 +37,7 @@ const parseNum = (val) => {
   const n = Number(val);
   return Number.isFinite(n) ? n : undefined;
 };
-const clampStr = (s, n) => (s ? String(s).slice(0, n) : '');
+// const clampStr = (s, n) => (s ? String(s).slice(0, n) : '');
 
 /**
  * Build a full URL from the current request with optional overrides
