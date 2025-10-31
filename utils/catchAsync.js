@@ -7,8 +7,10 @@
  * @param {Function} fn - async middleware function (req, res, next) => Promise
  * @returns {Function} wrapped middleware with error handling
  */
+// utils/catchAsync.js
 module.exports = function catchAsync(fn) {
   return function (req, res, next) {
-    fn(req, res, next).catch(next);
+    Promise.resolve(fn(req, res, next)).catch(next);
+    // ↑ Promise.resolve wraps the result, so even non-async functions work
   };
 };

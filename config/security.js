@@ -12,28 +12,25 @@ const helmet = require('helmet');
 const helmetConfig = helmet({
   contentSecurityPolicy: {
     directives: {
-      // Default policy: only allow resources from same origin
       defaultSrc: ["'self'"],
 
-      // Allowed script sources including inline scripts and trusted CDNs
       scriptSrc: [
         "'self'",
-        "'unsafe-inline'", // Allow inline scripts (use with caution)
+        "'unsafe-inline'",
         'https://cdn.jsdelivr.net',
         'https://api.mapbox.com',
         'https://cdnjs.cloudflare.com',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
         'https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js',
-        'https://static.cloudflareinsights.com', // For Cloudflare Insights script
+        'https://static.cloudflareinsights.com',
       ],
 
-      // Allow web workers from same origin and blob URLs
       workerSrc: ["'self'", 'blob:'],
 
-      // Allowed style sources including inline styles and trusted CDNs
       styleSrc: [
         "'self'",
-        "'unsafe-inline'", // Allow inline styles (use with caution)
+        "'unsafe-inline'",
+        'https://joshlehman.ca', // explicitly allow first-party absolute URLs
         'https://cdn.jsdelivr.net',
         'https://api.mapbox.com',
         'https://cdnjs.cloudflare.com',
@@ -42,10 +39,16 @@ const helmetConfig = helmet({
         'https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css',
       ],
 
-      // Allowed image sources including data URIs, blobs, and Cloudinary
-      imgSrc: ["'self'", 'data:', 'blob:', 'https://res.cloudinary.com'],
+      imgSrc: [
+        "'self'",
+        'data:',
+        'blob:',
+        'https://joshlehman.ca', // allow first-party images
+        'https://res.cloudinary.com',
+        'https://api.mapbox.com', // if you show map tiles as images
+        'https://tiles.mapbox.com', // add any tile server or CDN if used
+      ],
 
-      // Allowed connection sources for APIs and events
       connectSrc: [
         "'self'",
         'https://api.mapbox.com',
@@ -53,17 +56,21 @@ const helmetConfig = helmet({
         'https://events.mapbox.com',
       ],
 
-      // Allowed font sources
-      fontSrc: ["'self'", 'https://cdnjs.cloudflare.com'],
+      fontSrc: [
+        "'self'",
+        'https://cdnjs.cloudflare.com',
+        'https://cdn.jsdelivr.net', // if pulling fonts via jsdelivr
+        'data:', // allow embedded font sources if needed
+      ],
 
-      // Disallow embedding objects like Flash
       objectSrc: ["'none'"],
 
-      // No upgrade insecure requests directive (empty array)
+      // Explicitly allow manifest
+      manifestSrc: ["'self'", 'https://joshlehman.ca'],
+
       upgradeInsecureRequests: [],
     },
   },
-
   // Disable Cross-Origin Embedder Policy to avoid issues with some resources
   crossOriginEmbedderPolicy: false,
 });

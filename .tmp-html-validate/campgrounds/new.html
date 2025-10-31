@@ -1,0 +1,129 @@
+<!-- views/campgrounds/new.ejs -->
+<div class="row">
+  <h1 class="text-center" id="new-campground-heading">New Campground</h1>
+
+  <div class="col-md-6 offset-md-3">
+    <!-- Form section heading (visually hidden for a11y outline) -->
+    <h2 class="visually-hidden">Create campground form</h2>
+
+    <form
+      action="/outdoorsy/campgrounds"
+      method="POST"
+      novalidate
+      class="validated-form needs-validation"
+      enctype="multipart/form-data"
+      aria-labelledby="new-campground-heading"
+    >
+      <fieldset>
+        <legend class="visually-hidden">Campground details</legend>
+
+        <!-- Title -->
+        <div class="mb-3">
+          <label class="form-label" for="title">Title</label>
+          <input
+            class="form-control"
+            type="text"
+            id="title"
+            name="campground[title]"
+            required
+          />
+          <div class="valid-feedback" aria-live="polite">Looks good!</div>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-3">
+          <label class="form-label" for="location">Location</label>
+          <input
+            class="form-control"
+            type="text"
+            id="location"
+            name="campground[location]"
+            required
+          />
+          <div class="valid-feedback" aria-live="polite">Looks good!</div>
+        </div>
+
+        <!-- Image URL -->
+        <div class="mb-3">
+          <label class="form-label" for="imageUrl">Image URL</label>
+          <input
+            class="form-control"
+            type="url"
+            id="imageUrl"
+            name="campground[image]"
+            inputmode="url"
+            required
+          />
+          <div class="valid-feedback" aria-live="polite">Looks good!</div>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+          <label class="form-label" for="price">Campground Price</label>
+          <div class="input-group">
+            <span class="input-group-text" id="price-currency" aria-hidden="true">$</span>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              name="campground[price]"
+              placeholder="0.00"
+              inputmode="decimal"
+              step="0.01"
+              min="0"
+              aria-describedby="price-currency price-help"
+              required
+            />
+          </div>
+          <div id="price-help" class="form-text">USD per night.</div>
+          <div class="valid-feedback" aria-live="polite">Looks good!</div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label class="form-label" for="description">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="campground[description]"
+            rows="4"
+            required
+          ></textarea>
+          <div class="valid-feedback" aria-live="polite">Looks good!</div>
+        </div>
+
+        <!-- Upload Images -->
+        <div class="mb-3">
+          <div class="form-file custom-file">
+            <input
+              type="file"
+              class="form-file-input"
+              id="choose-image"
+              name="image"
+              multiple
+              aria-describedby="image-help"
+            />
+            <label class="form-file-label" for="choose-image">
+              <span class="form-file-text custom-file-label">Choose image(s)...</span>
+              <span class="form-file-button">Browse</span>
+            </label>
+            <div id="image-help" class="form-text">You can select multiple images.</div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="mb-3">
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            <span class="visually-hidden">Submit new campground</span>
+            <span aria-hidden="true">Add Campground</span>
+          </button>
+        </div>
+      </fieldset>
+    </form>
+
+    <p class="mt-3">
+      <a class="btn btn-link p-0" href="/outdoorsy/campgrounds">All Campgrounds</a>
+    </p>
+  </div>
+</div>

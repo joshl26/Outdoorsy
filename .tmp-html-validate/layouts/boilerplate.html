@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('../partials/head', { 
-    pageTitle: typeof pageTitle !== 'undefined' ? pageTitle : 'Outdoorsy',
-    pageDescription: typeof pageDescription !== 'undefined' ? pageDescription : 'Discover and share amazing campgrounds',
-    currentUrl: typeof currentUrl !== 'undefined' ? currentUrl : '',
-    canonical: typeof canonical !== 'undefined' ? canonical : '',
-    socialImageUrl: typeof socialImageUrl !== 'undefined' ? socialImageUrl : '',
-    breadcrumbTrail: typeof breadcrumbTrail !== 'undefined' ? breadcrumbTrail : [],
-    jsonLd: typeof jsonLd !== 'undefined' ? jsonLd : null,
-    robots: typeof robots !== 'undefined' ? robots : '',
-    isHome: typeof isHome !== 'undefined' ? isHome : false
-  }) %>
+  X
 
-  <body class="d-flex flex-column page-<%= typeof isHome !== 'undefined' && isHome ? 'home' : (typeof pageClass !== 'undefined' ? pageClass : 'default') %>">
+  <body class="d-flex flex-column page-X">
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <%- include('../partials/navbar') %>
+    X
 
     <!-- Flash messages / alerts -->
-    <% if (typeof success !== 'undefined' && success && success.length) { %>
+    
       <div class="container mt-3">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <%= success %>
+          X
           <button 
             type="button" 
             class="btn-close" 
@@ -31,12 +21,12 @@
           ></button>
         </div>
       </div>
-    <% } %>
     
-    <% if (typeof error !== 'undefined' && error && error.length) { %>
+    
+    
       <div class="container mt-3">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <%= error %>
+          X
           <button 
             type="button" 
             class="btn-close" 
@@ -45,19 +35,15 @@
           ></button>
         </div>
       </div>
-    <% } %>
+    
 
     <!-- Main content area -->
-    <% 
-      const isHomePage = typeof isHome !== 'undefined' ? isHome : false;
-      const mainClass = isHomePage ? 'fade-in' : 'container mt-5 fade-in';
-      const mainLabel = isHomePage ? 'Main content (home)' : 'Main content';
-    %>
-    <main id="main-content" class="<%= mainClass %>" aria-label="<%= mainLabel %>">
-      <%- body %>
+    
+    <main id="main-content" class="X" aria-label="X">
+      X
     </main>
 
-    <%- include('../partials/footer') %>
+    X
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script

@@ -1,0 +1,219 @@
+<!-- views/partials/footer.ejs -->
+<head>
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/outdoorsy/stylesheets/footer.css"
+  />
+</head>
+
+<footer
+  class="footer mt-auto"
+  aria-labelledby="footer-heading"
+>
+  <!-- Visually hidden heading for assistive tech -->
+  <h2 class="visually-hidden" id="footer-heading">Outdoorsy Website Footer</h2>
+
+  <div class="container py-5">
+    <div class="row g-4">
+      <!-- Brand Section -->
+      <div class="col-lg-4 col-md-6">
+        <h3 class="fw-bold h6 mb-3">
+          <i class="fas fa-campground text-primary me-2" aria-hidden="true"></i>
+          Outdoorsy
+        </h3>
+        <p class="mb-3">
+          Your gateway to discovering amazing outdoor adventures, connecting
+          with nature lovers, and sharing unforgettable camping experiences.
+        </p>
+        <div class="social-links">
+          <a
+            href="https://facebook.com/outdoorsy"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-outline-light btn-sm me-2"
+            aria-label="Visit Outdoorsy on Facebook"
+          >
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://twitter.com/outdoorsy"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-outline-light btn-sm me-2"
+            aria-label="Visit Outdoorsy on Twitter"
+          >
+            <i class="fab fa-twitter" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://instagram.com/outdoorsy"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-outline-light btn-sm me-2"
+            aria-label="Visit Outdoorsy on Instagram"
+          >
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://youtube.com/outdoorsy"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-outline-light btn-sm"
+            aria-label="Visit Outdoorsy on YouTube"
+          >
+            <i class="fab fa-youtube" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-lg-2 col-md-6">
+        <h3 class="fw-bold h6 mb-3">Explore</h3>
+        <ul class="list-unstyled footer-links">
+          <li><a href="X/campgrounds">All Campgrounds</a></li>
+          <li><a href="X/campgrounds/new">Add Campground</a></li>
+          <li><a href="#">Popular Destinations</a></li>
+          <li><a href="#">Map View</a></li>
+        </ul>
+      </div>
+
+      <!-- Community -->
+      <div class="col-lg-2 col-md-6">
+        <h3 class="fw-bold h6 mb-3">Community</h3>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div class="col-lg-2 col-md-6">
+        <h3 class="fw-bold h6 mb-3">Support</h3>
+        <ul class="list-unstyled footer-links">
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Safety Tips</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="col-lg-2 col-md-6">
+        <form
+          class="newsletter-form"
+          aria-labelledby="newsletter-heading"
+          novalidate
+        >
+          <h3 id="newsletter-heading" class="fw-bold h6 mb-3">Stay Updated</h3>
+          <p class="small mb-3">
+            Get the latest outdoor tips and destinations.
+          </p>
+          <div class="input-group input-group-sm">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Your email"
+              aria-label="Email for newsletter"
+              required
+            />
+            <button
+              class="btn btn-primary"
+              type="submit"
+              aria-label="Subscribe to newsletter"
+            >
+              <i class="fas fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="my-4 border-secondary opacity-25" />
+
+    <!-- Bottom Bar -->
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <p class="small mb-0">
+          &copy; 2025 Outdoorsy. All rights reserved.
+          <span class="d-none d-md-inline"
+            >| Built with
+            <i class="fas fa-heart text-danger" aria-hidden="true"></i>
+            for nature lovers</span
+          >
+        </p>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <p class="small mb-0">
+          Designed by
+          <a href="#" class="text-decoration-none fw-semibold">Josh Lehman</a>
+          <span class="mx-2" aria-hidden="true">•</span>
+          <a href="#" class="text-decoration-none">BlackRock Design Haus</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button
+    id="backToTop"
+    class="back-to-top btn btn-primary"
+    type="button"
+    aria-label="Back to top"
+    style="display: none"
+  >
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    <span class="visually-hidden">Back to top</span>
+  </button>
+</footer>
+
+<!-- Footer JavaScript -->
+<script>
+  // Back to top button functionality
+  const backToTopButton = document.getElementById('backToTop');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 300) {
+      backToTopButton.style.display = 'block';
+    } else {
+      backToTopButton.style.display = 'none';
+    }
+  });
+
+  backToTopButton.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Newsletter form submission
+  document
+    .querySelector('.newsletter-form')
+    ?.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      alert(
+        "Thanks for subscribing! We'll keep you updated on the best outdoor adventures."
+      );
+      this.reset();
+    });
+</script>
+
+<!-- Accessibility utility (if not already in a global stylesheet) -->
+<style>
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .back-to-top:focus {
+    outline: 2px solid var(--bs-primary);
+    outline-offset: 2px;
+  }
+</style>

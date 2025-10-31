@@ -9,6 +9,7 @@ const passport = require('passport');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
+const seoRoutes = require('./routes/seo'); // <-- NEW: robots.txt + sitemap.xml
 const { basePath, buildPath } = require('./config/basePath');
 const expressLayouts = require('express-ejs-layouts');
 
@@ -79,11 +80,30 @@ app.use((req, res, next) => {
   next();
 });
 
-// Health check endpoint for CI/testing tools (responds at root /)
+// Optional: normalize duplicate trailing slashes under basePath (SEO-friendly)
+app.use((req, res, next) => {
+  if (req.path.startsWith(basePath) && req.path !== basePath) {
+    // Collapse multiple trailing slashes: /outdoorsy/campgrounds// -> /outdoorsy/campgrounds/
+    const normalized = req.path.replace(/\/{2,}/g, '/');
+    if (normalized !== req.path) {
+      return res.redirect(
+        301,
+        normalized +
+          (req.url.endsWith('/') ? '' : req.url.slice(req.path.length))
+      );
+    }
+  }
+  next();
+});
+
+// Health check endpoint for CI/testing tools
 app.head('/', (req, res) => res.sendStatus(200));
 app.get('/healthz', (req, res) => res.status(200).send('ok'));
 
-// Mount routes with appropriate base paths
+// Mount SEO routes so robots/sitemap live under /outdoorsy
+app.use(basePath, seoRoutes);
+
+// Mount domain routes with appropriate base paths
 app.use(buildPath('campgrounds'), campgroundRoutes);
 app.use(buildPath('campgrounds/:id/reviews'), reviewRoutes);
 app.use(basePath, userRoutes);
@@ -97,15 +117,17 @@ app.get(basePath, (req, res) => {
 
 // Catch-all route for undefined paths - triggers 404 error
 app.all('*', (req, res, next) => {
+  if (res.headersSent) return; // ← Guard added
   const err = new Error('Page Not Found');
   err.statusCode = 404;
   next(err);
 });
 
 // Centralized error handling middleware
-// Renders error page with message and stack trace in development
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
+  if (res.headersSent) return next(err); // ← Guard added
+
   const statusCode = err.statusCode || 500;
   if (!err.message) err.message = 'Something went wrong!';
   const isDev = process.env.NODE_ENV === 'development';

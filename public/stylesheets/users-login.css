@@ -146,3 +146,10 @@ body {
       no-repeat center right / cover;
   }
 }
+
+.valid-feedback {
+  color: #155724; /* Dark green, Bootstrap’s success text color */
+  background-color: #d4edda; /* Light green background */
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}

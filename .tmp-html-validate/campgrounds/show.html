@@ -1,0 +1,446 @@
+<!-- views/campgrounds/show.ejs -->
+<link rel="stylesheet" href="/outdoorsy/stylesheets/skeleton.css" />
+<link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-show.css" />
+
+
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <div class="d-flex align-items-center gap-2">
+    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">
+      <i class="fas fa-arrow-left me-1" aria-hidden="true"></i>
+      <span>Back</span>
+    </a>
+    <!-- Page title (h1) with safe fallback -->
+    <h1 class="m-0">
+      Campground
+      
+        <span> — X</span>
+      
+    </h1>
+  </div>
+
+  <div class="d-flex gap-2">
+    <a
+      class="btn btn-outline-secondary"
+      href="/outdoorsy/campgrounds/nearby?lat=X&lng=X&radiusKm=25"
+    >
+      <i class="fas fa-location-arrow me-1" aria-hidden="true"></i>
+      <span>Nearby</span>
+    </a>
+
+    
+      <a class="btn btn-outline-primary" href="/outdoorsy/campgrounds/X/edit">
+        <i class="fas fa-edit me-1" aria-hidden="true"></i>
+        <span>Edit</span>
+      </a>
+    
+
+    
+      <!-- Favorite button with visible text -->
+      <button
+        type="button"
+        class="btn btn-sm X toggle-fav-btn"
+        data-id="X"
+        aria-pressed="X"
+        title="X"
+      >
+        <i class="fas fa-heart me-1" aria-hidden="true"></i>
+        <span>X</span>
+      </button>
+    
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-12 col-lg-8">
+    <!-- Gallery -->
+    <section aria-labelledby="gallery-heading" class="card shadow-sm mb-3">
+      <div class="card-body p-0">
+        <h2 id="gallery-heading" class="visually-hidden">Gallery</h2>
+
+        <!-- Gallery Skeleton -->
+        <div id="gallerySkeleton" class="skeleton-box ratio ratio-16x9" aria-hidden="true"></div>
+
+        
+          <div
+            id="carouselImages"
+            class="carousel slide" style="display:none;"
+            data-bs-ride="carousel"
+            aria-roledescription="carousel"
+          >
+            <div class="carousel-inner">
+              
+                <div class="carousel-item X">
+                  <img
+                    src="X"
+                    srcset="
+                      X 400w,
+                      X 800w,
+                      X 1200w
+                    "
+                    sizes="(max-width: 600px) 100vw, (max-width: 992px) 90vw, 800px"
+                    class="d-block w-100"
+                    alt="X - View X of X"
+                    width="X"
+                    height="X"
+                    decoding="async"
+                    X
+                    style="max-height: 500px; object-fit: cover; object-position: center; aspect-ratio: X / X;"
+                    onload="window.__galleryImgLoaded && window.__galleryImgLoaded()"
+                  />
+                </div>
+              
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev" aria-label="Previous image">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next" aria-label="Next image">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        
+          <img
+            id="galleryFallback"
+            src="https://placehold.co/1200x500?text=No+Image"
+            class="w-100"
+            alt="No images available for this campground"
+            width="1200"
+            height="500"
+            decoding="async"
+            loading="lazy"
+            style="display:none; object-fit: cover; object-position: center; aspect-ratio: 1200 / 500;"
+          />
+        
+      </div>
+    </section>
+
+    <!-- Details -->
+    <section aria-labelledby="details-heading" class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 id="details-heading" class="card-title h5 mb-3">About this campground</h2>
+        <p class="card-text">X</p>
+        <div class="d-flex align-items-center gap-3">
+          <div class="fw-bold fs-5">$X / night</div>
+          <div class="text-muted">
+            <i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i>
+            X
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Getting there (HowTo) -->
+    
+    <section aria-labelledby="getting-there-heading" class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 id="getting-there-heading" class="card-title h5 mb-3">How to get to X</h2>
+
+        
+          <p class="text-muted mb-2">Estimated time: X</p>
+        
+
+        
+          <div class="mb-2">
+            <strong>Suggested supplies:</strong>
+            <ul class="mb-0">
+              
+                <li>X</li>
+              
+            </ul>
+          </div>
+        
+
+        
+          <div class="mb-3">
+            <strong>Tools:</strong>
+            <ul class="mb-0">
+              
+                <li>X</li>
+              
+            </ul>
+          </div>
+        
+
+        <ol class="list-group list-group-numbered">
+          
+            <li class="list-group-item">
+              <div class="fw-semibold">X</div>
+              <div class="text-muted">X</div>
+              
+                <div class="mt-1">
+                  <a class="link-primary" href="X" target="_blank" rel="noopener">Open step link</a>
+                </div>
+              
+              
+                <div class="mt-2">
+                  <img 
+                    src="X" 
+                    srcset="
+                      X 400w,
+                      X 800w
+                    "
+                    sizes="(max-width: 600px) 100vw, 800px"
+                    class="img-fluid rounded" 
+                    alt="X" 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                </div>
+              
+            </li>
+          
+        </ol>
+      </div>
+    </section>
+
+    <!-- Booking guide (HowTo) -->
+    
+    <section aria-labelledby="booking-guide-heading" class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 id="booking-guide-heading" class="card-title h5 mb-3">How to book X</h2>
+
+        
+          <p class="text-muted mb-2">Estimated time: X</p>
+        
+
+        
+          <div class="mb-2">
+            <strong>What you'll need:</strong>
+            <ul class="mb-0">
+              
+                <li>X</li>
+              
+            </ul>
+          </div>
+        
+
+        
+          <div class="mb-3">
+            <strong>Tools:</strong>
+            <ul class="mb-0">
+              
+                <li>X</li>
+              
+            </ul>
+          </div>
+        
+
+        <ol class="list-group list-group-numbered">
+          
+            <li class="list-group-item">
+              <div class="fw-semibold">X</div>
+              <div class="text-muted">X</div>
+              
+                <div class="mt-1">
+                  <a class="link-primary" href="X" target="_blank" rel="noopener">Open step link</a>
+                </div>
+              
+              
+                <div class="mt-2">
+                  <img 
+                    src="X" 
+                    srcset="
+                      X 400w,
+                      X 800w
+                    "
+                    sizes="(max-width: 600px) 100vw, 800px"
+                    class="img-fluid rounded" 
+                    alt="X" 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                </div>
+              
+            </li>
+          
+        </ol>
+      </div>
+    </section>
+
+    <!-- FAQ (aligns with FAQPage JSON-LD) -->
+    
+    <section aria-labelledby="faq-heading" class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 id="faq-heading" class="card-title h5 mb-3">Frequently asked questions</h2>
+        
+          <div class="text-muted">No FAQs available.</div>
+        
+          <div class="accordion" id="faqAccordion">
+            
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="X">
+                  <button class="accordion-button X" type="button" data-bs-toggle="collapse" data-bs-target="#X" aria-expanded="X" aria-controls="X">
+                    X
+                  </button>
+                </h3>
+                <div id="X" class="accordion-collapse collapse X" aria-labelledby="X" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    X
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section aria-labelledby="reviews-heading" class="card shadow-sm">
+      <div class="card-body">
+        <h2 id="reviews-heading" class="card-title h5 mb-3">Reviews</h2>
+
+        
+          <div class="text-muted">No reviews yet.</div>
+        
+          <div class="list-group">
+            
+              <article class="list-group-item">
+                <header class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <strong>X</strong>
+                    <span class="text-muted small ms-2">X</span>
+                  </div>
+                </header>
+                <p class="mb-1 mt-2">X</p>
+                
+                  <div class="text-warning" role="img" aria-label="X out of 5 stars">
+                    <i class="fas fa-star" aria-hidden="true"></i>
+                    <i class="far fa-star" aria-hidden="true"></i>
+                  </div>
+                
+              </article>
+            
+          </div>
+
+          
+            <nav aria-label="Reviews pagination" class="mt-3">
+              <ul class="pagination justify-content-center">
+                <li class="page-item X">
+                  
+                    <span class="page-link" aria-disabled="true">Previous</span>
+                  
+                    <a class="page-link" href="?page=X&limit=X">Previous</a>
+                  
+                </li>
+                
+                  <li class="page-item X">
+                    
+                      <span class="page-link" aria-current="page">Page X</span>
+                    
+                      <a class="page-link" href="?page=X&limit=X">Page X</a>
+                    
+                  </li>
+                
+                <li class="page-item X">
+                  
+                    <span class="page-link" aria-disabled="true">Next</span>
+                  
+                    <a class="page-link" href="?page=X&limit=X">Next</a>
+                  
+                </li>
+              </ul>
+            </nav>
+          
+        
+      </div>
+    </section>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="col-12 col-lg-4">
+    <section aria-labelledby="host-heading" class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 id="host-heading" class="card-title h6">Host</h2>
+        <p class="mb-1">
+          <strong>X</strong>
+        </p>
+        <p class="text-muted mb-0">
+          <i class="far fa-clock me-1" aria-hidden="true"></i>
+          Listed X
+        </p>
+      </div>
+    </section>
+
+    
+      <section aria-labelledby="location-heading" class="card shadow-sm">
+        <div class="card-body">
+          <h2 id="location-heading" class="card-title h6">Location</h2>
+          <div class="text-muted mb-2">X</div>
+
+          <!-- Map Skeleton -->
+          <div id="staticMapSkeleton" class="skeleton-box ratio ratio-16x9" aria-hidden="true"></div>
+
+          <div
+            class="ratio ratio-16x9 bg-light rounded"
+            id="staticMap"
+            style="display:none;"
+            data-lng="X"
+            data-lat="X"
+            data-token="X"
+            data-zoom="10"
+            data-size="800x450@2x"
+            data-style="mapbox/outdoors-v12"
+            data-pin="pin-s+ff0000"
+            role="img"
+            aria-label="Map preview of campground location"
+          ></div>
+        </div>
+      </section>
+      <!-- External, CSP-safe map loader -->
+      <script src="/outdoorsy/js/static-map.js" defer></script>
+    
+  </div>
+</div>
+
+<!-- External, CSP-safe favorites handler -->
+<script src="/outdoorsy/js/favorites.js" defer></script>
+
+<!-- Skeleton + reveal logic (tiny, CSP-safe) -->
+<script defer>
+  window.__galleryReadyCount = 0;
+  window.__galleryImgLoaded = function () {
+    window.__galleryReadyCount = (window.__galleryReadyCount || 0) + 1;
+    // Show after first image to reduce TTI
+    if (window.__galleryReadyCount >= 1) {
+      const skel = document.getElementById('gallerySkeleton');
+      const car = document.getElementById('carouselImages');
+      const fb = document.getElementById('galleryFallback');
+      if (skel) skel.style.display = 'none';
+      if (car) car.style.display = '';
+      if (!car && fb) fb.style.display = '';
+    }
+  };
+
+  // Fallback: reveal after timeout in case onload doesn't fire
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+      const car = document.getElementById('carouselImages');
+      if (!car || car.style.display === 'none') {
+        const skel = document.getElementById('gallerySkeleton');
+        const fb = document.getElementById('galleryFallback');
+        if (skel) skel.style.display = 'none';
+        if (car) car.style.display = '';
+        if (!car && fb) fb.style.display = '';
+      }
+    }, 1200);
+
+    // Static map reveal hook — static-map.js should dispatch a custom event when the image loads
+    document.addEventListener('static-map:loaded', function () {
+      const sk = document.getElementById('staticMapSkeleton');
+      const map = document.getElementById('staticMap');
+      if (sk) sk.style.display = 'none';
+      if (map) map.style.display = '';
+    });
+  });
+</script>
+
+<style>
+  .carousel .carousel-item img { border-radius: .5rem; }
+  .visually-hidden-focusable:active,
+  .visually-hidden-focusable:focus {
+    position: static; width: auto; height: auto; overflow: visible; clip: auto;
+  }
+</style>

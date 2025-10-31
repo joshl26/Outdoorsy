@@ -7,60 +7,90 @@ const User = require('../models/user');
 const { cloudinary } = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const { basePath } = require('../config/basePath');
-const mapBoxToken = process.env.MAPBOX_MAPBOX_TOKEN || process.env.MAPBOX_TOKEN; // tolerate either var
+const mapBoxToken = process.env.MAPBOX_MAPBOX_TOKEN || process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 const NotFoundError = require('../utils/errors/NotFoundError');
 const AppError = require('../utils/errors/AppError');
+const catchAsync = require('../utils/catchAsync');
 
 // Optional caching (enabled if utils/cache exists and OUTDOORSY_CACHE !== '0')
 let cacheGetOrSet = null;
 const enableCache = process.env.OUTDOORSY_CACHE !== '0';
 if (enableCache) {
   try {
-    // provide ../utils/cache.js with getOrSet(key, ttlSeconds, fetchFn)
     cacheGetOrSet = require('../utils/cache').getOrSet;
   } catch {
     cacheGetOrSet = null;
   }
 }
 
+// SEO constants
+const SITE_ROOT = 'https://joshlehman.ca';
+const SUB_ROOT = `${SITE_ROOT}/outdoorsy`;
+
+// Helpers
+const isFiniteNum = (v) => typeof v === 'number' && Number.isFinite(v);
+const parseNum = (val) => {
+  if (val === undefined || val === null) return undefined;
+  if (typeof val === 'string' && val.trim() === '') return undefined;
+  const n = Number(val);
+  return Number.isFinite(n) ? n : undefined;
+};
+const clampStr = (s, n) => (s ? String(s).slice(0, n) : '');
+
+/**
+ * Build a full URL from the current request with optional overrides
+ * (used for rel="prev"/rel="next" pagination links)
+ */
+const buildUrlWithParams = (req, overrideParams = {}) => {
+  const url = new URL(`${req.protocol}://${req.get('host')}${req.originalUrl}`);
+  const params = url.searchParams;
+  Object.entries(overrideParams).forEach(([k, v]) => {
+    if (v === undefined || v === null || v === '') {
+      params.delete(k);
+    } else {
+      params.set(k, String(v));
+    }
+  });
+  url.search = params.toString();
+  return url.toString();
+};
+
 /**
  * Render the form to create a new campground.
  */
 module.exports.renderNewForm = (req, res) => {
-  res.render('campgrounds/new');
+  res.render('campgrounds/new', {
+    pageTitle: 'Add New Campground | Outdoorsy',
+    pageDescription:
+      'Create a new campground listing on Outdoorsy and share your favorite outdoor spots with the community.',
+    currentUrl: req.originalUrl,
+    breadcrumbTrail: [
+      { name: 'Campgrounds', url: `${SUB_ROOT}/campgrounds` },
+      { name: 'New', url: `${SUB_ROOT}/campgrounds/new` },
+    ],
+  });
 };
 
 /**
  * Create a new campground.
- * - Geocode the location string to get coordinates.
- * - Validate geocoding results.
- * - Save campground with images and author info.
  */
 module.exports.createCampground = async (req, res, next) => {
   try {
-    if (!mapBoxToken) {
-      throw new AppError(
-        'Geocoding is not configured. Missing MAPBOX_TOKEN.',
-        500
-      );
-    }
+    if (!mapBoxToken) throw new AppError('Missing MAPBOX_TOKEN.', 500);
 
     const location = req.body?.campground?.location || '';
 
-    const geocodeFetch = async () => {
-      return await geocoder
-        .forwardGeocode({ query: location, limit: 1 })
-        .send();
-    };
+    const geocodeFetch = async () =>
+      await geocoder.forwardGeocode({ query: location, limit: 1 }).send();
+
     const geoData = cacheGetOrSet
       ? await cacheGetOrSet(`geo:${location}`, 86400, geocodeFetch)
       : await geocodeFetch();
 
-    if (!geoData?.body?.features?.length) {
+    if (!geoData?.body?.features?.length)
       throw new AppError('Invalid location provided', 400);
-    }
 
     const campground = new Campground(req.body.campground);
     campground.geometry = geoData.body.features[0].geometry;
@@ -71,8 +101,7 @@ module.exports.createCampground = async (req, res, next) => {
     campground.author = req.user._id;
 
     await campground.save();
-
-    req.flash('success', 'Successfully created a new campground!');
+    req.flash('success', 'Successfully created campground!');
     res.redirect(`${basePath}/campgrounds/${campground._id}`);
   } catch (err) {
     next(err);
@@ -80,38 +109,18 @@ module.exports.createCampground = async (req, res, next) => {
 };
 
 /**
- * Display campgrounds with filters and pagination.
- * Filters:
- * - q: text search across title, description, location (regex-based)
- * - minPrice, maxPrice: numeric range
- * - lat, lng, radiusKm: geo radius in kilometers (requires 2dsphere index)
- * Pagination:
- * - page, limit
+ * Index – main campgrounds listing.
  */
 module.exports.index = async (req, res, next) => {
   try {
-    // Pagination
     const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
     const limit = Math.min(parseInt(req.query.limit, 10) || 20, 100);
     const skip = (page - 1) * limit;
 
-    // Filters
     const filter = {};
-
-    // Helpers for robust parsing
-    const isFiniteNum = (v) => typeof v === 'number' && Number.isFinite(v);
-    const parseNum = (val) => {
-      if (val === undefined || val === null) return undefined;
-      if (typeof val === 'string' && val.trim() === '') return undefined;
-      const n = Number(val);
-      return Number.isFinite(n) ? n : undefined;
-    };
-
-    // Text search (regex OR). For large scale, consider MongoDB text index.
     const q = (req.query.q || '').trim();
     if (q) {
-      const safe = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(safe, 'i');
+      const regex = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
       filter.$or = [
         { title: regex },
         { description: regex },
@@ -119,7 +128,6 @@ module.exports.index = async (req, res, next) => {
       ];
     }
 
-    // Price range
     const minPrice = parseNum(req.query.minPrice);
     const maxPrice = parseNum(req.query.maxPrice);
     if (isFiniteNum(minPrice) || isFiniteNum(maxPrice)) {
@@ -128,7 +136,6 @@ module.exports.index = async (req, res, next) => {
       if (isFiniteNum(maxPrice)) filter.price.$lte = maxPrice;
     }
 
-    // Geo radius (Point [lng, lat])
     const lat = parseNum(req.query.lat);
     const lng = parseNum(req.query.lng);
     const radiusKm = parseNum(req.query.radiusKm);
@@ -138,11 +145,8 @@ module.exports.index = async (req, res, next) => {
       isFiniteNum(radiusKm) &&
       radiusKm > 0
     ) {
-      const earthRadiusKm = 6378.1;
-      const radiusRadians = Math.min(radiusKm, 500) / earthRadiusKm; // cap to 500km
-      filter.geometry = {
-        $geoWithin: { $centerSphere: [[lng, lat], radiusRadians] },
-      };
+      const rads = Math.min(radiusKm, 500) / 6378.1;
+      filter.geometry = { $geoWithin: { $centerSphere: [[lng, lat], rads] } };
     }
 
     const projection = {
@@ -150,31 +154,14 @@ module.exports.index = async (req, res, next) => {
       price: 1,
       location: 1,
       'images.url': 1,
-      'images.filename': 1,
       geometry: 1,
-      createdAt: 1,
-      author: 1,
       description: 1,
     };
-    const sort = { createdAt: -1 };
-
-    // Optional caching
-    const keyParts = [
-      `p${page}`,
-      `l${limit}`,
-      q ? `q:${q}` : '',
-      Number.isFinite(minPrice) ? `min:${minPrice}` : '',
-      Number.isFinite(maxPrice) ? `max:${maxPrice}` : '',
-      Number.isFinite(lat) && Number.isFinite(lng) && Number.isFinite(radiusKm)
-        ? `geo:${lat},${lng},${radiusKm}`
-        : '',
-    ].filter(Boolean);
-    const cacheKey = `cg:index:v3:${keyParts.join(':')}`;
 
     const fetchIndex = async () => {
       const [campgrounds, total] = await Promise.all([
         Campground.find(filter, projection)
-          .sort(sort)
+          .sort({ createdAt: -1 })
           .skip(skip)
           .limit(limit)
           .lean(),
@@ -184,29 +171,32 @@ module.exports.index = async (req, res, next) => {
     };
 
     const data = cacheGetOrSet
-      ? await cacheGetOrSet(cacheKey, 60, fetchIndex)
+      ? await cacheGetOrSet(`cg:index:${page}:${q}`, 60, fetchIndex)
       : await fetchIndex();
+
     const totalPages = Math.ceil(data.total / limit);
 
-    // Favorites for current user to pre-highlight hearts
-    let favorites = [];
-    if (req.user) {
-      if (Array.isArray(req.user.favorites)) {
-        favorites = req.user.favorites.map(String);
-      } else {
-        const userDoc = await User.findById(req.user._id)
-          .select('favorites')
-          .lean();
-        favorites = (userDoc?.favorites || []).map(String);
-      }
-    }
+    // Pagination link hints
+    let prevUrl = null;
+    let nextUrl = null;
+    if (page > 1) prevUrl = buildUrlWithParams(req, { page: page - 1 });
+    if (page < totalPages)
+      nextUrl = buildUrlWithParams(req, { page: page + 1 });
+
+    const favorites =
+      req.user?.favorites?.map(String) ||
+      (
+        (await User.findById(req.user?._id).select('favorites').lean())
+          ?.favorites || []
+      ).map(String);
+
+    const pageUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
 
     res.render('campgrounds/index', {
       campgrounds: data.campgrounds,
       page,
       totalPages,
       total: data.total,
-      // Echo filters for form/UI (undefined -> '')
       q,
       minPrice: minPrice ?? '',
       maxPrice: maxPrice ?? '',
@@ -214,6 +204,25 @@ module.exports.index = async (req, res, next) => {
       lng: lng ?? '',
       radiusKm: radiusKm ?? '',
       favorites,
+      // SEO
+      pageTitle: 'Top Campgrounds Near You | Outdoorsy',
+      pageDescription:
+        'Browse top-rated campgrounds near you. Filter by amenities, read reviews, and plan your perfect outdoor stay with Outdoorsy.',
+      currentUrl: req.originalUrl,
+      canonical: pageUrl,
+      prevUrl,
+      nextUrl,
+      breadcrumbTrail: [
+        { name: 'Campgrounds', url: `${SUB_ROOT}/campgrounds` },
+      ],
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        '@id': `${pageUrl}#webpage`,
+        name: 'Campgrounds Listing | Outdoorsy',
+        description: 'Browse and discover top-rated campgrounds on Outdoorsy.',
+        isPartOf: { '@id': 'https://joshlehman.ca/#website' },
+      },
     });
   } catch (err) {
     next(err);
@@ -221,248 +230,200 @@ module.exports.index = async (req, res, next) => {
 };
 
 /**
- * Nearby: closest-first using $geoNear (separate page from index).
- * Requires: lat, lng, radiusKm
- * Optional: q, minPrice, maxPrice, sort
- * Pagination: page, limit
+ * Nearby – geo search.
  */
-module.exports.nearby = async (req, res, next) => {
-  try {
-    // Helpers
-    const isFiniteNum = (v) => typeof v === 'number' && Number.isFinite(v);
-    const parseNum = (val) => {
-      if (val === undefined || val === null) return undefined;
-      if (typeof val === 'string' && val.trim() === '') return undefined;
-      const n = Number(val);
-      return Number.isFinite(n) ? n : undefined;
-    };
+// controllers/campgrounds.js
+module.exports.nearby = catchAsync(async (req, res) => {
+  if (res.headersSent) return;
 
-    // Required geo inputs
-    const lat = parseNum(req.query.lat);
-    const lng = parseNum(req.query.lng);
-    const radiusKm = parseNum(req.query.radiusKm);
+  const {
+    q = '',
+    minPrice,
+    maxPrice,
+    lat,
+    lng,
+    radiusKm: radiusKmRaw,
+    sort = 'distance',
+    page: pageRaw = 1,
+  } = req.query;
+  const page = Math.max(1, parseInt(pageRaw, 10) || 1);
+  const limit = 12;
 
-    // If no valid geo params provided, render empty state (initial page load)
-    if (lat === undefined && lng === undefined && radiusKm === undefined) {
-      // favorites for logged-in users (empty grid still needs heart state if we show examples later)
-      let favorites = [];
-      if (req.user?.favorites) {
-        favorites = req.user.favorites.map(String);
-      }
-      return res.render('campgrounds/nearby', {
-        campgrounds: [],
-        page: 1,
-        totalPages: 0,
-        total: 0,
-        q: '',
-        minPrice: '',
-        maxPrice: '',
-        lat: '',
-        lng: '',
-        radiusKm: 25, // default radius
-        sort: 'distance', // default sort
-        favorites,
-      });
-    }
+  const radiusKm = radiusKmRaw
+    ? Math.max(1, Math.min(500, Number(radiusKmRaw)))
+    : undefined;
+  const latNum = lat ? Number(lat) : undefined;
+  const lngNum = lng ? Number(lng) : undefined;
+  const haveAllGeo =
+    Number.isFinite(latNum) &&
+    Number.isFinite(lngNum) &&
+    Number.isFinite(radiusKm);
 
-    // If params provided but invalid, throw error
-    if (
-      !isFiniteNum(lat) ||
-      !isFiniteNum(lng) ||
-      !isFiniteNum(radiusKm) ||
-      radiusKm <= 0
-    ) {
-      const err = new Error(
-        'lat, lng, and radiusKm are required for Nearby search'
-      );
-      err.status = 400;
-      throw err;
-    }
+  const baseLocals = {
+    title: 'Nearby Campgrounds',
+    q,
+    minPrice: minPrice ?? '',
+    maxPrice: maxPrice ?? '',
+    lat: Number.isFinite(latNum) ? latNum : '',
+    lng: Number.isFinite(lngNum) ? lngNum : '',
+    radiusKm: Number.isFinite(radiusKm) ? radiusKm : '',
+    sort,
+    page,
+    favorites: res.locals?.favorites || [],
+    currentUser: req.user || null,
+  };
 
-    // Pagination
-    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
-    const limit = Math.min(parseInt(req.query.limit, 10) || 20, 100);
-    const skip = (page - 1) * limit;
-
-    // Optional filters
-    const q = (req.query.q || '').trim();
-    const minPrice = parseNum(req.query.minPrice);
-    const maxPrice = parseNum(req.query.maxPrice);
-    const sort = req.query.sort || 'distance';
-
-    const nonGeoMatch = {};
-    if (q) {
-      const safe = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(safe, 'i');
-      nonGeoMatch.$or = [
-        { title: regex },
-        { description: regex },
-        { location: regex },
-      ];
-    }
-    if (isFiniteNum(minPrice) || isFiniteNum(maxPrice)) {
-      nonGeoMatch.price = {};
-      if (isFiniteNum(minPrice)) nonGeoMatch.price.$gte = minPrice;
-      if (isFiniteNum(maxPrice)) nonGeoMatch.price.$lte = maxPrice;
-    }
-
-    // Geo stage
-    const radiusMeters = Math.min(radiusKm, 500) * 1000;
-    const geoNearStage = {
-      $geoNear: {
-        near: { type: 'Point', coordinates: [lng, lat] },
-        distanceField: 'distance', // in meters
-        maxDistance: radiusMeters,
-        spherical: true,
-        key: 'geometry',
-      },
-    };
-
-    const projectStage = {
-      $project: {
-        title: 1,
-        price: 1,
-        location: 1,
-        'images.url': 1,
-        'images.filename': 1,
-        geometry: 1,
-        createdAt: 1,
-        author: 1,
-        description: 1,
-        distance: 1,
-      },
-    };
-
-    // Sort stage based on user selection
-    let sortStage;
-    if (sort === 'priceAsc') {
-      sortStage = { $sort: { price: 1, distance: 1 } };
-    } else if (sort === 'priceDesc') {
-      sortStage = { $sort: { price: -1, distance: 1 } };
-    } else {
-      sortStage = { $sort: { distance: 1 } }; // default: closest first
-    }
-
-    // Build pipelines
-    const dataPipeline = [geoNearStage];
-    if (Object.keys(nonGeoMatch).length)
-      dataPipeline.push({ $match: nonGeoMatch });
-    dataPipeline.push(
-      projectStage,
-      sortStage,
-      { $skip: skip },
-      { $limit: limit }
-    );
-
-    const countPipeline = [geoNearStage];
-    if (Object.keys(nonGeoMatch).length)
-      countPipeline.push({ $match: nonGeoMatch });
-    countPipeline.push({ $count: 'total' });
-
-    // Execute (aggregation returns plain objects)
-    const [campgrounds, countDoc] = await Promise.all([
-      Campground.aggregate(dataPipeline),
-      Campground.aggregate(countPipeline),
-    ]);
-
-    const total = countDoc[0]?.total ?? 0;
-    const totalPages = Math.ceil(total / limit);
-
-    // Favorites for current user
-    let favorites = [];
-    if (req.user) {
-      if (Array.isArray(req.user.favorites)) {
-        favorites = req.user.favorites.map(String);
-      } else {
-        const userDoc = await User.findById(req.user._id)
-          .select('favorites')
-          .lean();
-        favorites = (userDoc?.favorites || []).map(String);
-      }
-    }
-
-    res.render('campgrounds/nearby', {
-      campgrounds,
-      page,
-      totalPages,
-      total,
-      // Echo inputs
-      q,
-      minPrice: isFiniteNum(minPrice) ? minPrice : '',
-      maxPrice: isFiniteNum(maxPrice) ? maxPrice : '',
-      lat,
-      lng,
-      radiusKm,
-      sort,
-      favorites,
+  if (!haveAllGeo) {
+    return res.render('campgrounds/nearby', {
+      ...baseLocals,
+      campgrounds: [],
+      total: 0,
+      totalPages: 0,
+      inlineNotice:
+        'Enter a location and radius, or use your current location.',
     });
-  } catch (err) {
-    next(err);
   }
-};
 
+  const meters = radiusKm * 1000;
+  const Campground = require('../models/campground');
+
+  // Build aggregation pipeline
+  const pipeline = [];
+
+  // Stage 1: $geoNear (must be first, no query allowed with text search)
+  pipeline.push({
+    $geoNear: {
+      near: { type: 'Point', coordinates: [lngNum, latNum] },
+      distanceField: 'distance',
+      maxDistance: meters,
+      spherical: true,
+    },
+  });
+
+  // Stage 2: Text search via $match with regex (after $geoNear)
+  if (q) {
+    const searchRegex = new RegExp(q.split(/\s+/).join('|'), 'i');
+    pipeline.push({
+      $match: {
+        $or: [
+          { title: searchRegex },
+          { description: searchRegex },
+          { location: searchRegex },
+        ],
+      },
+    });
+  }
+
+  // Stage 3: Price filter
+  const hasMin = minPrice !== '' && typeof minPrice !== 'undefined';
+  const hasMax = maxPrice !== '' && typeof maxPrice !== 'undefined';
+  if (hasMin || hasMax) {
+    const priceMatch = {};
+    if (hasMin) priceMatch.$gte = Number(minPrice);
+    if (hasMax) priceMatch.$lte = Number(maxPrice);
+    pipeline.push({ $match: { price: priceMatch } });
+  }
+
+  // Stage 4: Sort
+  const sortStage = {};
+  if (sort === 'priceAsc') {
+    sortStage.price = 1;
+  } else if (sort === 'priceDesc') {
+    sortStage.price = -1;
+  } else {
+    sortStage.distance = 1;
+  }
+  pipeline.push({ $sort: sortStage });
+
+  // Count total (before pagination)
+  const countPipeline = [...pipeline, { $count: 'total' }];
+  const countResult = await Campground.aggregate(countPipeline);
+  const total = countResult.length > 0 ? countResult[0].total : 0;
+  const totalPages = Math.max(1, Math.ceil(total / limit));
+
+  // Stage 5: Pagination
+  pipeline.push({ $skip: (page - 1) * limit });
+  pipeline.push({ $limit: limit });
+
+  // Execute
+  const campgrounds = await Campground.aggregate(pipeline);
+
+  return res.render('campgrounds/nearby', {
+    ...baseLocals,
+    campgrounds,
+    total,
+    totalPages,
+  });
+});
 /**
  * Show details for a specific campground.
  * - Paginated reviews via separate query for scalability
  * - Populate campground author
- * - SEO-friendly locals
+ * - SEO-friendly locals + JSON-LD
  */
 module.exports.showCampground = async (req, res, next) => {
+  const { id } = req.params; // can be slug or ObjectId
+
   try {
-    const { id } = req.params;
+    // Try slug first, fallback to _id for backward compatibility
+    let campground = await Campground.findOne({ slug: id }).populate('author');
 
-    // Reviews pagination for show page
-    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
-    const limit = Math.min(parseInt(req.query.limit, 10) || 10, 50);
-    const skip = (page - 1) * limit;
+    // Fallback: try as ObjectId if slug lookup failed
+    if (!campground && id.match(/^[0-9a-fA-F]{24}$/)) {
+      campground = await Campground.findById(id).populate('author');
 
-    const campground = await Campground.findById(id)
-      .populate({ path: 'author', select: 'email username' })
-      .lean();
+      // 301 redirect old ID URLs to canonical slug URL
+      if (campground && campground.slug) {
+        return res.redirect(301, `/outdoorsy/campgrounds/${campground.slug}`);
+      }
+    }
 
     if (!campground) {
-      throw new NotFoundError('Campground not found');
+      req.flash('error', 'Campground not found');
+      return res.redirect('/outdoorsy/campgrounds');
     }
 
-    const [reviews, totalReviews] = await Promise.all([
-      Review.find({ campground: id })
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit)
-        .populate({ path: 'author', select: 'email username' })
-        .lean(),
-      Review.countDocuments({ campground: id }),
-    ]);
+    // Reviews pagination params
+    const reviewsLimit = 5;
+    const reviewsPage = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const skip = (reviewsPage - 1) * reviewsLimit;
 
-    const totalPages = Math.ceil(totalReviews / limit);
+    // Fetch paginated reviews with author populated
+    const reviews = await Review.find({ campground: campground._id })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(reviewsLimit)
+      .populate('author')
+      .lean();
 
-    // Compute isFavorited for initial heart state
-    let isFavorited = false;
-    if (req.user) {
-      const favs = Array.isArray(req.user.favorites)
-        ? req.user.favorites.map(String)
-        : (
-            (await User.findById(req.user._id).select('favorites').lean())
-              ?.favorites || []
-          ).map(String);
-      isFavorited = favs.includes(String(id));
-    }
+    const reviewsCount = await Review.countDocuments({
+      campground: campground._id,
+    });
+    const reviewsTotalPages = Math.ceil(reviewsCount / reviewsLimit);
 
-    // Ensure res.locals exists in test/middleware-less environments
-    res.locals = res.locals || {};
-    res.locals.pageTitle = `${campground.title} - Outdoorsy`;
-    res.locals.pageDescription = campground.description
-      ? campground.description.substring(0, 160)
-      : `Explore ${campground.title} on Outdoorsy`;
+    // Use slug in canonical URL
+    const canonical = `/outdoorsy/campgrounds/${campground.slug}`;
+    const currentUrl = canonical;
 
     res.render('campgrounds/show', {
       campground,
       reviews,
-      reviewsPage: page,
-      reviewsTotalPages: totalPages,
-      reviewsTotal: totalReviews,
-      reviewsLimit: limit,
-      isFavorited,
+      reviewsPage,
+      reviewsLimit,
+      reviewsTotalPages,
+      canonical,
+      currentUrl,
+      pageTitle: `${campground.title} — Outdoorsy`,
+      pageDescription:
+        campground.description?.substring(0, 155) ||
+        `Discover ${campground.title}`,
+      socialImageUrl: campground.images?.[0]?.url || '',
+      breadcrumbTrail: [
+        { name: 'Home', url: '/outdoorsy' },
+        { name: 'Campgrounds', url: '/outdoorsy/campgrounds' },
+        { name: campground.title, url: canonical },
+      ],
+      mapboxToken: process.env.MAPBOX_TOKEN || '',
     });
   } catch (err) {
     next(err);
@@ -481,9 +442,13 @@ module.exports.renderEditForm = async (req, res, next) => {
       throw new NotFoundError('Campground not found');
     }
 
-    res.locals.pageTitle = `Edit ${campground.title} - Outdoorsy`;
-
-    res.render('campgrounds/edit', { campground });
+    res.render('campgrounds/edit', {
+      campground,
+      pageTitle: `Edit ${campground.title} | Outdoorsy`,
+      pageDescription: `Edit campground details for ${campground.title}`,
+      currentUrl: req.originalUrl,
+      robots: 'noindex, nofollow',
+    });
   } catch (err) {
     next(err);
   }
@@ -604,6 +569,13 @@ module.exports.listFavorites = async (req, res, next) => {
     res.render('campgrounds/favorites', {
       campgrounds,
       total: campgrounds.length,
+      pageTitle: 'Your Favorite Campgrounds | Outdoorsy',
+      pageDescription:
+        'View and manage your favorite outdoor destinations and campgrounds.',
+      currentUrl: req.originalUrl,
+      breadcrumbTrail: [
+        { name: 'Favorites', url: `${SUB_ROOT}/campgrounds/favorites` },
+      ],
     });
   } catch (err) {
     next(err);

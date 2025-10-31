@@ -2,14 +2,7 @@
 <link rel="stylesheet" href="/outdoorsy/stylesheets/skeleton.css" />
 <link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-nearby.css" />
 
-<%
-// Cloudinary helper for responsive images
-function cloudinaryTransform(url, transform) {
-  if (!url || typeof url !== 'string') return url;
-  if (!url.includes('cloudinary.com')) return url;
-  return url.replace('/upload/', `/upload/${transform}/`);
-}
-%>
+
 
 <div class="fade-in">
   <div class="d-flex align-items-center justify-content-between mb-3">
@@ -51,7 +44,7 @@ function cloudinaryTransform(url, transform) {
                 name="q"
                 class="form-control"
                 placeholder="Title, description, location..."
-                value="<%= typeof q !== 'undefined' ? q : '' %>"
+                value="X"
                 inputmode="search"
               />
             </div>
@@ -59,19 +52,19 @@ function cloudinaryTransform(url, transform) {
             <div class="col-6 col-md-3 col-lg-2">
               <label for="sort" class="form-label">Sort By</label>
               <select id="sort" name="sort" class="form-select">
-                <% if (sort === 'priceAsc') { %>
+                
                   <option value="distance">Distance</option>
                   <option value="priceAsc" selected>Price: Low to High</option>
                   <option value="priceDesc">Price: High to Low</option>
-                <% } else if (sort === 'priceDesc') { %>
+                
                   <option value="distance">Distance</option>
                   <option value="priceAsc">Price: Low to High</option>
                   <option value="priceDesc" selected>Price: High to Low</option>
-                <% } else { %>
+                
                   <option value="distance" selected>Distance</option>
                   <option value="priceAsc">Price: Low to High</option>
                   <option value="priceDesc">Price: High to Low</option>
-                <% } %>
+                
               </select>
             </div>
 
@@ -107,7 +100,7 @@ function cloudinaryTransform(url, transform) {
                   min="0"
                   step="1"
                   inputmode="numeric"
-                  value="<%= typeof minPrice !== 'undefined' ? minPrice : '' %>"
+                  value="X"
                 />
               </div>
             </div>
@@ -124,7 +117,7 @@ function cloudinaryTransform(url, transform) {
                   min="0"
                   step="1"
                   inputmode="numeric"
-                  value="<%= typeof maxPrice !== 'undefined' ? maxPrice : '' %>"
+                  value="X"
                 />
               </div>
             </div>
@@ -141,7 +134,7 @@ function cloudinaryTransform(url, transform) {
                 max="90"
                 inputmode="decimal"
                 placeholder="e.g. 43.65"
-                value="<%= typeof lat !== 'undefined' && lat !== '' ? lat : '' %>"
+                value="X"
               />
             </div>
 
@@ -157,7 +150,7 @@ function cloudinaryTransform(url, transform) {
                 max="180"
                 inputmode="decimal"
                 placeholder="-79.38"
-                value="<%= typeof lng !== 'undefined' && lng !== '' ? lng : '' %>"
+                value="X"
               />
             </div>
 
@@ -176,7 +169,7 @@ function cloudinaryTransform(url, transform) {
                   max="500"
                   step="1"
                   inputmode="numeric"
-                  value="<%= typeof radiusKm !== 'undefined' && radiusKm !== '' ? radiusKm : 25 %>"
+                  value="X"
                   aria-describedby="radiusHelp"
                 />
                 <span class="input-group-text">km</span>
@@ -200,12 +193,12 @@ function cloudinaryTransform(url, transform) {
     </div>
   </section>
 
-  <% if (typeof inlineNotice !== 'undefined' && inlineNotice) { %>
+  
     <div class="alert alert-info d-flex align-items-center" role="status">
       <i class="fas fa-info-circle me-2" aria-hidden="true"></i>
-      <div><%= inlineNotice %></div>
+      <div>X</div>
     </div>
-  <% } %>
+  
 
   <!-- View Toggle -->
   <div class="d-flex justify-content-between align-items-center mb-3">
@@ -233,9 +226,9 @@ function cloudinaryTransform(url, transform) {
         <div
           id="nearbyStaticMap"
           class="ratio ratio-16x9 bg-light rounded js-static-map"
-          data-token="<%- process.env.MAPBOX_TOKEN || '' %>"
+          data-token="X"
           data-style="mapbox/outdoors-v12"
-          data-zoom="<%= typeof radiusKm !== 'undefined' && radiusKm ? Math.max(4, Math.min(14, Math.round(12 - Math.log2(Math.max(1, radiusKm))))) : 10 %>"
+          data-zoom="X"
           data-size="1200x675@2x"
           role="img"
           aria-label="Map preview of nearby campgrounds"
@@ -250,7 +243,7 @@ function cloudinaryTransform(url, transform) {
 
     <!-- Skeleton Grid (displayed before load) -->
     <div class="skeleton-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
-      <% for (let i = 0; i < 6; i++) { %>
+      
         <div class="col">
           <div class="skeleton-card">
             <div class="skeleton-card-img"></div>
@@ -266,116 +259,113 @@ function cloudinaryTransform(url, transform) {
             </div>
           </div>
         </div>
-      <% } %>
+      
     </div>
 
     <!-- Real Grid (hidden until JS shows) -->
     <div class="real-grid-content" style="display:none;">
-      <% if (!campgrounds.length) { %>
+      
         <div class="alert alert-info">
           <i class="fas fa-info-circle me-2"></i> No campgrounds found matching your criteria.
         </div>
-      <% } else { %>
+      
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          <% campgrounds.forEach((cg, idx) => { 
-               const cover = (cg.images && cg.images.length) ? cg.images[0].url : 'https://placehold.co/600x400?text=No+Image';
-               const isCloudinary = cover.includes('cloudinary.com');
-          %>
+          
             <div class="col">
               <article class="card h-100 shadow-sm fade-in-content">
-                <% if (isCloudinary) { %>
+                
                   <img 
-                    src="<%= cloudinaryTransform(cover, 'c_fill,g_auto,f_auto,q_auto,w_600,h_400') %>" 
+                    src="X" 
                     srcset="
-                      <%= cloudinaryTransform(cover, 'c_fill,g_auto,f_auto,q_auto,w_300,h_200') %> 300w,
-                      <%= cloudinaryTransform(cover, 'c_fill,g_auto,f_auto,q_auto,w_600,h_400') %> 600w,
-                      <%= cloudinaryTransform(cover, 'c_fill,g_auto,f_auto,q_auto,w_900,h_600') %> 900w
+                      X 300w,
+                      X 600w,
+                      X 900w
                     "
                     sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 33vw"
                     class="card-img-top" 
-                    alt="<%= cg.title %> cover" 
+                    alt="X cover" 
                     width="600"
                     height="400"
-                    loading="<%= idx < 6 ? 'eager' : 'lazy' %>"
+                    loading="X"
                     decoding="async"
                     style="aspect-ratio: 3 / 2; object-fit: cover; object-position: center;"
                   />
-                <% } else { %>
+                
                   <img 
-                    src="<%= cover %>" 
+                    src="X" 
                     class="card-img-top" 
-                    alt="<%= cg.title %> cover" 
+                    alt="X cover" 
                     width="600"
                     height="400"
-                    loading="<%= idx < 6 ? 'eager' : 'lazy' %>"
+                    loading="X"
                     decoding="async"
                     style="aspect-ratio: 3 / 2; object-fit: cover; object-position: center;"
                   />
-                <% } %>
+                
                 <div class="card-body d-flex flex-column">
                   <h3 class="card-title h5">
-<a class="text-decoration-none" href="/outdoorsy/campgrounds/<%= cg.slug || cg._id %>"><%= cg.title %></a>                  </h3>
+<a class="text-decoration-none" href="/outdoorsy/campgrounds/X">X</a>                  </h3>
                   <p class="card-text text-muted mb-1">
-                    <i class="fas fa-map-marker-alt me-1"></i> <%= cg.location %>
+                    <i class="fas fa-map-marker-alt me-1"></i> X
                   </p>
                   <div class="d-flex align-items-center gap-2 mb-2">
-                    <div class="fw-bold">$<%= cg.price %>/night</div>
-                    <% if (typeof cg.distance === 'number') { %>
+                    <div class="fw-bold">$X/night</div>
+                    
                       <span class="badge bg-info-subtle text-info border">
-                        <i class="fas fa-route me-1"></i> <%= (cg.distance/1000).toFixed(1) %> km
+                        <i class="fas fa-route me-1"></i> X km
                       </span>
-                    <% } %>
+                    
                   </div>
                   <div class="mt-auto d-flex gap-2">
-<a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/<%= cg.slug || cg._id %>">View</a>                    <% if (currentUser) { const fav = (favorites||[]).includes(String(cg._id)); %>
+<a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/X">View</a>                    
                       <button
                         type="button"
-                        class="btn btn-sm <%= fav ? 'btn-danger' : 'btn-outline-danger' %> toggle-fav-btn"
-                        data-id="<%= cg._id %>"
-                        aria-pressed="<%= fav %>">
+                        class="btn btn-sm X toggle-fav-btn"
+                        data-id="X"
+                        aria-pressed="X">
                         <i class="fas fa-heart"></i> Favorite
                       </button>
-                    <% } %>
+                    
                   </div>
                 </div>
               </article>
             </div>
-          <% }) %>
+          
         </div>
-      <% } %>
+      
     </div>
   </section>
 
   <!-- Pagination -->
-  <% if (typeof totalPages !== 'undefined' && totalPages > 1) { %>
+  
     <nav aria-label="Nearby pagination" class="mt-4">
       <ul class="pagination justify-content-center">
-        <li class="page-item <%= page <= 1 ? 'disabled' : '' %>">
-          <% if (page <= 1) { %>
+        <li class="page-item X">
+          
             <span class="page-link">Previous</span>
-          <% } else { %>
-            <a class="page-link" href="?page=<%= page - 1 %>">Previous</a>
-          <% } %>
+          
+            <a class="page-link" href="?page=X">Previous</a>
+          
         </li>
-        <% for (let p = 1; p <= totalPages; p++) { %>
-          <li class="page-item <%= p === page ? 'active' : '' %>">
-            <% if (p === page) { %>
-              <span class="page-link">Page <%= p %></span>
-            <% } else { %>
-              <a class="page-link" href="?page=<%= p %>">Page <%= p %></a>
-            <% } %>
+        
+          <li class="page-item X">
+            
+              <span class="page-link">Page X</span>
+            
+              <a class="page-link" href="?page=X">Page X</a>
+            
           </li>
-        <% } %>
-        <li class="page-item <%= page >= totalPages ? 'disabled' : '' %>">
-          <% if (page >= totalPages) { %>
+        
+        <li class="page-item X">
+          
             <span class="page-link">Next</span>
-          <% } else { %>
-            <a class="page-link" href="?page=<%= page + 1 %>">Next</a>
-          <% } %>
+          
+            <a class="page-link" href="?page=X">Next</a>
+          
         </li>
       </ul>
     </nav>
-  <% } %>
+  
 
   <!-- Scripts -->
   <script defer src="/outdoorsy/js/nearby-geolocate.js"></script>

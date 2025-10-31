@@ -13,16 +13,16 @@
     <div class="card-body mb-8">
       <h1 class="card-title h4 mb-4 text-center">Register</h1>
 
-      <% if (errors && errors.length) { %>
+      
         <div class="alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true">
           <strong>Please fix the following errors:</strong>
           <ul class="mb-0">
-            <% errors.forEach(error => { %>
-              <li><%- error.msg %></li>
-            <% }) %>
+            
+              <li>X</li>
+            
           </ul>
         </div>
-      <% } %>
+      
 
       <form
         action="/outdoorsy/register"
@@ -32,13 +32,13 @@
         aria-describedby="formHelp"
         autocomplete="off"
       >
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="_csrf" value="X">
 
         <!-- Username -->
         <div class="mb-3">
           <label class="form-label" for="username">Username <span class="text-danger">*</span></label>
           <input
-            class="form-control <%= errors && errors.find(e => e.param === 'username') ? 'is-invalid' : '' %>"
+            class="form-control X"
             type="text"
             id="username"
             name="username"
@@ -50,7 +50,7 @@
             maxlength="30"
             pattern="^[a-zA-Z0-9_]+$"
             title="Username should be 3-30 characters, letters, numbers, and underscores only."
-            value="<%- typeof formData !== 'undefined' && formData.username ? formData.username : '' %>"
+            value="X"
             autocomplete="username"
             inputmode="text"
           />
@@ -64,14 +64,14 @@
         <div class="mb-3">
           <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
           <input
-            class="form-control <%= errors && errors.find(e => e.param === 'email') ? 'is-invalid' : '' %>"
+            class="form-control X"
             type="email"
             id="email"
             name="email"
             required
             aria-required="true"
             aria-describedby="emailHelp"
-            value="<%- typeof formData !== 'undefined' && formData.email ? formData.email : '' %>"
+            value="X"
             autocomplete="email"
             inputmode="email"
           />
@@ -84,7 +84,7 @@
           <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
           <div class="password-wrapper">
             <input
-              class="form-control <%= errors && errors.find(e => e.param === 'password') ? 'is-invalid' : '' %>"
+              class="form-control X"
               type="password"
               id="password"
               name="password"
@@ -136,7 +136,7 @@
   Register
 </button>        
         <p id="formHelp" class="form-text text-center mt-3">
-          By registering, you agree to our <a href="<%= basePath %>/terms">Terms</a> and <a href="<%= basePath %>/privacy">Privacy Policy</a>.
+          By registering, you agree to our <a href="X/terms">Terms</a> and <a href="X/privacy">Privacy Policy</a>.
         </p>
       </form>
     </div>

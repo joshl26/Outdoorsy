@@ -2,7 +2,7 @@ Great idea. Here’s an updated README.md that includes a “What’s Completed�
 
 You can paste this over your existing README and adjust dates as needed.
 
-```markdown
+````markdown
 <h1 align="center">🌲 Welcome to Outdoorsy 👋</h1>
 
 <p align="center">
@@ -91,16 +91,16 @@ See the full roadmap for in‑progress and upcoming items.
 
 ## 🧠 Tech Stack
 
-| Layer | Technologies |
-|------|---------------|
-| Frontend | HTML5, CSS3, Bootstrap 5 |
-| Backend | Node.js, Express.js |
-| Database | MongoDB (Mongoose, hosted on AWS EC2) |
-| Auth | PassportJS |
-| Security | Helmet, Joi, csurf, express‑rate‑limit |
-| Docs | Swagger‑UI / JSDoc |
-| Deploy | Render.com, AWS |
-| Architecture | REST + MVC, SSR with EJS |
+| Layer        | Technologies                           |
+| ------------ | -------------------------------------- |
+| Frontend     | HTML5, CSS3, Bootstrap 5               |
+| Backend      | Node.js, Express.js                    |
+| Database     | MongoDB (Mongoose, hosted on AWS EC2)  |
+| Auth         | PassportJS                             |
+| Security     | Helmet, Joi, csurf, express‑rate‑limit |
+| Docs         | Swagger‑UI / JSDoc                     |
+| Deploy       | Render.com, AWS                        |
+| Architecture | REST + MVC, SSR with EJS               |
 
 ---
 
@@ -113,11 +113,12 @@ See the full roadmap for in‑progress and upcoming items.
 
 ## 🖼️ Screenshots
 
-| Home | All Campgrounds | Campground Details | Login/Register |
-|:----:|:----------------:|:------------------:|:---------------:|
+|                                          Home                                          |                                    All Campgrounds                                    |                                    Campground Details                                     |                                     Login/Register                                      |
+| :------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
 | ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png) | ![All](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png) | ![Details](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png) | ![Login](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png) |
 
 API Demo & UMLs
+
 - ![Swagger Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
 - ![Swagger Schemas](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI-1.png)
 - ![UML Sequence Diagram](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-sequence-diagram.png)
@@ -175,6 +176,7 @@ Outdoorsy/
    ├─ home.ejs
    └─ error.ejs
 ```
+````
 
 ---
 
@@ -254,6 +256,7 @@ Full roadmap: see ROADMAP.md
 ## 👤 Author
 
 **Joshua Lehman**
+
 - Portfolio: https://joshlehman.ca
 - GitHub: https://github.com/joshl26
 - LinkedIn: https://www.linkedin.com/in/joshrlehman/
@@ -262,8 +265,9 @@ Full roadmap: see ROADMAP.md
 
 ## 🤝 Contributing
 
-Issues and PRs welcome.  
-- Issues: https://github.com/joshl26/Outdoorsy/issues  
+Issues and PRs welcome.
+
+- Issues: https://github.com/joshl26/Outdoorsy/issues
 - Contributing Guide: https://github.com/joshl26/Outdoorsy/blob/master/CONTRIBUTING.md
 
 ---
@@ -271,6 +275,8 @@ Issues and PRs welcome.
 ## 📝 License
 
 MIT © 2023–2025 [Joshua Lehman](https://github.com/joshl26)
+
 ```
 
 Want me to also generate a concise “Changelog” section from the roadmap’s completed items with dates and PR links? It helps keep releases tidy and makes your progress obvious to visitors.
+```

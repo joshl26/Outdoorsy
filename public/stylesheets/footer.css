@@ -326,3 +326,25 @@ footer a:focus-visible {
     display: none;
   }
 }
+
+.page-link {
+  color: #0d6efd; /* Bootstrap primary blue, good contrast on white */
+}
+
+.page-link:hover,
+.page-link:focus {
+  color: #0a58ca; /* Darker blue on hover/focus */
+  text-decoration: underline;
+}
+
+.page-item.active .page-link {
+  background-color: #0d6efd; /* Bootstrap primary blue background */
+  color: #fff; /* White text for strong contrast */
+  border-color: #0d6efd;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d; /* Muted gray for disabled */
+  pointer-events: none;
+  cursor: default;
+}

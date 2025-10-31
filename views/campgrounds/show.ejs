@@ -1,5 +1,15 @@
 <!-- views/campgrounds/show.ejs -->
+<link rel="stylesheet" href="/outdoorsy/stylesheets/skeleton.css" />
 <link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-show.css" />
+
+<%
+// Cloudinary helper for responsive images
+function cloudinaryTransform(url, transform) {
+  if (!url || typeof url !== 'string') return url;
+  if (!url.includes('cloudinary.com')) return url;
+  return url.replace('/upload/', `/upload/${transform}/`);
+}
+%>
 
 <div class="d-flex align-items-center justify-content-between mb-3">
   <div class="d-flex align-items-center gap-2">
@@ -26,7 +36,7 @@
     </a>
 
     <% if (currentUser && String(currentUser._id) === String(campground.author?._id || campground.author)) { %>
-      <a class="btn btn-outline-primary" href="/outdoorsy/campgrounds/<%= campground._id %>/edit">
+      <a class="btn btn-outline-primary" href="/outdoorsy/campgrounds/<%= campground.slug || campground._id %>/edit">
         <i class="fas fa-edit me-1" aria-hidden="true"></i>
         <span>Edit</span>
       </a>
@@ -54,39 +64,64 @@
     <section aria-labelledby="gallery-heading" class="card shadow-sm mb-3">
       <div class="card-body p-0">
         <h2 id="gallery-heading" class="visually-hidden">Gallery</h2>
+
+        <!-- Gallery Skeleton -->
+        <div id="gallerySkeleton" class="skeleton-box ratio ratio-16x9" aria-hidden="true"></div>
+
         <% if (campground.images && campground.images.length) { %>
           <div
             id="carouselImages"
-            class="carousel slide"
+            class="carousel slide" style="display:none;"
             data-bs-ride="carousel"
             aria-roledescription="carousel"
           >
             <div class="carousel-inner">
-              <% campground.images.forEach((img, idx) => { %>
+              <% campground.images.forEach((img, idx) => {
+                   const width = img.width || 1200;
+                   const height = img.height || 800;
+                   const baseUrl = img.url;
+              %>
                 <div class="carousel-item <%= idx === 0 ? 'active' : '' %>">
                   <img
-                    src="<%= img.url %>"
+                    src="<%= cloudinaryTransform(baseUrl, 'c_fill,g_auto,f_auto,q_auto,w_1200,h_800') %>"
+                    srcset="
+                      <%= cloudinaryTransform(baseUrl, 'c_fill,g_auto,f_auto,q_auto,w_400,h_267') %> 400w,
+                      <%= cloudinaryTransform(baseUrl, 'c_fill,g_auto,f_auto,q_auto,w_800,h_533') %> 800w,
+                      <%= cloudinaryTransform(baseUrl, 'c_fill,g_auto,f_auto,q_auto,w_1200,h_800') %> 1200w
+                    "
+                    sizes="(max-width: 600px) 100vw, (max-width: 992px) 90vw, 800px"
                     class="d-block w-100"
                     alt="<%= campground.title || 'Campground' %> - View <%= idx + 1 %> of <%= campground.images.length %>"
-                    style="max-height: 500px; object-fit: cover;"
+                    width="<%= width %>"
+                    height="<%= height %>"
+                    decoding="async"
+                    <%= idx === 0 ? 'fetchpriority="high"' : 'loading="lazy"' %>
+                    style="max-height: 500px; object-fit: cover; object-position: center; aspect-ratio: <%= width %> / <%= height %>;"
+                    onload="window.__galleryImgLoaded && window.__galleryImgLoaded()"
                   />
                 </div>
               <% }) %>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev" aria-label="Previous image">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next" aria-label="Next image">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
           </div>
         <% } else { %>
           <img
+            id="galleryFallback"
             src="https://placehold.co/1200x500?text=No+Image"
             class="w-100"
             alt="No images available for this campground"
+            width="1200"
+            height="500"
+            decoding="async"
+            loading="lazy"
+            style="display:none; object-fit: cover; object-position: center; aspect-ratio: 1200 / 500;"
           />
         <% } %>
       </div>
@@ -104,6 +139,191 @@
             <%= campground.location %>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Getting there (HowTo) -->
+    <%
+      const uiGettingThereSteps = (campground?.gettingThere?.steps?.length
+        ? campground.gettingThere.steps
+        : [
+            { name: 'Head towards the nearest highway', text: 'Use your preferred navigation app to reach the main highway leading to the region.' },
+            { name: `Exit towards ${campground.location || 'the campground area'}`, text: `Take the signed exit and follow local road signs for ${campground.title}.` },
+            { name: 'Follow local access road', text: 'Proceed carefully on the access road; conditions may vary seasonally.' },
+            { name: 'Arrive at the entrance', text: `Look for the ${campground.title} entrance sign and check in if required.` },
+          ]);
+    %>
+    <section aria-labelledby="getting-there-heading" class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 id="getting-there-heading" class="card-title h5 mb-3">How to get to <%= campground.title %></h2>
+
+        <% if (campground?.gettingThere?.totalTimeISO) { %>
+          <p class="text-muted mb-2">Estimated time: <%= campground.gettingThere.totalTimeISO %></p>
+        <% } %>
+
+        <% if (Array.isArray(campground?.gettingThere?.supply) && campground.gettingThere.supply.length) { %>
+          <div class="mb-2">
+            <strong>Suggested supplies:</strong>
+            <ul class="mb-0">
+              <% campground.gettingThere.supply.forEach(s => { %>
+                <li><%= s %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <% if (Array.isArray(campground?.gettingThere?.tool) && campground.gettingThere.tool.length) { %>
+          <div class="mb-3">
+            <strong>Tools:</strong>
+            <ul class="mb-0">
+              <% campground.gettingThere.tool.forEach(t => { %>
+                <li><%= t %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <ol class="list-group list-group-numbered">
+          <% uiGettingThereSteps.forEach((s) => { %>
+            <li class="list-group-item">
+              <div class="fw-semibold"><%= s.name %></div>
+              <% if (s.text) { %><div class="text-muted"><%= s.text %></div><% } %>
+              <% if (s.url) { %>
+                <div class="mt-1">
+                  <a class="link-primary" href="<%= s.url %>" target="_blank" rel="noopener">Open step link</a>
+                </div>
+              <% } %>
+              <% if (s.image) { %>
+                <div class="mt-2">
+                  <img 
+                    src="<%= cloudinaryTransform(s.image, 'c_fill,g_auto,f_auto,q_auto,w_800') %>" 
+                    srcset="
+                      <%= cloudinaryTransform(s.image, 'c_fill,g_auto,f_auto,q_auto,w_400') %> 400w,
+                      <%= cloudinaryTransform(s.image, 'c_fill,g_auto,f_auto,q_auto,w_800') %> 800w
+                    "
+                    sizes="(max-width: 600px) 100vw, 800px"
+                    class="img-fluid rounded" 
+                    alt="<%= s.name %>" 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                </div>
+              <% } %>
+            </li>
+          <% }) %>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Booking guide (HowTo) -->
+    <%
+      const uiBookingSteps = (campground?.bookingGuide?.steps?.length
+        ? campground.bookingGuide.steps
+        : [
+            { name: 'Check availability', text: `On the ${campground.title} page, select your dates to check availability.` },
+            { name: 'Review details', text: 'Review campsite details, rules, pricing, and cancellation policy before booking.' },
+            { name: 'Complete booking', text: 'Proceed to checkout, provide guest details, and confirm your reservation.' },
+            { name: 'Receive confirmation', text: 'You will receive a booking confirmation with check-in instructions via email.' },
+          ]);
+    %>
+    <section aria-labelledby="booking-guide-heading" class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 id="booking-guide-heading" class="card-title h5 mb-3">How to book <%= campground.title %></h2>
+
+        <% if (campground?.bookingGuide?.totalTimeISO) { %>
+          <p class="text-muted mb-2">Estimated time: <%= campground.bookingGuide.totalTimeISO %></p>
+        <% } %>
+
+        <% if (Array.isArray(campground?.bookingGuide?.supply) && campground.bookingGuide.supply.length) { %>
+          <div class="mb-2">
+            <strong>What you'll need:</strong>
+            <ul class="mb-0">
+              <% campground.bookingGuide.supply.forEach(s => { %>
+                <li><%= s %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <% if (Array.isArray(campground?.bookingGuide?.tool) && campground.bookingGuide.tool.length) { %>
+          <div class="mb-3">
+            <strong>Tools:</strong>
+            <ul class="mb-0">
+              <% campground.bookingGuide.tool.forEach(t => { %>
+                <li><%= t %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <ol class="list-group list-group-numbered">
+          <% uiBookingSteps.forEach((s) => { %>
+            <li class="list-group-item">
+              <div class="fw-semibold"><%= s.name %></div>
+              <% if (s.text) { %><div class="text-muted"><%= s.text %></div><% } %>
+              <% if (s.url) { %>
+                <div class="mt-1">
+                  <a class="link-primary" href="<%= s.url %>" target="_blank" rel="noopener">Open step link</a>
+                </div>
+              <% } %>
+              <% if (s.image) { %>
+                <div class="mt-2">
+                  <img 
+                    src="<%= cloudinaryTransform(s.image, 'c_fill,g_auto,f_auto,q_auto,w_800') %>" 
+                    srcset="
+                      <%= cloudinaryTransform(s.image, 'c_fill,g_auto,f_auto,q_auto,w_400') %> 400w,
+                      <%= cloudinaryTransform(s.image, 'c_fill,g_auto,f_auto,q_auto,w_800') %> 800w
+                    "
+                    sizes="(max-width: 600px) 100vw, 800px"
+                    class="img-fluid rounded" 
+                    alt="<%= s.name %>" 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                </div>
+              <% } %>
+            </li>
+          <% }) %>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FAQ (aligns with FAQPage JSON-LD) -->
+    <%
+      const uiFaq = (Array.isArray(campground?.faq) && campground.faq.length
+        ? campground.faq
+        : [
+            { q: `Are pets allowed at ${campground.title}?`, a: 'Yes, friendly pets are generally welcome on a leash unless otherwise stated in the rules.' },
+            { q: `What facilities are available at ${campground.title}?`, a: 'Facilities vary by site; many include restrooms, showers, and picnic tables. Check the listing for details.' },
+            { q: `How do I make a reservation for ${campground.title}?`, a: 'Book directly on Outdoorsy by selecting dates and confirming your stay from the campground page.' },
+          ]);
+    %>
+    <section aria-labelledby="faq-heading" class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h2 id="faq-heading" class="card-title h5 mb-3">Frequently asked questions</h2>
+        <% if (!uiFaq || !uiFaq.length) { %>
+          <div class="text-muted">No FAQs available.</div>
+        <% } else { %>
+          <div class="accordion" id="faqAccordion">
+            <% uiFaq.forEach((item, idx) => { 
+                 const headingId = `faq-heading-${idx}`;
+                 const collapseId = `faq-collapse-${idx}`;
+            %>
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="<%= headingId %>">
+                  <button class="accordion-button <%= idx === 0 ? '' : 'collapsed' %>" type="button" data-bs-toggle="collapse" data-bs-target="#<%= collapseId %>" aria-expanded="<%= idx === 0 ? 'true' : 'false' %>" aria-controls="<%= collapseId %>">
+                    <%= item.q %>
+                  </button>
+                </h3>
+                <div id="<%= collapseId %>" class="accordion-collapse collapse <%= idx === 0 ? 'show' : '' %>" aria-labelledby="<%= headingId %>" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    <%= item.a %>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
       </div>
     </section>
 
@@ -189,67 +409,72 @@
         <div class="card-body">
           <h2 id="location-heading" class="card-title h6">Location</h2>
           <div class="text-muted mb-2"><%= campground.location %></div>
+
+          <!-- Map Skeleton -->
+          <div id="staticMapSkeleton" class="skeleton-box ratio ratio-16x9" aria-hidden="true"></div>
+
           <div
             class="ratio ratio-16x9 bg-light rounded"
             id="staticMap"
-            style="background-size: cover; background-position: center;"
+            style="display:none;"
+            data-lng="<%= campground.geometry.coordinates[0] %>"
+            data-lat="<%= campground.geometry.coordinates[1] %>"
+            data-token="<%= mapboxToken %>"
+            data-zoom="10"
+            data-size="800x450@2x"
+            data-style="mapbox/outdoors-v12"
+            data-pin="pin-s+ff0000"
+            role="img"
+            aria-label="Map preview of campground location"
           ></div>
         </div>
       </section>
-      <script>
-        (function () {
-          const lng = <%= campground.geometry.coordinates[0] %>;
-          const lat = <%= campground.geometry.coordinates[1] %>;
-          const token = '<%- process.env.MAPBOX_TOKEN || "" %>';
-          if (!token) return;
-          const url = `https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/pin-s+ff0000(${lng},${lat})/${lng},${lat},10,0/800x450@2x?access_token=${token}`;
-          const el = document.getElementById('staticMap');
-          if (el) el.style.backgroundImage = 'url(' + url + ')';
-        })();
-      </script>
+      <!-- External, CSP-safe map loader -->
+      <script src="/outdoorsy/js/static-map.js" defer></script>
     <% } %>
   </div>
 </div>
 
-<script>
-  // Favorites toggle (AJAX)
-  const favBtn = document.querySelector('.toggle-fav-btn');
-  if (favBtn) {
-    favBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const id = favBtn.getAttribute('data-id');
-      favBtn.disabled = true;
-      try {
-        const res = await fetch(`<%= basePath %>/campgrounds/${id}/favorite`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content || ''
-          },
-          credentials: 'same-origin'
-        });
-        if (res.status === 401) {
-          window.location = '<%= basePath %>/login';
-          return;
-        }
-        const data = await res.json();
-        if (data.status === 'added') {
-          favBtn.classList.replace('btn-outline-danger', 'btn-danger');
-          favBtn.setAttribute('aria-pressed', 'true');
-          favBtn.title = 'Remove from favorites';
-        } else if (data.status === 'removed') {
-          favBtn.classList.replace('btn-danger', 'btn-outline-danger');
-          favBtn.setAttribute('aria-pressed', 'false');
-          favBtn.title = 'Add to favorites';
-        }
-      } catch (err) {
-        console.error(err);
-        alert('Could not update favorite. Please try again.');
-      } finally {
-        favBtn.disabled = false;
+<!-- External, CSP-safe favorites handler -->
+<script src="/outdoorsy/js/favorites.js" defer></script>
+
+<!-- Skeleton + reveal logic (tiny, CSP-safe) -->
+<script defer>
+  window.__galleryReadyCount = 0;
+  window.__galleryImgLoaded = function () {
+    window.__galleryReadyCount = (window.__galleryReadyCount || 0) + 1;
+    // Show after first image to reduce TTI
+    if (window.__galleryReadyCount >= 1) {
+      const skel = document.getElementById('gallerySkeleton');
+      const car = document.getElementById('carouselImages');
+      const fb = document.getElementById('galleryFallback');
+      if (skel) skel.style.display = 'none';
+      if (car) car.style.display = '';
+      if (!car && fb) fb.style.display = '';
+    }
+  };
+
+  // Fallback: reveal after timeout in case onload doesn't fire
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+      const car = document.getElementById('carouselImages');
+      if (!car || car.style.display === 'none') {
+        const skel = document.getElementById('gallerySkeleton');
+        const fb = document.getElementById('galleryFallback');
+        if (skel) skel.style.display = 'none';
+        if (car) car.style.display = '';
+        if (!car && fb) fb.style.display = '';
       }
+    }, 1200);
+
+    // Static map reveal hook — static-map.js should dispatch a custom event when the image loads
+    document.addEventListener('static-map:loaded', function () {
+      const sk = document.getElementById('staticMapSkeleton');
+      const map = document.getElementById('staticMap');
+      if (sk) sk.style.display = 'none';
+      if (map) map.style.display = '';
     });
-  }
+  });
 </script>
 
 <style>

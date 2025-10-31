@@ -1,0 +1,327 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <%
+  // ======================================================
+  // Canonical anchors from main site graph (DO NOT REDEFINE)
+  // ======================================================
+  const MAIN_PERSON_ID = 'https://joshlehman.ca/#person';
+  const MAIN_ORG_ID = 'https://joshlehman.ca/#organization';
+  const MAIN_WEBSITE_ID = 'https://joshlehman.ca/#website';
+
+  // Outdoorsy subsite rooting
+  // siteRoot is used only for absolute URL building (SEO/meta).
+  const siteRoot = 'https://joshlehman.ca';
+  const subRoot = siteRoot + '/outdoorsy';
+
+  // For asset loading, always use same-origin, root-relative paths.
+  const outdoorsyRoot = '/outdoorsy';
+
+  function absUrl(url) {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    if (url.startsWith('/')) return siteRoot + url;
+    return subRoot.replace(/\/$/, '') + '/' + url.replace(/^\//, '');
+  }
+
+  // Safe locals
+  const HEAD_pageTitle = typeof pageTitle !== 'undefined' ? pageTitle : 'Outdoorsy';
+  const HEAD_pageDescription =
+    typeof pageDescription !== 'undefined'
+      ? pageDescription
+      : 'Discover and share amazing campgrounds';
+  const HEAD_currentUrl = typeof currentUrl !== 'undefined' ? currentUrl : '';
+  const HEAD_canonical = typeof canonical !== 'undefined' ? canonical : '';
+  const HEAD_socialImageUrl = typeof socialImageUrl !== 'undefined' ? socialImageUrl : '';
+  const HEAD_breadcrumbTrail = Array.isArray(breadcrumbTrail) ? breadcrumbTrail : [];
+  const HEAD_jsonLd = typeof jsonLd !== 'undefined' ? jsonLd : null;
+  const HEAD_robots = typeof robots !== 'undefined' ? robots : '';
+  const HEAD_isHome = typeof isHome !== 'undefined' ? isHome : false;
+  const HEAD_extraStyles = typeof extraStyles !== 'undefined' ? extraStyles : '';
+
+  // Build per-page WebPage node that is part of the MAIN website
+  const pageAbsUrl = absUrl(HEAD_canonical || HEAD_currentUrl) || (subRoot + '/');
+  const webPageId = pageAbsUrl + '#webpage';
+
+  const webPageNode = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': webPageId,
+    url: pageAbsUrl,
+    name: HEAD_pageTitle,
+    description: HEAD_pageDescription,
+    isPartOf: { '@id': MAIN_WEBSITE_ID }
+  };
+
+  // BreadcrumbList from breadcrumbTrail if present
+  let breadcrumbNode = null;
+  if (HEAD_breadcrumbTrail.length) {
+    breadcrumbNode = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      '@id': pageAbsUrl + '#breadcrumbs',
+      itemListElement: HEAD_breadcrumbTrail.map((bc, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: bc.name,
+        item: absUrl(bc.url)
+      }))
+    };
+  }
+
+  // Start graph with WebPage (+ Breadcrumb if present)
+  const graph = [webPageNode];
+  if (breadcrumbNode) graph.push(breadcrumbNode);
+
+  // Merge controller-provided jsonLd, without redefining Person/Organization/WebSite
+  function shouldKeepNode(n) {
+    if (!n || typeof n !== 'object') return false;
+    const id = n['@id'];
+    const type = n['@type'];
+    // Never re-emit main identities
+    if (id === MAIN_PERSON_ID || id === MAIN_ORG_ID || id === MAIN_WEBSITE_ID) return false;
+    if (type === 'Person' && id === MAIN_PERSON_ID) return false;
+    if (type === 'Organization' && id === MAIN_ORG_ID) return false;
+    if (type === 'WebSite' && id === MAIN_WEBSITE_ID) return false;
+    return true;
+  }
+
+  const incoming = Array.isArray(HEAD_jsonLd) ? HEAD_jsonLd : (HEAD_jsonLd ? [HEAD_jsonLd] : []);
+  const filteredIncoming = incoming.filter(shouldKeepNode);
+
+  // Enhance Campground nodes but always reference main website/org via @id
+  function enhanceCampground(n) {
+    if (!n) return [n];
+    const types = Array.isArray(n['@type']) ? n['@type'] : [n['@type']];
+    const isCamp = types.includes('Campground');
+
+    if (!isCamp) return [n];
+
+    const cgId = n['@id'] || (pageAbsUrl + '#campground');
+
+    // Guarantee linkage to main website
+    if (!n.isPartOf) n.isPartOf = { '@id': MAIN_WEBSITE_ID };
+
+    const out = [n];
+
+    // Add Place if missing (derived from same core properties)
+    const hasPlace =
+      incoming.some(x => x && x['@id'] === cgId + '/place') ||
+      graph.some(x => x && x['@id'] === cgId + '/place');
+    if (!hasPlace) {
+      out.push({
+        '@context': 'https://schema.org',
+        '@type': 'Place',
+        '@id': cgId + '/place',
+        name: n.name,
+        url: n.url,
+        image: n.image,
+        address: n.address || undefined,
+        geo: n.geo || undefined,
+        isPartOf: { '@id': MAIN_WEBSITE_ID }
+      });
+    }
+
+    // Add LocalBusiness if priceRange exists (and not already present)
+    const hasLB =
+      incoming.some(x => x && x['@id'] === cgId + '/lb') ||
+      graph.some(x => x && x['@id'] === cgId + '/lb');
+    if (n.priceRange && !hasLB) {
+      out.push({
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        '@id': cgId + '/lb',
+        name: n.name,
+        url: n.url,
+        image: n.image,
+        priceRange: n.priceRange,
+        address: n.address || undefined,
+        geo: n.geo || undefined,
+        parentOrganization: { '@id': MAIN_ORG_ID },
+        isPartOf: { '@id': MAIN_WEBSITE_ID }
+      });
+    }
+
+    return out;
+  }
+
+  // Push enhanced nodes
+  for (const node of filteredIncoming) {
+    graph.push(...enhanceCampground(node));
+  }
+
+  // Optionally set primaryImageOfPage if social image exists
+  if (HEAD_socialImageUrl) {
+    webPageNode.primaryImageOfPage = {
+      '@type': 'ImageObject',
+      url: absUrl(HEAD_socialImageUrl)
+    };
+  }
+
+  // ============================================
+  // Extend main-site graph with sitewide signals
+  // - Organization ContactPoint (attach to MAIN_ORG_ID)
+  // - SiteNavigationElement for the Outdoorsy subsite
+  // - WebSite SearchAction on MAIN_WEBSITE_ID
+  // ============================================
+  const OUT_BASE = subRoot;
+
+  const contactPointNode = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': MAIN_ORG_ID,
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'joshlehman.dev@gmail.com',
+        url: 'https://joshlehman.ca/contact',
+        availableLanguage: ['English']
+      }
+    ]
+  };
+
+  const siteNavigationNode = {
+    '@context': 'https://schema.org',
+    '@type': 'SiteNavigationElement',
+    '@id': `${OUT_BASE}#site-navigation`,
+    name: 'Outdoorsy Navigation',
+    isPartOf: { '@id': MAIN_WEBSITE_ID },
+    url: `${OUT_BASE}/`,
+    about: { '@id': MAIN_ORG_ID },
+    hasPart: [
+      { '@type': 'WebPage', name: 'Home', url: `${OUT_BASE}/` },
+      { '@type': 'CollectionPage', name: 'Campgrounds', url: `${OUT_BASE}/campgrounds` },
+      { '@type': 'CollectionPage', name: 'Nearby', url: `${OUT_BASE}/campgrounds/nearby` },
+      { '@type': 'CollectionPage', name: 'Favorites', url: `${OUT_BASE}/campgrounds/favorites` }
+    ]
+  };
+
+  const searchActionNode = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': MAIN_WEBSITE_ID,
+    potentialAction: [
+      {
+        '@type': 'SearchAction',
+        target: `${OUT_BASE}/campgrounds?q={search_term_string}`,
+        'query-input': 'required name=search_term_string'
+      }
+    ]
+  };
+
+  graph.push(contactPointNode, siteNavigationNode, searchActionNode);
+
+  // ============================================
+  // Cloudinary helper for responsive images
+  // ============================================
+  function cloudinaryTransform(url, transform) {
+    if (!url || typeof url !== 'string') return url;
+    if (!url.includes('cloudinary.com')) return url;
+    return url.replace('/upload/', `/upload/${transform}/`);
+  }
+
+  // LCP candidate: first campground image (if available)
+  const HEAD_lcpImageUrl = typeof campground !== 'undefined' && campground?.images?.[0]?.url
+    ? campground.images[0].url
+    : HEAD_socialImageUrl;
+  %>
+
+  <!-- Basic Meta -->
+  <title><%= HEAD_pageTitle %></title>
+  <meta name="description" content="<%= HEAD_pageDescription %>" />
+  <% if (HEAD_robots) { %><meta name="robots" content="<%= HEAD_robots %>"><% } %>
+  <% if (HEAD_canonical) { %><link rel="canonical" href="<%= absUrl(HEAD_canonical) %>"><% } %>
+  <% if (typeof prevUrl !== 'undefined' && prevUrl) { %><link rel="prev" href="<%= prevUrl %>"><% } %>
+  <% if (typeof nextUrl !== 'undefined' && nextUrl) { %><link rel="next" href="<%= nextUrl %>"><% } %>
+
+  <!-- ============================================ -->
+  <!-- CORE WEB VITALS: Resource Hints & Preloads  -->
+  <!-- ============================================ -->
+
+  <!-- DNS & connection prep for critical third-parties -->
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+  <link rel="preconnect" href="https://api.mapbox.com" crossorigin />
+  <link rel="preconnect" href="https://events.mapbox.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+  <!-- Preload LCP image (hero/gallery first image) with responsive srcset -->
+  <% if (HEAD_lcpImageUrl) { %>
+    <link
+      rel="preload"
+      as="image"
+      href="<%= cloudinaryTransform(HEAD_lcpImageUrl, 'c_fill,g_auto,f_auto,q_auto,w_1200') %>"
+      imagesrcset="
+        <%= cloudinaryTransform(HEAD_lcpImageUrl, 'c_fill,g_auto,f_auto,q_auto,w_400') %> 400w,
+        <%= cloudinaryTransform(HEAD_lcpImageUrl, 'c_fill,g_auto,f_auto,q_auto,w_800') %> 800w,
+        <%= cloudinaryTransform(HEAD_lcpImageUrl, 'c_fill,g_auto,f_auto,q_auto,w_1200') %> 1200w
+      "
+      imagesizes="(max-width: 600px) 100vw, (max-width: 992px) 50vw, 800px"
+      fetchpriority="high"
+    />
+  <% } %>
+
+  <!-- Favicon & Manifest (root-relative for same-origin in dev and prod) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= outdoorsyRoot %>/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= outdoorsyRoot %>/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= outdoorsyRoot %>/icons/favicon-16x16.png">
+  <link rel="manifest" href="<%= outdoorsyRoot %>/site.webmanifest">
+  <meta name="theme-color" content="#2b4d2f" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="<%= HEAD_isHome ? 'website' : 'article' %>">
+  <meta property="og:title" content="<%= HEAD_pageTitle %>">
+  <meta property="og:description" content="<%= HEAD_pageDescription %>">
+  <% if (HEAD_canonical) { %><meta property="og:url" content="<%= absUrl(HEAD_canonical) %>"><% } %>
+  <% if (HEAD_socialImageUrl) { %>
+    <meta property="og:image" content="<%= absUrl(HEAD_socialImageUrl) %>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+  <% } %>
+  <meta property="og:site_name" content="Outdoorsy">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="<%= HEAD_socialImageUrl ? 'summary_large_image' : 'summary' %>">
+  <meta name="twitter:title" content="<%= HEAD_pageTitle %>">
+  <meta name="twitter:description" content="<%= HEAD_pageDescription %>">
+  <% if (HEAD_socialImageUrl) { %><meta name="twitter:image" content="<%= absUrl(HEAD_socialImageUrl) %>"><% } %>
+
+  <!-- JSON-LD (extends main graph; references main @ids without redefining them) -->
+  <script type="application/ld+json">
+  <%- JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2) %>
+  </script>
+
+  <!-- Bootstrap CSS (loaded normally, no preload) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+
+  <!-- Mapbox GL JS CSS -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+
+<!-- Mapbox GL JS script -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js" defer></script>
+
+  <!-- Site stylesheets (after Bootstrap to allow overrides) -->
+  <link rel="stylesheet" href="<%= outdoorsyRoot %>/stylesheets/skeleton.css" />
+  <link rel="stylesheet" href="<%= outdoorsyRoot %>/stylesheets/app.css" />
+
+  <!-- Optional per-page styles -->
+  <% if (HEAD_extraStyles) { %>
+    <%= HEAD_extraStyles %>
+  <% } %>
+
+  <!-- CLS mitigation: default image styles + aspect-ratio hints -->
+  <style>
+    img[loading="lazy"] { content-visibility: auto; }
+    img { height: auto; max-width: 100%; }
+    /* Ensure images with width/height maintain aspect ratio */
+    img[width][height] { aspect-ratio: attr(width) / attr(height); }
+  </style>
+</head>

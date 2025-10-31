@@ -8,18 +8,18 @@
       <i class="fas fa-location-arrow me-1" aria-hidden="true"></i>
       <span>Nearby</span>
     </a>
-    <% if (currentUser) { %>
+    
       <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/favorites">
         <i class="fas fa-heart me-1" aria-hidden="true"></i>
         <span>My Favorites</span>
       </a>
-    <% } %>
-    <% if (currentUser) { %>
+    
+    
       <a class="btn btn-primary" href="/outdoorsy/campgrounds/new">
         <i class="fas fa-plus me-1" aria-hidden="true"></i>
         <span>New Campground</span>
       </a>
-    <% } %>
+    
   </div>
 </div>
 
@@ -36,7 +36,7 @@
           name="q"
           class="form-control"
           placeholder="Title, description, location..."
-          value="<%= typeof q !== 'undefined' ? q : '' %>"
+          value="X"
         >
       </div>
 
@@ -49,7 +49,7 @@
           class="form-control"
           min="0"
           step="1"
-          value="<%= typeof minPrice !== 'undefined' ? minPrice : '' %>"
+          value="X"
         >
       </div>
       <div class="col-6 col-md-2">
@@ -61,7 +61,7 @@
           class="form-control"
           min="0"
           step="1"
-          value="<%= typeof maxPrice !== 'undefined' ? maxPrice : '' %>"
+          value="X"
         >
       </div>
 
@@ -75,7 +75,7 @@
           step="0.000001"
           min="-90"
           max="90"
-          value="<%= typeof lat !== 'undefined' && lat !== '' ? lat : '' %>"
+          value="X"
         >
       </div>
       <div class="col-6 col-md-2">
@@ -88,7 +88,7 @@
           step="0.000001"
           min="-180"
           max="180"
-          value="<%= typeof lng !== 'undefined' && lng !== '' ? lng : '' %>"
+          value="X"
         >
       </div>
       <div class="col-6 col-md-2">
@@ -101,7 +101,7 @@
           min="1"
           max="500"
           step="1"
-          value="<%= typeof radiusKm !== 'undefined' && radiusKm !== '' ? radiusKm : '' %>"
+          value="X"
         >
       </div>
 
@@ -122,109 +122,93 @@
 
   <div class="d-flex justify-content-between align-items-center mb-2">
     <div class="text-muted" aria-live="polite">
-      <%= total %> result<%= total === 1 ? '' : 's' %>
+      X resultX
     </div>
-    <% if (typeof page !== 'undefined' && typeof totalPages !== 'undefined' && totalPages > 0) { %>
-      <div class="text-muted">Page <%= page %> of <%= totalPages %></div>
-    <% } %>
+    
+      <div class="text-muted">Page X of X</div>
+    
   </div>
 
   <!-- Cards -->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <% (campgrounds || []).forEach((cg) => { %>
+    
       <div class="col">
         <article class="card h-100 shadow-sm">
-          <% const cover = (cg.images && cg.images.length) ? cg.images[0].url : 'https://placehold.co/600x400?text=No+Image'; %>
+          
           <img
-            src="<%= cover %>"
+            src="X"
             class="card-img-top"
-            alt="<%= cg.title %> cover"
+            alt="X cover"
             style="height: 200px; object-fit: cover;"
           >
           <div class="card-body d-flex flex-column">
             <h3 class="card-title h5 mb-1">
-              <a class="text-decoration-none" href="/outdoorsy/campgrounds/<%= cg.slug || cg._id %>"><%= cg.title %></a>
+              <a class="text-decoration-none" href="/outdoorsy/campgrounds/X">X</a>
             </h3>
             <p class="card-text text-muted mb-2">
               <i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i>
-              <%= cg.location %>
+              X
             </p>
             <div class="fw-bold mb-3">
-              $<%= cg.price %> / night
+              $X / night
             </div>
             <div class="mt-auto d-flex gap-2">
-              <a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/<%= cg.slug || cg._id %>">View</a>
-              <% if (currentUser) { %>
+              <a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/X">View</a>
+              
                 <button
                   type="button"
-                  class="btn btn-sm <%= (favorites || []).includes(String(cg._id)) ? 'btn-danger' : 'btn-outline-danger' %> toggle-fav-btn"
-                  data-id="<%= cg._id %>"
-                  aria-pressed="<%= (favorites || []).includes(String(cg._id)) ? 'true' : 'false' %>"
-                  aria-label="<%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>"
-                  title="<%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>"
+                  class="btn btn-sm X toggle-fav-btn"
+                  data-id="X"
+                  aria-pressed="X"
+                  aria-label="X"
+                  title="X"
                 >
                   <i class="fas fa-heart" aria-hidden="true"></i>
                   <span class="visually-hidden">
-                    <%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>
+                    X
                   </span>
                   <span>Favorite</span>
                 </button>
-              <% } %>
+              
             </div>
           </div>
         </article>
       </div>
-    <% }) %>
+    
   </div>
 </section>
 
 <!-- Pagination -->
-<% if (typeof totalPages !== 'undefined' && totalPages > 1) { %>
-  <%
-    function encodeParam(key, value) {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(value);
-    }
 
-    function pageUrl(p) {
-      let query = [];
-      if (q) query.push(encodeParam('q', q));
-      if (minPrice !== '' && typeof minPrice !== 'undefined') query.push(encodeParam('minPrice', minPrice));
-      if (maxPrice !== '' && typeof maxPrice !== 'undefined') query.push(encodeParam('maxPrice', maxPrice));
-      if (lat !== '' && typeof lat !== 'undefined') query.push(encodeParam('lat', lat));
-      if (lng !== '' && typeof lng !== 'undefined') query.push(encodeParam('lng', lng));
-      if (radiusKm !== '' && typeof radiusKm !== 'undefined') query.push(encodeParam('radiusKm', radiusKm));
-      query.push(encodeParam('page', p));
-      return '/outdoorsy/campgrounds?' + query.join('&');
-    }
-  %>
+  
   <nav aria-label="Campgrounds pagination" class="mt-4">
     <ul class="pagination justify-content-center">
-      <li class="page-item <%= page <= 1 ? 'disabled' : '' %>">
-        <% if (page <= 1) { %>
+      <li class="page-item X">
+        
           <span class="page-link" aria-disabled="true">Previous</span>
-        <% } else { %>
-          <a class="page-link" href="<%= pageUrl(page - 1) %>">Previous</a>
-        <% } %>
+        
+          <a class="page-link" href="X">Previous</a>
+        
       </li>
-      <% for (let p = 1; p <= totalPages; p++) { %>
-        <li class="page-item <%= p === page ? 'active' : '' %>">
-          <% if (p === page) { %>
-            <span class="page-link" aria-current="page">Page <%= p %></span>
-          <% } else { %>
-            <a class="page-link" href="<%= pageUrl(p) %>">Page <%= p %></a>
-          <% } %>
+      
+        <li class="page-item X">
+          
+            <span class="page-link" aria-current="page">Page X</span>
+          
+            <a class="page-link" href="X">Page X</a>
+          
         </li>
-      <% } %>
-      <li class="page-item <%= page >= totalPages ? 'disabled' : '' %>">
-        <% if (page >= totalPages) { %>
+      
+      <li class="page-item X">
+        
           <span class="page-link" aria-disabled="true">Next</span>
-        <% } else { %>
-          <a class="page-link" href="<%= pageUrl(page + 1) %>">Next</a>
-        <% } %>
+        
+          <a class="page-link" href="X">Next</a>
+        
       </li>
     </ul>
   </nav>
-<% } %>
+
 
 <script>
   // Favorites toggle (AJAX)
