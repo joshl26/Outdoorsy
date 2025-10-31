@@ -1,0 +1,8 @@
+node_modules/**
+coverage/**
+public/**
+docs/**
+dist/**
+**/*.js.html
+**/*.css.html
+**/*.md.html

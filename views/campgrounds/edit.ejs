@@ -107,9 +107,13 @@
         <fieldset class="mb-3">
           <legend class="h6 mb-2">Existing Images</legend>
           <div class="row g-3">
-            <% campground.images.forEach(function(img, i) { 
+            <% campground.images.forEach(function (img, i) { 
                  const thumbAlt = `${campground.title || 'Campground'} image ${i + 1}`;
-                 const checkboxId = `delete-image-${i}`;
+                 const checkboxId = `delete-image-${String(i)
+                   .trim()
+                   .toLowerCase()
+                   .replace(/\s+/g, '-')
+                   .replace(/[^a-z0-9\-_:.]/g, '')}`;
             %>
               <div class="col-12 d-flex align-items-start gap-3">
                 <img
@@ -126,7 +130,9 @@
                     name="deleteImages[<%= i %>]"
                     value="<%= img.filename %>"
                   >
-                  <label class="form-check-label" for="<%= checkboxId %>">Delete this image</label>
+                  <label class="form-check-label" for="<%= checkboxId %>">
+                    Delete this image
+                  </label>
                 </div>
               </div>
             <% }) %>
@@ -139,7 +145,10 @@
         <button type="submit" class="btn btn-info">
           Update Campground
         </button>
-        <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/<%= campground._id %>">
+        <a
+          class="btn btn-outline-secondary"
+          href="/outdoorsy/campgrounds/<%= campground._id %>"
+        >
           Back to Campground
         </a>
       </div>

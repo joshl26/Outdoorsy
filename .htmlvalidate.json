@@ -1,5 +1,16 @@
 {
+  "root": true,
   "extends": ["html-validate:recommended", "html-validate:a11y"],
+  "ignore": [
+    "node_modules/**",
+    "coverage/**",
+    "public/**",
+    "docs/**",
+    "dist/**",
+    "**/*.js.html",
+    "**/*.css.html",
+    "**/*.md.html"
+  ],
   "rules": {
     "wcag/h30": "error",
     "wcag/h32": "error",
