@@ -1,2 +1,148 @@
 /* ===== Login Index Page Styles ===== */
 /* Place this file at: public/stylesheets/login.css */
+
+/* /public/outdoorsy/stylesheets/users-login.css */
+
+.btn.btn-success {
+  background-color: #0a7a27 !important; /* darker green */
+  border-color: #0a7a27 !important;
+  color: #ffffff !important;
+}
+.btn.btn-success:hover,
+.btn.btn-success:focus {
+  background-color: #086a21 !important;
+  border-color: #086a21 !important;
+}
+
+/* ==============================
+   OUTDOORSY LOGIN PAGE STYLES
+   ============================== */
+
+body {
+  background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);
+  min-height: 100vh;
+}
+
+.container {
+  min-height: calc(100vh - 60px);
+}
+
+/* Card structure */
+.card {
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #ffffff;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Headings */
+.card-title {
+  color: #1a4731;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Form controls */
+.form-control {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ced4da;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.form-control:focus {
+  border-color: #198754; /* Bootstrap success green */
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+  outline: 0;
+}
+
+/* Validation colors */
+.is-valid {
+  border-color: #28a745 !important;
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.valid-feedback,
+.invalid-feedback {
+  font-size: 0.875rem;
+}
+
+/* Button */
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #157347;
+  box-shadow: 0 4px 12px rgba(21, 115, 71, 0.3);
+}
+
+.btn-success:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.35);
+}
+
+/* Alert */
+.alert {
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Spinner alignment */
+.spinner-border {
+  vertical-align: text-bottom;
+}
+
+/* Accessibility improvement */
+:focus-visible {
+  outline: 2px solid #198754;
+  outline-offset: 4px;
+}
+
+/* Responsive touch */
+@media (max-width: 576px) {
+  .card {
+    margin: 1rem;
+  }
+
+  .card-img-top {
+    height: 150px;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    background: linear-gradient(120deg, #f0f8f5 40%, #ffffff 100%)
+      url('https://res.cloudinary.com/dv6keahg3/image/upload/v1680772780/Outdoorsy/pexels-brady-knoll-5914157_usg6oo.jpg')
+      no-repeat center right / cover;
+  }
+}

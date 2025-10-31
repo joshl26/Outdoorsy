@@ -1,69 +1,148 @@
+<!-- views/campgrounds/edit.ejs -->
 <div class="row">
-    <h1 class="text-center">Edit Campground</h1>
-    <div class="col-md-6 offset-md-3">
-        <form action="/outdoorsy/campgrounds/<%=campground._id%>?_method=PUT" method="POST" novalidate class="validated-form"
-            enctype="multipart/form-data">
-            <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="campground[title]"
-                    value="<%=campground.title %>" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="location">Location</label>
-                <input class="form-control" type="text" id="location" name="campground[location]"
-                    value="<%=campground.location %>" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
+  <div class="col-md-6 offset-md-3">
+    <!-- Page title -->
+    <h1 class="text-center mb-4">Edit Campground</h1>
 
-            <div class="mb-3">
-                <label class="form-label" for="price">Campground Price</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="price-label">$</span>
-                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price"
-                        aria-describedby="price-label" name="campground[price]" value="<%=campground.price %>"
-                        required>\<div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-            </div>
+    <!-- Form section heading (visually hidden for a11y outline) -->
+    <h2 class="visually-hidden">Edit campground form</h2>
 
-            <div class="mb-3">
-                <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="campground[description]"
-                    required><%= campground.description%></textarea>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-            <div class="mb-3">
-                <div class="form-file custom-file">
-                    <input type="file" class="form-file-input" id="image" name="image" multiple>
-                    <label class="form-file-label" for="image">
-                        <span class="form-file-text custom-file-label">Add more image(s)...</span>
-                        <span class="form-file-button">Browse</span>
-                    </label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <% campground.images.forEach(function(img, i) {  %>
+    <form
+      action="/outdoorsy/campgrounds/<%= campground._id %>?_method=PUT"
+      method="POST"
+      novalidate
+      class="validated-form needs-validation"
+      enctype="multipart/form-data"
+      aria-describedby="edit-cg-help"
+    >
+      <p id="edit-cg-help" class="visually-hidden">
+        Update the campground title, location, price, description, and images, then submit to save changes.
+      </p>
 
-                <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
-                <div class="form-check-inline">
-                    <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
-                </div>
-                <label for="image-<%=i%>">Delete?</label>
-                <% })%>
-            </div>
-            <div class="mb-3">
-                <button class="btn btn-info">Update Campground</button>
-            </div>
-        </form>
-        <a href="/outdoorsy/campgrounds/<%= campground._id%>">Back To Campground</a>
+      <!-- Title -->
+      <div class="mb-3">
+        <h3 class="visually-hidden">Title</h3>
+        <label class="form-label" for="cg-title">Title</label>
+        <input
+          class="form-control"
+          type="text"
+          id="cg-title"
+          name="campground[title]"
+          value="<%= campground.title %>"
+          required
+        >
+        <div class="valid-feedback" aria-live="polite">Looks good!</div>
+      </div>
 
-    </div>
+      <!-- Location -->
+      <div class="mb-3">
+        <h3 class="visually-hidden">Location</h3>
+        <label class="form-label" for="cg-location">Location</label>
+        <input
+          class="form-control"
+          type="text"
+          id="cg-location"
+          name="campground[location]"
+          value="<%= campground.location %>"
+          required
+        >
+        <div class="valid-feedback" aria-live="polite">Looks good!</div>
+      </div>
+
+      <!-- Price -->
+      <div class="mb-3">
+        <h3 class="visually-hidden">Price</h3>
+        <label class="form-label" for="cg-price">Campground Price</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-label">$</span>
+          <input
+            type="text"
+            class="form-control"
+            id="cg-price"
+            name="campground[price]"
+            placeholder="0.00"
+            aria-label="Price"
+            aria-describedby="price-label"
+            inputmode="decimal"
+            pattern="^\\d+(\\.\\d{1,2})?$"
+            value="<%= campground.price %>"
+            required
+          >
+          <div class="valid-feedback" aria-live="polite">Looks good!</div>
+        </div>
+        <div class="form-text">Enter a number like 25 or 25.50</div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <h3 class="visually-hidden">Description</h3>
+        <label class="form-label" for="cg-description">Description</label>
+        <textarea
+          class="form-control"
+          id="cg-description"
+          name="campground[description]"
+          rows="4"
+          required
+        ><%= campground.description %></textarea>
+        <div class="valid-feedback" aria-live="polite">Looks good!</div>
+      </div>
+
+      <!-- Add Images -->
+      <div class="mb-3">
+        <h3 class="visually-hidden">Add images</h3>
+        <label class="form-label" for="cg-images">Add more image(s)</label>
+        <input
+          type="file"
+          class="form-control"
+          id="cg-images"
+          name="image"
+          multiple
+          aria-describedby="cg-images-help"
+        >
+        <div id="cg-images-help" class="form-text">You can select multiple files.</div>
+      </div>
+
+      <!-- Existing Images with Delete checkboxes -->
+      <% if (campground.images && campground.images.length) { %>
+        <fieldset class="mb-3">
+          <legend class="h6 mb-2">Existing Images</legend>
+          <div class="row g-3">
+            <% campground.images.forEach(function(img, i) { 
+                 const thumbAlt = `${campground.title || 'Campground'} image ${i + 1}`;
+                 const checkboxId = `delete-image-${i}`;
+            %>
+              <div class="col-12 d-flex align-items-start gap-3">
+                <img
+                  src="<%= img.thumbnail %>"
+                  class="img-thumbnail"
+                  alt="<%= thumbAlt %>"
+                  style="max-width: 160px; height: auto;"
+                >
+                <div class="form-check mt-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="<%= checkboxId %>"
+                    name="deleteImages[<%= i %>]"
+                    value="<%= img.filename %>"
+                  >
+                  <label class="form-check-label" for="<%= checkboxId %>">Delete this image</label>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </fieldset>
+      <% } %>
+
+      <!-- Submit -->
+      <div class="mb-3 d-flex gap-2">
+        <button type="submit" class="btn btn-info">
+          Update Campground
+        </button>
+        <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/<%= campground._id %>">
+          Back to Campground
+        </a>
+      </div>
+    </form>
+  </div>
 </div>

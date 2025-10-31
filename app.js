@@ -79,6 +79,10 @@ app.use((req, res, next) => {
   next();
 });
 
+// Health check endpoint for CI/testing tools (responds at root /)
+app.head('/', (req, res) => res.sendStatus(200));
+app.get('/healthz', (req, res) => res.status(200).send('ok'));
+
 // Mount routes with appropriate base paths
 app.use(buildPath('campgrounds'), campgroundRoutes);
 app.use(buildPath('campgrounds/:id/reviews'), reviewRoutes);

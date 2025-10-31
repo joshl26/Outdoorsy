@@ -5,108 +5,178 @@
   <h1 class="text-primary m-0">All Campgrounds</h1>
   <div class="d-flex gap-2">
     <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/nearby">
-      <i class="fas fa-location-arrow me-1"></i> Nearby
+      <i class="fas fa-location-arrow me-1" aria-hidden="true"></i>
+      <span>Nearby</span>
     </a>
     <% if (currentUser) { %>
       <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/favorites">
-        <i class="fas fa-heart me-1"></i> My Favorites
+        <i class="fas fa-heart me-1" aria-hidden="true"></i>
+        <span>My Favorites</span>
       </a>
     <% } %>
     <% if (currentUser) { %>
       <a class="btn btn-primary" href="/outdoorsy/campgrounds/new">
-        <i class="fas fa-plus me-1"></i> New Campground
+        <i class="fas fa-plus me-1" aria-hidden="true"></i>
+        <span>New Campground</span>
       </a>
     <% } %>
   </div>
 </div>
 
-<!-- Filters -->
-<div class="card mb-4 shadow-sm">
+<!-- Filters section -->
+<section aria-labelledby="filters-heading" class="card mb-4 shadow-sm">
   <div class="card-body">
-    <form method="GET" action="/outdoorsy/campgrounds" class="row g-3" id="indexFilterForm">
+    <h2 id="filters-heading" class="h5 mb-3">Filters</h2>
+    <form method="GET" action="/outdoorsy/campgrounds" class="row g-3" id="indexFilterForm" novalidate>
       <div class="col-12 col-md-3">
         <label for="q" class="form-label">Search</label>
-        <input type="text" id="q" name="q" class="form-control" placeholder="Title, description, location..." value="<%= typeof q !== 'undefined' ? q : '' %>">
+        <input
+          type="text"
+          id="q"
+          name="q"
+          class="form-control"
+          placeholder="Title, description, location..."
+          value="<%= typeof q !== 'undefined' ? q : '' %>"
+        >
       </div>
 
       <div class="col-6 col-md-2">
         <label for="minPrice" class="form-label">Min Price</label>
-        <input type="number" id="minPrice" name="minPrice" class="form-control" min="0" step="1" value="<%= typeof minPrice !== 'undefined' ? minPrice : '' %>">
+        <input
+          type="number"
+          id="minPrice"
+          name="minPrice"
+          class="form-control"
+          min="0"
+          step="1"
+          value="<%= typeof minPrice !== 'undefined' ? minPrice : '' %>"
+        >
       </div>
       <div class="col-6 col-md-2">
         <label for="maxPrice" class="form-label">Max Price</label>
-        <input type="number" id="maxPrice" name="maxPrice" class="form-control" min="0" step="1" value="<%= typeof maxPrice !== 'undefined' ? maxPrice : '' %>">
+        <input
+          type="number"
+          id="maxPrice"
+          name="maxPrice"
+          class="form-control"
+          min="0"
+          step="1"
+          value="<%= typeof maxPrice !== 'undefined' ? maxPrice : '' %>"
+        >
       </div>
 
       <div class="col-6 col-md-2">
         <label for="lat" class="form-label">Lat</label>
-        <input type="number" id="lat" name="lat" class="form-control" step="0.000001" min="-90" max="90" value="<%= typeof lat !== 'undefined' && lat !== '' ? lat : '' %>">
+        <input
+          type="number"
+          id="lat"
+          name="lat"
+          class="form-control"
+          step="0.000001"
+          min="-90"
+          max="90"
+          value="<%= typeof lat !== 'undefined' && lat !== '' ? lat : '' %>"
+        >
       </div>
       <div class="col-6 col-md-2">
         <label for="lng" class="form-label">Lng</label>
-        <input type="number" id="lng" name="lng" class="form-control" step="0.000001" min="-180" max="180" value="<%= typeof lng !== 'undefined' && lng !== '' ? lng : '' %>">
+        <input
+          type="number"
+          id="lng"
+          name="lng"
+          class="form-control"
+          step="0.000001"
+          min="-180"
+          max="180"
+          value="<%= typeof lng !== 'undefined' && lng !== '' ? lng : '' %>"
+        >
       </div>
       <div class="col-6 col-md-2">
         <label for="radiusKm" class="form-label">Radius (km)</label>
-        <input type="number" id="radiusKm" name="radiusKm" class="form-control" min="1" max="500" step="1" value="<%= typeof radiusKm !== 'undefined' && radiusKm !== '' ? radiusKm : '' %>">
+        <input
+          type="number"
+          id="radiusKm"
+          name="radiusKm"
+          class="form-control"
+          min="1"
+          max="500"
+          step="1"
+          value="<%= typeof radiusKm !== 'undefined' && radiusKm !== '' ? radiusKm : '' %>"
+        >
       </div>
 
       <div class="col-12 col-md-6 d-flex align-items-end gap-2">
         <button type="submit" class="btn btn-primary">
-          <i class="fas fa-search me-1"></i> Apply Filters
+          <i class="fas fa-search me-1" aria-hidden="true"></i>
+          <span>Apply Filters</span>
         </button>
-        <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">
-          Reset
-        </a>
+        <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">Reset</a>
       </div>
     </form>
   </div>
-</div>
+</section>
 
-<div class="d-flex justify-content-between align-items-center mb-2">
-  <div class="text-muted">
-    <%= total %> result<%= total === 1 ? '' : 's' %>
-  </div>
-  <% if (typeof page !== 'undefined' && typeof totalPages !== 'undefined' && totalPages > 0) { %>
-    <div class="text-muted">Page <%= page %> of <%= totalPages %></div>
-  <% } %>
-</div>
+<!-- Results section -->
+<section aria-labelledby="results-heading">
+  <h2 id="results-heading" class="visually-hidden">Campground Results</h2>
 
-<!-- Cards -->
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-  <% (campgrounds || []).forEach((cg) => { %>
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <% const cover = (cg.images && cg.images.length) ? cg.images[0].url : 'https://placehold.co/600x400?text=No+Image'; %>
-        <img src="<%= cover %>" class="card-img-top" alt="<%= cg.title %> cover" style="height: 200px; object-fit: cover;">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title mb-1">
-            <a class="text-decoration-none" href="/outdoorsy/campgrounds/<%= cg._id %>"><%= cg.title %></a>
-          </h5>
-          <p class="card-text text-muted mb-2">
-            <i class="fas fa-map-marker-alt me-1"></i>
-            <%= cg.location %>
-          </p>
-          <div class="fw-bold mb-3">
-            $<%= cg.price %> / night
-          </div>
-          <div class="mt-auto d-flex gap-2">
-            <a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/<%= cg._id %>">View</a>
-            <% if (currentUser) { %>
-              <button
-                class="btn btn-sm <%= (favorites || []).includes(String(cg._id)) ? 'btn-danger' : 'btn-outline-danger' %> toggle-fav-btn"
-                data-id="<%= cg._id %>"
-                aria-pressed="<%= (favorites || []).includes(String(cg._id)) ? 'true' : 'false' %>"
-                title="<%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>">
-                <i class="fas fa-heart"></i>
-              </button>
-            <% } %>
-          </div>
-        </div>
-      </div>
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <div class="text-muted" aria-live="polite">
+      <%= total %> result<%= total === 1 ? '' : 's' %>
     </div>
-  <% }) %>
-</div>
+    <% if (typeof page !== 'undefined' && typeof totalPages !== 'undefined' && totalPages > 0) { %>
+      <div class="text-muted">Page <%= page %> of <%= totalPages %></div>
+    <% } %>
+  </div>
+
+  <!-- Cards -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% (campgrounds || []).forEach((cg) => { %>
+      <div class="col">
+        <article class="card h-100 shadow-sm">
+          <% const cover = (cg.images && cg.images.length) ? cg.images[0].url : 'https://placehold.co/600x400?text=No+Image'; %>
+          <img
+            src="<%= cover %>"
+            class="card-img-top"
+            alt="<%= cg.title %> cover"
+            style="height: 200px; object-fit: cover;"
+          >
+          <div class="card-body d-flex flex-column">
+            <h3 class="card-title h5 mb-1">
+              <a class="text-decoration-none" href="/outdoorsy/campgrounds/<%= cg._id %>"><%= cg.title %></a>
+            </h3>
+            <p class="card-text text-muted mb-2">
+              <i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i>
+              <%= cg.location %>
+            </p>
+            <div class="fw-bold mb-3">
+              $<%= cg.price %> / night
+            </div>
+            <div class="mt-auto d-flex gap-2">
+              <a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/<%= cg._id %>">View</a>
+              <% if (currentUser) { %>
+                <button
+                  type="button"
+                  class="btn btn-sm <%= (favorites || []).includes(String(cg._id)) ? 'btn-danger' : 'btn-outline-danger' %> toggle-fav-btn"
+                  data-id="<%= cg._id %>"
+                  aria-pressed="<%= (favorites || []).includes(String(cg._id)) ? 'true' : 'false' %>"
+                  aria-label="<%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>"
+                  title="<%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>"
+                >
+                  <i class="fas fa-heart" aria-hidden="true"></i>
+                  <span class="visually-hidden">
+                    <%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>
+                  </span>
+                  <span>Favorite</span>
+                </button>
+              <% } %>
+            </div>
+          </div>
+        </article>
+      </div>
+    <% }) %>
+  </div>
+</section>
 
 <!-- Pagination -->
 <% if (typeof totalPages !== 'undefined' && totalPages > 1) { %>
@@ -128,15 +198,27 @@
   <nav aria-label="Campgrounds pagination" class="mt-4">
     <ul class="pagination justify-content-center">
       <li class="page-item <%= page <= 1 ? 'disabled' : '' %>">
-        <a class="page-link" href="<%= pageUrl(page - 1) %>">Previous</a>
+        <% if (page <= 1) { %>
+          <span class="page-link" aria-disabled="true">Previous</span>
+        <% } else { %>
+          <a class="page-link" href="<%= pageUrl(page - 1) %>">Previous</a>
+        <% } %>
       </li>
       <% for (let p = 1; p <= totalPages; p++) { %>
         <li class="page-item <%= p === page ? 'active' : '' %>">
-          <a class="page-link" href="<%= pageUrl(p) %>"><%= p %></a>
+          <% if (p === page) { %>
+            <span class="page-link" aria-current="page">Page <%= p %></span>
+          <% } else { %>
+            <a class="page-link" href="<%= pageUrl(p) %>">Page <%= p %></a>
+          <% } %>
         </li>
       <% } %>
       <li class="page-item <%= page >= totalPages ? 'disabled' : '' %>">
-        <a class="page-link" href="<%= pageUrl(page + 1) %>">Next</a>
+        <% if (page >= totalPages) { %>
+          <span class="page-link" aria-disabled="true">Next</span>
+        <% } else { %>
+          <a class="page-link" href="<%= pageUrl(page + 1) %>">Next</a>
+        <% } %>
       </li>
     </ul>
   </nav>
@@ -163,11 +245,13 @@
           btn.classList.remove('btn-outline-danger');
           btn.classList.add('btn-danger');
           btn.setAttribute('aria-pressed', 'true');
+          btn.setAttribute('aria-label', 'Remove from favorites');
           btn.title = 'Remove from favorites';
         } else if (data.status === 'removed') {
           btn.classList.remove('btn-danger');
           btn.classList.add('btn-outline-danger');
           btn.setAttribute('aria-pressed', 'false');
+          btn.setAttribute('aria-label', 'Add to favorites');
           btn.title = 'Add to favorites';
         }
       } catch (err) {

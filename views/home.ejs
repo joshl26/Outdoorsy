@@ -105,21 +105,21 @@
     <div class="row g-4">
       <div class="col-lg-3 col-md-6 col-6">
         <article class="stat-item">
-          <span class="stat-number text-light" aria-label="1,250 plus">1,250+</span>
+          <span class="stat-number text-light" >1,250+</span>
           <span class="stat-label text-light">Campgrounds</span>
         </article>
       </div>
       
       <div class="col-lg-3 col-md-6 col-6">
         <article class="stat-item">
-          <span class="stat-number text-light" aria-label="5,400 plus">5,400+</span>
+          <span class="stat-number text-light" >5,400+</span>
           <span class="stat-label text-light">Reviews</span>
         </article>
       </div>
       
       <div class="col-lg-3 col-md-6 col-6">
         <article class="stat-item">
-          <span class="stat-number text-light" aria-label="2,800 plus">2,800+</span>
+          <span class="stat-number text-light" >2,800+</span>
           <span class="stat-label text-light">Members</span>
         </article>
       </div>
@@ -153,3 +153,57 @@
     </div>
   </div>
 </section>
+<script>
+  (function () {
+    // Respect user motion preferences
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Collect targets (feature cards and any other fade-in elements)
+    const targets = document.querySelectorAll('.fade-in');
+
+    if (!targets.length) return;
+
+    // If reduced motion, reveal instantly without animation
+    if (prefersReducedMotion) {
+      targets.forEach(el => el.classList.add('visible'));
+      return;
+    }
+
+    // IntersectionObserver with stagger reveal
+    const io = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const el = entry.target;
+
+        // Optional stagger based on index or data attribute
+        const baseDelay = parseInt(el.getAttribute('data-fade-delay') || '0', 10);
+        const incrementalDelay = parseInt(el.getAttribute('data-fade-step') || '80', 10);
+
+        // Compute index-based delay if not explicitly set
+        let indexDelay = 0;
+        if (!el.hasAttribute('data-fade-delay')) {
+          // Use DOM order within its row/parent for a subtle cascade
+          const siblings = Array.from(el.parentElement?.children || []);
+          const idx = Math.max(0, siblings.indexOf(el));
+          indexDelay = idx * incrementalDelay;
+        }
+
+        const delay = Math.min(600, baseDelay + indexDelay); // cap delay for snappiness
+
+        // Apply a one-time staggered reveal
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, delay);
+
+        observer.unobserve(el);
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -10% 0px', // start a bit before the element fully enters
+      threshold: 0.2
+    });
+
+    targets.forEach(el => io.observe(el));
+  })();
+</script>

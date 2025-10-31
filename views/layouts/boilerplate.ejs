@@ -78,14 +78,6 @@
   <link rel="preconnect" href="https://api.mapbox.com" crossorigin />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 
-  <!-- Bootstrap CSS (stable v5.3) -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-    crossorigin="anonymous"
-  />
-
 
   <!-- Font Awesome -->
   <link
@@ -173,18 +165,13 @@
     <% } %>
 
     <!-- Main content area -->
-    <% if (isHome) { %>
-      <!-- Home page uses full-width layout -->
-      <main id="main-content" class="fade-in">
-        <%- body %>
-      </main>
-    <% } else { %>
-      <!-- Standard pages use container layout -->
-      <main id="main-content" class="container mt-5 fade-in">
-        <%- body %>
-      </main>
-    <% } %>
-
+<% 
+  const mainClass = isHome ? 'fade-in' : 'container mt-5 fade-in';
+  const mainLabel = isHome ? 'Main content (home)' : 'Main content';
+%>
+<main id="main-content" class="<%= mainClass %>" aria-label="<%= mainLabel %>">
+  <%- body %>
+</main>
     <%- include('../partials/footer') %>
 
     <!-- Bootstrap JS Bundle with Popper -->

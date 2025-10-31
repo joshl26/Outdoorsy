@@ -1,23 +1,27 @@
+<head>
+  <link rel="stylesheet" href="/outdoorsy/stylesheets/users-register.css" />
+</head>
+
 <div class="container d-flex justify-content-center align-items-center mt-5">
-  <div class="card shadow" style="max-width: 400px; width: 100%;">
+  <div class="card shadow auth-card">
     <img
       src="https://res.cloudinary.com/dv6keahg3/image/upload/v1680645329/Outdoorsy/ibew4ersdrwm46pkunud.png"
       alt="Outdoorsy logo"
-      class="card-img-top"
+      class="card-img-top auth-card-img"
       loading="lazy"
     />
     <div class="card-body mb-8">
       <h1 class="card-title h4 mb-4 text-center">Register</h1>
 
       <% if (errors && errors.length) { %>
-      <div class="alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true">
-        <strong>Please fix the following errors:</strong>
-        <ul class="mb-0">
-          <% errors.forEach(error => { %>
-            <li><%= error.msg %></li>
-          <% }) %>
-        </ul>
-      </div>
+        <div class="alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true">
+          <strong>Please fix the following errors:</strong>
+          <ul class="mb-0">
+            <% errors.forEach(error => { %>
+              <li><%- error.msg %></li>
+            <% }) %>
+          </ul>
+        </div>
       <% } %>
 
       <form
@@ -28,7 +32,9 @@
         aria-describedby="formHelp"
         autocomplete="off"
       >
-      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <!-- Username -->
         <div class="mb-3">
           <label class="form-label" for="username">Username <span class="text-danger">*</span></label>
           <input
@@ -44,8 +50,9 @@
             maxlength="30"
             pattern="^[a-zA-Z0-9_]+$"
             title="Username should be 3-30 characters, letters, numbers, and underscores only."
-            value="<%= typeof formData !== 'undefined' ? formData.username : '' %>"
+            value="<%- typeof formData !== 'undefined' && formData.username ? formData.username : '' %>"
             autocomplete="username"
+            inputmode="text"
           />
           <div id="usernameHelp" class="form-text">3-30 characters; letters, numbers, and underscores only.</div>
           <div class="invalid-feedback">
@@ -53,6 +60,7 @@
           </div>
         </div>
 
+        <!-- Email -->
         <div class="mb-3">
           <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
           <input
@@ -63,37 +71,74 @@
             required
             aria-required="true"
             aria-describedby="emailHelp"
-            value="<%= typeof formData !== 'undefined' ? formData.email : '' %>"
+            value="<%- typeof formData !== 'undefined' && formData.email ? formData.email : '' %>"
             autocomplete="email"
+            inputmode="email"
           />
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           <div class="invalid-feedback">Please enter a valid email address.</div>
         </div>
 
+        <!-- Password -->
         <div class="mb-3">
           <label class="form-label" for="password">Password <span class="text-danger">*</span></label>
-          <input
-            class="form-control <%= errors && errors.find(e => e.param === 'password') ? 'is-invalid' : '' %>"
-            type="password"
-            id="password"
-            name="password"
-            required
-            aria-required="true"
-            minlength="8"
-            aria-describedby="passwordHelp"
-            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-            title="Password must be at least 8 characters, including letters and numbers."
-            autocomplete="new-password"
-          />
+          <div class="password-wrapper">
+            <input
+              class="form-control <%= errors && errors.find(e => e.param === 'password') ? 'is-invalid' : '' %>"
+              type="password"
+              id="password"
+              name="password"
+              required
+              aria-required="true"
+              minlength="8"
+              aria-describedby="passwordHelp passwordStrengthText"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+              title="Password must be at least 8 characters, including letters and numbers."
+              autocomplete="new-password"
+            />
+            <button type="button" class="toggle-visibility" aria-label="Show password" aria-pressed="false" data-target="password">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="strength-meter" aria-hidden="true">
+            <div class="strength-meter-bar" id="passwordStrengthBar"></div>
+          </div>
+          <div id="passwordStrengthText" class="form-text small-muted mt-1" aria-live="polite"></div>
           <div id="passwordHelp" class="form-text">At least 8 characters, including letters and numbers.</div>
           <div class="invalid-feedback">
             Please enter a valid password (min 8 chars, letters and numbers).
           </div>
         </div>
 
+        <!-- Confirm Password -->
+        <div class="mb-4">
+          <label class="form-label" for="confirmPassword">Confirm Password <span class="text-danger">*</span></label>
+          <div class="password-wrapper">
+            <input
+              class="form-control"
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+              aria-required="true"
+              aria-describedby="confirmHelp"
+              autocomplete="new-password"
+            />
+            <button type="button" class="toggle-visibility" aria-label="Show confirm password" aria-pressed="false" data-target="confirmPassword">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="confirmHelp" class="form-text">Re-enter your password to confirm.</div>
+          <div class="invalid-feedback">Passwords must match.</div>
+        </div>
+
         <button class="btn btn-success w-100" type="submit" id="submitBtn" aria-live="polite" aria-busy="false">
           Register
         </button>
+
+        <p id="formHelp" class="form-text text-center mt-3">
+          By registering, you agree to our <a href="<%= basePath %>/terms">Terms</a> and <a href="<%= basePath %>/privacy">Privacy Policy</a>.
+        </p>
       </form>
     </div>
   </div>
@@ -106,9 +151,80 @@
     const submitBtn = document.getElementById('submitBtn');
     const inputs = form.querySelectorAll('input');
 
-    // Validate a single input and toggle validation classes
-    function validateInput(input) {
-      if (input.checkValidity()) {
+    const pwd = document.getElementById('password');
+    const confirmPwd = document.getElementById('confirmPassword');
+    const strengthBar = document.getElementById('passwordStrengthBar');
+    const strengthText = document.getElementById('passwordStrengthText');
+
+    function scorePassword(value) {
+      let score = 0;
+      if (!value) return 0;
+      const letters = {};
+      for (let i = 0; i < value.length; i++) {
+        letters[value[i]] = (letters[value[i]] || 0) + 1;
+        score += 5.0 / letters[value[i]];
+      }
+      const variations = {
+        digits: /\d/.test(value),
+        lower: /[a-z]/.test(value),
+        upper: /[A-Z]/.test(value),
+        nonWords: /[^A-Za-z0-9]/.test(value),
+      };
+      let variationCount = 0;
+      for (const check in variations) {
+        variationCount += variations[check] ? 1 : 0;
+      }
+      score += (variationCount - 1) * 10;
+      return Math.floor(score);
+    }
+
+    function updateStrengthMeter(val) {
+      const score = scorePassword(val);
+      let width = '0%';
+      let color = '#dc3545';
+      let label = '';
+
+      if (score > 70) { width = '100%'; color = '#198754'; label = 'Strong'; }
+      else if (score > 50) { width = '75%'; color = '#20c997'; label = 'Good'; }
+      else if (score > 30) { width = '50%'; color = '#fd7e14'; label = 'Fair'; }
+      else if (score > 0) { width = '25%'; color = '#dc3545'; label = 'Weak'; }
+
+      strengthBar.style.width = width;
+      strengthBar.style.backgroundColor = color;
+      strengthText.textContent = val ? 'Password strength: ' + label : '';
+    }
+
+    function validateConfirmPassword() {
+      const match = confirmPwd.value && pwd.value && confirmPwd.value === pwd.value;
+      if (match) {
+        confirmPwd.classList.remove('is-invalid');
+        confirmPwd.classList.add('is-valid');
+      } else {
+        confirmPwd.classList.remove('is-valid');
+        if (confirmPwd.value) confirmPwd.classList.add('is-invalid');
+      }
+      return match;
+    }
+
+    // Toggle password visibility
+    document.querySelectorAll('.toggle-visibility').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const input = document.getElementById(targetId);
+        const isPassword = input.getAttribute('type') === 'password';
+        input.setAttribute('type', isPassword ? 'text' : 'password');
+        btn.setAttribute('aria-pressed', String(isPassword));
+        btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+        btn.innerHTML = isPassword
+          ? '<i class="fas fa-eye-slash" aria-hidden="true"></i>'
+          : '<i class="fas fa-eye" aria-hidden="true"></i>';
+        input.focus({ preventScroll: true });
+      });
+    });
+
+    // Base validation toggling
+    function toggleValidity(input, valid) {
+      if (valid) {
         input.classList.remove('is-invalid');
         input.classList.add('is-valid');
       } else {
@@ -117,7 +233,14 @@
       }
     }
 
-    // Instant validation on input and blur
+    function validateInput(input) {
+      const valid = input.checkValidity();
+      toggleValidity(input, valid);
+      if (input === pwd) updateStrengthMeter(input.value);
+      if (input === confirmPwd) validateConfirmPassword();
+      if (input === pwd && confirmPwd.value) validateConfirmPassword();
+    }
+
     inputs.forEach(input => {
       input.addEventListener('input', () => validateInput(input));
       input.addEventListener('blur', () => validateInput(input));
@@ -128,19 +251,18 @@
       let formIsValid = true;
       inputs.forEach(input => {
         validateInput(input);
-        if (!input.checkValidity()) {
-          formIsValid = false;
-        }
+        if (!input.checkValidity()) formIsValid = false;
       });
+      if (!validateConfirmPassword()) formIsValid = false;
 
       if (!formIsValid) {
         event.preventDefault();
         event.stopPropagation();
       } else {
-        // Disable button and show loading state
         submitBtn.disabled = true;
         submitBtn.setAttribute('aria-busy', 'true');
-        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Registering...';
+        submitBtn.innerHTML =
+          '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Registering...';
       }
       form.classList.add('was-validated');
     });

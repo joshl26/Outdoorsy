@@ -1,157 +1,276 @@
-<h1 align="center">Welcome to Outdoorsy 👋</h1>
-<p>
+Great idea. Here’s an updated README.md that includes a “What’s Completed” section summarizing the major improvements you’ve shipped so far, aligned to your roadmap. I also wove completion badges into relevant sections so new contributors see the current state at a glance.
+
+You can paste this over your existing README and adjust dates as needed.
+
+```markdown
+<h1 align="center">🌲 Welcome to Outdoorsy 👋</h1>
+
+<p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <img src="https://img.shields.io/badge/npm-%3E%3D8.0.0-blue.svg" />
-  <img src="https://img.shields.io/badge/node-%3E%3D17.0.0-blue.svg" />
+  <img src="https://img.shields.io/badge/status-actively%20maintained-brightgreen" />
+  <img src="https://img.shields.io/badge/accessibility-WCAG%202.1%20AA-blueviolet" />
+  <img src="https://img.shields.io/badge/tests-in%20progress-yellow" />
   <a href="https://github.com/joshl26/Outdoorsy#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://github.com/joshl26/Outdoorsy/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
- <a href="https://github.com/joshl26/Outdoorsy/blob/master/LICENSE" target="_blank">
+  <a href="https://github.com/joshl26/Outdoorsy/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/github/license/joshl26/Outdoorsy" />
   </a>
 </p>
 
-Outdoorsy is a full-stack website project where users can create and review campsites. To review or create a campsite, you must have an account.
+<p align="center">
+  Outdoorsy is a <strong>full‑stack web application</strong> where users discover, review, and share campsites worldwide.<br />
+  Live at <a href="https://joshlehman.ca/outdoorsy" target="_blank"><strong>joshlehman.ca/outdoorsy</strong></a> · API Docs at <a href="https://outdors.ca/api-docs/" target="_blank"><strong>outdors.ca/api-docs</strong></a>
+</p>
 
-## Functionalities
+---
 
-> Anyone can view the campsites and reviews without needing to sign up or log in.
+## ✅ What’s Completed (Highlights)
 
-> Users must log in to edit campsite details or comments.
+The following improvements have been shipped recently, mapped to our public roadmap.
 
-> Only the user who added a campsite or comment can edit/delete it.
+- Architecture and Code Quality
+  - Modularized configuration (`config/` for db, session, passport, security/helmet, swagger).
+  - Centralized middleware exports (`middleware/index.js`).
+  - Validation and auth middleware extracted (Joi + Passport guards).
+  - `app.js` refactored to minimal bootstrap (< 50 lines target).
 
-> All data will be securely stored on Amazon cloud servers.
+- Error Handling and Developer Experience
+  - Unified error classes (`AppError`, `ValidationError`, `AuthenticationError`, `NotFoundError`).
+  - Centralized error handler with user-friendly messages and dev-mode stack traces.
+  - Flash messages modernized (Bootstrap 5 close button, aria-live region).
 
-## Technologies Utilized
+- Frontend Accessibility and Semantics
+  - Correct heading hierarchy across EJS views (home, index, show, nearby, new, edit, favorites).
+  - Semantic sections with `aria-labelledby`, visually hidden headings where appropriate.
+  - Accessible navbar/footer: roles, landmarks, keyboard navigation, SVG icons labelled.
+  - Forms grouped with `<fieldset>`/`<legend>`, labels/ids properly associated.
+  - Focus styles, skip links, and improved contrast.
 
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
+- UI/UX and Styling
+  - Homepage rebuilt: immersive hero, features, stats, CTA; responsive and performant.
+  - New `public/stylesheets/` organization: `home.css`, `users-register.css`, `error.css`, `success.css`, `navbar.css`, `footer.css`.
+  - Removed inline styles from EJS; consistent button and input styling.
+  - IntersectionObserver-based staggered reveal animations respecting reduced motion.
 
-> HTML5 - A markup language for creating web pages and web applications.
+- Performance
+  - MongoDB indexes added on Campground, Review, User.
+  - Pagination added to campgrounds and reviews.
+  - Lazy-loading images and responsive layout optimizations.
+  - Parallax disabled on small screens to avoid jank.
 
-> CSS3 - used for describing the presentation of a document written in a markup language.
+- Security
+  - Rate limiting on auth and API routes.
+  - CSRF protection across forms (`csurf`) with token injection.
+  - Request body size limits and environment variable validation.
+  - Hardened Helmet CSP and security headers audit baseline.
+  - Security documentation and incident response plan drafted.
 
-> Bootstrap - A free and open-source front-end web framework for designing websites and web applications quickly.
+- Documentation
+  - README overhauled: features, tech stack, structure, env setup, screenshots.
+  - Roadmap published with phases and acceptance criteria.
+  - Live Swagger UI hosted and linked.
 
-> Node.js - Open-source, cross-platform JavaScript run-time environment for executing JavaScript code server-side.
+See the full roadmap for in‑progress and upcoming items.
 
-> Express.js - For building web applications and APIs and connecting middleware.
+---
 
-> Joi - Used for schema description and data validation.
+## 🚀 Features
 
-> Swagger-UI/JSDOC - Powerful UI interface for documenting, testing and displaying API endpoints.
+- Explore all campgrounds and reviews without login
+- Create, edit, and delete your own campgrounds and reviews (auth required)
+- Secure authentication and authorization with PassportJS
+- Image handling and storage on AWS
+- Nearby discovery, gallery, and review system
+- Swagger‑powered API documentation
 
-> UMLs - Unified Modeling Language diagrams which illustrate the sequence of events between objects within this app.
+---
 
-> Helmet - Helps secure Express apps by setting HTTP response headers.
+## 🧠 Tech Stack
 
-> REST - REST (REpresentational State Transfer) is an architectural style for developing web services.
+| Layer | Technologies |
+|------|---------------|
+| Frontend | HTML5, CSS3, Bootstrap 5 |
+| Backend | Node.js, Express.js |
+| Database | MongoDB (Mongoose, hosted on AWS EC2) |
+| Auth | PassportJS |
+| Security | Helmet, Joi, csurf, express‑rate‑limit |
+| Docs | Swagger‑UI / JSDoc |
+| Deploy | Render.com, AWS |
+| Architecture | REST + MVC, SSR with EJS |
 
-> MongoDB - Open-source cross-platform document-oriented NoSQL database program to store details like user info, campsites info and comments.
+---
 
-> PassportJS - Authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped into any Express-based web application.
+## 🧭 Live Resources
 
-> Data Associations - Associating user data with the respective campsites and comments using the reference method.
+- Website: https://joshlehman.ca/outdoorsy
+- API Docs (Swagger): https://joshlehman.ca/outdoorsy/api-docs/
 
-> Render.com - Cloud platform as a service used as a web application deployment model.
+---
 
-> AWS - Mongodb is hosted on Amazon ec2 instance.
+## 🖼️ Screenshots
 
-## API Documentation
+| Home | All Campgrounds | Campground Details | Login/Register |
+|:----:|:----------------:|:------------------:|:---------------:|
+| ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png) | ![All](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png) | ![Details](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png) | ![Login](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png) |
 
-### ✨ [Live API Documentation](https://outdors.ca/api-docs/)
+API Demo & UMLs
+- ![Swagger Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
+- ![Swagger Schemas](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI-1.png)
+- ![UML Sequence Diagram](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-sequence-diagram.png)
 
-> <p>Created using Swagger UI</p>
+---
 
-## Screenshots
+## 🏗️ Project Structure
 
-> HomePage ![Home](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_1.png)
+```text
+Outdoorsy/
+├─ app.js                         # Express app setup
+├─ server.js                      # Server bootstrap
+├─ config/
+│  ├─ db.js                       # Mongoose connection
+│  ├─ session.js                  # Session configuration
+│  ├─ passport.js                 # Passport strategies
+│  ├─ security.js                 # Helmet/CSP and headers
+│  └─ swagger.js                  # Swagger config
+├─ routes/
+│  ├─ campgrounds.js
+│  ├─ reviews.js
+│  ├─ users.js
+│  └─ api/
+│     └─ v1/                      # Swagger-annotated endpoints
+├─ controllers/
+│  ├─ campgrounds.controller.js
+│  ├─ reviews.controller.js
+│  └─ users.controller.js
+├─ models/
+│  ├─ Campground.js
+│  ├─ Review.js
+│  └─ User.js
+├─ middleware/
+│  ├─ index.js                    # Re-exports
+│  ├─ auth.js                     # isLoggedIn, ownership checks
+│  ├─ validation.js               # Joi validators
+│  └─ errors.js                   # Error handler and async wrapper
+├─ public/
+│  ├─ javascripts/
+│  │  └─ home.js                  # IntersectionObserver/stagger reveals
+│  └─ stylesheets/
+│     ├─ main.css
+│     ├─ home.css
+│     ├─ navbar.css
+│     ├─ footer.css
+│     ├─ users-register.css
+│     ├─ error.css
+│     └─ success.css
+└─ views/
+   ├─ layouts/boilerplate.ejs
+   ├─ partials/{navbar,footer,flash}.ejs
+   ├─ campgrounds/{index,show,new,edit,nearby}.ejs
+   ├─ users/{login,register,success}.ejs
+   ├─ favorites.ejs
+   ├─ home.ejs
+   └─ error.ejs
+```
 
-> All campsites
-> ![All campsites](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_2.png)
+---
 
-> Campsite Details Page
-> ![Campsite Details](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_4.png)
+## ⚙️ Environment Setup
 
-> Login & Register page
-> ![Login and Register](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy_3.png)
+Create `.env`:
 
-> Swagger API Demo pages
-> ![API Endpoints](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI.png)
-> ![API Schemas](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-Swagger-UI-1.png)
+```bash
+# App
+NODE_ENV=development
+PORT=3000
+BASE_URL=http://localhost:3000
 
-> UML Sequence Diagrams
+# Database
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/outdoorsy
 
-> ![API](https://raw.githubusercontent.com/joshl26/joshl26/main/assets/Outdoorsy-sequence-diagram.png)
+# Storage / CDN (example: Cloudinary)
+CLOUDINARY_CLOUD_NAME=your-cloud
+CLOUDINARY_KEY=your-key
+CLOUDINARY_SECRET=your-secret
 
-## Demo
+# Sessions & Auth
+SESSION_SECRET=supersecretkey
+GOOGLE_CLIENT_ID=your-id
+GOOGLE_CLIENT_SECRET=your-secret
+GOOGLE_CALLBACK_URL=/auth/google/callback
+```
 
-### ✨ [Live Demo Site](https://outdors.ca)
+Install and run:
 
-> <p>Hosted with free tier on Render.com</p>
-
-## Prerequisites
-
-- npm >=8.0.0
-- node >=17.0.0
-
-## Install
-
-```sh
+```bash
 npm install
+npm start
 ```
 
-## Usage
+Run tests:
 
-```sh
-npm run start
+```bash
+npm test
 ```
 
-## Run tests
+---
 
-```sh
-npm run test
-```
+## 🔐 Security Posture
 
-## Author
+- Rate limiting on auth and API
+- CSRF tokens on all forms
+- Strict CSP and Helmet headers
+- Joi input validation for all critical paths
+- Request size limits
+- Env var schema validation on startup
+- Incident response and security best practices documented
 
-👤 **Joshua Lehman**
+---
 
-## Portfolio
+## ♿ Accessibility
 
-- [joshlehman.ca](https://joshlehman.ca)
+- WCAG 2.1 AA-aligned structure and color contrast
+- Proper heading hierarchy (h1-h2-h3 per page region)
+- Landmarks (`<main>`, `<header>`, `<footer>`)
+- Keyboard‑accessible navigation and controls
+- Focus states and skip links
+- `aria-live` for flash messages and errors
 
-## Github
+---
 
-- [joshl26](https://github.com/joshl26)
+## 🧭 Roadmap Snapshot
 
-## LinkedIn
+- Done: foundation, security controls, accessibility overhaul, performance basics, documentation refresh
+- In Progress: compression, image optimization pipeline, caching/CDN, SEO metadata, Swagger endpoint coverage
+- Planned: user profiles, favorites/bookmarks, advanced search/filters, API v1 with JWT, monitoring & CI observability
 
-- [joshrlehman](https://www.linkedin.com/in/joshrlehman/)
+Full roadmap: see ROADMAP.md
+
+---
+
+## 👤 Author
+
+**Joshua Lehman**
+- Portfolio: https://joshlehman.ca
+- GitHub: https://github.com/joshl26
+- LinkedIn: https://www.linkedin.com/in/joshrlehman/
+
+---
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/joshl26/Outdoorsy/issues). You can also take a look at the [contributing guide](https://github.com/joshl26/Outdoorsy/blob/master/CONTRIBUTING.md).
+Issues and PRs welcome.  
+- Issues: https://github.com/joshl26/Outdoorsy/issues  
+- Contributing Guide: https://github.com/joshl26/Outdoorsy/blob/master/CONTRIBUTING.md
 
-## Show your support
-
-Give a ⭐️ if this project helped you!
+---
 
 ## 📝 License
 
-Copyright © 2023 [Joshua Lehman](https://github.com/joshl26).<br />
-This project is [MIT](https://github.com/joshl26/Outdoorsy/blob/master/LICENSE) licensed.
+MIT © 2023–2025 [Joshua Lehman](https://github.com/joshl26)
+```
 
----
+Want me to also generate a concise “Changelog” section from the roadmap’s completed items with dates and PR links? It helps keep releases tidy and makes your progress obvious to visitors.

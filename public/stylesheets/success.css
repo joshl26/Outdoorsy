@@ -1,0 +1,76 @@
+/* Outdoorsy Profile Success Page */
+
+.profile-success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  text-align: center;
+}
+
+.profile-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.profile-header h1 {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #2d5016, #4ecdc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.profile-details {
+  background: #f8f9fa;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.detail-item {
+  margin-bottom: 1rem;
+}
+
+.detail-item dt {
+  font-weight: 600;
+  color: #212529;
+}
+
+.detail-item dd {
+  margin: 0;
+  color: #555;
+  word-break: break-all;
+}
+
+.btn {
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #0b5ed7;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+}
+
+.btn-outline-danger:hover {
+  background: #dc3545;
+  color: #fff;
+}
+
+@media (max-width: 576px) {
+  .profile-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .profile-header h1 {
+    font-size: 1.6rem;
+  }
+}

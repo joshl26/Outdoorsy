@@ -6,21 +6,28 @@
 // - errorStack: string (optional)
 %>
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-6 offset-3">
-      <div class="alert alert-danger" role="alert">
-        <h4 class="alert-heading">Error</h4>
-        <p><%= errorMessage %></p>
+<head>
+  <link rel="stylesheet" href="/outdoorsy/stylesheets/error.css" />
+</head>
+
+<div class="container error-container mt-5" >
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="alert alert-danger shadow-sm error-alert" role="alert">
+        <h1 id="errorTitle" class="alert-heading h4">Something went wrong</h1>
+        <p class="error-message"><%= errorMessage %></p>
+
         <% if (errorStack) { %>
           <hr />
-          <pre class="mb-0" style="white-space: pre-wrap;"><%= errorStack %></pre>
+          <pre class="error-stack"><%= errorStack %></pre>
         <% } %>
       </div>
-      <div class="text-center mt-3">
-        <a href="/" class="btn btn-primary">Go to Home</a>
+
+      <div class="text-center mt-4">
+        <a href="/" class="btn btn-primary btn-lg">
+          <i class="fas fa-home me-2" aria-hidden="true"></i> Go Back Home
+        </a>
       </div>
     </div>
   </div>
 </div>
-

@@ -1,347 +1,307 @@
 <!-- views/campgrounds/nearby.ejs -->
-<link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-index.css" />
-
-<div class="d-flex align-items-center justify-content-between mb-3">
-  <h1 class="text-primary m-0">Nearby Campgrounds</h1>
-  <div class="d-flex gap-2">
-    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">
-      <i class="fas fa-list me-1"></i> Back to All
-    </a>
-    <a class="btn btn-outline-secondary" href="/outdoorsy/favorites">
-      <i class="fas fa-heart me-1"></i> Favorites
-    </a>
-  </div>
-</div>
-
-<div class="card mb-4 shadow-sm">
-  <div class="card-body">
-    <form method="GET" action="/outdoorsy/campgrounds/nearby" class="row g-3" id="nearbyForm" novalidate>
-      <div class="col-12 col-md-3">
-        <label for="q" class="form-label">Search</label>
-        <input type="text" id="q" name="q" class="form-control" placeholder="Title, description, location..." value="<%= typeof q !== 'undefined' ? q : '' %>">
-      </div>
-
-      <div class="col-6 col-md-2">
-        <label for="minPrice" class="form-label">Min Price</label>
-        <input type="number" id="minPrice" name="minPrice" class="form-control" min="0" step="1" value="<%= typeof minPrice !== 'undefined' ? minPrice : '' %>">
-      </div>
-      <div class="col-6 col-md-2">
-        <label for="maxPrice" class="form-label">Max Price</label>
-        <input type="number" id="maxPrice" name="maxPrice" class="form-control" min="0" step="1" value="<%= typeof maxPrice !== 'undefined' ? maxPrice : '' %>">
-      </div>
-
-      <div class="col-6 col-md-2">
-        <label for="lat" class="form-label">Lat</label>
-        <input type="number" id="lat" name="lat" class="form-control" step="0.000001" min="-90" max="90" value="<%= typeof lat !== 'undefined' && lat !== '' ? lat : '' %>">
-      </div>
-      <div class="col-6 col-md-2">
-        <label for="lng" class="form-label">Lng</label>
-        <input type="number" id="lng" name="lng" class="form-control" step="0.000001" min="-180" max="180" value="<%= typeof lng !== 'undefined' && lng !== '' ? lng : '' %>">
-      </div>
-      <div class="col-6 col-md-2">
-        <label for="radiusKm" class="form-label">Radius (km)</label>
-        <input type="number" id="radiusKm" name="radiusKm" class="form-control" min="1" max="500" step="1" value="<%= typeof radiusKm !== 'undefined' && radiusKm !== '' ? radiusKm : 25 %>">
-      </div>
-
-      <div class="col-6 col-md-2">
-        <label for="sort" class="form-label">Sort By</label>
-        <select id="sort" name="sort" class="form-select">
-          <option value="distance" <%= (sort === 'distance' || !sort) ? 'selected' : '' %>>Distance</option>
-          <option value="priceAsc" <%= sort === 'priceAsc' ? 'selected' : '' %>>Price: Low to High</option>
-          <option value="priceDesc" <%= sort === 'priceDesc' ? 'selected' : '' %>>Price: High to Low</option>
-        </select>
-      </div>
-
-      <div class="col-12 col-md-6 d-flex align-items-end gap-2">
-        <button type="button" class="btn btn-outline-primary" id="useLocationBtn">
-          <i class="fas fa-crosshairs me-1"></i> Use My Location
-        </button>
-        <button type="submit" class="btn btn-primary flex-grow-1">
-          <i class="fas fa-location-arrow me-1"></i> Find Nearby
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- View Toggle -->
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <div class="btn-group" role="group" aria-label="View toggle">
-    <input type="radio" class="btn-check" name="viewMode" id="viewGrid" autocomplete="off" checked>
-    <label class="btn btn-outline-primary" for="viewGrid">
-      <i class="fas fa-th me-1"></i> Grid
-    </label>
-    <input type="radio" class="btn-check" name="viewMode" id="viewMap" autocomplete="off">
-    <label class="btn btn-outline-primary" for="viewMap">
-      <i class="fas fa-map me-1"></i> Map
-    </label>
-  </div>
-</div>
-
-<!-- Map Container (hidden by default) -->
-<div id="mapContainer" class="card mb-4 shadow-sm" style="display: none;">
-  <div id="nearbyMap" style="height: 520px;"></div>
-</div>
-
-<!-- Grid Container -->
-<div id="gridContainer">
-  <div class="d-flex justify-content-between align-items-center mb-2">
-    <div class="text-muted">
-      <%= total %> result<%= total === 1 ? '' : 's' %><% if (radiusKm) { %> within <%= radiusKm %> km<% } %>
+<head>
+  <link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-index.css" />
+</head>
+<div class="fade-in">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 id="nearbyHeading" class="text-primary m-0">Nearby Campgrounds</h1>
+    <div class="d-flex gap-2">
+      <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">
+        <i class="fas fa-list me-1" aria-hidden="true"></i>
+        <span>Back to All</span>
+      </a>
+      <a class="btn btn-outline-secondary" href="/outdoorsy/favorites">
+        <i class="fas fa-heart me-1" aria-hidden="true"></i>
+        <span>Favorites</span>
+      </a>
     </div>
-    <% if (typeof page !== 'undefined' && typeof totalPages !== 'undefined' && totalPages > 0) { %>
-      <div class="text-muted">Page <%= page %> of <%= totalPages %></div>
-    <% } %>
   </div>
 
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    <% (campgrounds || []).forEach((cg) => { %>
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          <% const cover = (cg.images && cg.images.length) ? cg.images[0].url : 'https://placehold.co/600x400?text=No+Image'; %>
-          <img src="<%= cover %>" class="card-img-top" alt="<%= cg.title %> cover">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">
-              <a class="text-decoration-none" href="/outdoorsy/campgrounds/<%= cg._id %>"><%= cg.title %></a>
-            </h5>
-            <p class="card-text text-muted mb-1">
-              <i class="fas fa-map-marker-alt me-1"></i>
-              <%= cg.location %>
-            </p>
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <div class="fw-bold">$<%= cg.price %> / night</div>
-              <% if (typeof cg.distance === 'number') { %>
-                <span class="badge bg-info-subtle text-info border">
-                  <i class="fas fa-route me-1"></i>
-                  <%= (cg.distance / 1000).toFixed(1) %> km away
-                </span>
-              <% } %>
-            </div>
-            <div class="mt-auto d-flex gap-2">
-              <a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/<%= cg._id %>">View</a>
-              <% if (currentUser) { %>
-                <button 
-                  class="btn btn-sm <%= (favorites || []).includes(String(cg._id)) ? 'btn-danger' : 'btn-outline-danger' %> toggle-fav-btn" 
-                  data-id="<%= cg._id %>" 
-                  aria-pressed="<%= (favorites || []).includes(String(cg._id)) ? 'true' : 'false' %>">
-                  <i class="fas fa-heart"></i>
-                </button>
-              <% } %>
-            </div>
+  <!-- Filters section -->
+  <section aria-labelledby="nearby-filters-heading" class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h2 id="nearby-filters-heading" class="h5 mb-3">Filters</h2>
+      <form
+        method="GET"
+        action="/outdoorsy/campgrounds/nearby"
+        class="row g-3"
+        id="nearbyForm"
+        novalidate
+      >
+        <fieldset>
+          <legend class="visually-hidden">Search nearby campgrounds</legend>
+
+          <div class="col-12 col-md-3">
+            <label for="q" class="form-label">Search</label>
+            <input
+              type="text"
+              id="q"
+              name="q"
+              class="form-control"
+              placeholder="Title, description, location..."
+              value="<%= typeof q !== 'undefined' ? q : '' %>"
+            />
           </div>
-        </div>
+
+          <div class="col-6 col-md-2">
+            <label for="minPrice" class="form-label">Min Price</label>
+            <input
+              type="number"
+              id="minPrice"
+              name="minPrice"
+              class="form-control"
+              min="0"
+              step="1"
+              value="<%= typeof minPrice !== 'undefined' ? minPrice : '' %>"
+            />
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label for="maxPrice" class="form-label">Max Price</label>
+            <input
+              type="number"
+              id="maxPrice"
+              name="maxPrice"
+              class="form-control"
+              min="0"
+              step="1"
+              value="<%= typeof maxPrice !== 'undefined' ? maxPrice : '' %>"
+            />
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label for="lat" class="form-label">Latitude</label>
+            <input
+              type="number"
+              id="lat"
+              name="lat"
+              class="form-control"
+              step="0.000001"
+              min="-90"
+              max="90"
+              value="<%= typeof lat !== 'undefined' && lat !== '' ? lat : '' %>"
+            />
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label for="lng" class="form-label">Longitude</label>
+            <input
+              type="number"
+              id="lng"
+              name="lng"
+              class="form-control"
+              step="0.000001"
+              min="-180"
+              max="180"
+              value="<%= typeof lng !== 'undefined' && lng !== '' ? lng : '' %>"
+            />
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label for="radiusKm" class="form-label">Radius (km)</label>
+            <input
+              type="number"
+              id="radiusKm"
+              name="radiusKm"
+              class="form-control"
+              min="1"
+              max="500"
+              step="1"
+              aria-describedby="radiusHelp"
+              value="<%= typeof radiusKm !== 'undefined' && radiusKm !== '' ? radiusKm : 25 %>"
+            />
+            <small id="radiusHelp" class="form-text text-muted">
+              Distance in kilometers (max 500)
+            </small>
+          </div>
+
+          <!-- Sort By -->
+          <div class="col-6 col-md-2">
+            <label for="sort" class="form-label">Sort By</label>
+            <select id="sort" name="sort" class="form-select">
+              <% if (sort === 'priceAsc') { %>
+                <option value="distance">Distance</option>
+                <option value="priceAsc" selected>Price: Low to High</option>
+                <option value="priceDesc">Price: High to Low</option>
+              <% } else if (sort === 'priceDesc') { %>
+                <option value="distance">Distance</option>
+                <option value="priceAsc">Price: Low to High</option>
+                <option value="priceDesc" selected>Price: High to Low</option>
+              <% } else { %>
+                <option value="distance" selected>Distance</option>
+                <option value="priceAsc">Price: Low to High</option>
+                <option value="priceDesc">Price: High to Low</option>
+              <% } %>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-6 d-flex align-items-end gap-2 mt-2">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              id="useLocationBtn"
+              aria-live="polite"
+              aria-label="Use my current location to find nearby campgrounds"
+            >
+              <i class="fas fa-crosshairs me-1" aria-hidden="true"></i>
+              <span>Use My Location</span>
+            </button>
+            <button type="submit" class="btn btn-primary flex-grow-1">
+              <i class="fas fa-location-arrow me-1" aria-hidden="true"></i>
+              <span>Find Nearby</span>
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
+  <!-- View Toggle (no heading required) -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="btn-group" role="group" aria-labelledby="viewToggleLabel">
+      <span id="viewToggleLabel" class="visually-hidden">Toggle view mode</span>
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="viewMode"
+        id="viewGrid"
+        checked
+      />
+      <label class="btn btn-outline-primary" for="viewGrid">
+        <i class="fas fa-th me-1" aria-hidden="true"></i>
+        <span>Grid</span>
+      </label>
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="viewMode"
+        id="viewMap"
+      />
+      <label class="btn btn-outline-primary" for="viewMap">
+        <i class="fas fa-map me-1" aria-hidden="true"></i>
+        <span>Map</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Map section -->
+  <section aria-labelledby="nearby-map-heading">
+    <h2 id="nearby-map-heading" class="visually-hidden">Map Results</h2>
+    <div id="mapContainer" class="card mb-4 shadow-sm" style="display:none;">
+      <div id="nearbyMap" style="height:520px;" role="region" aria-label="Nearby campgrounds map"></div>
+    </div>
+  </section>
+
+  <!-- Grid section -->
+  <section aria-labelledby="nearby-results-heading" id="gridContainer">
+    <h2 id="nearby-results-heading" class="visually-hidden">Campground Results</h2>
+
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div class="text-muted" aria-live="polite">
+        <%= total %> result<%= total === 1 ? '' : 's' %>
+        <% if (radiusKm) { %> within <%= radiusKm %> km<% } %>
       </div>
-    <% }) %>
-  </div>
+      <% if (typeof page !== 'undefined' && typeof totalPages !== 'undefined' && totalPages > 0) { %>
+        <div class="text-muted">Page <%= page %> of <%= totalPages %></div>
+      <% } %>
+    </div>
 
-  <% if (typeof totalPages !== 'undefined' && totalPages > 1) { %>
-    <%
-      const params = new URLSearchParams();
-      if (q) params.set('q', q);
-      if (minPrice !== '' && typeof minPrice !== 'undefined') params.set('minPrice', minPrice);
-      if (maxPrice !== '' && typeof maxPrice !== 'undefined') params.set('maxPrice', maxPrice);
-      if (lat !== '' && typeof lat !== 'undefined') params.set('lat', lat);
-      if (lng !== '' && typeof lng !== 'undefined') params.set('lng', lng);
-      if (radiusKm !== '' && typeof radiusKm !== 'undefined') params.set('radiusKm', radiusKm);
-      if (sort) params.set('sort', sort);
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% (campgrounds || []).forEach((cg) => { %>
+        <div class="col">
+          <article class="card h-100 shadow-sm">
+            <% const cover = (cg.images && cg.images.length)
+                 ? cg.images[0].url
+                 : 'https://placehold.co/600x400?text=No+Image'; %>
+            <img src="<%= cover %>" class="card-img-top" alt="<%= cg.title %> cover" />
+            <div class="card-body d-flex flex-column">
+              <h3 class="card-title h5">
+                <a class="text-decoration-none" href="/outdoorsy/campgrounds/<%= cg._id %>"><%= cg.title %></a>
+              </h3>
+              <p class="card-text text-muted mb-1">
+                <i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i>
+                <%= cg.location %>
+              </p>
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <div class="fw-bold">$<%= cg.price %> / night</div>
+                <% if (typeof cg.distance === 'number') { %>
+                  <span class="badge bg-info-subtle text-info border">
+                    <i class="fas fa-route me-1" aria-hidden="true"></i>
+                    <%= (cg.distance / 1000).toFixed(1) %> km away
+                  </span>
+                <% } %>
+              </div>
+              <div class="mt-auto d-flex gap-2">
+                <a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/<%= cg._id %>">View</a>
+                <% if (currentUser) { %>
+                  <button
+                    type="button"
+                    class="btn btn-sm <%= (favorites || []).includes(String(cg._id)) ? 'btn-danger' : 'btn-outline-danger' %> toggle-fav-btn"
+                    data-id="<%= cg._id %>"
+                    aria-pressed="<%= (favorites || []).includes(String(cg._id)) ? 'true' : 'false' %>"
+                    aria-label="<%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>"
+                    title="<%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>"
+                  >
+                    <i class="fas fa-heart" aria-hidden="true"></i>
+                    <span class="visually-hidden">
+                      <%= (favorites || []).includes(String(cg._id)) ? 'Remove from favorites' : 'Add to favorites' %>
+                    </span>
+                    <span>Favorite</span>
+                  </button>
+                <% } %>
+              </div>
+            </div>
+          </article>
+        </div>
+      <% }) %>
+    </div>
 
-      function pageUrl(p) {
-        const u = new URLSearchParams(params);
-        u.set('page', p);
-        return `/outdoorsy/campgrounds/nearby?${u.toString()}`;
-      }
-    %>
-    <nav aria-label="Nearby pagination" class="mt-4">
-      <ul class="pagination justify-content-center">
-        <li class="page-item <%= page <= 1 ? 'disabled' : '' %>">
-          <a class="page-link" href="<%= pageUrl(page - 1) %>">Previous</a>
-        </li>
-        <% for (let p = 1; p <= totalPages; p++) { %>
-          <li class="page-item <%= p === page ? 'active' : '' %>">
-            <a class="page-link" href="<%= pageUrl(p) %>"><%= p %></a>
+    <% if (typeof totalPages !== 'undefined' && totalPages > 1) { %>
+      <%
+        const params = new URLSearchParams();
+        if (q) params.set('q', q);
+        if (minPrice !== '' && typeof minPrice !== 'undefined') params.set('minPrice', minPrice);
+        if (maxPrice !== '' && typeof maxPrice !== 'undefined') params.set('maxPrice', maxPrice);
+        if (lat !== '' && typeof lat !== 'undefined') params.set('lat', lat);
+        if (lng !== '' && typeof lng !== 'undefined') params.set('lng', lng);
+        if (radiusKm !== '' && typeof radiusKm !== 'undefined') params.set('radiusKm', radiusKm);
+        if (sort) params.set('sort', sort);
+
+        function pageUrl(p) {
+          const u = new URLSearchParams(params);
+          u.set('page', p);
+          return `/outdoorsy/campgrounds/nearby?${u.toString()}`;
+        }
+      %>
+      <nav aria-label="Nearby pagination" class="mt-4">
+        <ul class="pagination justify-content-center">
+          <li class="page-item <%= page <= 1 ? 'disabled' : '' %>">
+            <% if (page <= 1) { %>
+              <span class="page-link" aria-disabled="true">Previous</span>
+            <% } else { %>
+              <a class="page-link" href="<%= pageUrl(page - 1) %>">Previous</a>
+            <% } %>
           </li>
-        <% } %>
-        <li class="page-item <%= page >= totalPages ? 'disabled' : '' %>">
-          <a class="page-link" href="<%= pageUrl(page + 1) %>">Next</a>
-        </li>
-      </ul>
-    </nav>
-  <% } %>
-</div> <!-- /gridContainer -->
-
-<script>
-  // Client-side validation
-  document.getElementById('nearbyForm')?.addEventListener('submit', (e) => {
-    const latEl = document.getElementById('lat');
-    const lngEl = document.getElementById('lng');
-    const rEl = document.getElementById('radiusKm');
-    const lat = Number(latEl?.value);
-    const lng = Number(lngEl?.value);
-    const r = Number(rEl?.value);
-
-    const allEmpty = (!latEl.value && !lngEl.value && !rEl.value);
-    if (allEmpty) return;
-
-    if (!Number.isFinite(lat) || !Number.isFinite(lng) || !Number.isFinite(r) || r <= 0) {
-      e.preventDefault();
-      alert('Please fill lat, lng, and a positive radius.');
-    }
-  });
-
-  // Use My Location
-  document.getElementById('useLocationBtn')?.addEventListener('click', function() {
-    const btn = this;
-    if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser');
-      return;
-    }
-    const originalHtml = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Getting location...';
-
-    navigator.geolocation.getCurrentPosition(
-      function(pos) {
-        const { latitude, longitude } = pos.coords;
-        document.getElementById('lat').value = latitude.toFixed(6);
-        document.getElementById('lng').value = longitude.toFixed(6);
-        const radiusInput = document.getElementById('radiusKm');
-        if (!radiusInput.value || Number(radiusInput.value) <= 0) {
-          radiusInput.value = 25;
-        }
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-check me-1"></i> Location Set!';
-        setTimeout(() => btn.innerHTML = originalHtml, 1500);
-      },
-      function(err) {
-        alert('Unable to retrieve your location.');
-        btn.disabled = false;
-        btn.innerHTML = originalHtml;
-      },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-    );
-  });
-
-  // View toggle
-  document.getElementById('viewGrid')?.addEventListener('change', function() {
-    if (this.checked) {
-      document.getElementById('gridContainer').style.display = 'block';
-      document.getElementById('mapContainer').style.display = 'none';
-    }
-  });
-  document.getElementById('viewMap')?.addEventListener('change', function() {
-    if (this.checked) {
-      document.getElementById('gridContainer').style.display = 'none';
-      document.getElementById('mapContainer').style.display = 'block';
-      initMap();
-    }
-  });
-
-  // Map
-  const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
-  let map = null;
-  let markers = [];
-  function initMap() {
-    if (map) return;
-    if (!mapToken || typeof mapboxgl === 'undefined') {
-      document.getElementById('nearbyMap').innerHTML = '<div class="p-4 text-center text-muted">Map unavailable</div>';
-      return;
-    }
-
-    mapboxgl.accessToken = mapToken;
-
-    const results = <%- JSON.stringify(campgrounds || []) %>;
-    if (!results.length) {
-      document.getElementById('nearbyMap').innerHTML = '<div class="p-4 text-center text-muted">No campgrounds to display</div>';
-      return;
-    }
-
-    const userLat = <%= typeof lat !== 'undefined' && lat !== '' ? lat : 'null' %>;
-    const userLng = <%= typeof lng !== 'undefined' && lng !== '' ? lng : 'null' %>;
-    const center = (userLat && userLng) ? [userLng, userLat] : (results[0].geometry?.coordinates || [0,0]);
-
-    map = new mapboxgl.Map({
-      container: 'nearbyMap',
-      style: 'mapbox://styles/mapbox/outdoors-v12',
-      center: center,
-      zoom: 9
-    });
-
-    map.addControl(new mapboxgl.NavigationControl());
-    map.addControl(new mapboxgl.FullscreenControl());
-
-    // Fit bounds to results
-    const bounds = new mapboxgl.LngLatBounds();
-    results.forEach(r => {
-      if (r.geometry?.coordinates?.length === 2) {
-        bounds.extend(r.geometry.coordinates);
-      }
-    });
-    if (!bounds.isEmpty()) {
-      map.fitBounds(bounds, { padding: 40 });
-    }
-
-    // User marker
-    if (userLat && userLng) {
-      new mapboxgl.Marker({ color: '#1a73e8' })
-        .setLngLat([userLng, userLat])
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<strong>Your Location</strong>'))
-        .addTo(map);
-    }
-
-    // Result markers
-    results.forEach(cg => {
-      if (!(cg.geometry?.coordinates?.length === 2)) return;
-      const cover = (cg.images && cg.images[0]?.url) ? cg.images[0].url : 'https://placehold.co/300x200?text=No+Image';
-      const dist = (typeof cg.distance === 'number') ? (cg.distance / 1000).toFixed(1) + ' km' : '';
-
-      const popupHtml = `
-        <div style="max-width:240px">
-          <img src="${cover}" alt="${cg.title}" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:6px" />
-          <strong>${cg.title}</strong><br/>
-          <span class="text-muted">${cg.location || ''}</span><br/>
-          ${dist ? `<span class="badge bg-info-subtle text-info border mt-1">${dist} away</span>` : ''}
-          <div class="mt-2">
-            <a class="btn btn-sm btn-primary" href="/outdoorsy/campgrounds/${cg._id}">View</a>
-          </div>
-        </div>`;
-
-      const marker = new mapboxgl.Marker()
-        .setLngLat(cg.geometry.coordinates)
-        .setPopup(new mapboxgl.Popup({ offset: 12 }).setHTML(popupHtml))
-        .addTo(map);
-      markers.push(marker);
-    });
-  }
-
-  // Favorites toggle (AJAX)
-  document.querySelectorAll('.toggle-fav-btn').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const id = btn.getAttribute('data-id');
-      try {
-        const res = await fetch(`/outdoorsy/campgrounds/${id}/favorite`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin'
-        });
-        if (res.status === 401) {
-          window.location = '/outdoorsy/login';
-          return;
-        }
-        const data = await res.json();
-        if (data.status === 'added') {
-          btn.classList.remove('btn-outline-danger');
-          btn.classList.add('btn-danger');
-          btn.setAttribute('aria-pressed', 'true');
-        } else if (data.status === 'removed') {
-          btn.classList.remove('btn-danger');
-          btn.classList.add('btn-outline-danger');
-          btn.setAttribute('aria-pressed', 'false');
-        }
-      } catch (err) {
-        console.error(err);
-        alert('Could not update favorite. Please try again.');
-      }
-    });
-  });
-</script>
+          <% for (let p = 1; p <= totalPages; p++) { %>
+            <li class="page-item <%= p === page ? 'active' : '' %>">
+              <% if (p === page) { %>
+                <span class="page-link" aria-current="page">Page <%= p %></span>
+              <% } else { %>
+                <a class="page-link" href="<%= pageUrl(p) %>">Page <%= p %></a>
+              <% } %>
+            </li>
+          <% } %>
+          <li class="page-item <%= page >= totalPages ? 'disabled' : '' %>">
+            <% if (page >= totalPages) { %>
+              <span class="page-link" aria-disabled="true">Next</span>
+            <% } else { %>
+              <a class="page-link" href="<%= pageUrl(page + 1) %>">Next</a>
+            <% } %>
+          </li>
+        </ul>
+      </nav>
+    <% } %>
+  </section>
+</div>

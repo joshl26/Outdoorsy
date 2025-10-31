@@ -4,48 +4,72 @@
 <div class="d-flex align-items-center justify-content-between mb-3">
   <div class="d-flex align-items-center gap-2">
     <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">
-      <i class="fas fa-arrow-left me-1"></i> Back
+      <i class="fas fa-arrow-left me-1" aria-hidden="true"></i>
+      <span>Back</span>
     </a>
-    <h1 class="m-0"><%= campground.title %></h1>
+    <!-- Page title (h1) with safe fallback -->
+    <h1 class="m-0">
+      Campground
+      <% if (campground && campground.title) { %>
+        <span> — <%= campground.title %></span>
+      <% } %>
+    </h1>
   </div>
+
   <div class="d-flex gap-2">
-    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/nearby?lat=<%= campground.geometry?.coordinates?.[1] ?? '' %>&lng=<%= campground.geometry?.coordinates?.[0] ?? '' %>&radiusKm=25">
-      <i class="fas fa-location-arrow me-1"></i> Nearby
+    <a
+      class="btn btn-outline-secondary"
+      href="/outdoorsy/campgrounds/nearby?lat=<%= campground.geometry?.coordinates?.[1] ?? '' %>&lng=<%= campground.geometry?.coordinates?.[0] ?? '' %>&radiusKm=25"
+    >
+      <i class="fas fa-location-arrow me-1" aria-hidden="true"></i>
+      <span>Nearby</span>
     </a>
+
     <% if (currentUser && String(currentUser._id) === String(campground.author?._id || campground.author)) { %>
       <a class="btn btn-outline-primary" href="/outdoorsy/campgrounds/<%= campground._id %>/edit">
-        <i class="fas fa-edit me-1"></i> Edit
+        <i class="fas fa-edit me-1" aria-hidden="true"></i>
+        <span>Edit</span>
       </a>
     <% } %>
+
     <% if (currentUser) { %>
-      <form method="POST" action="/outdoorsy/campgrounds/<%= campground._id %>?_method=DELETE" class="d-inline" onsubmit="return confirm('Delete this campground?');">
-        <% if (String(currentUser._id) === String(campground.author?._id || campground.author)) { %>
-          <button class="btn btn-outline-danger" type="submit">
-            <i class="fas fa-trash me-1"></i> Delete
-          </button>
-        <% } %>
-      </form>
-<button 
-  class="btn btn-sm <%= isFavorited ? 'btn-danger' : 'btn-outline-danger' %> toggle-fav-btn"
-  data-id="<%= campground._id %>"
-  aria-pressed="<%= isFavorited ? 'true' : 'false' %>"
-  title="<%= isFavorited ? 'Remove from favorites' : 'Add to favorites' %>">
-  <i class="fas fa-heart me-1"></i> Favorite
-</button>    <% } %>
+      <!-- Favorite button with visible text -->
+      <button
+        type="button"
+        class="btn btn-sm <%= isFavorited ? 'btn-danger' : 'btn-outline-danger' %> toggle-fav-btn"
+        data-id="<%= campground._id %>"
+        aria-pressed="<%= isFavorited ? 'true' : 'false' %>"
+        title="<%= isFavorited ? 'Remove from favorites' : 'Add to favorites' %>"
+      >
+        <i class="fas fa-heart me-1" aria-hidden="true"></i>
+        <span><%= isFavorited ? 'Remove from favorites' : 'Add to favorites' %></span>
+      </button>
+    <% } %>
   </div>
 </div>
 
 <div class="row g-4">
   <div class="col-12 col-lg-8">
-    <!-- Images carousel / gallery -->
-    <div class="card shadow-sm mb-3">
+    <!-- Gallery -->
+    <section aria-labelledby="gallery-heading" class="card shadow-sm mb-3">
       <div class="card-body p-0">
+        <h2 id="gallery-heading" class="visually-hidden">Gallery</h2>
         <% if (campground.images && campground.images.length) { %>
-          <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+          <div
+            id="carouselImages"
+            class="carousel slide"
+            data-bs-ride="carousel"
+            aria-roledescription="carousel"
+          >
             <div class="carousel-inner">
               <% campground.images.forEach((img, idx) => { %>
                 <div class="carousel-item <%= idx === 0 ? 'active' : '' %>">
-                  <img src="<%= img.url %>" class="d-block w-100" alt="Image <%= idx + 1 %>" style="max-height: 500px; object-fit: cover;">
+                  <img
+                    src="<%= img.url %>"
+                    class="d-block w-100"
+                    alt="<%= campground.title || 'Campground' %> - View <%= idx + 1 %> of <%= campground.images.length %>"
+                    style="max-height: 500px; object-fit: cover;"
+                  />
                 </div>
               <% }) %>
             </div>
@@ -59,53 +83,55 @@
             </button>
           </div>
         <% } else { %>
-          <img src="https://placehold.co/1200x500?text=No+Image" class="w-100" alt="No images">
+          <img
+            src="https://placehold.co/1200x500?text=No+Image"
+            class="w-100"
+            alt="No images available for this campground"
+          />
         <% } %>
       </div>
-    </div>
+    </section>
 
     <!-- Details -->
-    <div class="card shadow-sm mb-3">
+    <section aria-labelledby="details-heading" class="card shadow-sm mb-3">
       <div class="card-body">
-        <h5 class="card-title mb-3">About this campground</h5>
+        <h2 id="details-heading" class="card-title h5 mb-3">About this campground</h2>
         <p class="card-text"><%= campground.description || 'No description provided.' %></p>
         <div class="d-flex align-items-center gap-3">
           <div class="fw-bold fs-5">$<%= campground.price %> / night</div>
           <div class="text-muted">
-            <i class="fas fa-map-marker-alt me-1"></i>
+            <i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i>
             <%= campground.location %>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Reviews -->
-    <div class="card shadow-sm">
+    <section aria-labelledby="reviews-heading" class="card shadow-sm">
       <div class="card-body">
-        <h5 class="card-title mb-3">Reviews</h5>
+        <h2 id="reviews-heading" class="card-title h5 mb-3">Reviews</h2>
 
         <% if (!reviews || reviews.length === 0) { %>
           <div class="text-muted">No reviews yet.</div>
         <% } else { %>
           <div class="list-group">
             <% reviews.forEach(r => { %>
-              <div class="list-group-item">
-                <div class="d-flex justify-content-between align-items-center">
+              <article class="list-group-item">
+                <header class="d-flex justify-content-between align-items-center">
                   <div>
                     <strong><%= r.author?.username || r.author?.email || 'Anonymous' %></strong>
-                    <span class="text-muted small ms-2">
-                      <%= new Date(r.createdAt).toLocaleString() %>
-                    </span>
+                    <span class="text-muted small ms-2"><%= new Date(r.createdAt).toLocaleString() %></span>
                   </div>
-                </div>
+                </header>
                 <p class="mb-1 mt-2"><%= r.body %></p>
                 <% if (typeof r.rating === 'number') { %>
-                  <div class="text-warning">
-                    <% for (let i=0;i<r.rating;i++){ %><i class="fas fa-star"></i><% } %>
-                    <% for (let i=r.rating;i<5;i++){ %><i class="far fa-star"></i><% } %>
+                  <div class="text-warning" role="img" aria-label="<%= r.rating %> out of 5 stars">
+                    <% for (let i = 0; i < r.rating; i++) { %><i class="fas fa-star" aria-hidden="true"></i><% } %>
+                    <% for (let i = r.rating; i < 5; i++) { %><i class="far fa-star" aria-hidden="true"></i><% } %>
                   </div>
                 <% } %>
-              </div>
+              </article>
             <% }) %>
           </div>
 
@@ -113,49 +139,65 @@
             <nav aria-label="Reviews pagination" class="mt-3">
               <ul class="pagination justify-content-center">
                 <li class="page-item <%= reviewsPage <= 1 ? 'disabled' : '' %>">
-                  <a class="page-link" href="?page=<%= reviewsPage - 1 %>&limit=<%= reviewsLimit %>">Previous</a>
+                  <% if (reviewsPage <= 1) { %>
+                    <span class="page-link" aria-disabled="true">Previous</span>
+                  <% } else { %>
+                    <a class="page-link" href="?page=<%= reviewsPage - 1 %>&limit=<%= reviewsLimit %>">Previous</a>
+                  <% } %>
                 </li>
                 <% for (let p = 1; p <= reviewsTotalPages; p++) { %>
                   <li class="page-item <%= p === reviewsPage ? 'active' : '' %>">
-                    <a class="page-link" href="?page=<%= p %>&limit=<%= reviewsLimit %>"><%= p %></a>
+                    <% if (p === reviewsPage) { %>
+                      <span class="page-link" aria-current="page">Page <%= p %></span>
+                    <% } else { %>
+                      <a class="page-link" href="?page=<%= p %>&limit=<%= reviewsLimit %>">Page <%= p %></a>
+                    <% } %>
                   </li>
                 <% } %>
                 <li class="page-item <%= reviewsPage >= reviewsTotalPages ? 'disabled' : '' %>">
-                  <a class="page-link" href="?page=<%= reviewsPage + 1 %>&limit=<%= reviewsLimit %>">Next</a>
+                  <% if (reviewsPage >= reviewsTotalPages) { %>
+                    <span class="page-link" aria-disabled="true">Next</span>
+                  <% } else { %>
+                    <a class="page-link" href="?page=<%= reviewsPage + 1 %>&limit=<%= reviewsLimit %>">Next</a>
+                  <% } %>
                 </li>
               </ul>
             </nav>
           <% } %>
         <% } %>
       </div>
-    </div>
+    </section>
   </div>
 
   <!-- Sidebar -->
   <div class="col-12 col-lg-4">
-    <div class="card shadow-sm mb-3">
+    <section aria-labelledby="host-heading" class="card shadow-sm mb-3">
       <div class="card-body">
-        <h5 class="card-title">Host</h5>
-        <p class="mb-1"><strong><%= campground.author?.username || campground.author?.email || 'Unknown' %></strong></p>
+        <h2 id="host-heading" class="card-title h6">Host</h2>
+        <p class="mb-1">
+          <strong><%= campground.author?.username || campground.author?.email || 'Unknown' %></strong>
+        </p>
         <p class="text-muted mb-0">
-          <i class="far fa-clock me-1"></i>
+          <i class="far fa-clock me-1" aria-hidden="true"></i>
           Listed <%= campground.createdAt ? new Date(campground.createdAt).toLocaleDateString() : '' %>
         </p>
       </div>
-    </div>
+    </section>
 
-    <!-- Static map (optional) -->
     <% if (campground.geometry?.coordinates?.length === 2) { %>
-      <div class="card shadow-sm">
+      <section aria-labelledby="location-heading" class="card shadow-sm">
         <div class="card-body">
-          <h5 class="card-title">Location</h5>
+          <h2 id="location-heading" class="card-title h6">Location</h2>
           <div class="text-muted mb-2"><%= campground.location %></div>
-          <div class="ratio ratio-16x9 bg-light rounded" id="staticMap" style="background-size: cover; background-position: center;"></div>
+          <div
+            class="ratio ratio-16x9 bg-light rounded"
+            id="staticMap"
+            style="background-size: cover; background-position: center;"
+          ></div>
         </div>
-      </div>
+      </section>
       <script>
-        // If you have a Mapbox static token, you can render a static image map
-        (function() {
+        (function () {
           const lng = <%= campground.geometry.coordinates[0] %>;
           const lat = <%= campground.geometry.coordinates[1] %>;
           const token = '<%- process.env.MAPBOX_TOKEN || "" %>';
@@ -170,48 +212,50 @@
 </div>
 
 <script>
-  // Set initial favorite state if server provided favorites via locals (optional)
-  // If you pass 'favorites' with just campground page, you can set button state initially.
-  const favBtn = document.querySelector('.toggle-fav-btn');
-  // You can optionally set initial state by checking if it's already favorited server-side.
-
   // Favorites toggle (AJAX)
+  const favBtn = document.querySelector('.toggle-fav-btn');
   if (favBtn) {
     favBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       const id = favBtn.getAttribute('data-id');
+      favBtn.disabled = true;
       try {
-        const res = await fetch(`/outdoorsy/campgrounds/${id}/favorite`, {
+        const res = await fetch(`<%= basePath %>/campgrounds/${id}/favorite`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content || ''
+          },
           credentials: 'same-origin'
         });
         if (res.status === 401) {
-          window.location = '/outdoorsy/login';
+          window.location = '<%= basePath %>/login';
           return;
         }
         const data = await res.json();
         if (data.status === 'added') {
-          favBtn.classList.remove('btn-outline-danger');
-          favBtn.classList.add('btn-danger');
+          favBtn.classList.replace('btn-outline-danger', 'btn-danger');
           favBtn.setAttribute('aria-pressed', 'true');
           favBtn.title = 'Remove from favorites';
         } else if (data.status === 'removed') {
-          favBtn.classList.remove('btn-danger');
-          favBtn.classList.add('btn-outline-danger');
+          favBtn.classList.replace('btn-danger', 'btn-outline-danger');
           favBtn.setAttribute('aria-pressed', 'false');
           favBtn.title = 'Add to favorites';
         }
       } catch (err) {
         console.error(err);
         alert('Could not update favorite. Please try again.');
+      } finally {
+        favBtn.disabled = false;
       }
     });
   }
 </script>
 
 <style>
-  .carousel .carousel-item img {
-    border-radius: .5rem;
+  .carousel .carousel-item img { border-radius: .5rem; }
+  .visually-hidden-focusable:active,
+  .visually-hidden-focusable:focus {
+    position: static; width: auto; height: auto; overflow: visible; clip: auto;
   }
 </style>

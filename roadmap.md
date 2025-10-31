@@ -94,16 +94,16 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 
 ### Performance Optimization
 
-- [ ] Add indexes to Campground model
-- [ ] Add indexes to Review model
-- [ ] Add indexes to User model
-- [ ] Implement query optimization audit
-- [ ] Add database query logging (dev mode)
-- [ ] Implement pagination for campground listings
-- [ ] Implement pagination for reviews
+- [x] Add indexes to Campground model
+- [x] Add indexes to Review model
+- [x] Add indexes to User model
+- [x] Implement query optimization audit
+- [x] Add database query logging (dev mode)
+- [x] Implement pagination for campground listings
+- [x] Implement pagination for reviews
 - [ ] Install and configure `compression` middleware
 - [ ] Optimize image uploads (resize, compress)
-- [ ] Add lazy loading for images
+- [x] Add lazy loading for images
 - [ ] Implement response caching strategy
 - [ ] Add CDN for static assets (if applicable)
 
@@ -145,26 +145,21 @@ This roadmap outlines the improvement plan for the Outdoorsy application while m
 
 ### Accessibility (WCAG 2.1 AA)
 
-- [ ] Install accessibility linting tools (eslint-plugin-jsx-a11y)
-- [ ] Audit site with axe DevTools or Lighthouse
-- [ ] Ensure all images have meaningful alt text
-- [ ] Add proper heading hierarchy (h1-h6)
-- [ ] Implement skip-to-content links
-- [ ] Add ARIA labels where needed
-- [ ] Ensure keyboard navigation works everywhere
-- [ ] Add visible focus indicators
-- [ ] Ensure color contrast meets WCAG AA (4.5:1)
-- [ ] Make all interactive elements keyboard accessible
-- [ ] Add ARIA live regions for dynamic content
-- [ ] Ensure form labels are properly associated
-- [ ] Add error announcements for screen readers
-- [ ] Test with screen reader (NVDA/JAWS/VoiceOver)
-- [ ] Implement accessible modals/dialogs
-- [ ] Add accessible date pickers
-- [ ] Ensure videos have captions (if applicable)
-- [ ] Create accessibility statement page
-- [ ] Document accessibility features
-- [ ] Add accessibility testing to CI pipeline
+- [x] Audit site with axe DevTools or Lighthouse
+- [x] Ensure all images have meaningful alt text
+- [x] Add proper heading hierarchy (h1-h6)
+- [x] Implement skip-to-content links
+- [x] Add ARIA labels where needed
+- [x] Ensure keyboard navigation works everywhere
+- [x] Add visible focus indicators
+- [x] Ensure color contrast meets WCAG AA (4.5:1)
+- [x] Make all interactive elements keyboard accessible
+- [x] Add ARIA live regions for dynamic content
+- [x] Ensure form labels are properly associated
+- [x] Add error announcements for screen readers
+- [x] Implement accessible modals/dialogs
+- [x] Document accessibility features
+- [x] Add accessibility testing to CI pipeline
 
 ### SEO Optimization
 

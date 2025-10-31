@@ -1,0 +1,82 @@
+/* Outdoorsy Error Page Styles */
+
+body {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #212529;
+}
+
+.error-container {
+  min-height: 60vh;
+}
+
+.error-alert {
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  background-color: #fff5f5;
+  color: #842029;
+}
+
+.alert-heading {
+  font-weight: 700;
+  color: #842029;
+}
+
+.error-message {
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-stack {
+  background-color: #212529;
+  color: #f8f9fa;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+/* Button styling */
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.25);
+}
+
+.btn:focus-visible {
+  outline: 2px solid #0d6efd;
+  outline-offset: 4px;
+}
+
+/* Responsive spacing */
+@media (max-width: 576px) {
+  .error-container {
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+
+  .error-alert {
+    padding: 1rem;
+  }
+
+  .btn-lg {
+    font-size: 1rem;
+    padding: 0.5rem 1.25rem;
+  }
+}

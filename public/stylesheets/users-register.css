@@ -1,2 +1,142 @@
 /* ===== Register Index Page Styles ===== */
 /* Place this file at: public/stylesheets/register.css */
+
+/* Outdoorsy Register Page */
+
+.auth-card {
+  max-width: 420px;
+  width: 100%;
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #ffffff;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.auth-card-img {
+  height: 120px;
+  object-fit: contain;
+  background: #fff;
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.form-control {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ced4da;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.form-control:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+  outline: 0;
+}
+
+.is-valid {
+  border-color: #28a745 !important;
+}
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.valid-feedback,
+.invalid-feedback {
+  font-size: 0.875rem;
+}
+
+/* Toggle show/hide password */
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #6c757d;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.toggle-visibility:focus-visible {
+  outline: 2px solid #198754;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Strength meter */
+.strength-meter {
+  height: 6px;
+  border-radius: 4px;
+  background: #e9ecef;
+  overflow: hidden;
+  margin-top: 0.375rem;
+}
+
+.strength-meter-bar {
+  height: 100%;
+  width: 0%;
+  transition:
+    width 0.25s ease,
+    background-color 0.25s ease;
+  background-color: #dc3545;
+}
+
+.form-text.small-muted {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+/* Buttons */
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #157347;
+  box-shadow: 0 4px 12px rgba(21, 115, 71, 0.3);
+}
+
+.btn-success:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.35);
+}
+
+/* Accessibility enhancements */
+:focus-visible {
+  outline: 2px solid #198754;
+  outline-offset: 4px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .auth-card {
+    margin: 1rem;
+  }
+  .auth-card-img {
+    height: 100px;
+  }
+}
