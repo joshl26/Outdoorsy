@@ -4,7 +4,7 @@
  * Base Path Configuration
  *
  * Centralizes the base path configuration for the application.
- * This allows the app to run on a subpath (e.g., /outdoorsy/)
+ * This allows the app to run at the domain root or on a subpath.
  * and makes it easy to change or remove the base path in the future.
  */
 
@@ -20,7 +20,7 @@ const normalizeBasePath = (value) => {
     : withLeadingSlash;
 };
 
-const basePath = normalizeBasePath(process.env.BASE_PATH || '/outdoorsy');
+const basePath = normalizeBasePath(process.env.BASE_PATH || '/');
 
 /**
  * Helper function to build full paths with base path prefix
@@ -28,9 +28,9 @@ const basePath = normalizeBasePath(process.env.BASE_PATH || '/outdoorsy');
  * @returns {string} Full path with base path prefix
  *
  * @example
- * buildPath('campgrounds') // Returns: '/outdoorsy/campgrounds'
- * buildPath('/campgrounds') // Returns: '/outdoorsy/campgrounds'
- * buildPath('') // Returns: '/outdoorsy'
+ * buildPath('campgrounds') // Returns: '/campgrounds'
+ * buildPath('/campgrounds') // Returns: '/campgrounds'
+ * buildPath('') // Returns: '/'
  */
 const buildPath = (path = '') => {
   // Remove leading slash from path if present
@@ -60,7 +60,7 @@ const buildPath = (path = '') => {
  * @returns {string} Full asset path
  *
  * @example
- * buildAssetPath('stylesheets', 'app.css') // Returns: '/outdoorsy/stylesheets/app.css'
+ * buildAssetPath('stylesheets', 'app.css') // Returns: '/stylesheets/app.css'
  */
 const buildAssetPath = (assetType, filename) => {
   return buildPath(`${assetType}/${filename}`);
@@ -72,7 +72,7 @@ const buildAssetPath = (assetType, filename) => {
  * @returns {string} Full API path
  *
  * @example
- * buildApiPath('campgrounds') // Returns: '/outdoorsy/api/v1/campgrounds'
+ * buildApiPath('campgrounds') // Returns: '/api/v1/campgrounds'
  */
 const buildApiPath = (endpoint) => {
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;

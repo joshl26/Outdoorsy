@@ -3,6 +3,7 @@
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
+const { basePath, buildPath } = require('./basePath');
 
 /**
  * Swagger-jsdoc options to generate OpenAPI specification.
@@ -20,7 +21,7 @@ const options = {
     },
     servers: [
       {
-        url: process.env.BASE_PATH || '/outdoorsy', // Base path for API
+        url: basePath, // Base path for API
       },
     ],
   },
@@ -36,11 +37,7 @@ const specs = swaggerJsdoc(options);
  * @param {Express.Application} app - The Express app instance
  */
 const swaggerSetup = (app) => {
-  app.use(
-    (process.env.BASE_PATH || '/outdoorsy') + '/api-docs',
-    swaggerUi.serve,
-    swaggerUi.setup(specs)
-  );
+  app.use(buildPath('api-docs'), swaggerUi.serve, swaggerUi.setup(specs));
 };
 
 module.exports = swaggerSetup;

@@ -6,33 +6,21 @@ require('dotenv').config();
 
 const mongoose = require('mongoose');
 const app = require('./app');
+const connectDB = require('./config/database');
 
-// MongoDB connection string from environment or default to local
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/outdoorsy';
+const port = process.env.PORT || 3053;
 
-// Connect to MongoDB using Mongoose
-mongoose.connect(dbUrl, {
-  // useNewUrlParser: true, // Uncomment if needed for compatibility
-  // useUnifiedTopology: true, // Uncomment if needed for compatibility
+app.listen(port, () => {
+  // eslint-disable-next-line no-console
+  console.log(`Serving on port ${port}`);
 });
 
-const db = mongoose.connection;
-
-// Log connection errors to console
-// eslint-disable-next-line no-console
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// Once connected, start the Express server
-db.once('open', () => {
+connectDB().catch((err) => {
   // eslint-disable-next-line no-console
-  console.log('MongoDB connected');
+  console.error('MongoDB connection error:', err);
+});
 
-  // Use port from environment or default to 3053
-  const port = process.env.PORT || 3053;
-
-  // Start listening for incoming requests
-  app.listen(port, () => {
-    // eslint-disable-next-line no-console
-    console.log(`Serving on port ${port}`);
-  });
+mongoose.connection.on('disconnected', () => {
+  // eslint-disable-next-line no-console
+  console.warn('MongoDB disconnected; serving fallback UI until it returns.');
 });

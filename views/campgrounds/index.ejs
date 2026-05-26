@@ -1,21 +1,21 @@
 <!-- views/campgrounds/index.ejs -->
-<link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-index.css" />
+<link rel="stylesheet" type="text/css" href="<%= basePath %>/stylesheets/campgrounds-index.css" />
 
 <div class="d-flex align-items-center justify-content-between mb-3">
   <h1 class="text-primary m-0">All Campgrounds</h1>
   <div class="d-flex gap-2">
-    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/nearby">
+    <a class="btn btn-outline-secondary" href="<%= basePath %>/campgrounds/nearby">
       <i class="fas fa-location-arrow me-1" aria-hidden="true"></i>
       <span>Nearby</span>
     </a>
     <% if (currentUser) { %>
-      <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/favorites">
+      <a class="btn btn-outline-secondary" href="<%= basePath %>/campgrounds/favorites">
         <i class="fas fa-heart me-1" aria-hidden="true"></i>
         <span>My Favorites</span>
       </a>
     <% } %>
     <% if (currentUser) { %>
-      <a class="btn btn-primary" href="/outdoorsy/campgrounds/new">
+      <a class="btn btn-primary" href="<%= basePath %>/campgrounds/new">
         <i class="fas fa-plus me-1" aria-hidden="true"></i>
         <span>New Campground</span>
       </a>
@@ -27,7 +27,7 @@
 <section aria-labelledby="filters-heading" class="card mb-4 shadow-sm">
   <div class="card-body">
     <h2 id="filters-heading" class="h5 mb-3">Filters</h2>
-    <form method="GET" action="/outdoorsy/campgrounds" class="row g-3" id="indexFilterForm" novalidate>
+    <form method="GET" action="<%= basePath %>/campgrounds" class="row g-3" id="indexFilterForm" novalidate>
       <div class="col-12 col-md-3">
         <label for="q" class="form-label">Search</label>
         <input
@@ -110,11 +110,18 @@
           <i class="fas fa-search me-1" aria-hidden="true"></i>
           <span>Apply Filters</span>
         </button>
-        <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">Reset</a>
+        <a class="btn btn-outline-secondary" href="<%= basePath %>/campgrounds">Reset</a>
       </div>
     </form>
   </div>
 </section>
+
+<% if (typeof inlineNotice !== 'undefined' && inlineNotice) { %>
+  <div class="alert alert-info d-flex align-items-center mb-4" role="status">
+    <i class="fas fa-info-circle me-2" aria-hidden="true"></i>
+    <div><%= inlineNotice %></div>
+  </div>
+<% } %>
 
 <!-- Results section -->
 <section aria-labelledby="results-heading">
@@ -143,7 +150,7 @@
           >
           <div class="card-body d-flex flex-column">
             <h3 class="card-title h5 mb-1">
-              <a class="text-decoration-none" href="/outdoorsy/campgrounds/<%= cg.slug || cg._id %>"><%= cg.title %></a>
+              <a class="text-decoration-none" href="<%= basePath %>/campgrounds/<%= cg.slug || cg._id %>"><%= cg.title %></a>
             </h3>
             <p class="card-text text-muted mb-2">
               <i class="fas fa-map-marker-alt me-1" aria-hidden="true"></i>
@@ -153,7 +160,7 @@
               $<%= cg.price %> / night
             </div>
             <div class="mt-auto d-flex gap-2">
-              <a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/<%= cg.slug || cg._id %>">View</a>
+              <a class="btn btn-sm btn-primary flex-grow-1" href="<%= basePath %>/campgrounds/<%= cg.slug || cg._id %>">View</a>
               <% if (currentUser) { %>
                 <button
                   type="button"
@@ -194,7 +201,7 @@
       if (lng !== '' && typeof lng !== 'undefined') query.push(encodeParam('lng', lng));
       if (radiusKm !== '' && typeof radiusKm !== 'undefined') query.push(encodeParam('radiusKm', radiusKm));
       query.push(encodeParam('page', p));
-      return '/outdoorsy/campgrounds?' + query.join('&');
+      return '<%= basePath %>/campgrounds?' + query.join('&');
     }
   %>
   <nav aria-label="Campgrounds pagination" class="mt-4">
@@ -233,13 +240,13 @@
       e.preventDefault();
       const id = btn.getAttribute('data-id');
       try {
-        const res = await fetch(`/outdoorsy/campgrounds/${id}/favorite`, {
+        const res = await fetch(`<%= basePath %>/campgrounds/${id}/favorite`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'same-origin'
         });
         if (res.status === 401) {
-          window.location = '/outdoorsy/login';
+          window.location = '<%= basePath %>/login';
           return;
         }
         const data = await res.json();

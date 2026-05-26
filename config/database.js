@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
  * - Uses connection string from environment variable or defaults to local DB.
  * - Uses recommended options for stability.
  * - Logs successful connection or errors.
- * - Exits process on initial connection failure.
+ * - Leaves the app running on initial connection failure so the UI can still load.
  */
 const connectDB = async () => {
   try {
@@ -40,7 +40,6 @@ const connectDB = async () => {
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('MongoDB connection error:', err);
-    process.exit(1);
   }
 };
 

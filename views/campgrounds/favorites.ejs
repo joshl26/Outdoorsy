@@ -1,15 +1,15 @@
 <!-- views/campgrounds/favorites.ejs -->
-<link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-index.css" />
+<link rel="stylesheet" type="text/css" href="<%= basePath %>/stylesheets/campgrounds-index.css" />
 
 <div class="d-flex align-items-center justify-content-between mb-3">
   <h1 class="text-primary m-0">
     <i class="fas fa-heart me-2"></i>My Favorites
   </h1>
   <div class="d-flex gap-2">
-    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">
+    <a class="btn btn-outline-secondary" href="<%= basePath %>/campgrounds">
       <i class="fas fa-compass me-1"></i> Explore More
     </a>
-    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds/nearby">
+    <a class="btn btn-outline-secondary" href="<%= basePath %>/campgrounds/nearby">
       <i class="fas fa-location-arrow me-1"></i> Nearby
     </a>
   </div>
@@ -33,7 +33,7 @@
         <p class="text-muted mb-4">
           Browse campgrounds and click the <i class="fas fa-heart text-danger"></i> button to save your favorites here.
         </p>
-        <a class="btn btn-primary" href="/outdoorsy/campgrounds">
+        <a class="btn btn-primary" href="<%= basePath %>/campgrounds">
           <i class="fas fa-compass me-1"></i> Explore Campgrounds
         </a>
       </div>
@@ -53,7 +53,7 @@
             
             <div class="card-body d-flex flex-column">
               <h3 class="card-title h5">
-<a class="text-decoration-none" href="/outdoorsy/campgrounds/<%= cg.slug || cg._id %>">                  <%= cg.title %>
+<a class="text-decoration-none" href="<%= basePath %>/campgrounds/<%= cg.slug || cg._id %>">                  <%= cg.title %>
                 </a>
               </h3>
               
@@ -67,7 +67,7 @@
               </div>
               
               <div class="mt-auto d-flex gap-2">
-<a class="btn btn-sm btn-primary flex-grow-1" href="/outdoorsy/campgrounds/<%= cg.slug || cg._id %>">                  <i class="fas fa-eye me-1"></i> View
+<a class="btn btn-sm btn-primary flex-grow-1" href="<%= basePath %>/campgrounds/<%= cg.slug || cg._id %>">                  <i class="fas fa-eye me-1"></i> View
                 </a>
                 <% if (currentUser) { %>
                   <button

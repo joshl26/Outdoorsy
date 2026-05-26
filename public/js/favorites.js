@@ -5,7 +5,7 @@
 
   function getBasePath() {
     var meta = document.querySelector('meta[name="base-path"]');
-    return (meta && meta.content) || '/outdoorsy';
+    return (meta && meta.content) || '';
   }
   function getCsrf() {
     var m = document.querySelector('meta[name="csrf-token"]');

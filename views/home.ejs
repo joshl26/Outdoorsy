@@ -1,6 +1,6 @@
 
 <head>
-  <link rel="stylesheet" href="/outdoorsy/stylesheets/home.css" />
+  <link rel="stylesheet" href="<%= basePath === '/' ? '' : basePath %>/stylesheets/home.css" />
 </head>
 <!-- Hero Section -->
 <div class="home-hero">
@@ -42,6 +42,37 @@
     <i class="fas fa-chevron-down" aria-hidden="true"></i>
   </a>
 </div>
+
+<% const unavailableServices = Object.entries(serviceStatus || {}).filter(([, ready]) => !ready); %>
+<% if (unavailableServices.length) { %>
+  <section class="py-5 bg-light border-top border-bottom" aria-labelledby="service-status-heading">
+    <div class="container">
+      <header class="mb-4 text-center">
+        <h2 id="service-status-heading" class="h3 text-dark mb-2">Setup In Progress</h2>
+        <p class="text-muted mb-0">
+          Outdoorsy is live, but a few integrations are still waiting on environment variables.
+        </p>
+      </header>
+      <div class="row g-4">
+        <% unavailableServices.forEach(([service]) => { %>
+          <div class="col-md-6 col-xl-3">
+            <article class="feature-card h-100 border border-warning-subtle bg-white">
+              <div class="feature-icon" aria-hidden="true">
+                <i class="fas fa-plug text-warning"></i>
+              </div>
+              <h3 class="feature-title text-dark mb-2">
+                <%= service === 'cloudinary' ? 'Image Uploads' : service === 'mapbox' ? 'Maps & Geocoding' : service === 'googleAuth' ? 'Google Sign-In' : 'Database Sync' %>
+              </h3>
+              <p class="feature-description text-muted mb-0">
+                <%= service === 'cloudinary' ? 'Campground image uploads are temporarily disabled until Cloudinary credentials are added.' : service === 'mapbox' ? 'Interactive maps and location geocoding will appear after Mapbox is configured.' : service === 'googleAuth' ? 'Google authentication will be enabled once OAuth credentials are added.' : 'Production data will appear after the database connection is configured.' %>
+              </p>
+            </article>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+<% } %>
 
 <!-- Features Section -->
 <section id="features" class="features-section" aria-labelledby="features-heading">

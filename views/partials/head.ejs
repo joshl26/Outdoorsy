@@ -10,13 +10,11 @@
   const MAIN_ORG_ID = 'https://joshlehman.ca/#organization';
   const MAIN_WEBSITE_ID = 'https://joshlehman.ca/#website';
 
-  // Outdoorsy subsite rooting
-  // siteRoot is used only for absolute URL building (SEO/meta).
-  const siteRoot = 'https://joshlehman.ca';
-  const subRoot = siteRoot + '/outdoorsy';
-
-  // For asset loading, always use same-origin, root-relative paths.
-  const outdoorsyRoot = '/outdoorsy';
+  // Site root is used only for absolute URL building (SEO/meta).
+  const siteRoot = (process.env.SITE_ROOT_URL || 'https://outdoorsy.joshlehman.ca').replace(/\/$/, '');
+  const appBasePath = typeof basePath !== 'undefined' ? basePath : '/';
+  const assetRoot = appBasePath === '/' ? '' : appBasePath;
+  const subRoot = siteRoot + assetRoot;
 
   function absUrl(url) {
     if (!url) return '';
@@ -265,10 +263,11 @@
   <% } %>
 
   <!-- Favicon & Manifest (root-relative for same-origin in dev and prod) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="<%= outdoorsyRoot %>/icons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="<%= outdoorsyRoot %>/icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="<%= outdoorsyRoot %>/icons/favicon-16x16.png">
-  <link rel="manifest" href="<%= outdoorsyRoot %>/site.webmanifest">
+  <meta name="base-path" content="<%= assetRoot %>">
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= assetRoot %>/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= assetRoot %>/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= assetRoot %>/icons/favicon-16x16.png">
+  <link rel="manifest" href="<%= assetRoot %>/site.webmanifest">
   <meta name="theme-color" content="#2b4d2f" />
 
   <!-- Open Graph -->
@@ -309,8 +308,8 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js" defer></script>
 
   <!-- Site stylesheets (after Bootstrap to allow overrides) -->
-  <link rel="stylesheet" href="<%= outdoorsyRoot %>/stylesheets/skeleton.css" />
-  <link rel="stylesheet" href="<%= outdoorsyRoot %>/stylesheets/app.css" />
+  <link rel="stylesheet" href="<%= assetRoot %>/stylesheets/skeleton.css" />
+  <link rel="stylesheet" href="<%= assetRoot %>/stylesheets/app.css" />
 
   <!-- Optional per-page styles -->
   <% if (HEAD_extraStyles) { %>

@@ -1,5 +1,5 @@
 <head>
-  <link rel="stylesheet" href="/outdoorsy/stylesheets/users-login.css" />
+  <link rel="stylesheet" href="<%= basePath === '/' ? '' : basePath %>/stylesheets/users-login.css" />
 </head>
 <div class="container d-flex justify-content-center align-items-center ">
   <div class="card shadow" style="max-width: 400px; width: 100%;">
@@ -19,7 +19,7 @@
       <% } %>
 
       <form
-        action="/outdoorsy/login"
+        action="<%= basePath %>/login"
         method="POST"
         class="validated-form needs-validation"
         novalidate

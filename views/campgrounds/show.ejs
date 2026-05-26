@@ -1,6 +1,6 @@
 <!-- views/campgrounds/show.ejs -->
-<link rel="stylesheet" href="/outdoorsy/stylesheets/skeleton.css" />
-<link rel="stylesheet" type="text/css" href="/outdoorsy/stylesheets/campgrounds-show.css" />
+<link rel="stylesheet" href="<%= basePath === '/' ? '' : basePath %>/stylesheets/skeleton.css" />
+<link rel="stylesheet" type="text/css" href="<%= basePath === '/' ? '' : basePath %>/stylesheets/campgrounds-show.css" />
 
 <%
 // Cloudinary helper for responsive images
@@ -13,7 +13,7 @@ function cloudinaryTransform(url, transform) {
 
 <div class="d-flex align-items-center justify-content-between mb-3">
   <div class="d-flex align-items-center gap-2">
-    <a class="btn btn-outline-secondary" href="/outdoorsy/campgrounds">
+    <a class="btn btn-outline-secondary" href="<%= basePath %>/campgrounds">
       <i class="fas fa-arrow-left me-1" aria-hidden="true"></i>
       <span>Back</span>
     </a>
@@ -29,14 +29,14 @@ function cloudinaryTransform(url, transform) {
   <div class="d-flex gap-2">
     <a
       class="btn btn-outline-secondary"
-      href="/outdoorsy/campgrounds/nearby?lat=<%= campground.geometry?.coordinates?.[1] ?? '' %>&lng=<%= campground.geometry?.coordinates?.[0] ?? '' %>&radiusKm=25"
+      href="<%= basePath %>/campgrounds/nearby?lat=<%= campground.geometry?.coordinates?.[1] ?? '' %>&lng=<%= campground.geometry?.coordinates?.[0] ?? '' %>&radiusKm=25"
     >
       <i class="fas fa-location-arrow me-1" aria-hidden="true"></i>
       <span>Nearby</span>
     </a>
 
     <% if (currentUser && String(currentUser._id) === String(campground.author?._id || campground.author)) { %>
-      <a class="btn btn-outline-primary" href="/outdoorsy/campgrounds/<%= campground.slug || campground._id %>/edit">
+      <a class="btn btn-outline-primary" href="<%= basePath %>/campgrounds/<%= campground.slug || campground._id %>/edit">
         <i class="fas fa-edit me-1" aria-hidden="true"></i>
         <span>Edit</span>
       </a>
@@ -141,6 +141,17 @@ function cloudinaryTransform(url, transform) {
         </div>
       </div>
     </section>
+
+    <% if (!(serviceStatus && serviceStatus.mapbox)) { %>
+      <section class="card shadow-sm mb-3 border-warning-subtle bg-warning-subtle" aria-labelledby="maps-placeholder-heading">
+        <div class="card-body">
+          <h2 id="maps-placeholder-heading" class="card-title h5 mb-2">Maps Coming Shortly</h2>
+          <p class="mb-0 text-muted">
+            Mapbox is not configured yet, so the interactive map and geocoded nearby experience are temporarily unavailable on this deployment.
+          </p>
+        </div>
+      </section>
+    <% } %>
 
     <!-- Getting there (HowTo) -->
     <%
@@ -430,13 +441,13 @@ function cloudinaryTransform(url, transform) {
         </div>
       </section>
       <!-- External, CSP-safe map loader -->
-      <script src="/outdoorsy/js/static-map.js" defer></script>
+      <script src="<%= basePath === '/' ? '' : basePath %>/js/static-map.js" defer></script>
     <% } %>
   </div>
 </div>
 
 <!-- External, CSP-safe favorites handler -->
-<script src="/outdoorsy/js/favorites.js" defer></script>
+<script src="<%= basePath === '/' ? '' : basePath %>/js/favorites.js" defer></script>
 
 <!-- Skeleton + reveal logic (tiny, CSP-safe) -->
 <script defer>

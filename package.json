@@ -4,8 +4,8 @@
   "description": "A modern campground review and discovery platform",
   "author": "Joshua Lehman <your.email@example.com>",
   "packageManager": "pnpm@8.15.0",
-  "homepage": "https://outdoorsy.joshlehman.ca/outdoorsy",
-  "demo": "https://outdoorsy.joshlehman.ca/outdoorsy",
+  "homepage": "https://outdoorsy.joshlehman.ca",
+  "demo": "https://outdoorsy.joshlehman.ca",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joshl26/Outdoorsy.git"
@@ -31,7 +31,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix --ignore-pattern node_modules/",
-    "format:check": "prettier --check \"**/*.{js,json,md,yaml,yml}\"",
+    "format:check": "prettier --check \"**/*.{js,json,yaml,yml}\"",
     "validate": "npm run lint && npm run format:check && npm run test",
     "seed": "node seeds/index.js",
     "db:backup": "node scripts/backup-db.js",

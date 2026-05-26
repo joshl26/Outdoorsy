@@ -4,7 +4,9 @@ const router = express.Router();
 const Campground = require('../models/campground');
 const { basePath } = require('../config/basePath');
 
-const SITE_ROOT = (process.env.SITE_ROOT_URL || 'https://outdoorsy.joshlehman.ca').replace(/\/$/, '');
+const SITE_ROOT = (
+  process.env.SITE_ROOT_URL || 'https://outdoorsy.joshlehman.ca'
+).replace(/\/$/, '');
 const SUB_ROOT = `${SITE_ROOT}${basePath === '/' ? '' : basePath}`;
 
 // Basic in-memory cache for sitemap body

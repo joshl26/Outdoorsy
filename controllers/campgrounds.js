@@ -4,7 +4,8 @@
 const Campground = require('../models/campground');
 const Review = require('../models/review');
 const User = require('../models/user');
-const { cloudinary } = require('../cloudinary');
+const mongoose = require('mongoose');
+const { cloudinary, cloudinaryEnabled } = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const { basePath } = require('../config/basePath');
 const mapBoxToken = process.env.MAPBOX_MAPBOX_TOKEN || process.env.MAPBOX_TOKEN;
@@ -25,8 +26,10 @@ if (enableCache) {
 }
 
 // SEO constants
-const SITE_ROOT = 'https://joshlehman.ca';
-const SUB_ROOT = `${SITE_ROOT}/outdoorsy`;
+const SITE_ROOT = (
+  process.env.SITE_ROOT_URL || 'https://outdoorsy.joshlehman.ca'
+).replace(/\/$/, '');
+const SUB_ROOT = `${SITE_ROOT}${basePath === '/' ? '' : basePath}`;
 
 // Helpers
 const isFiniteNum = (v) => typeof v === 'number' && Number.isFinite(v);
@@ -36,6 +39,7 @@ const parseNum = (val) => {
   const n = Number(val);
   return Number.isFinite(n) ? n : undefined;
 };
+const isDatabaseReady = () => mongoose.connection.readyState === 1;
 // const clampStr = (s, n) => (s ? String(s).slice(0, n) : '');
 
 const getGeocoder = () => {
@@ -87,6 +91,13 @@ module.exports.createCampground = async (req, res, next) => {
   try {
     const location = req.body?.campground?.location || '';
     const geocoder = getGeocoder();
+
+    if ((req.files || []).length && !cloudinaryEnabled) {
+      throw new AppError(
+        'Image uploads are unavailable until Cloudinary is configured.',
+        500
+      );
+    }
 
     const geocodeFetch = async () =>
       await geocoder.forwardGeocode({ query: location, limit: 1 }).send();
@@ -153,6 +164,43 @@ module.exports.index = async (req, res, next) => {
     ) {
       const rads = Math.min(radiusKm, 500) / 6378.1;
       filter.geometry = { $geoWithin: { $centerSphere: [[lng, lat], rads] } };
+    }
+
+    if (!isDatabaseReady()) {
+      return res.render('campgrounds/index', {
+        campgrounds: [],
+        page,
+        totalPages: 0,
+        total: 0,
+        q,
+        minPrice: minPrice ?? '',
+        maxPrice: maxPrice ?? '',
+        lat: lat ?? '',
+        lng: lng ?? '',
+        radiusKm: radiusKm ?? '',
+        favorites: [],
+        inlineNotice:
+          'Campground listings will appear once the database connection is configured.',
+        pageTitle: 'Top Campgrounds Near You | Outdoorsy',
+        pageDescription:
+          'Browse top-rated campgrounds near you. Filter by amenities, read reviews, and plan your perfect outdoor stay with Outdoorsy.',
+        currentUrl: req.originalUrl,
+        canonical: `${SUB_ROOT}/campgrounds`,
+        prevUrl: null,
+        nextUrl: null,
+        breadcrumbTrail: [
+          { name: 'Campgrounds', url: `${SUB_ROOT}/campgrounds` },
+        ],
+        jsonLd: {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          '@id': `${SUB_ROOT}/campgrounds#webpage`,
+          name: 'Campgrounds Listing | Outdoorsy',
+          description:
+            'Browse and discover top-rated campgrounds on Outdoorsy.',
+          isPartOf: { '@id': 'https://joshlehman.ca/#website' },
+        },
+      });
     }
 
     const projection = {
@@ -279,6 +327,17 @@ module.exports.nearby = catchAsync(async (req, res) => {
     currentUser: req.user || null,
   };
 
+  if (!isDatabaseReady()) {
+    return res.render('campgrounds/nearby', {
+      ...baseLocals,
+      campgrounds: [],
+      total: 0,
+      totalPages: 0,
+      inlineNotice:
+        'Nearby results will appear once the database connection is configured.',
+    });
+  }
+
   if (!haveAllGeo) {
     return res.render('campgrounds/nearby', {
       ...baseLocals,
@@ -371,6 +430,14 @@ module.exports.showCampground = async (req, res, next) => {
   const { id } = req.params; // can be slug or ObjectId
 
   try {
+    if (!isDatabaseReady()) {
+      req.flash(
+        'error',
+        'Campground details are temporarily unavailable until the database connection is configured.'
+      );
+      return res.redirect(`${basePath}/campgrounds`);
+    }
+
     // Try slug first, fallback to _id for backward compatibility
     let campground = await Campground.findOne({ slug: id }).populate('author');
 
@@ -380,13 +447,13 @@ module.exports.showCampground = async (req, res, next) => {
 
       // 301 redirect old ID URLs to canonical slug URL
       if (campground && campground.slug) {
-        return res.redirect(301, `/outdoorsy/campgrounds/${campground.slug}`);
+        return res.redirect(301, `${basePath}/campgrounds/${campground.slug}`);
       }
     }
 
     if (!campground) {
       req.flash('error', 'Campground not found');
-      return res.redirect('/outdoorsy/campgrounds');
+      return res.redirect(`${basePath}/campgrounds`);
     }
 
     // Reviews pagination params
@@ -408,7 +475,7 @@ module.exports.showCampground = async (req, res, next) => {
     const reviewsTotalPages = Math.ceil(reviewsCount / reviewsLimit);
 
     // Use slug in canonical URL
-    const canonical = `/outdoorsy/campgrounds/${campground.slug}`;
+    const canonical = `${basePath}/campgrounds/${campground.slug}`;
     const currentUrl = canonical;
 
     res.render('campgrounds/show', {
@@ -425,8 +492,8 @@ module.exports.showCampground = async (req, res, next) => {
         `Discover ${campground.title}`,
       socialImageUrl: campground.images?.[0]?.url || '',
       breadcrumbTrail: [
-        { name: 'Home', url: '/outdoorsy' },
-        { name: 'Campgrounds', url: '/outdoorsy/campgrounds' },
+        { name: 'Home', url: basePath },
+        { name: 'Campgrounds', url: `${basePath}/campgrounds` },
         { name: campground.title, url: canonical },
       ],
       mapboxToken: process.env.MAPBOX_TOKEN || '',
@@ -441,6 +508,13 @@ module.exports.showCampground = async (req, res, next) => {
  */
 module.exports.renderEditForm = async (req, res, next) => {
   try {
+    if (!isDatabaseReady()) {
+      throw new AppError(
+        'Campground editing is temporarily unavailable until the database connection is configured.',
+        503
+      );
+    }
+
     const { id } = req.params;
     const campground = await Campground.findById(id);
 
@@ -468,6 +542,13 @@ module.exports.renderEditForm = async (req, res, next) => {
  */
 module.exports.updateCampground = async (req, res, next) => {
   try {
+    if (!isDatabaseReady()) {
+      throw new AppError(
+        'Campground updates are temporarily unavailable until the database connection is configured.',
+        503
+      );
+    }
+
     const { id } = req.params;
 
     const campground = await Campground.findByIdAndUpdate(
@@ -510,6 +591,13 @@ module.exports.updateCampground = async (req, res, next) => {
  */
 module.exports.deleteCampground = async (req, res, next) => {
   try {
+    if (!isDatabaseReady()) {
+      throw new AppError(
+        'Campground deletion is temporarily unavailable until the database connection is configured.',
+        503
+      );
+    }
+
     const { id } = req.params;
     const campground = await Campground.findByIdAndDelete(id);
 

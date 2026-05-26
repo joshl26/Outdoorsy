@@ -8,7 +8,7 @@
     <h2 class="visually-hidden">Edit campground form</h2>
 
     <form
-      action="/outdoorsy/campgrounds/<%= campground._id %>?_method=PUT"
+      action="<%= basePath %>/campgrounds/<%= campground._id %>?_method=PUT"
       method="POST"
       novalidate
       class="validated-form needs-validation"
@@ -147,7 +147,7 @@
         </button>
         <a
           class="btn btn-outline-secondary"
-          href="/outdoorsy/campgrounds/<%= campground._id %>"
+          href="<%= basePath %>/campgrounds/<%= campground._id %>"
         >
           Back to Campground
         </a>

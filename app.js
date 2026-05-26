@@ -3,6 +3,7 @@
 
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
@@ -41,7 +42,7 @@ app.set('layout', 'layouts/boilerplate');
 // Parse URL-encoded bodies (form submissions)
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files under the basePath (e.g., /outdoorsy)
+// Serve static files under the basePath.
 app.use(basePath, express.static(path.join(__dirname, 'public')));
 
 // Configure session middleware with settings from config/session.js
@@ -71,6 +72,20 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user || null;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
+  res.locals.serviceStatus = {
+    database: mongoose.connection.readyState === 1,
+    cloudinary: Boolean(
+      process.env.CLOUDINARY_CLOUD_NAME &&
+        process.env.CLOUDINARY_KEY &&
+        process.env.CLOUDINARY_SECRET
+    ),
+    mapbox: Boolean(
+      process.env.MAPBOX_MAPBOX_TOKEN || process.env.MAPBOX_TOKEN
+    ),
+    googleAuth: Boolean(
+      process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+    ),
+  };
   next();
 });
 
@@ -83,7 +98,7 @@ app.use((req, res, next) => {
 // Optional: normalize duplicate trailing slashes under basePath (SEO-friendly)
 app.use((req, res, next) => {
   if (req.path.startsWith(basePath) && req.path !== basePath) {
-    // Collapse multiple trailing slashes: /outdoorsy/campgrounds// -> /outdoorsy/campgrounds/
+    // Collapse multiple trailing slashes within the mounted app paths.
     const normalized = req.path.replace(/\/{2,}/g, '/');
     if (normalized !== req.path) {
       return res.redirect(
@@ -99,15 +114,8 @@ app.use((req, res, next) => {
 // Health check endpoint for CI/testing tools
 app.head('/', (req, res) => res.sendStatus(200));
 app.get('/healthz', (req, res) => res.status(200).send('ok'));
-app.get('/', (req, res, next) => {
-  if (basePath === '/') {
-    return next();
-  }
 
-  return res.redirect(302, basePath);
-});
-
-// Mount SEO routes so robots/sitemap live under /outdoorsy
+// Mount SEO routes under the configured app root.
 app.use(basePath, seoRoutes);
 
 // Mount domain routes with appropriate base paths

@@ -7,7 +7,7 @@
     <h2 class="visually-hidden">Create campground form</h2>
 
     <form
-      action="/outdoorsy/campgrounds"
+      action="<%= basePath %>/campgrounds"
       method="POST"
       novalidate
       class="validated-form needs-validation"
@@ -94,6 +94,16 @@
 
         <!-- Upload Images -->
         <div class="mb-3">
+          <% if (!(serviceStatus && serviceStatus.cloudinary)) { %>
+            <div class="card border-warning-subtle bg-warning-subtle mb-3">
+              <div class="card-body">
+                <h3 class="h6 mb-2">Image uploads coming shortly</h3>
+                <p class="mb-0 text-muted">
+                  Cloudinary is not configured yet, so file uploads are temporarily unavailable. You can still prepare the rest of the listing once setup is finished.
+                </p>
+              </div>
+            </div>
+          <% } %>
           <div class="form-file custom-file">
             <input
               type="file"
@@ -102,6 +112,7 @@
               name="image"
               multiple
               aria-describedby="image-help"
+              <%= !(serviceStatus && serviceStatus.cloudinary) ? 'disabled' : '' %>
             />
             <label class="form-file-label" for="choose-image">
               <span class="form-file-text custom-file-label">Choose image(s)...</span>
@@ -123,7 +134,7 @@
     </form>
 
     <p class="mt-3">
-      <a class="btn btn-link p-0" href="/outdoorsy/campgrounds">All Campgrounds</a>
+      <a class="btn btn-link p-0" href="<%= basePath %>/campgrounds">All Campgrounds</a>
     </p>
   </div>
 </div>

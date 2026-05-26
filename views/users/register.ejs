@@ -1,5 +1,5 @@
 <head>
-  <link rel="stylesheet" href="/outdoorsy/stylesheets/users-register.css" />
+  <link rel="stylesheet" href="<%= basePath === '/' ? '' : basePath %>/stylesheets/users-register.css" />
 </head>
 
 <div class="container d-flex justify-content-center align-items-center mt-5">
@@ -25,7 +25,7 @@
       <% } %>
 
       <form
-        action="/outdoorsy/register"
+        action="<%= basePath %>/register"
         method="POST"
         class="validated-form needs-validation"
         novalidate
