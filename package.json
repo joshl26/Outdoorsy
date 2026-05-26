@@ -4,8 +4,8 @@
   "description": "A modern campground review and discovery platform",
   "author": "Joshua Lehman <your.email@example.com>",
   "packageManager": "pnpm@8.15.0",
-  "homepage": "/outdoorsy/",
-  "demo": "https://joshlehman.ca/outdoorsy",
+  "homepage": "https://outdoorsy.joshlehman.ca/outdoorsy",
+  "demo": "https://outdoorsy.joshlehman.ca/outdoorsy",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joshl26/Outdoorsy.git"
@@ -21,7 +21,7 @@
   "main": "app.js",
   "scripts": {
     "start-windows": "set PORT=3053 && nodemon -e js,ejs,yaml,json server.js",
-    "start": "cross-env PORT=3053 node server.js",
+    "start": "node server.js",
     "start:dev": "cross-env PORT=3053 nodemon -e js,ejs,yaml,json server.js",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "jest --watch",

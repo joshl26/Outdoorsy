@@ -8,7 +8,19 @@
  * and makes it easy to change or remove the base path in the future.
  */
 
-const basePath = process.env.BASE_PATH || '/outdoorsy';
+const normalizeBasePath = (value) => {
+  if (!value || value === '/') return '/';
+
+  const trimmed = String(value).trim();
+  if (!trimmed || trimmed === '/') return '/';
+
+  const withLeadingSlash = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+  return withLeadingSlash.endsWith('/')
+    ? withLeadingSlash.slice(0, -1)
+    : withLeadingSlash;
+};
+
+const basePath = normalizeBasePath(process.env.BASE_PATH || '/outdoorsy');
 
 /**
  * Helper function to build full paths with base path prefix
@@ -31,7 +43,11 @@ const buildPath = (path = '') => {
 
   // Handle empty path
   if (!cleanPath) {
-    return cleanBasePath;
+    return cleanBasePath || '/';
+  }
+
+  if (cleanBasePath === '/') {
+    return `/${cleanPath}`;
   }
 
   return `${cleanBasePath}/${cleanPath}`;
@@ -71,7 +87,7 @@ module.exports = {
 
   // Export common paths for convenience
   paths: {
-    home: basePath || '/',
+    home: basePath,
     login: buildPath('login'),
     logout: buildPath('logout'),
     register: buildPath('register'),

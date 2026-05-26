@@ -1,6 +1,8 @@
 // Express session configuration
 // config/session.js
 
+const { basePath } = require('./basePath');
+
 /**
  * Configuration object for Express session middleware.
  * - Uses a secret from environment variables for signing the session ID cookie.
@@ -28,8 +30,8 @@ const sessionConfig = {
     // Controls cross-site request behavior; 'lax' allows some cross-site usage but protects against CSRF
     sameSite: 'lax',
 
-    // Cookie path scope, defaults to '/outdoorsy' or environment variable BASE_PATH
-    path: process.env.BASE_PATH || '/outdoorsy',
+    // Cookie path scope matches the application mount path.
+    path: basePath,
 
     // Cookie expiration time: 1 week in milliseconds
     maxAge: 1000 * 60 * 60 * 24 * 7,

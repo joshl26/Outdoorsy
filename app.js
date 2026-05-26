@@ -99,6 +99,13 @@ app.use((req, res, next) => {
 // Health check endpoint for CI/testing tools
 app.head('/', (req, res) => res.sendStatus(200));
 app.get('/healthz', (req, res) => res.status(200).send('ok'));
+app.get('/', (req, res, next) => {
+  if (basePath === '/') {
+    return next();
+  }
+
+  return res.redirect(302, basePath);
+});
 
 // Mount SEO routes so robots/sitemap live under /outdoorsy
 app.use(basePath, seoRoutes);

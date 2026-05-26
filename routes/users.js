@@ -8,6 +8,7 @@ const catchAsync = require('../utils/catchAsync');
 const users = require('../controllers/users');
 const rateLimit = require('express-rate-limit');
 const csurf = require('csurf');
+const { buildPath } = require('../config/basePath');
 
 const csrfProtection = csurf();
 
@@ -68,7 +69,7 @@ router
     authLimiter,
     passport.authenticate('local', {
       failureFlash: true,
-      failureRedirect: '/outdoorsy/login',
+      failureRedirect: buildPath('login'),
     }),
     users.login
   );

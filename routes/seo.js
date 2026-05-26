@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const Campground = require('../models/campground');
+const { basePath } = require('../config/basePath');
 
-const SITE_ROOT = 'https://joshlehman.ca';
-const SUB_ROOT = `${SITE_ROOT}/outdoorsy`;
+const SITE_ROOT = (process.env.SITE_ROOT_URL || 'https://outdoorsy.joshlehman.ca').replace(/\/$/, '');
+const SUB_ROOT = `${SITE_ROOT}${basePath === '/' ? '' : basePath}`;
 
 // Basic in-memory cache for sitemap body
 let cached = { body: '', ts: 0 };
@@ -13,10 +14,10 @@ const TTL_MS = 5 * 60 * 1000; // 5 minutes
 router.get('/robots.txt', (req, res) => {
   const robots = [
     'User-agent: *',
-    'Allow: /outdoorsy/',
-    'Disallow: /outdoorsy/login',
-    'Disallow: /outdoorsy/register',
-    'Sitemap: https://joshlehman.ca/outdoorsy/sitemap.xml',
+    `Allow: ${basePath === '/' ? '/' : `${basePath}/`}`,
+    `Disallow: ${basePath === '/' ? '/login' : `${basePath}/login`}`,
+    `Disallow: ${basePath === '/' ? '/register' : `${basePath}/register`}`,
+    `Sitemap: ${SUB_ROOT}/sitemap.xml`,
     '',
   ].join('\n');
   res.type('text/plain').send(robots);

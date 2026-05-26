@@ -16,7 +16,7 @@
 </p>
 
 Outdoorsy is a full‑stack web application where users discover, review, and share campsites worldwide.  
-Live: [joshlehman.ca/outdoorsy](https://joshlehman.ca/outdoorsy) · API Docs: [joshlehman.ca/outdoorsy/api-docs](https://joshlehman.ca/outdoorsy/api-docs/)
+Live: [outdoorsy.joshlehman.ca/outdoorsy](https://outdoorsy.joshlehman.ca/outdoorsy) · API Docs: [outdoorsy.joshlehman.ca/outdoorsy/api-docs](https://outdoorsy.joshlehman.ca/outdoorsy/api-docs/)
 
 ---
 
@@ -91,8 +91,8 @@ See the full roadmap for in‑progress and upcoming items.
 
 ### 🧭 Live Resources
 
-- Website: [joshlehman.ca/outdoorsy](https://joshlehman.ca/outdoorsy)  
-- API Docs (Swagger): [joshlehman.ca/outdoorsy/api-docs](https://joshlehman.ca/outdoorsy/api-docs/)
+- Website: [outdoorsy.joshlehman.ca/outdoorsy](https://outdoorsy.joshlehman.ca/outdoorsy)  
+- API Docs (Swagger): [outdoorsy.joshlehman.ca/outdoorsy/api-docs](https://outdoorsy.joshlehman.ca/outdoorsy/api-docs/)
 
 ---
 
@@ -179,6 +179,10 @@ SESSION_SECRET=supersecretkey
 GOOGLE_CLIENT_ID=your-id
 GOOGLE_CLIENT_SECRET=your-secret
 GOOGLE_CALLBACK_URL=/auth/google/callback
+
+# Render / deployment
+BASE_PATH=/outdoorsy
+SITE_ROOT_URL=https://outdoorsy.joshlehman.ca
 ```
 
 Install and run:

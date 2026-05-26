@@ -3,6 +3,7 @@
 
 const { validationResult, body } = require('express-validator');
 const User = require('../models/user');
+const { buildPath } = require('../config/basePath');
 
 /**
  * Render the user registration form.
@@ -46,7 +47,7 @@ const registerHandler = async (req, res, next) => {
     req.login(registeredUser, (err) => {
       if (err) return next(err);
       req.flash('success', 'Welcome to Outdoorsy!');
-      res.redirect('/outdoorsy/campgrounds');
+      res.redirect(buildPath('campgrounds'));
     });
   } catch (e) {
     next(e); // Pass error to centralized error handler
@@ -103,7 +104,7 @@ module.exports.renderLogin = (req, res) => {
  */
 module.exports.login = (req, res) => {
   req.flash('success', 'Welcome back!');
-  const redirectUrl = req.session.returnTo || '/outdoorsy/campgrounds';
+  const redirectUrl = req.session.returnTo || buildPath('campgrounds');
   delete req.session.returnTo;
   res.redirect(redirectUrl);
 };
@@ -121,6 +122,6 @@ module.exports.logout = (req, res, next) => {
       return next(err);
     }
     req.flash('success', 'Goodbye!');
-    res.redirect('/outdoorsy/campgrounds');
+    res.redirect(buildPath('campgrounds'));
   });
 };

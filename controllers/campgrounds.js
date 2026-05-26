@@ -8,7 +8,6 @@ const { cloudinary } = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const { basePath } = require('../config/basePath');
 const mapBoxToken = process.env.MAPBOX_MAPBOX_TOKEN || process.env.MAPBOX_TOKEN;
-const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 const NotFoundError = require('../utils/errors/NotFoundError');
 const AppError = require('../utils/errors/AppError');
@@ -38,6 +37,14 @@ const parseNum = (val) => {
   return Number.isFinite(n) ? n : undefined;
 };
 // const clampStr = (s, n) => (s ? String(s).slice(0, n) : '');
+
+const getGeocoder = () => {
+  if (!mapBoxToken) {
+    throw new AppError('Missing MAPBOX_TOKEN.', 500);
+  }
+
+  return mbxGeocoding({ accessToken: mapBoxToken });
+};
 
 /**
  * Build a full URL from the current request with optional overrides
@@ -78,9 +85,8 @@ module.exports.renderNewForm = (req, res) => {
  */
 module.exports.createCampground = async (req, res, next) => {
   try {
-    if (!mapBoxToken) throw new AppError('Missing MAPBOX_TOKEN.', 500);
-
     const location = req.body?.campground?.location || '';
+    const geocoder = getGeocoder();
 
     const geocodeFetch = async () =>
       await geocoder.forwardGeocode({ query: location, limit: 1 }).send();

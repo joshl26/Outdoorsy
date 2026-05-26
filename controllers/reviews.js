@@ -3,6 +3,7 @@
 
 const Campground = require('../models/campground');
 const Review = require('../models/review');
+const { buildPath } = require('../config/basePath');
 
 const NotFoundError = require('../utils/errors/NotFoundError');
 
@@ -39,7 +40,7 @@ module.exports.createReview = async (req, res, next) => {
     await campground.save();
 
     req.flash('success', 'Created new review!');
-    res.redirect(`/outdoorsy/campgrounds/${campground._id}`);
+    res.redirect(buildPath(`campgrounds/${campground._id}`));
   } catch (err) {
     next(err);
   }
@@ -69,7 +70,7 @@ module.exports.deleteReview = async (req, res, next) => {
     await Review.findByIdAndDelete(reviewId);
 
     req.flash('success', 'Successfully deleted review');
-    res.redirect(`/outdoorsy/campgrounds/${id}`);
+    res.redirect(buildPath(`campgrounds/${id}`));
   } catch (err) {
     next(err);
   }
